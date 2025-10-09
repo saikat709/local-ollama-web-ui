@@ -41,7 +41,7 @@ function App() {
     // http://10.42.0.155:11434/api/generate
 
     try {
-      const response = await fetch('http://10.47.0.109:8000/ollama-generate', {
+      const response = await fetch('http://10.47.0.109:8000/stream', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -24,13 +24,14 @@ async def generate(req: GenerateReq):
         data = r.json()
         return JSONResponse({"response": data.get("response", "")})
 
-# --- Streamed (NDJSON from Ollama -> plain text tokens) ---
-@app.post("/stream")
-async def stream(req: GenerateReq):
-    payload = req.model_dump()
-    payload["stream"] = True
 
-    async def token_generator():
+@app.post("/stream")
+async def stream(request: Request):
+    # accept any JSON your client sends and pass it through
+    payload = await request.json()
+    payload.setdefault("stream", True)  # ensure streaming
+
+    async def ndjson():
         async with httpx.AsyncClient(timeout=None) as client:
             async with client.stream("POST", f"{OLLAMA_BASE}/api/generate", json=payload) as r:
                 if r.status_code != 200:
@@ -39,17 +40,13 @@ async def stream(req: GenerateReq):
                 async for line in r.aiter_lines():
                     if not line:
                         continue
-                    try:
-                        obj = json.loads(line)
-                        if obj.get("done"):     # <— ignore the final empty chunk
-                            break
-                        chunk = obj.get("response", "")
-                        if chunk:
-                            yield chunk
-                            await asyncio.sleep(0)  # let loop breathe
-                    except json.JSONDecodeError:
-                        continue
-    return StreamingResponse(token_generator(), media_type="text/plain")
+                    # IMPORTANT: return each JSON line exactly as Ollama sends it
+                    # Your frontend splits on '\n' and JSON.parse()s each line.
+                    yield line + "\n"
+
+    # use NDJSON content-type (browser fetch still fine)
+    return StreamingResponse(ndjson(), media_type="application/x-ndjson")
+
 
 # --- Quick health check ---
 @app.get("/healthz")
