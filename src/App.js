@@ -9,12 +9,20 @@ const Spinner = () => (
   </div>
 );
 
+const servers = [
+  'http://10.47.0.109:11434',
+  'http://10.47.0.1036:11434',
+]
+
 function App() {
   const [prompt, setPrompt] = useState('');
   const [messages, setMessages] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const abortControllerRef = useRef(null);
   const chatContainerRef = useRef(null);
+
+  const [selectedServer, setSelectedServer] = useState('');
+  const [serverStatus, setServerStatus] = useState("disconnected");
 
   const handleInputChange = (e) => {
     setPrompt(e.target.value);
@@ -30,8 +38,10 @@ function App() {
 
     abortControllerRef.current = new AbortController();
 
+    // http://10.42.0.155:11434/api/generate
+
     try {
-      const response = await fetch('http://10.42.0.155:11434/api/generate', {
+      const response = await fetch('http://10.47.0.109:8000/ollama-generate', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -41,7 +51,7 @@ function App() {
           prompt: prompt,
           stream: true,
           seed: 42,
-          num_predict: 4000,
+          num_predict: 10,
           mirostat: 0,
           temperature: 0.2,
           top_k: 0,
@@ -54,7 +64,7 @@ function App() {
           frequency_penalty: 0.0,
           penalize_newline: false,
           stop: ['user:'],
-          num_ctx: 1024,
+          num_ctx: 10,
           num_keep: -1,
           numa: false,
           num_thread: 8,
@@ -65,6 +75,9 @@ function App() {
           use_mmap: true,
           use_mlock: false,
           vocab_only: false,
+          options: {
+            num_predict: 200,
+          }
         }),
         signal: abortControllerRef.current.signal,
       });
@@ -145,6 +158,19 @@ function App() {
     <div className="App">
       <header className="header">
         <h1>Ollama Chat</h1>
+        <div style={{display: 'flex', alignItems: 'center', gap: '1rem'}}>
+          <span> Server status: {serverStatus} </span>
+          {serverStatus === 'disconnected' && selectedServer && <button onClick={() => setServerStatus('connected')}> Connect </button>}
+          <select
+            value={selectedServer}
+            onChange={(e) => setSelectedServer(e.target.value)}
+          > 
+            <option value="" disabled>Select Server</option>
+            {servers.map((server, index) => (
+              <option key={index} value={server}>{server}</option>
+            ))}
+          </select>
+        </div>
       </header>
       <div className="chat-container" ref={chatContainerRef}>
         {messages.map((msg, index) => (
