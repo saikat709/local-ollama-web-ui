@@ -1,5 +1,6 @@
 from fastapi import FastAPI, HTTPException
 from fastapi.responses import StreamingResponse, JSONResponse, PlainTextResponse
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 import os, json, httpx, asyncio
 
@@ -7,12 +8,21 @@ OLLAMA_BASE = os.getenv("OLLAMA_BASE_URL", "http://127.0.0.1:11434")
 
 app = FastAPI(title="Ollama Proxy")
 
+# Allow all CORS (for testing only)
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],          # Allow all origins
+    allow_credentials=True,
+    allow_methods=["*"],          # Allow all HTTP methods (GET, POST, PUT, etc.)
+    allow_headers=["*"],          # Allow all headers
+)
+
 class GenerateReq(BaseModel):
     model: str = "llama3.1"
     prompt: str
     stream: bool = True
 
-# --- Non-streamed (one JSON) ---
+
 @app.post("/generate")
 async def generate(req: GenerateReq):
     payload = req.model_dump()
@@ -27,9 +37,8 @@ async def generate(req: GenerateReq):
 
 @app.post("/stream")
 async def stream(request: Request):
-    # accept any JSON your client sends and pass it through
     payload = await request.json()
-    payload.setdefault("stream", True)  # ensure streaming
+    payload.setdefault("stream", True)
 
     async def ndjson():
         async with httpx.AsyncClient(timeout=None) as client:
@@ -44,7 +53,6 @@ async def stream(request: Request):
                     # Your frontend splits on '\n' and JSON.parse()s each line.
                     yield line + "\n"
 
-    # use NDJSON content-type (browser fetch still fine)
     return StreamingResponse(ndjson(), media_type="application/x-ndjson")
 
 
