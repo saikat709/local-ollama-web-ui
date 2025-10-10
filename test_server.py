@@ -64,6 +64,20 @@ servers = [
         'port' : '8000',
         'current_load' : 0,
         'is_active' : True
+    },
+    {
+        'name' : 'Ratul PC',
+        'ip' : '10.100.202.164',
+        'port' : '8000',
+        'current_load' : 0,
+        'is_active' : True
+    },
+    {
+        'name' : 'Akkhar PC',
+        'ip' : '10.100.202.160',
+        'port' : '8000',
+        'current_load' : 0,
+        'is_active' : True
     }
 ]
 
