@@ -21,9 +21,6 @@ function App() {
   const abortControllerRef = useRef(null);
   const chatContainerRef = useRef(null);
 
-  const [selectedServer, setSelectedServer] = useState('');
-  const [serverStatus, setServerStatus] = useState("disconnected");
-
   const handleInputChange = (e) => {
     setPrompt(e.target.value);
   };
@@ -39,9 +36,13 @@ function App() {
     abortControllerRef.current = new AbortController();
 
     // http://10.42.0.155:11434/api/generate
+    // http://10.47.0.109:8000/stream
+    // http://10.42.0.155:8000/stream
+
+    // Load balancer ip: 10.100.201.91
 
     try {
-      const response = await fetch('http://10.47.0.109:8000/stream', {
+      const response = await fetch('http://10.100.201.91:8000/stream', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -158,19 +159,6 @@ function App() {
     <div className="App">
       <header className="header">
         <h1>Ollama Chat</h1>
-        <div style={{display: 'flex', alignItems: 'center', gap: '1rem'}}>
-          <span> Server status: {serverStatus} </span>
-          {serverStatus === 'disconnected' && selectedServer && <button onClick={() => setServerStatus('connected')}> Connect </button>}
-          <select
-            value={selectedServer}
-            onChange={(e) => setSelectedServer(e.target.value)}
-          > 
-            <option value="" disabled>Select Server</option>
-            {servers.map((server, index) => (
-              <option key={index} value={server}>{server}</option>
-            ))}
-          </select>
-        </div>
       </header>
       <div className="chat-container" ref={chatContainerRef}>
         {messages.map((msg, index) => (

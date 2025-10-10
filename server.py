@@ -1,7 +1,6 @@
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Request
 from fastapi.responses import StreamingResponse, JSONResponse, PlainTextResponse
 from fastapi.middleware.cors import CORSMiddleware
-from pydantic import BaseModel
 import os, json, httpx, asyncio
 
 OLLAMA_BASE = os.getenv("OLLAMA_BASE_URL", "http://127.0.0.1:11434")
@@ -11,21 +10,16 @@ app = FastAPI(title="Ollama Proxy")
 # Allow all CORS (for testing only)
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],          # Allow all origins
+    allow_origins=["*"], 
     allow_credentials=True,
-    allow_methods=["*"],          # Allow all HTTP methods (GET, POST, PUT, etc.)
-    allow_headers=["*"],          # Allow all headers
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
-
-class GenerateReq(BaseModel):
-    model: str = "llama3.1"
-    prompt: str
-    stream: bool = True
 
 
 @app.post("/generate")
-async def generate(req: GenerateReq):
-    payload = req.model_dump()
+async def generate(req: Request):
+    payload = await req.json()
     payload["stream"] = False
     async with httpx.AsyncClient(timeout=300.0) as client:
         r = await client.post(f"{OLLAMA_BASE}/api/generate", json=payload)
@@ -49,8 +43,6 @@ async def stream(request: Request):
                 async for line in r.aiter_lines():
                     if not line:
                         continue
-                    # IMPORTANT: return each JSON line exactly as Ollama sends it
-                    # Your frontend splits on '\n' and JSON.parse()s each line.
                     yield line + "\n"
 
     return StreamingResponse(ndjson(), media_type="application/x-ndjson")
@@ -66,3 +58,8 @@ async def health():
         return PlainTextResponse("ok")
     except Exception as e:
         raise HTTPException(503, str(e))
+
+
+## Run
+# pip3 install fastapi uvicorn httpx
+# python3 -m uvicorn server:app --host 0.0.0.0 --port 8000 --reload
