@@ -160,12 +160,11 @@ servers = [
 ]
 
 
-def log_request(request: Request, prompt: str, handling_server: str):
-    ip = "1.1.1.1" #request.headers.get("X-Forwarded-For", flask_request.remote_addr)
-    ip_filename = f"logs/{ip}.csv"
+def log_request(client_ip: str, prompt: str, handling_server: str):
+    ip_filename = f"logs/{client_ip}.csv"
     now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    row = [ip, handling_server, now, prompt]
-    header = ["ip", "handling_server", "date_time", "prompt"]
+    row = [client_ip, handling_server, now, prompt]
+    header = ["client_ip", "handling_server", "date_time", "prompt"]
 
     # Write to both global log and per-IP log
     for filename in ["logs.csv", ip_filename]:
@@ -310,7 +309,6 @@ async def get_least_loaded_server():
 async def servers_status():
     """Return list of servers with load and health info."""
     async with servers_lock:
-        # shallow copy to avoid exposing internal refs
         out = [
             {
                 'name': s['name'],
@@ -348,6 +346,7 @@ async def deactivate_server(name: str):
 @app.post("/generate")
 @limiter.limit("122/minute")
 async def generate(request: Request):
+    client_host = request.client.host if request.client else "unknown"
     payload = await request.json()
     payload["stream"] = False
     payload["prompt"] = system_prompt + "\n\n User query is: " + payload.get("prompt", "")
@@ -359,7 +358,7 @@ async def generate(request: Request):
         server = await acquire_server()
         OLLAMA_BASE = f"http://{server['ip']}:{server['port']}"
 
-        log_request(request, payload.get("prompt", "").strip(), server['name'])
+        log_request(client_host, payload.get("prompt", "").strip(), server['name'])
         print(f"Routing to server: {server['name']} at {server['ip']}:{server['port']} (attempt {attempt}) load={server['current_load']}")
 
         try:
@@ -367,38 +366,32 @@ async def generate(request: Request):
                 r = await client.post(f"{OLLAMA_BASE}/generate", json=payload)
                 if r.status_code != 200:
                     body = r.text if r.text is not None else ""
-                    # treat non-2xx as final
                     raise HTTPException(r.status_code, body)
                 data = r.json()
                 return JSONResponse({"response": data.get("response", "")})
         except (httpx.RemoteProtocolError, httpx.ReadError, httpx.ConnectError, httpx.RequestError) as e:
-            # transient network problem — log and try another backend (unless out of attempts)
             log.warning("Upstream failed (attempt %d): %r", attempt, e)
             last_exc = e
-            # mark server as maybe unhealthy
             async with servers_lock:
                 server['is_active'] = False
         finally:
             await release_server(server)
-
-    # if we reach here, all retries failed
     raise HTTPException(status_code=503, detail=f"All backend attempts failed: {last_exc}")
 
 
 @app.post("/stream")
 @limiter.limit("122/minute")
 async def stream(request: Request):
+    client_ip = request.client.host if request.client else "unknown"
     payload = await request.json()
     payload.setdefault("stream", True)
 
-    log_request(request, payload.get("prompt", "").strip(), "-")
+    log_request(client_ip, payload.get("prompt", "").strip(), "-")
     payload["prompt"] = system_prompt + "\n\n User query is: " + payload.get("prompt", "")
 
     print(payload["prompt"])
 
     async def ndjson():
-        # We'll attempt up to MAX_RETRIES backends, but if we've already yielded some data
-        # we can't retry safely and must stop.
         for attempt in range(1, MAX_RETRIES + 1):
             server = await acquire_server()
             OLLAMA_BASE = f"http://{server['ip']}:{server['port']}"
@@ -416,29 +409,21 @@ async def stream(request: Request):
                                 continue
                             yielded_any = True
                             yield line + "\n"
-
-                        # finished successfully
                         return
 
             except (httpx.RemoteProtocolError, httpx.ReadError, httpx.ConnectError, httpx.RequestError) as e:
                 log.warning("Upstream aborted early (attempt %d): %r", attempt, e)
-                # mark server unhealthy so it won't be picked next
                 async with servers_lock:
                     server['is_active'] = False
-                # release and if we haven't yielded anything yet, try next server
                 await release_server(server)
                 released = True
                 if yielded_any:
-                    # can't retry after partial data; stop the generator
                     return
                 else:
-                    # try next attempt
                     continue
             finally:
                 if not released:
                     await release_server(server)
-
-        # all attempts exhausted
         return
 
     return StreamingResponse(ndjson(), media_type="application/x-ndjson")
