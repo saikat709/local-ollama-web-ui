@@ -6,7 +6,7 @@ ollama --version
 ```
 
 ```bash
-ollama pull llama3.1
+ollama pull llama3.1:8b
 ollama run llama3.1
 ollama run llama3.1 "sdk"
 ```

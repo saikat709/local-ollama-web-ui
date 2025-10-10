@@ -73,6 +73,10 @@ body {
   transition: transform 0.3s ease;
 }
 
+.chat-message .avatar bot {
+  background-color: red;
+}
+
 .chat-message:hover .avatar {
   transform: scale(1.1);
 }

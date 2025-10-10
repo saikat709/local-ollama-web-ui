@@ -1,7 +1,13 @@
 from fastapi import FastAPI, HTTPException, Request
 from fastapi.responses import StreamingResponse, JSONResponse, PlainTextResponse
 from fastapi.middleware.cors import CORSMiddleware
+
 import os, json, httpx, asyncio
+from typing import Dict, Any
+
+from slowapi import Limiter, _rate_limit_exceeded_handler
+from slowapi.util import get_remote_address
+from slowapi.errors import RateLimitExceeded
 
 from server import OLLAMA_BASE
 
@@ -11,47 +17,140 @@ app = FastAPI(title="Ollama Load Balancer")
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
-# http://10.42.0.155:11434/api/generate
-# http://10.47.0.109:8000/stream
-# http://10.42.0.155:8000/stream
+limiter = Limiter(key_func=get_remote_address, default_limits=["200/day", "50/hour"])
+app.state.limiter = limiter
+app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
 
 
 servers = [
     {
-        'name' : 'Server Pc 1',
-        'ip' : '10.42.0.155',
-        'port' : '8000',
-        'current_load' : 0
+        'name': 'Sakib Vai PC',
+        'ip': '10.47.0.140',
+        'port': '8000',
+        'current_load': 0,
+        'is_active': True,
     },
     {
-        'name' : 'Masters 1',
-        'ip' : '10.42.0.155',
-        'port' : '8000',
-        'current_load' : 0
+        'name': 'Darun Nayeem Laptop',
+        'ip': '10.100.200.236',
+        'port': '8000',
+        'current_load': 0,
+        'is_active': True,
     },
     {
-        'name' : 'Masters 2',
-        'ip' : '10.47.0.109',
-        'port' : '8000',
-        'current_load' : 0
+        'name': 'Server Pc 1',
+        'ip': '10.42.0.155',
+        'port': '8000',
+        'current_load': 0,
+        'is_active': True,
+    },
+    {
+        'name': 'Arif Vai PC',
+        'ip': '10.47.0.136',
+        'port': '8000',
+        'current_load': 0,
+        'is_active': True,
+    },
+    {
+        'name': 'Proma Apu PC',
+        'ip': '10.47.0.109',
+        'port': '8000',
+        'current_load': 0,
+        'is_active': True,
+    },
+    {
+        'name': 'Nahid Vai PC Left',
+        'ip': '10.47.0.105',
+        'port': '8000',
+        'current_load': 0,
+        'is_active': True,
+    },
+    {
+        'name': 'Shipshika Apu PC',
+        'ip': '10.47.0.130',
+        'port': '8000',
+        'current_load': 0,
+        'is_active': True,
     },
 ]
 
 
+async def _check_server_health(server: Dict[str, Any], timeout: float = 5.0) -> Dict[str, Any]:
+    """Async check of a server's /healthz endpoint. Returns a small result dict."""
+    url = f"http://{server['ip']}:{server['port']}/healthz"
+    start = asyncio.get_event_loop().time()
+    try:
+        async with httpx.AsyncClient(timeout=timeout) as client:
+            r = await client.get(url)
+            body = r.text.strip() if r.text is not None else ""
+            ok = r.status_code == 200 and (body == "" or body.lower() in ("ok", "okay", "healthy"))
+            elapsed = asyncio.get_event_loop().time() - start
+            server['is_active'] = bool(ok)
+            return {
+                'server': server.get('name'),
+                'url': url,
+                'status_code': r.status_code,
+                'body': body,
+                'ok': ok,
+                'elapsed': elapsed,
+            }
+    except Exception as e:
+        elapsed = asyncio.get_event_loop().time() - start
+        server['is_active'] = False
+        return {
+            'server': server.get('name'),
+            'url': url,
+            'status_code': None,
+            'body': str(e),
+            'ok': False,
+            'elapsed': elapsed,
+        }
+
+
+@app.on_event("startup")
+async def on_startup_health_check():
+    """Run a health check for all configured servers when the app starts.
+
+    Marks servers with failing health checks as inactive and prints a short
+    summary log with totals for active/inactive servers.
+    """
+    print("Starting initial servers health check...")
+    tasks = [_check_server_health(s, timeout=5.0) for s in servers]
+    results = await asyncio.gather(*tasks)
+
+    ok_count = 0
+    fail_count = 0
+    for r in results:
+        if r['ok']:
+            ok_count += 1
+            print(f"[OK]   {r['server']:20} {r['url']:30} ({r['elapsed']:.2f}s) -> {r['body']}")
+        else:
+            fail_count += 1
+            code = r['status_code'] or 'ERR'
+            print(f"[FAIL] {r['server']:20} {r['url']:30} ({r['elapsed']:.2f}s) -> {code} {r['body']}")
+
+    print(f"Initial health check complete. Active: {ok_count}, Inactive: {fail_count}")
+
+
 def get_least_loaded_server():
-    least_loaded_server = min(servers, key=lambda x: x['current_load'])
+    active_servers = [s for s in servers if s['is_active']]
+    if not active_servers:
+        raise HTTPException(status_code=503, detail="No active backend servers")
+    least_loaded_server = min(active_servers, key=lambda x: x['current_load'])
     return least_loaded_server
 
 
+
 @app.post("/generate")
-async def generate(req: Request):
-    payload = await req.json()
+@limiter.limit("22/minute")
+async def generate(request: Request):
+    payload = await request.json()
     payload["stream"] = False
     server = get_least_loaded_server()
     OLLAMA_BASE = f"http://{server['ip']}:{server['port']}"
@@ -67,6 +166,7 @@ async def generate(req: Request):
 
 
 @app.post("/stream")
+@limiter.limit("22/minute")
 async def stream(request: Request):
     payload = await request.json()
     payload.setdefault("stream", True)
@@ -95,7 +195,8 @@ async def stream(request: Request):
 
 
 @app.get("/healthz")
-async def health():
+@limiter.limit("22/minute")
+async def health(request: Request):
     server = get_least_loaded_server()
     OLLAMA_BASE = f"http://{server['ip']}:{server['port']}"
 

@@ -9,6 +9,25 @@ const Spinner = () => (
   </div>
 );
 
+
+const OlympiadInfo = () => {
+  return (
+    <div className="olympiad-info">
+      <h2>Welcome to the Olympiad Preparation Chat!</h2>
+      <p>
+        This chat is designed to help you prepare for various Olympiads by providing information, resources, and practice questions.
+      </p>
+      <ul>
+      <li><strong>Math Olympiad:</strong> Get tips on problem-solving techniques, past papers, and study materials.</li>
+      <li><strong>Science Olympiad:</strong> Explore topics in physics, chemistry, and biology with curated resources.</li>
+      <li><strong>Programming Olympiad:</strong> Practice coding problems and learn algorithms and data structures.</li>
+    </ul>
+    <p>Feel free to ask any questions or request specific resources to aid your preparation!</p>
+  </div>
+  );
+};
+
+
 const servers = [
   'http://10.47.0.109:11434',
   'http://10.47.0.1036:11434',
@@ -34,10 +53,6 @@ function App() {
     setIsLoading(true);
 
     abortControllerRef.current = new AbortController();
-
-    // http://10.42.0.155:11434/api/generate
-    // http://10.47.0.109:8000/stream
-    // http://10.42.0.155:8000/stream
 
     // Load balancer ip: 10.100.201.91
 
@@ -93,19 +108,20 @@ function App() {
 
       const processStream = async () => {
         while (true) {
-          const { done, value } = await reader.read();
-          if (done) {
-            setIsLoading(false);
-            break;
-          }
+          try {
+            const { done, value } = await reader.read();
+            if (done) {
+              setIsLoading(false);
+              break;
+            }
 
-          const chunk = decoder.decode(value, { stream: true });
-          const jsonChunks = chunk.split('\n').filter(c => c);
+            const chunk = decoder.decode(value, { stream: true });
+            const jsonChunks = chunk.split('\n').filter(c => c);
 
-          jsonChunks.forEach(jsonChunk => {
-            try {
+            jsonChunks.forEach(jsonChunk => {
               const parsed = JSON.parse(jsonChunk);
               if (parsed.response) {
+              console.log('Reading stream...');
                 botMessage += parsed.response;
                 setMessages(prevMessages => {
                   const newMessages = [...prevMessages];
@@ -116,10 +132,12 @@ function App() {
                   return newMessages;
                 });
               }
-            } catch (error) {
-              console.error('Error parsing JSON chunk:', error);
-            }
-          });
+            });
+          } catch (error) {
+            console.error('Error parsing JSON chunk:', error);
+            setIsLoading(false);
+            break;
+          }
         }
       };
 
@@ -136,9 +154,13 @@ function App() {
   };
 
   const handleCancel = () => {
-    if (abortControllerRef.current) {
-      abortControllerRef.current.abort();
+    if ( abortControllerRef.current ) {
+      if (!abortControllerRef.current.signal.aborted) {
+        abortControllerRef.current.abort();
+      }
     }
+    console.log("AbortCController: ", abortControllerRef.current.signal.aborted);
+    setIsLoading(false);
   };
 
   useEffect(() => {
@@ -160,10 +182,13 @@ function App() {
       <header className="header">
         <h1>Ollama Chat</h1>
       </header>
+
+      {messages.length === 0 && !isLoading && <OlympiadInfo />}
+
       <div className="chat-container" ref={chatContainerRef}>
         {messages.map((msg, index) => (
           <div key={index} className={`chat-message ${msg.sender}-message`}>
-            <div className="avatar">
+            <div className={`avatar ${msg.sender === 'bot' && "bot"}`}>
               {msg.sender === 'user' ? <FiUser /> : <FiCpu />}
             </div>
             <div className="message-content">
@@ -177,6 +202,7 @@ function App() {
         <div className="input-container">
           <textarea
             value={prompt}
+            disabled={isLoading}
             onChange={handleInputChange}
             placeholder="Type your message here..."
             rows="1"
@@ -191,7 +217,7 @@ function App() {
             <button onClick={handleSend} disabled={isLoading}>
               <FiSend />
             </button>
-            {isLoading && (
+            { isLoading && (
               <button onClick={handleCancel} className="cancel-button">
                 <FiXCircle />
               </button>
