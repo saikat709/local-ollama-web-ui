@@ -17,6 +17,13 @@ servers = [
         'is_active' : True
     },
     {
+        'name': 'Tausif Vai PC',
+        'ip': '10.100.201.127',
+        'port': '8000',
+        'current_load': 0,
+        'is_active': True,
+    },
+    {
         'name' : 'Darun Nayeem Laptop',
         'ip' : '10.100.200.236',
         'port' : '8000',
@@ -52,7 +59,7 @@ servers = [
         'is_active' : True
     },
     {
-        'name' : 'Shipshika Apu PC',
+        'name' : 'Dipshika Apu PC',
         'ip' : '10.47.0.130',
         'port' : '8000',
         'current_load' : 0,

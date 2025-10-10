@@ -28,11 +28,6 @@ const OlympiadInfo = () => {
 };
 
 
-const servers = [
-  'http://10.47.0.109:11434',
-  'http://10.47.0.1036:11434',
-]
-
 function App() {
   const [prompt, setPrompt] = useState('');
   const [messages, setMessages] = useState([]);
@@ -92,7 +87,7 @@ function App() {
           use_mlock: false,
           vocab_only: false,
           options: {
-            num_predict: 200,
+            num_predict: 512,
           }
         }),
         signal: abortControllerRef.current.signal,
@@ -202,7 +197,7 @@ function App() {
         <div className="input-container">
           <textarea
             value={prompt}
-            disabled={isLoading}
+            // disabled={isLoading}
             onChange={handleInputChange}
             placeholder="Type your message here..."
             rows="1"

@@ -9,6 +9,9 @@ from slowapi import Limiter, _rate_limit_exceeded_handler
 from slowapi.util import get_remote_address
 from slowapi.errors import RateLimitExceeded
 
+import csv, os
+from datetime import datetime
+
 from server import OLLAMA_BASE
 
 # OLLAMA_BASE = os.getenv("OLLAMA_BASE_URL", "http://127.0.0.1:11434")
@@ -43,6 +46,13 @@ servers = [
         'current_load': 0,
         'is_active': True,
     },
+     {
+        'name': 'Tausif Vai PC',
+        'ip': '10.100.201.127',
+        'port': '8000',
+        'current_load': 0,
+        'is_active': True,
+    },
     {
         'name': 'Server Pc 1',
         'ip': '10.42.0.155',
@@ -72,13 +82,30 @@ servers = [
         'is_active': True,
     },
     {
-        'name': 'Shipshika Apu PC',
+        'name': 'Dipshika Apu PC',
         'ip': '10.47.0.130',
         'port': '8000',
         'current_load': 0,
         'is_active': True,
     },
 ]
+
+
+def log_request(request: Request, prompt: str, handling_server: str):
+    ip = "1.1.1.1" #request.headers.get("X-Forwarded-For", flask_request.remote_addr)
+    ip_filename = f"logs/{ip}.csv"
+    now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    row = [ip, handling_server, now, prompt]
+    header = ["ip", "handling_server", "date_time", "prompt"]
+
+    # Write to both global log and per-IP log
+    for filename in ["logs.csv", ip_filename]:
+        file_exists = os.path.isfile(filename)
+        with open(filename, mode="a", newline="", encoding="utf-8") as f:
+            writer = csv.writer(f)
+            if not file_exists:
+                writer.writerow(header)
+            writer.writerow(row)
 
 
 async def _check_server_health(server: Dict[str, Any], timeout: float = 5.0) -> Dict[str, Any]:
@@ -115,12 +142,6 @@ async def _check_server_health(server: Dict[str, Any], timeout: float = 5.0) -> 
 
 @app.on_event("startup")
 async def on_startup_health_check():
-    """Run a health check for all configured servers when the app starts.
-
-    Marks servers with failing health checks as inactive and prints a short
-    summary log with totals for active/inactive servers.
-    """
-    print("Starting initial servers health check...")
     tasks = [_check_server_health(s, timeout=5.0) for s in servers]
     results = await asyncio.gather(*tasks)
 
@@ -148,13 +169,16 @@ def get_least_loaded_server():
 
 
 @app.post("/generate")
-@limiter.limit("22/minute")
+@limiter.limit("122/minute")
 async def generate(request: Request):
     payload = await request.json()
     payload["stream"] = False
     server = get_least_loaded_server()
     OLLAMA_BASE = f"http://{server['ip']}:{server['port']}"
     server['current_load'] += 1
+
+    log_request(request, payload.get("prompt", "").strip(), server['name'])
+
     print(f"Routing to server: {server['name']} at {server['ip']}:{server['port']} with current load {server['current_load']}")
     async with httpx.AsyncClient(timeout=300.0) as client:
         r = await client.post(f"{OLLAMA_BASE}/generate", json=payload)
@@ -166,14 +190,17 @@ async def generate(request: Request):
 
 
 @app.post("/stream")
-@limiter.limit("22/minute")
+@limiter.limit("122/minute")
 async def stream(request: Request):
     payload = await request.json()
     payload.setdefault("stream", True)
 
     server = get_least_loaded_server()
     OLLAMA_BASE = f"http://{server['ip']}:{server['port']}"
-    server['current_load'] += 1   
+    server['current_load'] += 1 
+
+    log_request(request, payload.get("prompt", "").strip(), server['name'])
+
     print(f"Routing to server: {server['name']} at {server['ip']}:{server['port']} with current load {server['current_load']}")
     async def ndjson():
         try: 
@@ -182,7 +209,6 @@ async def stream(request: Request):
                     print(r)
                     if r.status_code != 200:
                         body = await r.aread()
-                        print(body)
                         raise HTTPException(r.status_code, body.decode("utf-8", "ignore"))
                     async for line in r.aiter_lines():
                         if not line:
@@ -195,7 +221,7 @@ async def stream(request: Request):
 
 
 @app.get("/healthz")
-@limiter.limit("22/minute")
+@limiter.limit("122/minute")
 async def health(request: Request):
     server = get_least_loaded_server()
     OLLAMA_BASE = f"http://{server['ip']}:{server['port']}"
