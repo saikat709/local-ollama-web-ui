@@ -1,0 +1,1060 @@
+client_ip,handling_server,date_time,prompt
+10.42.0.160,-,2025-10-11 09:49:39,"import pandas as pd 
+
+train_data = train.csv(""/kaggle/input/bdaio-nlp-genre-prediction/train.csv"") 
+test_data = test.csv(""/kaggle/input/bdaio-nlp-genre-prediction/test.csv"") what the rpoblem with this code"
+10.42.0.160,-,2025-10-11 09:51:40,then how can i print the results of chart for it
+10.42.0.160,-,2025-10-11 09:53:33,"import pandas as pd 
+
+train_data = pd.read_csv(""/kaggle/input/bdaio-nlp-genre-prediction/train.csv"") 
+test_data = pd.read_csv(""/kaggle/input/bdaio-nlp-genre-prediction/test.csv"")
+
+train.csv_head() whats wrong wit the last line"
+10.42.0.160,-,2025-10-11 10:23:37,"Meet Aera, a devoted Film and Drama Studies student with a heart full of stories and a dream of becoming a director who changes how the world sees emotions on screen.
+
+Her mentor, Professor Haruto, is a legendary figure in their university — eccentric, brilliant, and deeply passionate about cinema. He’s the kind of professor who quotes classic Korean dramas in class and believes that “data tells the real story behind every masterpiece.”
+
+For months, Haruto had been preparing his magnum opus — a massive research presentation for the FilmFare Local Showcase, the university’s grandest annual event where film scholars, critics, and students come together to celebrate the art of storytelling.
+This showcase wasn’t just another presentation — it was his reputation, legacy, and pride on the line.
+
+    But disaster struck the night before the showcase
+
+As the clock hit midnight, Haruto inserted his old pen drive into his laptop… only to be greeted by a single line of horror:
+
+    “Drive not readable. Files corrupted”
+
+Years of his research — gone.
+The carefully labeled K-Drama dataset, a record of thousands of dramas and their genres, had lost half its entries.
+Only 50% of the genre data remained intact. The other half? Completely blank.
+
+Panic set in. The presentation was due in just a few hours, and without the genre analysis, his entire talk would collapse.
+
+In a moment of desperation, Haruto called his most promising student — Aera.
+She had always been fascinated by how genres shape emotions, and she had built small models for fun before.
+Now, this wasn’t a classroom assignment anymore — it was a real challenge.
+
+Haruto’s voice trembled as he said:
+
+    “Aera… my dataset—it’s gone. Half of it is missing. I can’t show anything tomorrow. You’re my only hope”
+
+The Mission
+
+Aera now has only 5 hours to recover the missing genre labels from the corrupted dataset before sunrise.
+
+The dataset, thankfully, still has:
+
+    Some K-Dramas with known genres
+    And the rest — dramas with missing genres that need to be predicted
+
+The university auditorium will be full by morning. Professors, critics, and fellow students will be watching.
+If Aera fails, Haruto’s years of research — and perhaps his reputation — will crumble.
+
+But if she succeeds…
+She’ll not only save her professor but also prove that even broken data can tell beautiful stories again.
+
+Your task?
+Step into Aera’s shoes.
+Help her predict the missing genres of the dramas using the remaining data — accurately, efficiently, and creatively.
+You have limited time and limited data — can you bring back the lost stories before dawn?
+
+Constraint:
+Due to a sudden router DNS failure at Aera’s dorm, she can’t access any external model repositories or pretrained libraries. That means no pre-built embeddings, no sentence transformers, and no pretrained neural networks.
+She must design everything from scratch — craft her own model depending on other basic libraries for NLP to recover the lost genres before sunrise.
+
+    “True creativity begins where convenience ends”
+
+Objective:
+Predict the lost Genre values in the K-Drama dataset.
+Your model’s accuracy will determine whether Aera becomes the university’s hero — or the student who couldn’t save her professor’s final act.
+
+Start
+4 days ago
+Close
+4 hours to go
+Description
+
+You will be given a dataset of K-Dramas with details such as titles, cast, directors, summaries, and other metadata.
+Your task is to predict the genre(s) of each drama in the test set based on the available information.
+
+Remember you can’t use any pretrained models or Hugging Face libraries here as there are some problems in Aera's local network that blocks HF. Now, no time to solve the router issue, Aera decides to get into raw codinf.
+
+You must build your own NLP solution from scratch just like Aera, working through the night to save the day!
+
+Good luck!
+May your models be as dramatic in methodology and accuracy themselves. 💫
+Evaluation
+
+Submissions are evaluated using a multi-label genre matching metric based on the Jaccard Index (Intersection over Union).
+
+For each K-Drama in the test set:
+
+    If all genres are predicted correctly, the score is 100%.
+    Partial matches are proportionally rewarded based on overlap.
+    The final score is the average over all rows and is expressed as a percentage (0–100).
+
+The leaderboard is split 50/50 into Public and Private sets:
+
+    Public leaderboard is visible during the competition.
+    Private leaderboard determines the final ranking.
+
+Submission File
+
+For each ID in the test set, you must predict the genres as a comma-separated list.
+Your submission file must include a header and have the following format:
+Id 	Genre
+1 	Drama, Romance
+2 	Action, Crime, Comedy
+3 	Life, Drama
+
+Sample submission file has achieved 13% (rounded) in the current setting........................this is a kagge problem ....can u tell me what to do ...and what codes might solve this"
+10.42.0.160,-,2025-10-11 10:25:31,/kaggle/input/bdaio-nlp-genre-prediction/train.csv................./kaggle/input/bdaio-nlp-genre-prediction/test.csv......./kaggle/input/bdaio-nlp-genre-prediction/sample_submission (1).csv.....these are the pnly datasets given
+10.42.0.160,-,2025-10-11 10:26:42,can you give me a sample code for solving this kaggle problem the most accurately
+10.42.0.160,-,2025-10-11 10:29:57,"Meet Aera, a devoted Film and Drama Studies student with a heart full of stories and a dream of becoming a director who changes how the world sees emotions on screen.
+
+Her mentor, Professor Haruto, is a legendary figure in their university — eccentric, brilliant, and deeply passionate about cinema. He’s the kind of professor who quotes classic Korean dramas in class and believes that “data tells the real story behind every masterpiece.”
+
+For months, Haruto had been preparing his magnum opus — a massive research presentation for the FilmFare Local Showcase, the university’s grandest annual event where film scholars, critics, and students come together to celebrate the art of storytelling.
+This showcase wasn’t just another presentation — it was his reputation, legacy, and pride on the line.
+
+But disaster struck the night before the showcase
+
+As the clock hit midnight, Haruto inserted his old pen drive into his laptop… only to be greeted by a single line of horror:
+
+“Drive not readable. Files corrupted”
+
+Years of his research — gone.
+The carefully labeled K-Drama dataset, a record of thousands of dramas and their genres, had lost half its entries.
+Only 50% of the genre data remained intact. The other half? Completely blank.
+
+Panic set in. The presentation was due in just a few hours, and without the genre analysis, his entire talk would collapse.
+
+In a moment of desperation, Haruto called his most promising student — Aera.
+She had always been fascinated by how genres shape emotions, and she had built small models for fun before.
+Now, this wasn’t a classroom assignment anymore — it was a real challenge.
+
+Haruto’s voice trembled as he said:
+
+“Aera… my dataset—it’s gone. Half of it is missing. I can’t show anything tomorrow. You’re my only hope”
+
+The Mission
+
+Aera now has only 5 hours to recover the missing genre labels from the corrupted dataset before sunrise.
+
+The dataset, thankfully, still has:
+
+Some K-Dramas with known genres
+And the rest — dramas with missing genres that need to be predicted
+
+The university auditorium will be full by morning. Professors, critics, and fellow students will be watching.
+If Aera fails, Haruto’s years of research — and perhaps his reputation — will crumble.
+
+But if she succeeds…
+She’ll not only save her professor but also prove that even broken data can tell beautiful stories again.
+
+Your task?
+Step into Aera’s shoes.
+Help her predict the missing genres of the dramas using the remaining data — accurately, efficiently, and creatively.
+You have limited time and limited data — can you bring back the lost stories before dawn?
+
+Constraint:
+Due to a sudden router DNS failure at Aera’s dorm, she can’t access any external model repositories or pretrained libraries. That means no pre-built embeddings, no sentence transformers, and no pretrained neural networks.
+She must design everything from scratch — craft her own model depending on other basic libraries for NLP to recover the lost genres before sunrise.
+
+“True creativity begins where convenience ends”
+
+Objective:
+Predict the lost Genre values in the K-Drama dataset.
+Your model’s accuracy will determine whether Aera becomes the university’s hero — or the student who couldn’t save her professor’s final act.
+
+Start
+4 days ago
+Close
+4 hours to go
+Description
+
+You will be given a dataset of K-Dramas with details such as titles, cast, directors, summaries, and other metadata.
+Your task is to predict the genre(s) of each drama in the test set based on the available information.
+
+Remember you can’t use any pretrained models or Hugging Face libraries here as there are some problems in Aera's local network that blocks HF. Now, no time to solve the router issue, Aera decides to get into raw codinf.
+
+You must build your own NLP solution from scratch just like Aera, working through the night to save the day!
+
+Good luck!
+May your models be as dramatic in methodology and accuracy themselves. 💫
+Evaluation
+
+Submissions are evaluated using a multi-label genre matching metric based on the Jaccard Index (Intersection over Union).
+
+For each K-Drama in the test set:
+
+If all genres are predicted correctly, the score is 100%.
+Partial matches are proportionally rewarded based on overlap.
+The final score is the average over all rows and is expressed as a percentage (0–100).
+
+The leaderboard is split 50/50 into Public and Private sets:
+
+Public leaderboard is visible during the competition.
+Private leaderboard determines the final ranking.
+
+Submission File
+
+For each ID in the test set, you must predict the genres as a comma-separated list.
+Your submission file must include a header and have the following format:
+Id 	Genre
+1 	Drama, RomanceInternational AI Olympiad (IAIO) 2026
+
+Meet Aera, a devoted Film and Drama Studies student with a heart full of stories and a dream of becoming a director who changes how the world sees emotions on screen.
+
+Her mentor, Professor Haruto, is a legendary figure in their university — eccentric, brilliant, and deeply passionate about cinema. He’s the kind of professor who quotes classic Korean dramas in class and believes that “data tells the real story behind every masterpiece.”
+
+For months, Haruto had been preparing his magnum opus — a massive research presentation for the FilmFare Local Showcase, the university’s grandest annual event where film scholars, critics, and students come together to celebrate the art of storytelling.
+This showcase wasn’t just another presentation — it was his reputation, legacy, and pride on the line.
+
+But disaster struck the night before the showcase
+
+As the clock hit midnight, Haruto inserted his old pen drive into his laptop… only to be greeted by a single line of horror:
+
+“Drive not readable. Files corrupted”
+
+Years of his research — gone.
+The carefully labeled K-Drama dataset, a record of thousands of dramas and their genres, had lost half its entries.
+Only 50% of the genre data remained intact. The other half? Completely blank.
+
+Panic set in. The presentation was due in just a few hours, and without the genre analysis, his entire talk would collapse.
+
+In a moment of desperation, Haruto called his most promising student — Aera.
+She had always been fascinated by how genres shape emotions, and she had built small models for fun before.
+Now, this wasn’t a classroom assignment anymore — it was a real challenge.
+
+Haruto’s voice trembled as he said:
+
+“Aera… my dataset—it’s gone. Half of it is missing. I can’t show anything tomorrow. You’re my only hope”
+
+The Mission
+
+Aera now has only 5 hours to recover the missing genre labels from the corrupted dataset before sunrise.
+
+The dataset, thankfully, still has:
+
+Some K-Dramas with known genres
+And the rest — dramas with missing genres that need to be predicted
+
+The university auditorium will be full by morning. Professors, critics, and fellow students will be watching.
+If Aera fails, Haruto’s years of research — and perhaps his reputation — will crumble.
+
+But if she succeeds…
+She’ll not only save her professor but also prove that even broken data can tell beautiful stories again.
+
+Your task?
+Step into Aera’s shoes.
+Help her predict the missing genres of the dramas using the remaining data — accurately, efficiently, and creatively.
+You have limited time and limited data — can you bring back the lost stories before dawn?
+
+Constraint:
+Due to a sudden router DNS failure at Aera’s dorm, she can’t access any external model repositories or pretrained libraries. That means no pre-built embeddings, no sentence transformers, and no pretrained neural networks.
+She must design everything from scratch — craft her own model depending on other basic libraries for NLP to recover the lost genres before sunrise.
+
+“True creativity begins where convenience ends”
+
+Objective:
+Predict the lost Genre values in the K-Drama dataset.
+Your model’s accuracy will determine whether Aera becomes the university’s hero — or the student who couldn’t save her professor’s final act.
+
+Start
+4 days ago
+Close
+4 hours to go
+Description
+
+You will be given a dataset of K-Dramas with details such as titles, cast, directors, summaries, and other metadata.
+Your task is to predict the genre(s) of each drama in the test set based on the available information.
+
+Remember you can’t use any pretrained models or Hugging Face libraries here as there are some problems in Aera's local network that blocks HF. Now, no time to solve the router issue, Aera decides to get into raw codinf.
+
+You must build your own NLP solution from scratch just like Aera, working through the night to save the day!
+
+Good luck!
+May your models be as dramatic in methodology and accuracy themselves. 💫
+Evaluation
+
+Submissions are evaluated using a multi-label genre matching metric based on the Jaccard Index (Intersection over Union).
+
+For each K-Drama in the test set:
+
+If all genres are predicted correctly, the score is 100%.
+Partial matches are proportionally rewarded based on overlap.
+The final score is the average over all rows and is expressed as a percentage (0–100).
+
+The leaderboard is split 50/50 into Public and Private sets:
+
+Public leaderboard is visible during the competition.
+Private leaderboard determines the final ranking.
+
+Submission File
+
+For each ID in the test set, you must predict the genres as a comma-separated list.
+Your submission file must include a header and have the following format:
+Id 	Genre
+1 	Drama, Romance
+2 	Action, Crime, Comedy
+3 	Life, Drama
+
+Sample submission file has achieved 13% (rounded) in the current setting........................this is a kagge problem ....can u tell me what to do ...and what codes might solve this
+2 	Action, Crime, Comedy
+3 	Life, Drama
+
+Sample submission file has achieved 13% (rounded) in the current setting........................this is a kagge problem ....can u tell me what to do ...and what codes might solve this"
+10.42.0.160,-,2025-10-11 10:42:22,"import pandas as pd 
+
+train_data = pd.read_csv(""/kaggle/input/bdaio-nlp-genre-prediction/train.csv"") 
+test_data = pd.read_csv(""/kaggle/input/bdaio-nlp-genre-prediction/test.csv"")
+
+train_data.head()................# Target (what we want to predict)
+y = train_data[""Genre""]
+
+# Features (columns we will use to predict)
+features = [""Name"" , ""Year of release"", ""Content Rating"", ""Rating"", ""Synopsis"", ""Tags"",	""Director"" ,""Screenwriter"",	""Cast"", ""Production companies"", ""Rank""] 
+
+# Training data
+X = train_data[features]
+
+# Test data
+X_test = test_data[features]
+
+
+X.head() these are my previous codes but why is this one not working if the ear;ier 2 is wroking fine.......from sklearn.ensemble import RandomForestRegressor
+
+# Create model
+model = RandomForestRegressor(random_state=1)
+
+# Train it
+model.fit(X, y)"
+10.42.0.160,-,2025-10-11 10:43:56,shouldnt these code should be in other cells....why alltogether
+10.42.0.160,-,2025-10-11 10:49:21,"alr but as randomforstregressor is not for numerical ....what i can do in this case to fix my this part of code.....from sklearn.ensemble import RandomForestRegressor
+
+# Create model
+model = RandomForestRegressor(random_state=1)
+
+# Train it
+model.fit(X, y)...cuz it says You have categorical data, but your model needs something numerical"
+10.42.0.160,-,2025-10-11 10:51:16,"are my these ocdes okay import pandas as pd
+
+train_data = pd.read_csv(""/kaggle/input/bdaio-nlp-genre-prediction/train.csv"")
+test_data = pd.read_csv(""/kaggle/input/bdaio-nlp-genre-prediction/test.csv"")
+
+train_data.head()................# Target (what we want to predict)
+y = train_data[""Genre""]
+Features (columns we will use to predict)
+
+features = [""Name"" , ""Year of release"", ""Content Rating"", ""Rating"", ""Synopsis"", ""Tags"",	""Director"" ,""Screenwriter"",	""Cast"", ""Production companies"", ""Rank""]
+Training data
+
+X = train_data[features]
+Test data
+
+X_test = test_data[features]
+
+X.head() these are my previous codes but why is this one not working if the ear;ier 2 is wroking fine.......from sklearn.ensemble import RandomForestRegressor
+Create model
+
+model = RandomForestRegressor(random_state=1)
+Train it
+
+model.fit(X, y)"
+10.42.0.160,-,2025-10-11 10:52:16,thats so hard ...suggest smthg easy for me to understand as a begginr
+10.42.0.160,-,2025-10-11 10:53:40,"import pandas as pd
+
+train_data = pd.read_csv(""/kaggle/input/bdaio-nlp-genre-prediction/train.csv"")
+test_data = pd.read_csv(""/kaggle/input/bdaio-nlp-genre-prediction/test.csv"")
+
+train_data.head()................# Target (what we want to predict)
+y = train_data[""Genre""]
+Features (columns we will use to predict)
+
+features = [""Name"" , ""Year of release"", ""Content Rating"", ""Rating"", ""Synopsis"", ""Tags"",	""Director"" ,""Screenwriter"",	""Cast"", ""Production companies"", ""Rank""]
+Training data
+
+X = train_data[features]
+Test data
+
+X_test = test_data[features]
+
+X.head() these are my previous codes but why is this one not working if the ear;ier 2 is wroking fine.......from sklearn.ensemble import RandomForestRegressor
+Create model
+
+model = RandomForestRegressor(random_state=1)
+Train it
+
+model.fit(X, y)"
+10.42.0.160,-,2025-10-11 10:55:08,hi
+10.42.0.160,-,2025-10-11 10:56:31,"Meet Aera, a devoted Film and Drama Studies student with a heart full of stories and a dream of becoming a director who changes how the world sees emotions on screen.
+
+Her mentor, Professor Haruto, is a legendary figure in their university — eccentric, brilliant, and deeply passionate about cinema. He’s the kind of professor who quotes classic Korean dramas in class and believes that “data tells the real story behind every masterpiece.”
+
+For months, Haruto had been preparing his magnum opus — a massive research presentation for the FilmFare Local Showcase, the university’s grandest annual event where film scholars, critics, and students come together to celebrate the art of storytelling.
+This showcase wasn’t just another presentation — it was his reputation, legacy, and pride on the line.
+
+But disaster struck the night before the showcase
+
+As the clock hit midnight, Haruto inserted his old pen drive into his laptop… only to be greeted by a single line of horror:
+
+“Drive not readable. Files corrupted”
+
+Years of his research — gone.
+The carefully labeled K-Drama dataset, a record of thousands of dramas and their genres, had lost half its entries.
+Only 50% of the genre data remained intact. The other half? Completely blank.
+
+Panic set in. The presentation was due in just a few hours, and without the genre analysis, his entire talk would collapse.
+
+In a moment of desperation, Haruto called his most promising student — Aera.
+She had always been fascinated by how genres shape emotions, and she had built small models for fun before.
+Now, this wasn’t a classroom assignment anymore — it was a real challenge.
+
+Haruto’s voice trembled as he said:
+
+“Aera… my dataset—it’s gone. Half of it is missing. I can’t show anything tomorrow. You’re my only hope”
+
+The Mission
+
+Aera now has only 5 hours to recover the missing genre labels from the corrupted dataset before sunrise.
+
+The dataset, thankfully, still has:
+
+Some K-Dramas with known genres
+And the rest — dramas with missing genres that need to be predicted
+
+The university auditorium will be full by morning. Professors, critics, and fellow students will be watching.
+If Aera fails, Haruto’s years of research — and perhaps his reputation — will crumble.
+
+But if she succeeds…
+She’ll not only save her professor but also prove that even broken data can tell beautiful stories again.
+
+Your task?
+Step into Aera’s shoes.
+Help her predict the missing genres of the dramas using the remaining data — accurately, efficiently, and creatively.
+You have limited time and limited data — can you bring back the lost stories before dawn?
+
+Constraint:
+Due to a sudden router DNS failure at Aera’s dorm, she can’t access any external model repositories or pretrained libraries. That means no pre-built embeddings, no sentence transformers, and no pretrained neural networks.
+She must design everything from scratch — craft her own model depending on other basic libraries for NLP to recover the lost genres before sunrise.
+
+“True creativity begins where convenience ends”
+
+Objective:
+Predict the lost Genre values in the K-Drama dataset.
+Your model’s accuracy will determine whether Aera becomes the university’s hero — or the student who couldn’t save her professor’s final act.
+
+Start
+4 days ago
+Close
+4 hours to go
+Description
+
+You will be given a dataset of K-Dramas with details such as titles, cast, directors, summaries, and other metadata.
+Your task is to predict the genre(s) of each drama in the test set based on the available information.
+
+Remember you can’t use any pretrained models or Hugging Face libraries here as there are some problems in Aera's local network that blocks HF. Now, no time to solve the router issue, Aera decides to get into raw codinf.
+
+You must build your own NLP solution from scratch just like Aera, working through the night to save the day!
+
+Good luck!
+May your models be as dramatic in methodology and accuracy themselves. 💫
+Evaluation
+
+Submissions are evaluated using a multi-label genre matching metric based on the Jaccard Index (Intersection over Union).
+
+For each K-Drama in the test set:
+
+If all genres are predicted correctly, the score is 100%.
+Partial matches are proportionally rewarded based on overlap.
+The final score is the average over all rows and is expressed as a percentage (0–100).
+
+The leaderboard is split 50/50 into Public and Private sets:
+
+Public leaderboard is visible during the competition.
+Private leaderboard determines the final ranking.
+
+Submission File
+
+For each ID in the test set, you must predict the genres as a comma-separated list.
+Your submission file must include a header and have the following format:
+Id 	Genre
+1 	Drama, RomanceInternational AI Olympiad (IAIO) 2026
+
+Meet Aera, a devoted Film and Drama Studies student with a heart full of stories and a dream of becoming a director who changes how the world sees emotions on screen.
+
+Her mentor, Professor Haruto, is a legendary figure in their university — eccentric, brilliant, and deeply passionate about cinema. He’s the kind of professor who quotes classic Korean dramas in class and believes that “data tells the real story behind every masterpiece.”
+
+For months, Haruto had been preparing his magnum opus — a massive research presentation for the FilmFare Local Showcase, the university’s grandest annual event where film scholars, critics, and students come together to celebrate the art of storytelling.
+This showcase wasn’t just another presentation — it was his reputation, legacy, and pride on the line.
+
+But disaster struck the night before the showcase
+
+As the clock hit midnight, Haruto inserted his old pen drive into his laptop… only to be greeted by a single line of horror:
+
+“Drive not readable. Files corrupted”
+
+Years of his research — gone.
+The carefully labeled K-Drama dataset, a record of thousands of dramas and their genres, had lost half its entries.
+Only 50% of the genre data remained intact. The other half? Completely blank.
+
+Panic set in. The presentation was due in just a few hours, and without the genre analysis, his entire talk would collapse.
+
+In a moment of desperation, Haruto called his most promising student — Aera.
+She had always been fascinated by how genres shape emotions, and she had built small models for fun before.
+Now, this wasn’t a classroom assignment anymore — it was a real challenge.
+
+Haruto’s voice trembled as he said:
+
+“Aera… my dataset—it’s gone. Half of it is missing. I can’t show anything tomorrow. You’re my only hope”
+
+The Mission
+
+Aera now has only 5 hours to recover the missing genre labels from the corrupted dataset before sunrise.
+
+The dataset, thankfully, still has:
+
+Some K-Dramas with known genres
+And the rest — dramas with missing genres that need to be predicted
+
+The university auditorium will be full by morning. Professors, critics, and fellow students will be watching.
+If Aera fails, Haruto’s years of research — and perhaps his reputation — will crumble.
+
+But if she succeeds…
+She’ll not only save her professor but also prove that even broken data can tell beautiful stories again.
+
+Your task?
+Step into Aera’s shoes.
+Help her predict the missing genres of the dramas using the remaining data — accurately, efficiently, and creatively.
+You have limited time and limited data — can you bring back the lost stories before dawn?
+
+Constraint:
+Due to a sudden router DNS failure at Aera’s dorm, she can’t access any external model repositories or pretrained libraries. That means no pre-built embeddings, no sentence transformers, and no pretrained neural networks.
+She must design everything from scratch — craft her own model depending on other basic libraries for NLP to recover the lost genres before sunrise.
+
+“True creativity begins where convenience ends”
+
+Objective:
+Predict the lost Genre values in the K-Drama dataset.
+Your model’s accuracy will determine whether Aera becomes the university’s hero — or the student who couldn’t save her professor’s final act.
+
+Start
+4 days ago
+Close
+4 hours to go
+Description
+
+You will be given a dataset of K-Dramas with details such as titles, cast, directors, summaries, and other metadata.
+Your task is to predict the genre(s) of each drama in the test set based on the available information.
+
+Remember you can’t use any pretrained models or Hugging Face libraries here as there are some problems in Aera's local network that blocks HF. Now, no time to solve the router issue, Aera decides to get into raw codinf.
+
+You must build your own NLP solution from scratch just like Aera, working through the night to save the day!
+
+Good luck!
+May your models be as dramatic in methodology and accuracy themselves. 💫
+Evaluation
+
+Submissions are evaluated using a multi-label genre matching metric based on the Jaccard Index (Intersection over Union).
+
+For each K-Drama in the test set:
+
+If all genres are predicted correctly, the score is 100%.
+Partial matches are proportionally rewarded based on overlap.
+The final score is the average over all rows and is expressed as a percentage (0–100).
+
+The leaderboard is split 50/50 into Public and Private sets:
+
+Public leaderboard is visible during the competition.
+Private leaderboard determines the final ranking.
+
+Submission File
+
+For each ID in the test set, you must predict the genres as a comma-separated list.
+Your submission file must include a header and have the following format:
+Id 	Genre
+1 	Drama, Romance
+2 	Action, Crime, Comedy
+3 	Life, Drama
+
+Sample submission file has achieved 13% (rounded) in the current setting........................this is a kagge problem ....can u tell me what to do ...and what codes might solve this
+2 	Action, Crime, Comedy
+3 	Life, Drama
+
+Sample submission file has achieved 13% (rounded) in the current setting........................this is a kagge problem ....can u tell me what to do ...and what codes might solve this"
+10.42.0.160,-,2025-10-11 11:01:45,"import pandas as pd
+
+train_data = pd.read_csv(""/kaggle/input/bdaio-nlp-genre-prediction/train.csv"")
+test_data = pd.read_csv(""/kaggle/input/bdaio-nlp-genre-prediction/test.csv"")
+
+train_data.head()................# Target (what we want to predict)
+y = train_data[""Genre""]
+Features (columns we will use to predict)
+
+features = [""Name"" , ""Year of release"", ""Content Rating"", ""Rating"", ""Synopsis"", ""Tags"",	""Director"" ,""Screenwriter"",	""Cast"", ""Production companies"", ""Rank""]
+Training data
+
+X = train_data[features]
+Test data
+
+X_test = test_data[features]
+
+X.head() these are my previous codes but why is this one not working if the ear;ier 2 is wroking fine.......from sklearn.ensemble import RandomForestRegressor
+Create model
+
+model = RandomForestRegressor(random_state=1)
+Train it
+
+model.fit(X, y)"
+10.42.0.160,-,2025-10-11 11:05:38,"what do i do if my terminal says You have categorical data, but your model needs something numerical....what can i do here in this code...suggest me ez small from sklearn.ensemble import RandomForestRegressor
+
+# Create model
+model = RandomForestRegressor(random_state=1)
+
+# Train it
+model.fit(X, y)"
+10.42.0.160,-,2025-10-11 11:10:04,# Assuming 'cat_cols' is a list of categorical column names........how should the list look like
+10.42.0.160,-,2025-10-11 11:11:27,"should it look anything lik this  Features (columns we will use to predict)
+features = [""Name"" , ""Year of release"", ""Content Rating"", ""Rating"", ""Synopsis"", ""Tags"",	""Director"" ,""Screenwriter"",	""Cast"", ""Production companies"", ""Rank""]"
+10.42.0.160,-,2025-10-11 11:20:43,"from sklearn.preprocessing import OneHotEncoder
+from sklearn.compose import ColumnTransformer
+from sklearn.pipeline import Pipeline
+
+# Here 'cat_cols' is a list of categorical column names
+cat_cols = [""Name"",
+            ""Year of release"",
+            ""Content Rating"",
+            ""Rating"",
+            ""Synopsis"",
+            ""Tags"",
+            ""Director"", 
+            ""Screenwriter"",  
+            ""Cast"",  
+            ""Production companies""
+]
+
+ct = ColumnTransformer(
+    transformers=[
+        ('encoder', OneHotEncoder(), cat_cols)
+    ],
+    remainder='passthrough'
+)
+
+# Define the pipeline with One-Hot encoding for categorical data
+pipe = Pipeline([
+    ('transformer', ct),
+    ('model', RandomForestRegressor(random_state=1))
+])
+
+# Now you can use 'pipe' to fit your model
+pipe.fit(X, y)
+..............NameError                                 Traceback (most recent call last)
+/tmp/ipykernel_37/1716873327.py in <cell line: 0>()
+     26 pipe = Pipeline([
+     27     ('transformer', ct),
+---> 28     ('model', RandomForestRegressor(random_state=1))
+     29 ])
+     30 
+
+NameError: name 'RandomForestRegressor' is not defined...what to do in this case"
+10.42.0.160,-,2025-10-11 11:22:32,but it says randomforest is not defined
+10.42.0.160,-,2025-10-11 11:23:51,"🎭
+
+Meet Aera, a devoted Film and Drama Studies student with a heart full of stories and a dream of becoming a director who changes how the world sees emotions on screen.
+
+Her mentor, Professor Haruto, is a legendary figure in their university — eccentric, brilliant, and deeply passionate about cinema. He’s the kind of professor who quotes classic Korean dramas in class and believes that “data tells the real story behind every masterpiece.”
+
+For months, Haruto had been preparing his magnum opus — a massive research presentation for the FilmFare Local Showcase, the university’s grandest annual event where film scholars, critics, and students come together to celebrate the art of storytelling.
+This showcase wasn’t just another presentation — it was his reputation, legacy, and pride on the line.
+
+    But disaster struck the night before the showcase
+
+As the clock hit midnight, Haruto inserted his old pen drive into his laptop… only to be greeted by a single line of horror:
+
+    “Drive not readable. Files corrupted”
+
+Years of his research — gone.
+The carefully labeled K-Drama dataset, a record of thousands of dramas and their genres, had lost half its entries.
+Only 50% of the genre data remained intact. The other half? Completely blank.
+
+Panic set in. The presentation was due in just a few hours, and without the genre analysis, his entire talk would collapse.
+
+In a moment of desperation, Haruto called his most promising student — Aera.
+She had always been fascinated by how genres shape emotions, and she had built small models for fun before.
+Now, this wasn’t a classroom assignment anymore — it was a real challenge.
+
+Haruto’s voice trembled as he said:
+
+    “Aera… my dataset—it’s gone. Half of it is missing. I can’t show anything tomorrow. You’re my only hope”
+
+The Mission
+
+Aera now has only 5 hours to recover the missing genre labels from the corrupted dataset before sunrise.
+
+The dataset, thankfully, still has:
+
+    Some K-Dramas with known genres
+    And the rest — dramas with missing genres that need to be predicted
+
+The university auditorium will be full by morning. Professors, critics, and fellow students will be watching.
+If Aera fails, Haruto’s years of research — and perhaps his reputation — will crumble.
+
+But if she succeeds…
+She’ll not only save her professor but also prove that even broken data can tell beautiful stories again.
+
+Your task?
+Step into Aera’s shoes.
+Help her predict the missing genres of the dramas using the remaining data — accurately, efficiently, and creatively.
+You have limited time and limited data — can you bring back the lost stories before dawn?
+
+Constraint:
+Due to a sudden router DNS failure at Aera’s dorm, she can’t access any external model repositories or pretrained libraries. That means no pre-built embeddings, no sentence transformers, and no pretrained neural networks.
+She must design everything from scratch — craft her own model depending on other basic libraries for NLP to recover the lost genres before sunrise.
+
+    “True creativity begins where convenience ends”
+
+Objective:
+Predict the lost Genre values in the K-Drama dataset.
+Your model’s accuracy will determine whether Aera becomes the university’s hero — or the student who couldn’t save her professor’s final act.
+
+Start
+4 days ago
+Close
+3 hours to go
+Description
+
+You will be given a dataset of K-Dramas with details such as titles, cast, directors, summaries, and other metadata.
+Your task is to predict the genre(s) of each drama in the test set based on the available information.
+
+Remember you can’t use any pretrained models or Hugging Face libraries here as there are some problems in Aera's local network that blocks HF. Now, no time to solve the router issue, Aera decides to get into raw codinf.
+
+You must build your own NLP solution from scratch just like Aera, working through the night to save the day!
+
+Good luck!
+May your models be as dramatic in methodology and accuracy themselves. 💫
+Evaluation
+
+Submissions are evaluated using a multi-label genre matching metric based on the Jaccard Index (Intersection over Union).
+
+For each K-Drama in the test set:
+
+    If all genres are predicted correctly, the score is 100%.
+    Partial matches are proportionally rewarded based on overlap.
+    The final score is the average over all rows and is expressed as a percentage (0–100).
+
+The leaderboard is split 50/50 into Public and Private sets:
+
+    Public leaderboard is visible during the competition.
+    Private leaderboard determines the final ranking.
+
+Submission File
+
+For each ID in the test set, you must predict the genres as a comma-separated list.
+Your submission file must include a header and have the following format:
+Id 	Genre
+1 	Drama, Romance
+2 	Action, Crime, Comedy
+3 	Life, Drama
+
+Sample submission file has achieved 13% (rounded) in the current setting"
+10.42.0.160,-,2025-10-11 11:25:40,"how do i define random forest here in my code ....cuz if i dont, it shows error"
+10.42.0.160,-,2025-10-11 11:28:47,"rf = RandomForestClassifier(n_estimators=100)
+rf.fit(X_train, y_train).......what does this mean and why numer 100 is here"
+10.42.0.160,-,2025-10-11 11:32:47,"why does this error show up ---------------------------------------------------------------------------
+NameError                                 Traceback (most recent call last)
+/tmp/ipykernel_37/2159175139.py in <cell line: 0>()
+     28 pipe = Pipeline([
+     29     ('transformer', ct),
+---> 30     ('model', RandomForestRegressor(random_state=1))
+     31 ])
+     32 
+
+NameError: name 'RandomForestRegressor' is not defined"
+10.42.0.160,-,2025-10-11 11:34:08,"this i s my fixed code but it shtill shows me this from sklearn.preprocessing import OneHotEncoder
+from sklearn.compose import ColumnTransformer
+from sklearn.pipeline import Pipeline
+
+
+# Here 'cat_cols' is a list of categorical column names
+cat_cols = [""Name"",
+            ""Year of release"",
+            ""Content Rating"",
+            ""Rating"",
+            ""Synopsis"",
+            ""Tags"",
+            ""Director"", 
+            ""Screenwriter"",  
+            ""Cast"",  
+            ""Production companies""
+]
+
+ct = ColumnTransformer(
+    transformers=[
+        ('encoder', OneHotEncoder(), cat_cols)
+    ],
+    remainder='passthrough'
+)
+
+from sklearn.ensemble import RandomForestClassifier
+# Define the pipeline with One-Hot encoding for categorical data
+pipe = Pipeline([
+    ('transformer', ct),
+    ('model', RandomForestRegressor(random_state=1))
+])
+
+pipe.fit(X, y)"
+10.42.0.160,-,2025-10-11 11:36:55,"---------------------------------------------------------------------------
+ValueError                                Traceback (most recent call last)
+/usr/local/lib/python3.11/dist-packages/sklearn/compose/_column_transformer.py in _hstack(self, Xs)
+    829                 # dtype conversion if necessary.
+--> 830                 converted_Xs = [
+    831                     check_array(X, accept_sparse=True, force_all_finite=False)
+
+/usr/local/lib/python3.11/dist-packages/sklearn/compose/_column_transformer.py in <listcomp>(.0)
+    830                 converted_Xs = [
+--> 831                     check_array(X, accept_sparse=True, force_all_finite=False)
+    832                     for X in Xs
+
+/usr/local/lib/python3.11/dist-packages/sklearn/utils/validation.py in check_array(array, accept_sparse, accept_large_sparse, dtype, order, copy, force_all_finite, ensure_2d, allow_nd, ensure_min_samples, ensure_min_features, estimator, input_name)
+    878                 else:
+--> 879                     array = _asarray_with_order(array, order=order, dtype=dtype, xp=xp)
+    880             except ComplexWarning as complex_warning:
+
+/usr/local/lib/python3.11/dist-packages/sklearn/utils/_array_api.py in _asarray_with_order(array, dtype, order, copy, xp)
+    184         # Use NumPy API to support order
+--> 185         array = numpy.asarray(array, order=order, dtype=dtype)
+    186         return xp.asarray(array, copy=copy)
+
+/usr/local/lib/python3.11/dist-packages/pandas/core/generic.py in __array__(self, dtype, copy)
+   2152         values = self._values
+-> 2153         arr = np.asarray(values, dtype=dtype)
+   2154         if (
+
+ValueError: could not convert string to float: '#233'
+
+The above exception was the direct cause of the following exception:
+
+ValueError                                Traceback (most recent call last)
+/tmp/ipykernel_37/2562596882.py in <cell line: 0>()
+     33 
+     34 # Fit the pipeline to your dataset (X and y)
+---> 35 pipe.fit(X, y)
+
+/usr/local/lib/python3.11/dist-packages/sklearn/pipeline.py in fit(self, X, y, **fit_params)
+    399         """"""
+    400         fit_params_steps = self._check_fit_params(**fit_params)
+--> 401         Xt = self._fit(X, y, **fit_params_steps)
+    402         with _print_elapsed_time(""Pipeline"", self._log_message(len(self.steps) - 1)):
+    403             if self._final_estimator != ""passthrough"":
+
+/usr/local/lib/python3.11/dist-packages/sklearn/pipeline.py in _fit(self, X, y, **fit_params_steps)
+    357                 cloned_transformer = clone(transformer)
+    358             # Fit or load from cache the current transformer
+--> 359             X, fitted_transformer = fit_transform_one_cached(
+    360                 cloned_transformer,
+    361                 X,
+
+/usr/local/lib/python3.11/dist-packages/joblib/memory.py in __call__(self, *args, **kwargs)
+    324 
+    325     def __call__(self, *args, **kwargs):
+--> 326         return self.func(*args, **kwargs)
+    327 
+    328     def call_and_shelve(self, *args, **kwargs):
+
+/usr/local/lib/python3.11/dist-packages/sklearn/pipeline.py in _fit_transform_one(transformer, X, y, weight, message_clsname, message, **fit_params)
+    891     with _print_elapsed_time(message_clsname, message):
+    892         if hasattr(transformer, ""fit_transform""):
+--> 893             res = transformer.fit_transform(X, y, **fit_params)
+    894         else:
+    895             res = transformer.fit(X, y, **fit_params).transform(X)
+
+/usr/local/lib/python3.11/dist-packages/sklearn/utils/_set_output.py in wrapped(self, X, *args, **kwargs)
+    138     @wraps(f)
+    139     def wrapped(self, X, *args, **kwargs):
+--> 140         data_to_wrap = f(self, X, *args, **kwargs)
+    141         if isinstance(data_to_wrap, tuple):
+    142             # only wrap the first output for cross decomposition
+
+/usr/local/lib/python3.11/dist-packages/sklearn/compose/_column_transformer.py in fit_transform(self, X, y)
+    749         self._record_output_indices(Xs)
+    750 
+--> 751         return self._hstack(list(Xs))
+    752 
+    753     def transform(self, X):
+
+/usr/local/lib/python3.11/dist-packages/sklearn/compose/_column_transformer.py in _hstack(self, Xs)
+    833                 ]
+    834             except ValueError as e:
+--> 835                 raise ValueError(
+    836                     ""For a sparse output, all columns should ""
+    837                     ""be a numeric or convertible to a numeric.""
+
+ValueError: For a sparse output, all columns should be a numeric or convertible to a numeric"
+10.42.0.160,-,2025-10-11 11:52:04,"whats this # Preprocess text data
+vectorizer = TfidfVectorizer(stop_words='english')
+text_data = df['summary'].fillna('').astype(str)
+text_data_vectorized = vectorizer.fit_transform(text_data)"
+10.42.0.160,-,2025-10-11 12:10:36,"okay then this classifier has worked ..from sklearn.preprocessing import OneHotEncoder
+from sklearn.compose import ColumnTransformer
+from sklearn.pipeline import Pipeline
+from sklearn.ensemble import RandomForestClassifier
+import pandas as pd
+
+# Define categorical columns
+cat_cols = [""Name"",
+            ""Year of release"",
+            ""Content Rating"",
+            ""Rating"",
+            ""Synopsis"",
+            ""Tags"",
+            ""Director"", 
+            ""Screenwriter"",  
+            ""Cast"",  
+            ""Production companies""
+]
+
+# One-Hot encoding for categorical data using ColumnTransformer
+ct = ColumnTransformer(
+    transformers=[
+        ('encoder', OneHotEncoder(), cat_cols)
+    ],
+    remainder='passthrough'
+)
+
+# Define the pipeline with One-Hot encoding for categorical data and a Random Forest Regressor
+pipe = Pipeline([
+    ('transformer', ct),
+    ('model', RandomForestClassifier(random_state=1)) 
+]).....now ca u suggest me how to submit this and is this the end or i am missing something"
+10.42.0.160,-,2025-10-11 12:25:14,"rom sklearn.preprocessing import OneHotEncoder
+from sklearn.compose import ColumnTransformer
+from sklearn.pipeline import Pipeline
+from sklearn.ensemble import RandomForestClassifier
+import pandas as pd
+
+# Define categorical columns
+cat_cols = [""Name"",
+            ""Year of release"",
+            ""Content Rating"",
+            ""Rating"",
+            ""Synopsis"",
+            ""Tags"",
+            ""Director"", 
+            ""Screenwriter"",  
+            ""Cast"",  
+            ""Production companies""
+]
+
+ct = ColumnTransformer(
+    transformers=[
+        ('encoder', OneHotEncoder(), cat_cols)
+    ],
+    remainder='passthrough'
+)
+
+pipe = Pipeline([
+    ('transformer', ct),
+    ('model', RandomForestClassifier(random_state=1)) 
+])
+
+# Fit the pipeline to your training data
+pipe.fit(X, y)
+...........the errpr shows me For a sparse output, all columns should be a numeric or convertible to a numeric....."
+10.42.0.160,-,2025-10-11 12:27:37,what numerical colums ....where can i find it....is it in the number listing for the table you mean
+10.42.0.160,-,2025-10-11 12:28:59,"this is the table ......... 	Name 	Year of release 	Content Rating 	Rating 	Synopsis 	Tags 	Director 	Screenwriter 	Cast 	Production companies 	Rank
+0 	49 Days 	2011 	15+ - Teens 15 or older 	8.3 	Shin Ji Hyun was enjoying absolute bliss as sh... 	Coma, Second Chance, Death, Car Accident, Naiv... 	Jo Young Kwang, Park Yong Soon 	So Hyun Kyung 	Lee Yo Won, Nam Gyu Ri, Jung Il Woo, Jo Hyun J... 	HB Entertainment 	#233
+1 	Pachinko 	2022 	15+ - Teens 15 or older 	8.4 	This sweeping saga chronicles the hopes and dr... 	Co-produced, Discrimination, Immigrant, Adapte... 	Kogonada, Justin Chon 	Soo Hugh 	Kim Min Ha, Youn Yuh Jung, Jin Ha, Lee Min Ho,... 	Blue Marble Pictures, A Han.Bok Dream Producti... 	#167
+2 	The Smile Has Left Your Eyes 	2018 	15+ - Teens 15 or older 	8.3 	A TV series centered around the unfolding rela... 	Antihero, Psychological, Murder, Tragic Past, ... 	Yoo Je Won 	Song Hye Jin 	Seo In Guk, Jung So Min, Park Sung Woong, Seo ... 	Fuji Television, Studio Dragon, The Unicorn 	#213
+3 	Happiness 	2021 	15+ - Teens 15 or older 	8.9 	A deadly new strain of a virus is spreading th... 	Disease, Strong Female Lead, Survival, Virus, ... 	Ahn Gil Ho 	Han Sang Woon 	Han Hyo Joo, Park Hyung Sik, Jo Woo Jin, Lee ... 	Studio Dragon 	#19
+4 	Nine: Nine Times Time Travel 	2013 	15+ - Teens 15 or older 	8.4 	Park Sun Woo works as an anchorman at a TV bro... 	Time Travel, 1990s, Bromance, Female Chases Ma... 	Kim Byung Soo 	Song Jae Jung, Kim Yoon Joo 	Lee Jin Wook, Lee Seung Joon, Jo Yoon Hee, Oh ... 	JS Pictures, Chorokbaem Media 	#157..............which is the numerical column"
+10.42.0.160,-,2025-10-11 12:30:35,need a small regression code
+10.42.0.160,-,2025-10-11 12:33:12,how can i complete this hsortly
+10.42.0.160,-,2025-10-11 13:11:29,show me some code for regression on python
+10.42.0.160,-,2025-10-11 13:25:33,"...---------------------------------------------------------------------------
+ValueError                                Traceback (most recent call last)
+/tmp/ipykernel_37/3977545794.py in <cell line: 0>()
+      5 
+      6 # Train it
+----> 7 model.fit(X, y)
+      8 
+      9 
+
+/usr/local/lib/python3.11/dist-packages/sklearn/ensemble/_forest.py in fit(self, X, y, sample_weight)
+    343         if issparse(y):
+    344             raise ValueError(""sparse multilabel-indicator for y is not supported."")
+--> 345         X, y = self._validate_data(
+    346             X, y, multi_output=True, accept_sparse=""csc"", dtype=DTYPE
+    347         )
+
+/usr/local/lib/python3.11/dist-packages/sklearn/base.py in _validate_data(self, X, y, reset, validate_separately, **check_params)
+    582                 y = check_array(y, input_name=""y"", **check_y_params)
+    583             else:
+--> 584                 X, y = check_X_y(X, y, **check_params)
+    585             out = X, y
+    586 
+
+/usr/local/lib/python3.11/dist-packages/sklearn/utils/validation.py in check_X_y(X, y, accept_sparse, accept_large_sparse, dtype, order, copy, force_all_finite, ensure_2d, allow_nd, multi_output, ensure_min_samples, ensure_min_features, y_numeric, estimator)
+   1104         )
+   1105 
+-> 1106     X = check_array(
+   1107         X,
+   1108         accept_sparse=accept_sparse,
+
+/usr/local/lib/python3.11/dist-packages/sklearn/utils/validation.py in check_array(array, accept_sparse, accept_large_sparse, dtype, order, copy, force_all_finite, ensure_2d, allow_nd, ensure_min_samples, ensure_min_features, estimator, input_name)
+    877                     array = xp.astype(array, dtype, copy=False)
+    878                 else:
+--> 879                     array = _asarray_with_order(array, order=order, dtype=dtype, xp=xp)
+    880             except ComplexWarning as complex_warning:
+    881                 raise ValueError(
+
+/usr/local/lib/python3.11/dist-packages/sklearn/utils/_array_api.py in _asarray_with_order(array, dtype, order, copy, xp)
+    183     if xp.__name__ in {""numpy"", ""numpy.array_api""}:
+    184         # Use NumPy API to support order
+--> 185         array = numpy.asarray(array, order=order, dtype=dtype)
+    186         return xp.asarray(array, copy=copy)
+    187     else:
+
+/usr/local/lib/python3.11/dist-packages/pandas/core/generic.py in __array__(self, dtype, copy)
+   2151     ) -> np.ndarray:
+   2152         values = self._values
+-> 2153         arr = np.asarray(values, dtype=dtype)
+   2154         if (
+   2155             astype_is_view(values.dtype, arr.dtype)
+
+ValueError: could not convert string to float: '49 Days'help me with understanding this error"
+10.42.0.160,-,2025-10-11 13:29:31,"import pandas as pd
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.metrics.pairwise import cosine_similarity
+from sklearn.model_selection import train_test_split
+
+# Load the dataset
+df = pd.read_csv('/kaggle/input/bdaio-nlp-genre-prediction/train.csv')
+
+# Preprocess text data
+vectorizer = TfidfVectorizer(stop_words='english')
+text_data = df['summary'].fillna('').astype(str)
+text_data_vectorized = vectorizer.fit_transform(text_data)
+
+# Split data into training and testing sets
+train_text, test_text, train_genres, test_genres = train_test_split(text_data_vectorized, df['genre'], test_size=0.2, random_state=42)
+
+# Train a TF-IDF model on the training text data to get vector representations of genres
+genres_tfidf = cosine_similarity(vectorizer.transform(train_genres))
+
+# Predict missing genres using cosine similarity between genre vectors and text vectors
+def predict_missing_genres(test_text, train_text, test_genres, genres_tfidf):
+    predicted_genres = []
+    for i in range(len(test_text)):
+        similarities = cosine_similarity(test_text[i].reshape(1,-1), train_text)
+        idx = np.argmax(similarities)
+        if test_genres.iloc[idx] is not None:
+            predicted_genres.append(', '.join(list(set(np.where(genres_tfidf[idx] > 0.5)[0]))))
+        else:
+            predicted_genres.append(',')
+    return predicted_genres
+
+
+
+predicted_genres = predict_missing_genres(test_text, train_text, test_genres, genres_tfidf)
+
+...........this was my original code so now help me out"

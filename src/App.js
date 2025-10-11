@@ -24,7 +24,7 @@ const OlympiadInfo = () => {
   return (
     <div className="olympiad-info">
       <img src={iaioLogo} alt="IAIO Logo" className="info-logo" />
-      <h2>Welcome to IIT,DU!</h2>
+      <h2>Welcome to IIT, DU!</h2>
       <p>Best wishes for the selection contest for IAIO, 2026! <br/> I am your AI friend to help you with the basic AI & ML related queries!</p>
       <div className="example-questions">
         <p>Here are some example questions you can ask me:</p>
@@ -199,7 +199,7 @@ function App() {
     <div className="App">
       <header className="header">
         <img src={iitLogo} alt="IIT Logo" className="header-logo" />
-        <h1>IIT AI Olympiad</h1>
+        <h1>International AI Olympiad (IAIO) 2026 Selection Round</h1>
       </header>
 
       {error && <ErrorModal message={error} onClose={() => setError(null)} />}

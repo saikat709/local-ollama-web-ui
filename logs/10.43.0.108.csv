@@ -1,0 +1,33 @@
+client_ip,handling_server,date_time,prompt
+10.43.0.108,-,2025-10-11 08:42:57,hello
+10.43.0.108,-,2025-10-11 09:56:10,sklear.LabelEncoder
+10.43.0.108,-,2025-10-11 09:58:20,.apply to columns seperate data
+10.43.0.108,-,2025-10-11 09:59:22,split strings within columns
+10.43.0.108,-,2025-10-11 10:03:32,nlp in sklearn
+10.43.0.108,-,2025-10-11 10:15:19,how to reverse LabelEncoder
+10.43.0.108,-,2025-10-11 10:34:05,output csv filefrom dataframe
+10.43.0.108,-,2025-10-11 10:36:17,set column names to data frame
+10.43.0.108,-,2025-10-11 10:39:20,set name of index column
+10.43.0.108,-,2025-10-11 10:47:33,save prediction file in kaggle competitions
+10.43.0.108,-,2025-10-11 10:59:27,submission in kaggle competition file export
+10.43.0.108,-,2025-10-11 11:03:55,how to get id from csv
+10.43.0.108,-,2025-10-11 11:14:18,"dfPredictions = pd.DataFrame(predictions)
+dfPredictions.columns = ['Genre']
+dfPredictions.index.name = 'Id'
+dfPredictions.to_csv('submission.csv', index=False)
+
+dfPredictions 
+this code is not giving the output file in kaggle"
+10.43.0.108,-,2025-10-11 11:23:01,"df_predictions.to_csv('/kaggle/working/submission.csv', index=False)"
+10.43.0.108,-,2025-10-11 11:24:13,"ValueError: X has 2750 features, but MultinomialNB is expecting 2726 features as input."
+10.43.0.108,-,2025-10-11 11:30:01,how to give id to csv
+10.43.0.108,-,2025-10-11 12:30:22,how to find difference between 2 datasets
+10.43.0.108,-,2025-10-11 12:32:11,no mathematical difference
+10.43.0.108,-,2025-10-11 12:33:30,probabilistic and deterministic methods
+10.43.0.108,-,2025-10-11 12:44:33,how to find the mathematical noise between 2 datasets
+10.43.0.108,-,2025-10-11 13:09:55,take 51 to 100 in iris data in sklearn
+10.43.0.108,-,2025-10-11 13:47:08,how to add rows to datafram
+10.43.0.108,-,2025-10-11 13:48:10,how to add rows to datafram
+10.43.0.108,-,2025-10-11 13:49:57,how to merge 2 identical data frames
+10.43.0.108,-,2025-10-11 14:02:37,how to merge 2 identical data frames 2d
+10.43.0.108,-,2025-10-11 14:05:53,add a row to dataframe 2d

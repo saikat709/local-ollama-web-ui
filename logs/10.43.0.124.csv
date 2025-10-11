@@ -1,0 +1,107 @@
+client_ip,handling_server,date_time,prompt
+10.43.0.124,-,2025-10-11 09:19:50,demo code for plotting dots in matplotlib andit should mark the lowest y value
+10.43.0.124,-,2025-10-11 09:21:30,code for plotting dots in amtplotlib
+10.43.0.124,-,2025-10-11 10:08:58,detect single mathematical transformation noise applied to a database
+10.43.0.124,-,2025-10-11 10:14:22,"np.sqrt(np.clip(y_noisy,0,None)) what does this do"
+10.43.0.124,-,2025-10-11 10:15:24,add a constant to it after sqrting it
+10.43.0.124,-,2025-10-11 10:30:10,we have to denoise a data
+10.43.0.124,-,2025-10-11 10:33:41,"iris = load_iris()
+X_original = iris.data
+y_original = iris.target
+feature_names = iris.feature_names
+
+return the iris db ina  dataframe"
+10.43.0.124,-,2025-10-11 10:49:36,"from sklearn.ensemble import RandomForestRegressor
+from sklearn.model_selection import train_test_split
+
+model = RandomForestRegressor(n_estimators=100, random_state=0)
+
+X_train, X_valid, y_train, y_valid = train_test_split(X,y[:50],random_state=0)
+
+model.fit(X_train, y_train)
+
+preds = model.predict(X_valid)
+
+print(preds)
+
+do array.reshape because my features is just one column"
+10.43.0.124,-,2025-10-11 10:50:59,use a linear regression model because my model will rpedict one column to another column
+10.43.0.124,-,2025-10-11 10:53:16,"---------------------------------------------------------------------------
+ValueError                                Traceback (most recent call last)
+/tmp/ipykernel_37/365390804.py in <cell line: 0>()
+      7 X_train, X_valid, y_train, y_valid = train_test_split(X,y[:50],random_state=0)
+      8 
+----> 9 model.fit(X_train, y_train)
+     10 
+     11 preds = model.predict(X_valid)
+
+/usr/local/lib/python3.11/dist-packages/sklearn/linear_model/_base.py in fit(self, X, y, sample_weight)
+    646         accept_sparse = False if self.positive else [""csr"", ""csc"", ""coo""]
+    647 
+--> 648         X, y = self._validate_data(
+    649             X, y, accept_sparse=accept_sparse, y_numeric=True, multi_output=True
+    650         )
+
+/usr/local/lib/python3.11/dist-packages/sklearn/base.py in _validate_data(self, X, y, reset, validate_separately, **check_params)
+    582                 y = check_array(y, input_name=""y"", **check_y_params)
+    583             else:
+--> 584                 X, y = check_X_y(X, y, **check_params)
+    585             out = X, y
+    586 
+
+/usr/local/lib/python3.11/dist-packages/sklearn/utils/validation.py in check_X_y(X, y, accept_sparse, accept_large_sparse, dtype, order, copy, force_all_finite, ensure_2d, allow_nd, multi_output, ensure_min_samples, ensure_min_features, y_numeric, estimator)
+   1104         )
+   1105 
+-> 1106     X = check_array(
+   1107         X,
+   1108         accept_sparse=accept_sparse,
+
+/usr/local/lib/python3.11/dist-packages/sklearn/utils/validation.py in check_array(array, accept_sparse, accept_large_sparse, dtype, order, copy, force_all_finite, ensure_2d, allow_nd, ensure_min_samples, ensure_min_features, estimator, input_name)
+    900             # If input is 1D raise error
+    901             if array.ndim == 1:
+--> 902                 raise ValueError(
+    903                     ""Expected 2D array, got 1D array instead:\narray={}.\n""
+    904                     ""Reshape your data either using array.reshape(-1, 1) if ""
+
+ValueError: Expected 2D array, got 1D array instead:
+array=[-0.98245261 -0.55068554 -0.95892427 -0.46460218 -0.99616461 -0.83226744
+ -0.99992326 -0.55068554 -0.99616461 -0.88345466 -0.77276449 -0.95160207
+ -0.77276449 -0.95892427 -0.95160207 -0.91616594 -0.95892427 -0.77276449
+ -0.92581468 -0.95892427 -0.95892427 -0.98245261 -0.99616461 -0.98245261
+ -0.99616461 -0.993691   -0.92581468 -0.70554033 -0.92581468 -0.92581468
+ -0.98245261 -0.92581468 -0.92581468 -0.993691   -0.92581468 -0.993691
+ -0.92581468].
+Reshape your data either using array.reshape(-1, 1) if your data has a single feature or array.reshape(1, -1) if it contains a single sample."
+10.43.0.124,-,2025-10-11 10:55:35,code it up
+10.43.0.124,-,2025-10-11 10:56:39,"X = train_df['sepal length (cm)']
+y = iris_df['sepal length (cm)']
+y = y[:50]"
+10.43.0.124,-,2025-10-11 10:58:50,code up a LinearRegression model that will be trained on one feature columns and one target column
+10.43.0.124,-,2025-10-11 11:03:48,import decisiontree
+10.43.0.124,-,2025-10-11 11:19:14,make a X dataframe from 4 arrays and give each a collumn name
+10.43.0.124,-,2025-10-11 11:33:04,"from sklearn.ensemble import RandomForestClassifier
+
+tX = iris_df.drop(columns=['target'], axis=1)
+ty = iris_df['target']
+
+X_train, X_valid, y_train, y_valid = train_test_split(tX, ty, random_state=0)
+
+
+finalmodel = RandomForestClassifier(n_estimators=100, random_state=0)
+
+finalmodel.fit(X_train, y_train)
+
+from sklearn.metrics import mean_absolute_error
+
+predics = finalmodel.predict(denoised_df)
+
+print(""preds: "", predics)
+
+all predicted values are 0"
+10.43.0.124,-,2025-10-11 11:44:37,multiply all values of a col by -1
+10.43.0.124,-,2025-10-11 11:55:18,"predics = finalmodel.predict(denoised_df)
+
+code submission file from it"
+10.43.0.124,-,2025-10-11 12:03:13,"Solution and submission values for ID do not match
+
+what dos this mean"

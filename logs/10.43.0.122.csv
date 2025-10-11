@@ -1,0 +1,28 @@
+client_ip,handling_server,date_time,prompt
+10.43.0.122,-,2025-10-11 09:40:25,"so, here in the dataset, i found this thing ""Aired On"" does it effects the result of genere of a movie or i can just drop it ?"
+10.43.0.122,-,2025-10-11 09:55:14,"so in the dataset, theres column with values in charechter but is sperarated with commas ,can i just use it or i have to prepare it more?"
+10.43.0.122,-,2025-10-11 10:06:27,does duration effects on the genere of a movie ?
+10.43.0.122,-,2025-10-11 11:23:25,how do i add id in the submission data
+10.43.0.122,-,2025-10-11 11:24:34,"somethign like this :
+df_test = df_test.reset_index({""id""})......"
+10.43.0.122,-,2025-10-11 11:30:04,"i want to use this : ""df_test = df_test.reset_index({""id""})......"" as to add the id column for my submission"
+10.43.0.122,-,2025-10-11 11:37:12,how do i add an id column
+10.43.0.122,-,2025-10-11 11:38:24,"any other way that includes ""reset index"""
+10.43.0.122,-,2025-10-11 11:42:37,"df_test['id'] = df_test.reset_index['id'] 
+is the code okay?"
+10.43.0.122,-,2025-10-11 11:45:47,df_test['id'] = df_test.reset_index(0)
+10.43.0.122,-,2025-10-11 11:46:54,"i just want to add a new column called ""id: in the submission dataset"
+10.43.0.122,-,2025-10-11 11:47:57,what happenes if i write the code ? whats the outcome?
+10.43.0.122,-,2025-10-11 11:56:26,what does Duplicate ID values found in submission means ?
+10.43.0.122,-,2025-10-11 12:00:16,"just in one line code please in small. i forgot the code it was something like this :
+df_test['id'] = df_test.reset_index(..*something i forgot*...)"
+10.43.0.122,-,2025-10-11 12:02:06,"df_test['id'] = df_test.reset_index(drop=True)['index']
+
+does it adds Id column in the dataset ?"
+10.43.0.122,-,2025-10-11 12:35:06,the ID needed to be start from 50 to 100
+10.43.0.122,-,2025-10-11 13:19:28,what is the library i need for computer vision's data reading
+10.43.0.122,-,2025-10-11 13:25:38,sup'
+10.43.0.122,-,2025-10-11 13:39:46,"ValueError: array length 30 does not match index length 100  
+
+whay to do ?"
+10.43.0.122,-,2025-10-11 13:46:38,"like panda reads csv files, what reads images for computer vision"

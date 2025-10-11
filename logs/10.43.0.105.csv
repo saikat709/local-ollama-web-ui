@@ -1,0 +1,385 @@
+client_ip,handling_server,date_time,prompt
+10.43.0.105,-,2025-10-11 09:18:48,competition links
+10.43.0.105,-,2025-10-11 09:30:04,show me an example code with torchvision's datasets
+10.43.0.105,-,2025-10-11 09:31:25,"no like how to use the ""datasets"" library"
+10.43.0.105,-,2025-10-11 09:34:27,from torchvision import datasets that one that u us smt like datasets.ImageFolder()
+10.43.0.105,-,2025-10-11 10:04:09,Solution and submission values for Id do not match actual meaning of this
+10.43.0.105,-,2025-10-11 10:08:04,ID column Id not found in submission this is a submission error now i cant find out where the problem is help me find out the problem
+10.43.0.105,-,2025-10-11 10:47:29,"loss = lss(outputs,  label)
+        loss.backward() correct way to backpropagate the loss"
+10.43.0.105,-,2025-10-11 10:48:38,"class Data_T(Dataset):
+    def __init__(self, csv_path, img_dir, transform=None):
+        self.df = pd.read_csv(csv_path)
+        self.img_dir = img_dir
+        self.transform = transform
+        self.classes = sorted(self.df[""label""])
+        self.cls_to_idx = {}
+        for idx, cls in enumerate(self.classes):
+            self.cls_to_idx[cls] = idx
+    def __len__(self):
+        return(len(self.df))
+    def __getitem__(self, idx):
+        row = self.df.iloc[idx]
+        img_name = row[""image_name""]
+        img_path = os.path.join(self.img_dir, img_name)
+        img = Image.open(img_path).convert(""RGB"")
+        label_cls = row[""label""]
+        label = self.cls_to_idx[label_cls]
+        if self.transform:
+            img = self.transform(img)
+        return img, label
+
+class Data_Ts(Dataset):
+    def __init__(self, img_dir, transform=None):
+        self.img_dir = img_dir
+        self.transform = transform
+        self.files=[]
+        for f in os.listdir(self.img_dir):
+            if f.endswith("".jpg""):
+                self.files.append(f)
+
+    def __len__(self):
+        return(len(self.files))
+    def __getitem__(self, idx):
+        img_name = self.files[idx]
+        img_path = os.path.join(self.img_dir, img_name)
+        img = Image.open(img_path).convert(""RGB"")
+        if self.transform:
+            img = self.transform(img)
+        return img, img_name
+
+train_dataset = Data_T(""/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/train.csv"", ""/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/train"", transform = train_transform)
+train_dataloader = DataLoader(train_dataset, batch_size=32, shuffle=True)
+test_dataset = Data_Ts(""/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test"", transform = test_transform)
+test_dataloader = DataLoader(test_dataset, batch_size=32, shuffle=True)
+
+model = models.resnet18(pretrained=True)
+model.fc = nn.Linear(512, df[""label""].nunique())
+optimizer = optim.Adam(model.parameters(), lr=0.001)
+shceduler = optim.lr_scheduler.StepLR(optimizer, step_size=3, gamma = 1)
+criterion = nn.CrossEntropyLoss()
+model = model.to(device)
+
+for i in range(10):
+    model.train()
+    total_loss = 0
+    for img, label in train_dataloader:
+        img, label = img.to(device), label.to(device)
+        outputs = model(img)
+        loss = criterion(outputs,  label)
+        loss.backward()
+        optimizer.step()
+        total_loss += loss.item()
+    scheduler.step()
+    print(f"" Epoch: {i}, Loss: {total_loss}"")
+
+model.eval()
+preds = []
+for imgs, ids in test_dataloader:
+    imgs = imgs.to(device)
+    output = model(imgs)
+    pred = torch.argmax(outputs, dim=1).cpu().np()
+    preds.extend(list(pred))
+
+submission = pd.DataFrame({
+    ""image_name"" : test[""image_name""],
+    ""label"" : preds
+})
+
+submission.to_csv(""jjj.csv"", index=False)
+
+/usr/local/lib/python3.11/dist-packages/torchvision/models/_utils.py:208: UserWarning: The parameter 'pretrained' is deprecated since 0.13 and may be removed in the future, please use 'weights' instead.
+  warnings.warn(
+/usr/local/lib/python3.11/dist-packages/torchvision/models/_utils.py:223: UserWarning: Arguments other than a weight enum or `None` for 'weights' are deprecated since 0.13 and may be removed in the future. The current behavior is equivalent to passing `weights=ResNet18_Weights.IMAGENET1K_V1`. You can also use `weights=ResNet18_Weights.DEFAULT` to get the most up-to-date weights.
+  warnings.warn(msg)
+
+---------------------------------------------------------------------------
+RuntimeError                              Traceback (most recent call last)
+/tmp/ipykernel_37/3917090922.py in <cell line: 0>()
+     79 shceduler = optim.lr_scheduler.StepLR(optimizer, step_size=3, gamma = 1)
+     80 criterion = nn.CrossEntropyLoss()
+---> 81 model = model.to(device)
+     82 
+     83 for i in range(10):
+
+/usr/local/lib/python3.11/dist-packages/torch/nn/modules/module.py in to(self, *args, **kwargs)
+   1341                     raise
+   1342 
+-> 1343         return self._apply(convert)
+   1344 
+   1345     def register_full_backward_pre_hook(
+
+/usr/local/lib/python3.11/dist-packages/torch/nn/modules/module.py in _apply(self, fn, recurse)
+    901         if recurse:
+    902             for module in self.children():
+--> 903                 module._apply(fn)
+    904 
+    905         def compute_should_use_set_data(tensor, tensor_applied):
+
+/usr/local/lib/python3.11/dist-packages/torch/nn/modules/module.py in _apply(self, fn, recurse)
+    928             # `with torch.no_grad():`
+    929             with torch.no_grad():
+--> 930                 param_applied = fn(param)
+    931             p_should_use_set_data = compute_should_use_set_data(param, param_applied)
+    932 
+
+/usr/local/lib/python3.11/dist-packages/torch/nn/modules/module.py in convert(t)
+   1327                         memory_format=convert_to_format,
+   1328                     )
+-> 1329                 return t.to(
+   1330                     device,
+   1331                     dtype if t.is_floating_point() or t.is_complex() else None,
+
+RuntimeError: CUDA error: device-side assert triggered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+ where did i mess up lol"
+10.43.0.105,-,2025-10-11 10:52:17,"what is this error trying to say? RuntimeError: CUDA error: device-side assert triggered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions."
+10.43.0.105,-,2025-10-11 10:57:33,"IndexError                                Traceback (most recent call last)
+/tmp/ipykernel_37/444522641.py in <cell line: 0>()
+     86     for img, label in train_dataloader:
+     87         outputs = model(img)
+---> 88         loss = criterion(outputs,  label[:, len(outputs+1)])
+     89         scaler.scale(loss).backward()
+     90         scaler.step()
+
+IndexError: too many indices for tensor of dimension 1 what does this error"
+10.43.0.105,-,2025-10-11 10:58:52,"---------------------------------------------------------------------------
+IndexError                                Traceback (most recent call last)
+/tmp/ipykernel_37/58750060.py in <cell line: 0>()
+     86     for img, label in train_dataloader:
+     87         outputs = model(img)
+---> 88         loss = criterion(outputs,  label)
+     89         scaler.scale(loss).backward()
+     90         scaler.step()
+
+/usr/local/lib/python3.11/dist-packages/torch/nn/modules/module.py in _wrapped_call_impl(self, *args, **kwargs)
+   1737             return self._compiled_call_impl(*args, **kwargs)  # type: ignore[misc]
+   1738         else:
+-> 1739             return self._call_impl(*args, **kwargs)
+   1740 
+   1741     # torchrec tests the code consistency with the following code
+
+/usr/local/lib/python3.11/dist-packages/torch/nn/modules/module.py in _call_impl(self, *args, **kwargs)
+   1748                 or _global_backward_pre_hooks or _global_backward_hooks
+   1749                 or _global_forward_hooks or _global_forward_pre_hooks):
+-> 1750             return forward_call(*args, **kwargs)
+   1751 
+   1752         result = None
+
+/usr/local/lib/python3.11/dist-packages/torch/nn/modules/loss.py in forward(self, input, target)
+   1293 
+   1294     def forward(self, input: Tensor, target: Tensor) -> Tensor:
+-> 1295         return F.cross_entropy(
+   1296             input,
+   1297             target,
+
+/usr/local/lib/python3.11/dist-packages/torch/nn/functional.py in cross_entropy(input, target, weight, size_average, ignore_index, reduce, reduction, label_smoothing)
+   3492     if size_average is not None or reduce is not None:
+   3493         reduction = _Reduction.legacy_get_string(size_average, reduce)
+-> 3494     return torch._C._nn.cross_entropy_loss(
+   3495         input,
+   3496         target,
+
+IndexError: Target 9 is out of bounds.how is it getting out of bound"
+10.43.0.105,-,2025-10-11 11:02:38,"import torch
+import torch.nn as nn
+import torch.optim as optim
+from torchvision import models ,transforms
+import os
+import numpy
+import pandas as pd
+from torch.utils.data import Dataset, DataLoader
+from PIL import Image
+
+device = ""cuda""
+df = pd.read_csv(""/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/train.csv"")
+dt = pd.read_csv(""/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test.csv"")
+
+train_transform = transforms.Compose([
+    transforms.Resize((224, 224)),
+    transforms.RandomHorizontalFlip(),
+    transforms.RandomRotation(15),
+    transforms.ColorJitter(0.2, 0.2, 0.2, 0.1),
+    transforms.ToTensor(),
+    transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
+])
+
+test_transform = transforms.Compose([
+    transforms.Resize((224, 224)),
+    transforms.ToTensor(),
+    transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
+])
+
+class Data_T(Dataset):
+    def __init__(self, csv_path, img_dir, transform=None):
+        self.df = pd.read_csv(csv_path)
+        self.img_dir = img_dir
+        self.transform = transform
+        self.classes = sorted(self.df[""label""])
+        self.cls_to_idx = {}
+        for idx, cls in enumerate(self.classes):
+            self.cls_to_idx[cls] = idx
+    def __len__(self):
+        return(len(self.df))
+    def __getitem__(self, idx):
+        row = self.df.iloc[idx]
+        img_name = row[""image_name""]
+        img_path = os.path.join(self.img_dir, img_name)
+        img = Image.open(img_path).convert(""RGB"")
+        label_cls = row[""label""]
+        label = self.cls_to_idx[label_cls]
+        if self.transform:
+            img = self.transform(img)
+        return img, label
+
+class Data_Ts(Dataset):
+    def __init__(self, img_dir, transform=None):
+        self.img_dir = img_dir
+        self.transform = transform
+        self.files=[]
+        for f in os.listdir(self.img_dir):
+            if f.endswith("".jpg""):
+                self.files.append(f)
+
+    def __len__(self):
+        return(len(self.files))
+    def __getitem__(self, idx):
+        img_name = self.files[idx]
+        img_path = os.path.join(self.img_dir, img_name)
+        img = Image.open(img_path).convert(""RGB"")
+        if self.transform:
+            img = self.transform(img)
+        return img, img_name
+
+train_dataset = Data_T(""/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/train.csv"", ""/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/train"", transform = train_transform)
+train_dataloader = DataLoader(train_dataset, batch_size=32, shuffle=True)
+test_dataset = Data_Ts(""/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test"", transform = test_transform)
+test_dataloader = DataLoader(test_dataset, batch_size=32, shuffle=True)
+
+model = models.resnet18(pretrained=True)
+model.fc = nn.Linear(512, df[""label""].nunique())
+optimizer = optim.Adam(model.parameters(), lr=0.001)
+shceduler = optim.lr_scheduler.StepLR(optimizer, step_size=3, gamma = 1)
+criterion = nn.CrossEntropyLoss()
+scaler = torch.cuda.amp.GradScaler()
+
+for i in range(10):
+    model.train()
+    total_loss = 0
+    for img, label in train_dataloader:
+        outputs = model(img)
+        for i in range (1, len(outputs)):
+        loss = criterion(outputs,  label)
+        scaler.scale(loss).backward()
+        scaler.step()
+        scaler.update()
+        total_loss += loss.item()
+    scheduler.step()
+    print(f"" Epoch: {i}, Loss: {total_loss}"")
+
+model.eval()
+preds = []
+for imgs, ids in test_dataloader:
+    output = model(imgs)
+    pred = torch.argmax(outputs, dim=1).cpu().np()
+    preds.extend(list(pred))
+
+submission = pd.DataFrame({
+    ""image_name"" : test[""image_name""],
+    ""label"" : preds
+})
+
+submission.to_csv(""jjj.csv"", index=False) any flaw in my coe thats making labels larger than outputs?"
+10.43.0.105,-,2025-10-11 11:04:43,where is the prolem in my code that is making the label list larger than outputs
+10.43.0.105,-,2025-10-11 11:07:17,"output: torch.Size([20, 8])
+label: torch.Size([20])"
+10.43.0.105,-,2025-10-11 11:20:30,"output: torch.Size([10, 8])"
+10.43.0.105,-,2025-10-11 11:32:17,how to check the size of a list
+10.43.0.105,-,2025-10-11 11:34:37,"i want a list with 60 ""east"" string in it how do i do that"
+10.43.0.105,-,2025-10-11 11:35:59,how to define 60 same value to a list
+10.43.0.105,-,2025-10-11 11:41:28,how to hange the nth element of a list
+10.43.0.105,-,2025-10-11 11:43:32,u have a list of some directories to some images now how do u get the other part of the directory except of .jpg?
+10.43.0.105,-,2025-10-11 11:46:02,"no u got some paths in a list now u want to make a list that wil contain the same paths just without "".jpg"" in them"
+10.43.0.105,-,2025-10-11 11:52:31,i got a list where all the elemnts are in dtype tensor how to convert theminto int
+10.43.0.105,-,2025-10-11 11:54:54,"---------------------------------------------------------------------------
+AttributeError                            Traceback (most recent call last)
+/tmp/ipykernel_38/2600116226.py in <cell line: 0>()
+    114 def convert_tensor_to_int(tensor_list):
+    115     return [int(item.item()) for item in tensor_list]
+--> 116 preds = convert_tensor_to_int(preds)
+    117 print(len(preds))
+    118 paths = dt[""image_name""]
+
+/tmp/ipykernel_38/2600116226.py in convert_tensor_to_int(tensor_list)
+    113 print(len(mlist))
+    114 def convert_tensor_to_int(tensor_list):
+--> 115     return [int(item.item()) for item in tensor_list]
+    116 preds = convert_tensor_to_int(preds)
+    117 print(len(preds))
+
+/tmp/ipykernel_38/2600116226.py in <listcomp>(.0)
+    113 print(len(mlist))
+    114 def convert_tensor_to_int(tensor_list):
+--> 115     return [int(item.item()) for item in tensor_list]
+    116 preds = convert_tensor_to_int(preds)
+    117 print(len(preds))
+
+AttributeError: 'str' object has no attribute 'item'"
+10.43.0.105,-,2025-10-11 11:56:19,"AttributeError                            Traceback (most recent call last)
+/tmp/ipykernel_38/3542871185.py in <cell line: 0>()
+    114 def convert_tensor_to_int(tensor_list):
+    115     return [int(item) for item in tensor_list.tolist()]
+--> 116 preds = convert_tensor_to_int(preds)
+    117 print(len(preds))
+    118 paths = dt[""image_name""]
+
+/tmp/ipykernel_38/3542871185.py in convert_tensor_to_int(tensor_list)
+    113 print(len(mlist))
+    114 def convert_tensor_to_int(tensor_list):
+--> 115     return [int(item) for item in tensor_list.tolist()]
+    116 preds = convert_tensor_to_int(preds)
+    117 print(len(preds))
+
+AttributeError: 'list' object has no attribute 'tolist'"
+10.43.0.105,-,2025-10-11 11:58:02,ig the elements of the list are in string so now how to convert them to int all of thm
+10.43.0.105,-,2025-10-11 12:08:09,"---------------------------------------------------------------------------
+KeyError                                  Traceback (most recent call last)
+/tmp/ipykernel_38/2084152592.py in <cell line: 0>()
+    115         gg.append(f)
+    116 for i in range(139):
+--> 117     preds[i] = idx_to_cls[preds[i]]
+    118 preds.extend(mlist)
+    119 print(len(mlist))
+
+KeyError: tensor(0)"
+10.43.0.105,-,2025-10-11 12:23:55,catboost classifier import syntax
+10.43.0.105,-,2025-10-11 12:51:56,how to select all categorical features of a datafram
+10.43.0.105,-,2025-10-11 13:35:55,how to create a list from a list but only taking the first 100 number
+10.43.0.105,-,2025-10-11 13:37:03,"---------------------------------------------------------------------------
+IndexError                                Traceback (most recent call last)
+/tmp/ipykernel_37/45370397.py in <cell line: 0>()
+      9 s = pd.DataFrame({
+     10     ""ID"" : dt[""ID""],
+---> 11     ""target"" : y[:, 100]
+     12 })
+     13 s.to_csv(""s.csv"", index=False)
+
+IndexError: too many indices for array: array is 1-dimensional, but 2 were indexed"
+10.43.0.105,-,2025-10-11 13:38:41,how to get last 100
+10.43.0.105,-,2025-10-11 13:39:43,"---------------------------------------------------------------------------
+AttributeError                            Traceback (most recent call last)
+/tmp/ipykernel_37/587115625.py in <cell line: 0>()
+      9 s = pd.DataFrame({
+     10     ""ID"" : dt[""ID""],
+---> 11     ""target"" : y.iloc[-100:]
+     12 })
+     13 s.to_csv(""s.csv"", index=False)
+
+AttributeError: 'numpy.ndarray' object has no attribute 'iloc'"
+10.43.0.105,-,2025-10-11 13:43:45,its showing submission contains null vals
+10.43.0.105,-,2025-10-11 14:10:26,axes[i].legend() explai n this

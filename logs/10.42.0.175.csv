@@ -1,0 +1,60 @@
+client_ip,handling_server,date_time,prompt
+10.42.0.175,-,2025-10-11 09:59:57,"where is the mistake
+df = pd.sort_index()"
+10.42.0.175,-,2025-10-11 10:01:55,"what to do next 
+Step into Aera’s shoes.
+Help her predict the missing genres of the dramas using the remaining data — accurately, efficiently, and creatively.
+You have limited time and limited data — can you bring back the lost stories before dawn?"
+10.42.0.175,-,2025-10-11 10:08:19,"or each ID in the test set, you must predict the genres as a comma-separated list.
+Your submission file must include a header and have the following format:
+Id 	Genre
+1 	Drama, Romance
+2 	Action, Crime, Comedy
+3 	Life, Drama"
+10.42.0.175,-,2025-10-11 10:12:02,"write the code so that i can submit it from this event
+https://www.kaggle.com/competitions/bdaio-nlp-genre-prediction/overview"
+10.42.0.175,-,2025-10-11 10:14:47,create a draft code for the event and add a note so that i by reading it i can easily edit it with ral one
+10.42.0.175,-,2025-10-11 10:19:25,"solve the problem for final so that i can just submit it 
+https://www.kaggle.com/competitions/the-gps-blackout-computer-vision-challenge/overview"
+10.42.0.175,-,2025-10-11 10:21:09,"should i list all my columns for the iris challenge and what to do
+Define the feature columns and target column
+feature_cols = [""Name"", ""column2"", ...]  # List your feature column names here"
+10.42.0.175,-,2025-10-11 10:23:15,"should i list all my columns for the iris challenge(https://www.kaggle.com/competitions/iris-your-favourite-dataset/overview) and what to do
+Define the feature columns and target column
+feature_cols = [""Name"", ""column2"", ...]  # List your feature column names here"
+10.42.0.175,-,2025-10-11 10:27:49,"what should i add here(feature_cols = [""Name"", ""column2"", ...]) from my columns Index(['Name', 'Aired Date', 'Year of release', 'Original Network', 'Aired On',
+       'Number of Episodes', 'Duration', 'Content Rating', 'Rating',
+       'Synopsis', 'Genre', 'Tags', 'Director', 'Screenwriter', 'Cast',
+       'Production companies', 'Rank'],
+      dtype='object')"
+10.42.0.175,-,2025-10-11 10:34:01,what is easy between iris and gps backout
+10.42.0.175,-,2025-10-11 10:39:59,/home/iit-du/Downloads/sample_submission (1).csv -- this is the sample submission of iris challange . solve the problem like this
+10.42.0.175,-,2025-10-11 10:57:42,sole the iris challange
+10.42.0.175,-,2025-10-11 11:05:49,where i will edit in this code and what to write
+10.42.0.175,-,2025-10-11 11:21:42,how to save a file to csv format in code
+10.42.0.175,-,2025-10-11 11:27:38,give me an example with the data
+10.42.0.175,-,2025-10-11 11:31:06,easy way to save a file in csv format from kaggle
+10.42.0.175,-,2025-10-11 11:33:55,easy way to convert a notebook in csv file in cod
+10.42.0.175,-,2025-10-11 11:43:56,how to save and submit a notebook
+10.42.0.175,-,2025-10-11 11:45:15,how to see notebook path in kaggle
+10.42.0.175,-,2025-10-11 11:46:51,"this is my notebook path -- /kaggle/working
+how to save it to a csv file"
+10.42.0.175,-,2025-10-11 11:50:43,how to create a data frame
+10.42.0.175,-,2025-10-11 12:03:16,"how to do these 
+Submission Format
+
+To submit, upload a CSV file with exactly these two columns:
+ID 	target
+51 	0
+52 	1
+53 	2"
+10.42.0.175,-,2025-10-11 12:09:39,write the code for iris challange
+10.42.0.175,-,2025-10-11 12:11:14,this is the submission format of iris /home/iit-du/Downloads/Alid1.csv
+10.42.0.175,-,2025-10-11 12:49:30,how to approch this iris problem so that ican get some partical marks
+10.42.0.175,-,2025-10-11 12:51:16,how to save the noteboook to a csv file
+10.42.0.175,-,2025-10-11 13:26:55,solve the problem of iris
+10.42.0.175,-,2025-10-11 13:45:19,how to use comma in data frame so that the in the output i can see the comma
+10.42.0.175,-,2025-10-11 13:46:39,"what should i do to see answer like thisID,target
+51,1
+52,0
+53,2"

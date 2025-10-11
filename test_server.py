@@ -78,6 +78,13 @@ servers = [
         'port' : '8000',
         'current_load' : 0,
         'is_active' : True
+    },
+     {
+        'name' : 'Nafis PC',
+        'ip' : '10.100.202.173',
+        'port' : '8000',
+        'current_load' : 0,
+        'is_active' : True
     }
 ]
 

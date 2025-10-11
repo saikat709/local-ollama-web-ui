@@ -1,0 +1,23 @@
+client_ip,handling_server,date_time,prompt
+10.43.0.160,-,2025-10-11 10:01:53,sigmoid function
+10.43.0.160,-,2025-10-11 10:07:17,code to turn a numpy array into a dataset
+10.43.0.160,-,2025-10-11 10:15:12,how to find the noise in a dataset
+10.43.0.160,-,2025-10-11 10:19:55,does a single mathematical operation mean e function or maybe just am operator
+10.43.0.160,-,2025-10-11 10:23:51,scatterplot
+10.43.0.160,-,2025-10-11 10:29:41,plot to visualize iris dataset
+10.43.0.160,-,2025-10-11 10:43:44,how to compare two datasets to find noise
+10.43.0.160,-,2025-10-11 10:53:01,how to plot to compare the features of two datastes
+10.43.0.160,-,2025-10-11 10:54:13,using sns
+10.43.0.160,-,2025-10-11 10:57:46,PROBABLISTIC METHODS TO DETERMINE NOSIE FUNCTION
+10.43.0.160,-,2025-10-11 11:00:01,how to add feature names to a dataframe
+10.43.0.160,-,2025-10-11 11:02:21,i need a new row to store feature names
+10.43.0.160,-,2025-10-11 11:23:36,log function
+10.43.0.160,-,2025-10-11 11:25:40,how to plot datasets features
+10.43.0.160,-,2025-10-11 11:30:16,how to add a feature col to a dataset
+10.43.0.160,-,2025-10-11 11:33:08,how to visualize two features in a numerical plot
+10.43.0.160,-,2025-10-11 11:58:26,how to plot all the fetures of the iris dataset together
+10.43.0.160,-,2025-10-11 12:29:46,how to apply knn model to a dataset
+10.43.0.160,-,2025-10-11 12:46:40,should f1 score be high in a good model or low
+10.43.0.160,-,2025-10-11 13:08:37,how to feed jpg data into model
+10.43.0.160,-,2025-10-11 13:28:36,which math graph has a c like shape
+10.43.0.160,-,2025-10-11 13:37:57,logit functiob

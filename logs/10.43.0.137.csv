@@ -1,0 +1,39 @@
+client_ip,handling_server,date_time,prompt
+10.43.0.137,-,2025-10-11 09:28:10,Give me a standard regression code in python
+10.43.0.137,-,2025-10-11 09:50:26,No manual data labeling and incorporation is allowed. what does it mean
+10.43.0.137,-,2025-10-11 09:52:50,may i combine existing train_csv file with the linkmof image
+10.43.0.137,-,2025-10-11 10:29:51,give me syntax to saperate one column by it's comma
+10.43.0.137,-,2025-10-11 10:31:25,you have to separate one colum in multple bu vomma
+10.43.0.137,-,2025-10-11 10:34:22,syntax of importing countvectorizer
+10.43.0.137,-,2025-10-11 10:36:03,syntax of converting countvectorized array to text
+10.43.0.137,-,2025-10-11 10:40:29,syntax to implement countvectorizer for 2 columns at once
+10.43.0.137,-,2025-10-11 11:04:33,syntax of changing column nam
+10.43.0.137,-,2025-10-11 11:08:20,syntax of adding constant value to a integer dataset comands
+10.43.0.137,-,2025-10-11 11:15:03,syntax of converting list to array
+10.43.0.137,-,2025-10-11 11:23:37,how to convert a list to sting
+10.43.0.137,-,2025-10-11 11:26:02,syntax of converting list to string
+10.43.0.137,-,2025-10-11 11:27:06,list is in dataframe columns
+10.43.0.137,-,2025-10-11 12:02:31,from keras.preprocessing.image import ImageDataGenerator find spelling mistake
+10.43.0.137,-,2025-10-11 12:07:46,"find errormodel.add(Conv2D(32,3,3))"
+10.43.0.137,-,2025-10-11 12:13:29,"model.add(Dense(6,activation = 'categorical'))find error and solve"
+10.43.0.137,-,2025-10-11 12:21:23,syntax of shoing full row
+10.43.0.137,-,2025-10-11 12:23:13,in pandas i want to see full row of a cell
+10.43.0.137,-,2025-10-11 12:31:05,how to convert a list to array
+10.43.0.137,-,2025-10-11 13:00:49,"find error test_data = datagen.flow_from_dataframe(
+df_test,
+x_col = 'image_path',
+y_col = None
+target_size = (128,128),
+class_name = None
+batch_size = 32,
+shuffle = False
+)"
+10.43.0.137,-,2025-10-11 13:04:25,syntax of converting array number by  string
+10.43.0.137,-,2025-10-11 13:06:02,in a array there is a number 3 how to replace it by a
+10.43.0.137,-,2025-10-11 13:07:08,in a array there is a number 3 how to replace it by a
+10.43.0.137,-,2025-10-11 13:57:17,"---------------------------------------------------------------------------
+ValueError                                Traceback (most recent call last)
+/tmp/ipykernel_37/1633207627.py in <cell line: 0>()
+----> 1 b=  np.array(b)
+
+ValueError: setting an array element with a sequence. The requested array has an inhomogeneous shape after 1 dimensions. The detected shape was (125,) + inhomogeneous part."

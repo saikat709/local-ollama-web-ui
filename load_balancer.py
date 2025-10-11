@@ -157,6 +157,27 @@ servers = [
         'current_load': 0,
         'is_active': True,
     },
+    {
+        'name': 'Akkhar PC',
+        'ip': '10.100.202.160',
+        'port': '8000',
+        'current_load': 0,
+        'is_active': True,
+    }, 
+    {
+        'name': 'Ratul PC',
+        'ip': '10.100.202.164',
+        'port': '8000',
+        'current_load': 0,
+        'is_active': True,
+    },
+    {
+        'name' : 'Nafis PC',
+        'ip' : '10.100.202.173',
+        'port' : '8000',
+        'current_load' : 0,
+        'is_active' : True
+    }
 ]
 
 
@@ -344,14 +365,12 @@ async def deactivate_server(name: str):
 
 
 @app.post("/generate")
-@limiter.limit("122/minute")
+@limiter.limit("1/minute")
 async def generate(request: Request):
     client_host = request.client.host if request.client else "unknown"
     payload = await request.json()
     payload["stream"] = False
     payload["prompt"] = system_prompt + "\n\n User query is: " + payload.get("prompt", "")
-
-    print(payload["prompt"])
 
     last_exc = None
     for attempt in range(1, MAX_RETRIES + 1):
@@ -380,7 +399,7 @@ async def generate(request: Request):
 
 
 @app.post("/stream")
-@limiter.limit("122/minute")
+@limiter.limit("1/minute")
 async def stream(request: Request):
     client_ip = request.client.host if request.client else "unknown"
     payload = await request.json()
@@ -389,7 +408,7 @@ async def stream(request: Request):
     log_request(client_ip, payload.get("prompt", "").strip(), "-")
     payload["prompt"] = system_prompt + "\n\n User query is: " + payload.get("prompt", "")
 
-    print(payload["prompt"])
+    # print(payload["prompt"])
 
     async def ndjson():
         for attempt in range(1, MAX_RETRIES + 1):

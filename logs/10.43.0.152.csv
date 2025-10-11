@@ -1,0 +1,4 @@
+client_ip,handling_server,date_time,prompt
+10.43.0.152,-,2025-10-11 13:46:26,how can i extract only 2 columns from a dataframe
+10.43.0.152,-,2025-10-11 13:50:46,how do i convert df to csv
+10.43.0.152,-,2025-10-11 13:58:19,how do i add an index column

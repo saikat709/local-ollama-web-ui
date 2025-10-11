@@ -1,0 +1,54 @@
+client_ip,handling_server,date_time,prompt
+10.43.0.139,-,2025-10-11 09:20:23,immediate machine learning beginner tips
+10.43.0.139,-,2025-10-11 09:43:21,how do I start
+10.43.0.139,-,2025-10-11 09:47:44,iris your favourite dataset
+10.43.0.139,-,2025-10-11 10:08:06,"/kaggle/input/iris-your-favourite-dataset/sample_submission.csv
+
+fault?"
+10.43.0.139,-,2025-10-11 10:09:30,"import panda as pd
+dt = pd.read.csv(""/kaggle/input/iris-your-favourite-dataset/sample_submission.csv"")"
+10.43.0.139,-,2025-10-11 10:21:02,"import panda as pd
+df = pd.read_csv(""kaggle/input/bdaio-nlp-genre-prediction/sample_submission (1).csv"")"
+10.43.0.139,-,2025-10-11 10:38:26,I don't know what to do I forgot everything the moment I sat down here
+10.43.0.139,-,2025-10-11 10:40:18,I shouldn't have registered and stayed home tending to my sick mother
+10.43.0.139,-,2025-10-11 10:46:17,/kaggle/input/bdaio-nlp-genre-prediction/sample_submission (1).csv
+10.43.0.139,-,2025-10-11 10:47:44,"import pandas as pd
+
+submission_df = pd.read_csv(""/kaggle/input/bdaio-nlp-genre-prediction/sample_submission_(1).csv
+"")
+
+print(submission_df.head())
+
+fault?"
+10.43.0.139,-,2025-10-11 11:13:10,"# Load original Iris dataset\niris = load_iris()\nX_original = iris.data\ny_original = iris.target\nfeature_names = iris.feature_names\n\n# Load noisy training data\ntrain_df = pd.read_csv(""/kaggle/input/iris-your-favourite-dataset/train.csv"")\npublic_test_df = pd.read_csv(""/kaggle/input/iris-your-favourite-dataset/test.csv"")\n\nprint(""Data loaded successfully"")\nprint(""Train shape:"", train_df.shape)\nprint(""Public test shape:"", public_test_df.shape)\n"
+10.43.0.139,-,2025-10-11 11:25:41,"fig, axes = plt.subplots(2, 2, figsize=(12, 8))\naxes = axes.flatten()\n\nfor i, feature in enumerate(feature_names):\n    # Sort the original values for smooth plotting\n    sort_idx = np.argsort(X_original[:50, i])\n    X_sorted = X_original[:50, i][sort_idx]\n    Y_noisy_sorted = train_df[feature].values[sort_idx]\n\n    axes[i].plot(X_sorted, Y_noisy_sorted, 'bo-', label='Noisy', alpha=0.7)\n    axes[i].plot(X_sorted, X_sorted, 'r--', label='Original', alpha=0.7)\n    axes[i].set_title(feature)\n    axes[i].set_xlabel(""Original value"")\n    axes[i].set_ylabel(""Feature value"")\n    axes[i].legend()\n\nplt.suptitle(""Original vs Noisy Features (First 50 Samples, Sorted)"", fontsize=14)\nplt.tight_layout()\nplt.show()\n`"
+10.43.0.139,-,2025-10-11 11:33:26,"# Assume noise function: f(x) = x^2\n# Denoising: sqrt(x)\nX_test_noisy = public_test_df[feature_names].values\n\n# Clip negative values to avoid NaNs\nX_test_denoised = np.sqrt(np.clip(X_test_noisy, 0, None))\nprint(""Denoising applied (sqrt transformation)"")\n'"
+10.43.0.139,-,2025-10-11 11:39:22,"cell_type	""code""
+source	'model = RandomForestClassifier(random_state=42)\nmodel.fit(X_original, y_original)\nprint(""Model trained on clean Iris data"")\n'
+metadata	
+trusted	true
+execution	
+iopub.status.busy	""2025-10-08T06:28:36.839087Z""
+iopub.execute_input	""2025-10-08T06:28:36.839445Z""
+iopub.status.idle	""2025-10-08T06:28:36.981643Z""
+shell.execute_reply.started	""2025-10-08T06:28:36.839416Z""
+shell.execute_reply	""2025-10-08T06:28:36.980722Z""
+outputs	
+0	
+name	""stdout""
+text	""Model trained on clean Iris data\n""
+output_type	""stream""
+execution_count"
+10.43.0.139,-,2025-10-11 11:58:47,how to check competition results in kaggle
+10.43.0.139,-,2025-10-11 12:27:01,what is IDset?
+10.43.0.139,-,2025-10-11 12:28:15,rules
+10.43.0.139,-,2025-10-11 12:29:53,how can a participant get disqualified?
+10.43.0.139,-,2025-10-11 12:31:24,give me a demo for matplotlib\
+10.43.0.139,-,2025-10-11 13:09:20,Numpy introduction
+10.43.0.139,-,2025-10-11 13:10:30,numpy to define values
+10.43.0.139,-,2025-10-11 13:18:28,Importing matplotlib syntax
+10.43.0.139,-,2025-10-11 13:19:39,Disqualfication reasons
+10.43.0.139,-,2025-10-11 13:28:47,/self-destruct?
+10.43.0.139,-,2025-10-11 13:45:25,"mport numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nfrom sklearn.datasets import load_iris\nfrom sklearn.ensemble import RandomForestClassifier\n\n# Pretty plots\nplt.style.use(""seaborn-v0_8-whitegrid"")'"
+10.43.0.139,-,2025-10-11 13:47:36,"Load original Iris dataset\niris = load_iris()\nX_original = iris.data\ny_original = iris.target\nfeature_names = iris.feature_names\n\n# Load noisy training data\ntrain_df = pd.read_csv(""/kaggle/input/iris-your-favourite-dataset/train.csv"")\npublic_test_df = pd.read_csv(""/kaggle/input/iris-your-favourite-dataset/test.csv"")\n\nprint(""Data loaded successfully"")\nprint(""Train shape:"", train_df.shape)\nprint(""Public test shape:"", public_test_df.shape)\n'"
+10.43.0.139,-,2025-10-11 13:50:49,"`fig, axes = plt.subplots(2, 2, figsize=(12, 8))\naxes = axes.flatten()\n\nfor i, feature in enumerate(feature_names):\n    # Sort the original values for smooth plotting\n    sort_idx = np.argsort(X_original[:50, i])\n    X_sorted = X_original[:50, i][sort_idx]\n    Y_noisy_sorted = train_df[feature].values[sort_idx]\n\n    axes[i].plot(X_sorted, Y_noisy_sorted, 'bo-', label='Noisy', alpha=0.7)\n    axes[i].plot(X_sorted, X_sorted, 'r--', label='Original', alpha=0.7)\n    axes[i].set_title(feature)\n    axes[i].set_xlabel(""Original value"")\n    axes[i].set_ylabel(""Feature value"")\n    axes[i].legend()\n\nplt.suptitle(""Original vs Noisy Features (First 50 Samples, Sorted)"", fontsize=14)\nplt.tight_layout()\nplt.show()\n`"

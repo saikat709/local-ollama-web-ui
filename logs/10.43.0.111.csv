@@ -1,0 +1,3963 @@
+client_ip,handling_server,date_time,prompt
+10.43.0.111,-,2025-10-11 09:29:36,content based filtering logic using python
+10.43.0.111,-,2025-10-11 09:34:42,where to import train_test_splitter from?
+10.43.0.111,-,2025-10-11 09:35:57,exampl
+10.43.0.111,-,2025-10-11 09:38:16,example of train_test_split
+10.43.0.111,-,2025-10-11 09:41:16,merging in pandas example
+10.43.0.111,-,2025-10-11 09:57:12,DecsisionTreeRegressor example
+10.43.0.111,-,2025-10-11 10:03:48,"I want to predic the ID and Genre -
+
+
+    train.csv
+        Contains 50% of the full dataset.
+        Includes all features along with the Genre column.
+        Participants will use this file to train their models. 
+
+    test.csv
+        Contains the remaining 50% of the dataset.
+        Participants will use this file to make predictions for the public leaderboard. 
+
+    sample_submission.csv
+        A template submission file.
+        Shows the required format (ID and predicted Genre comma-separated).
+        Can be used to test submission code before uploading.
+my codee="
+10.43.0.111,-,2025-10-11 10:14:17,"""['ID'] not found in axis""
+the Id has no column name in default"
+10.43.0.111,-,2025-10-11 10:15:41,how to use a blank column head name but have numbers
+10.43.0.111,-,2025-10-11 10:19:22,"there's no ID here-KeyError: ""['ID'] not found in axis""
+Index(['Name', 'Aired Date', 'Year of release', 'Original Network', 'Aired On',
+       'Number of Episodes', 'Duration', 'Content Rating', 'Rating',
+       'Synopsis', 'Genre', 'Tags', 'Director', 'Screenwriter', 'Cast',
+       'Production companies', 'Rank'],
+      dtype='object')
+
+Index(['Name', 'Aired Date', 'Year of release', 'Original Network', 'Aired On',
+       'Number of Episodes', 'Duration', 'Content Rating', 'Rating',
+       'Synopsis', 'Tags', 'Director', 'Screenwriter', 'Cast',
+       'Production companies', 'Rank'],
+      dtype='object')
+import pandas as pd
+
+# Load necessary libraries
+train_df = pd.read_csv('/kaggle/input/bdaio-1st-prb/train.csv')
+test_df = pd.read_csv('/kaggle/input/bdaio-1st-prb/test.csv')
+
+# Prepare data for training and prediction
+X_train, y_train = train_df.drop(['ID', 'Genre'], axis=1), train_df[['ID', 'Genre']]
+X_test = test_df.drop('ID', axis=1)
+
+# Make predictions on test set
+y_pred = X_test.apply(lambda x: 'Genre_0' if x['Tags'] > 5 else 'Genre_1', axis=1)
+
+# Create submission DataFrame
+submission = pd.DataFrame({'ID': test_df['ID'], 'Genre': y_pred})
+
+# Save submission to csv file
+submission.to_csv('submission.csv', index=False)"
+10.43.0.111,-,2025-10-11 10:22:07,"my code-
+import pandas as pd
+
+train_df = pd.read_csv('/kaggle/input/bdaio-1st-prb/train.csv')
+test_df = pd.read_csv('/kaggle/input/bdaio-1st-prb/test.csv')
+
+X_train = train_df.drop(['ID', 'Genre'], axis=1)
+y_train = train_df[['ID', 'Genre']]
+
+X_test = test_df.drop('Tags', axis=1)  # Corrected column name
+y_pred = X_test.apply(lambda x: 'Genre_0' if x['Tags'] > 5 else 'Genre_1', axis=1)
+
+submission = pd.DataFrame({'ID': test_df['ID'], 'Genre': y_pred})
+submission.to_csv('submission.csv', index=False)
+the error-
+---------------------------------------------------------------------------
+KeyError                                  Traceback (most recent call last)
+/tmp/ipykernel_37/2188650293.py in <cell line: 0>()
+      4 test_df = pd.read_csv('/kaggle/input/bdaio-1st-prb/test.csv')
+      5 
+----> 6 X_train = train_df.drop(['ID', 'Genre'], axis=1)
+      7 y_train = train_df[['ID', 'Genre']]
+      8 
+
+/usr/local/lib/python3.11/dist-packages/pandas/core/frame.py in drop(self, labels, axis, index, columns, level, inplace, errors)
+   5579                 weight  1.0     0.8
+   5580         """"""
+-> 5581         return super().drop(
+   5582             labels=labels,
+   5583             axis=axis,
+
+/usr/local/lib/python3.11/dist-packages/pandas/core/generic.py in drop(self, labels, axis, index, columns, level, inplace, errors)
+   4786         for axis, labels in axes.items():
+   4787             if labels is not None:
+-> 4788                 obj = obj._drop_axis(labels, axis, level=level, errors=errors)
+   4789 
+   4790         if inplace:
+
+/usr/local/lib/python3.11/dist-packages/pandas/core/generic.py in _drop_axis(self, labels, axis, level, errors, only_slice)
+   4828                 new_axis = axis.drop(labels, level=level, errors=errors)
+   4829             else:
+-> 4830                 new_axis = axis.drop(labels, errors=errors)
+   4831             indexer = axis.get_indexer(new_axis)
+   4832 
+
+/usr/local/lib/python3.11/dist-packages/pandas/core/indexes/base.py in drop(self, labels, errors)
+   7068         if mask.any():
+   7069             if errors != ""ignore"":
+-> 7070                 raise KeyError(f""{labels[mask].tolist()} not found in axis"")
+   7071             indexer = indexer[~mask]
+   7072         return self.delete(indexer)
+
+KeyError: ""['ID'] not found in axis""
+test and train columns"
+10.43.0.111,-,2025-10-11 10:26:40,"i think id should be created to count the number of genres cuz there's no ids in axis
+import pandas as pd
+
+train_df = pd.read_csv('/kaggle/input/bdaio-1st-prb/train.csv')
+test_df = pd.read_csv('/kaggle/input/bdaio-1st-prb/test.csv')
+
+X_train = train_df.drop(['Id', 'Genre'], axis=1)  # Corrected column names
+y_train = train_df[['Id']]  # Removed 'Genre' as it's not a target variable
+
+X_test = test_df.drop('Tags', axis=1)  
+y_pred = X_test.apply(lambda x: 'Genre_0' if x['Tags'] > 5 else 'Genre_1', axis=1)
+
+submission = pd.DataFrame({'Id': test_df['Id'], 'Genre': y_pred})
+submission.to_csv('submission.csv', index=False)"
+10.43.0.111,-,2025-10-11 10:28:25,where is the importng of train and test and where is it defying it from?
+10.43.0.111,-,2025-10-11 10:30:19,"rain.csv
+
+    Contains 50% of the full dataset.
+    Includes all features along with the Genre column.
+    Participants will use this file to train their models. 
+
+test.csv
+
+    Contains the remaining 50% of the dataset.
+    Participants will use this file to make predictions for the public leaderboard. 
+
+sample_submission.csv
+
+    A template submission file.
+    Shows the required format (ID and predicted Genre comma-separated).
+    Can be used to test submission code before uploading.
+Index(['Name', 'Aired Date', 'Year of release', 'Original Network', 'Aired On',
+       'Number of Episodes', 'Duration', 'Content Rating', 'Rating',
+       'Synopsis', 'Genre', 'Tags', 'Director', 'Screenwriter', 'Cast',
+       'Production companies', 'Rank'],
+      dtype='object')
+
+Index(['Name', 'Aired Date', 'Year of release', 'Original Network', 'Aired On',
+       'Number of Episodes', 'Duration', 'Content Rating', 'Rating',
+       'Synopsis', 'Tags', 'Director', 'Screenwriter', 'Cast',
+       'Production companies', 'Rank'],
+      dtype='object')
+
+Index(['Id', 'Genre'], dtype='object')"
+10.43.0.111,-,2025-10-11 10:31:46,"train.csv
+
+Contains 50% of the full dataset.
+Includes all features along with the Genre column.
+Participants will use this file to train their models. 
+
+test.csv
+
+Contains the remaining 50% of the dataset.
+Participants will use this file to make predictions for the public leaderboard. 
+
+sample_submission.csv
+
+A template submission file.
+Shows the required format (ID and predicted Genre comma-separated).
+Can be used to test submission code before uploading.
+
+Index(['Name', 'Aired Date', 'Year of release', 'Original Network', 'Aired On',
+'Number of Episodes', 'Duration', 'Content Rating', 'Rating',
+'Synopsis', 'Genre', 'Tags', 'Director', 'Screenwriter', 'Cast',
+'Production companies', 'Rank'],
+dtype='object')
+
+Index(['Name', 'Aired Date', 'Year of release', 'Original Network', 'Aired On',
+'Number of Episodes', 'Duration', 'Content Rating', 'Rating',
+'Synopsis', 'Tags', 'Director', 'Screenwriter', 'Cast',
+'Production companies', 'Rank'],
+dtype='object')
+
+Index(['Id', 'Genre'], dtype='object')
+give me the final code to train the predicted genres"
+10.43.0.111,-,2025-10-11 10:34:48,"ValueError: could not convert string to float: 'Designated Survivor' in 
+import pandas as pd
+
+
+# Load training data
+train_df = pd.read_csv('/kaggle/input/bdaio-1st-prb/train.csv')
+
+# One-hot encoding for Genre column (assuming categorical)
+from sklearn.preprocessing import OneHotEncoder
+encoder = OneHotEncoder(sparse=False)
+
+X = train_df.drop(['Genre'], axis=1)  # Features
+y = train_df['Genre']  # Target variable
+
+# Split data into training and validation sets (e.g., 80% for training, 20% for validation)
+from sklearn.model_selection import train_test_split
+X_train, X_val, y_train, y_val = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# Train a suitable model on the training set (e.g., logistic regression or neural network)
+from sklearn.linear_model import LogisticRegression
+
+model = LogisticRegression()
+model.fit(X_train, y_train)
+
+# Make predictions on the validation set
+y_pred_val = model.predict(X_val)"
+10.43.0.111,-,2025-10-11 10:37:22,"ValueError: Columns must be same length as key in
+import pandas as pd
+
+# Load training data
+train_df = pd.read_csv('/kaggle/input/bdaio-1st-prb/train.csv')
+
+# Handle categorical 'Genre' column with One-Hot Encoding (OHE)
+from sklearn.preprocessing import OneHotEncoder
+encoder = OneHotEncoder(sparse=False)
+
+genre_ohe = encoder.fit_transform(train_df[['Genre']])
+train_df[['Genre_ohe']] = genre_ohe
+
+# Split data into features and target variable
+X = train_df.drop(['Genre', 'Genre_ohe'], axis=1)  # Features (excluding Genre)
+y = train_df['Genre']  # Target variable
+
+# One-Hot Encoding for 'Genre' column now handled in X
+from sklearn.model_selection import train_test_split
+X_train, X_val, y_train, y_val = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# Train a suitable model on the training set
+from sklearn.linear_model import LogisticRegression
+
+model = LogisticRegression()
+model.fit(X_train, y_train)
+
+# Make predictions on the validation set
+y_pred_val = model.predict(X_val)
+# Evaluate the model's performance using metrics (e.g., accuracy, F1 score, classification report)
+from sklearn.metrics import accuracy_score, classification_report
+print('Validation Accuracy:', accuracy_score(y_val, y_pred_val))
+print('Classification Report:\n', classification_report(y_val, y_pred_val))"
+10.43.0.111,-,2025-10-11 10:38:59,"full code-ValueError: Columns must be same length as key in
+import pandas as pd
+Load training data
+
+train_df = pd.read_csv('/kaggle/input/bdaio-1st-prb/train.csv')
+Handle categorical 'Genre' column with One-Hot Encoding (OHE)
+
+from sklearn.preprocessing import OneHotEncoder
+encoder = OneHotEncoder(sparse=False)
+
+genre_ohe = encoder.fit_transform(train_df[['Genre']])
+train_df[['Genre_ohe']] = genre_ohe
+Split data into features and target variable
+
+X = train_df.drop(['Genre', 'Genre_ohe'], axis=1)  # Features (excluding Genre)
+y = train_df['Genre']  # Target variable
+One-Hot Encoding for 'Genre' column now handled in X
+
+from sklearn.model_selection import train_test_split
+X_train, X_val, y_train, y_val = train_test_split(X, y, test_size=0.2, random_state=42)
+Train a suitable model on the training set
+
+from sklearn.linear_model import LogisticRegression
+
+model = LogisticRegression()
+model.fit(X_train, y_train)
+Make predictions on the validation set
+
+y_pred_val = model.predict(X_val)
+Evaluate the model's performance using metrics (e.g., accuracy, F1 score, classification report)
+
+from sklearn.metrics import accuracy_score, classification_report
+print('Validation Accuracy:', accuracy_score(y_val, y_pred_val))
+print('Classification Report:\n', classification_report(y_val,"
+10.43.0.111,-,2025-10-11 10:45:12,"Columns must be same length as key
+how to solve this"
+10.43.0.111,-,2025-10-11 10:46:26,"Columns must be same length as key in 
+import pandas as pd
+from sklearn.preprocessing import OneHotEncoder
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import accuracy_score, classification_report
+
+# Load training data
+train_df = pd.read_csv('/kaggle/input/bdaio-1st-prb/train.csv')
+
+# Handle categorical 'Genre' column with One-Hot Encoding (OHE)
+encoder = OneHotEncoder(sparse=False)
+genre_ohe = encoder.fit_transform(train_df[['Genre']])
+train_df[['Genre_ohe']] = genre_ohe
+
+# Split data into features and target variable
+X = train_df.drop(['Genre', 'Genre_ohe'], axis=1)  # Features (excluding Genre)
+y = train_df['Genre']  # Target variable
+
+# One-Hot Encoding for 'Genre' column now handled in X
+X = pd.get_dummies(train_df, columns=['Genre'], drop_first=True)
+
+# Split data into training and validation sets
+X_train, X_val, y_train, y_val = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# Train a suitable model on the training set
+model = LogisticRegression()
+model.fit(X_train, y_train)
+
+# Make predictions on the validation set
+y_pred_val = model.predict(X_val)
+
+# Evaluate the model's performance using metrics (e.g., accuracy, F1 score, classification report)
+print('Validation Accuracy:', accuracy_score(y_val, y_pred_val))
+print('Classification Report:\n', classification_report(y_val, y_pred_val))"
+10.43.0.111,-,2025-10-11 10:48:42,"ValueError: Columns must be same length as key in 
+import pandas as pd
+from sklearn.preprocessing import OneHotEncoder
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import accuracy_score, classification_report
+
+# Load training data
+train_df = pd.read_csv('/kaggle/input/bdaio-1st-prb/train.csv')
+
+# Handle categorical 'Genre' column with One-Hot Encoding (OHE)
+encoder = OneHotEncoder(sparse=False)
+genre_ohe = encoder.fit_transform(train_df[['Genre']])
+train_df[['Genre_ohe']] = genre_ohe
+
+# Split data into features and target variable
+X = train_df.drop(['Genre', 'Genre_ohe'], axis=1)  # Features (excluding Genre)
+y = train_df['Genre']  # Target variable_ohe
+
+# Split data into features and target variable
+X = pd.get_dummies(train_df, columns=['Genre'], drop_first=True)
+y = train_df['Genre']  # Target variable
+
+# One-Hot Encoding for 'Genre' column now handled in X
+X = pd.get_dummies(train_df, columns=['Genre'], drop_first=True)
+
+# Split data into training and validation sets
+X_train, X_val, y_train, y_val = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# Train a suitable model on the training set
+model = LogisticRegression()
+model.fit(X_train, y_train)
+
+# Make predictions on the validation set
+y_pred_val = model.predict(X_val)
+
+# Evaluate the model's performance using metrics (e.g., accuracy, F1 score, classification report)
+print('Validation Accuracy:', accuracy_score(y_val, y_pred_val))
+print('Classification Report:\n', classification_report(y_val, y_pred_val))"
+10.43.0.111,-,2025-10-11 10:53:19,"/usr/local/lib/python3.11/dist-packages/sklearn/preprocessing/_encoders.py:868: FutureWarning: `sparse` was renamed to `sparse_output` in version 1.2 and will be removed in 1.4. `sparse_output` is ignored unless you leave `sparse` to its default value.
+  warnings.warn(
+
+---------------------------------------------------------------------------
+ValueError                                Traceback (most recent call last)
+/tmp/ipykernel_37/1681090765.py in <cell line: 0>()
+     12 encoder = OneHotEncoder(sparse=False)
+     13 genre_ohe = encoder.fit_transform(train_df[['Genre']])
+---> 14 train_df[['Genre_ohe']] = genre_ohe
+     15 #Split data into features and target variable
+     16 
+
+/usr/local/lib/python3.11/dist-packages/pandas/core/frame.py in __setitem__(self, key, value)
+   4297             self._setitem_frame(key, value)
+   4298         elif isinstance(key, (Series, np.ndarray, list, Index)):
+-> 4299             self._setitem_array(key, value)
+   4300         elif isinstance(value, DataFrame):
+   4301             self._set_item_frame_value(key, value)
+
+/usr/local/lib/python3.11/dist-packages/pandas/core/frame.py in _setitem_array(self, key, value)
+   4348 
+   4349             elif isinstance(value, np.ndarray) and value.ndim == 2:
+-> 4350                 self._iset_not_inplace(key, value)
+   4351 
+   4352             elif np.ndim(value) > 1:
+
+/usr/local/lib/python3.11/dist-packages/pandas/core/frame.py in _iset_not_inplace(self, key, value)
+   4375         if self.columns.is_unique:
+   4376             if np.shape(value)[-1] != len(key):
+-> 4377                 raise ValueError(""Columns must be same length as key"")
+   4378 
+   4379             for i, col in enumerate(key):
+
+ValueError: Columns must be same length as key
+#ValueError: Columns must be same length as key in
+import pandas as pd
+from sklearn.preprocessing import OneHotEncoder
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import accuracy_score, classification_report
+#Load training data
+
+train_df = pd.read_csv('/kaggle/input/bdaio-1st-prb/train.csv')
+#Handle categorical 'Genre' column with One-Hot Encoding (OHE)
+
+encoder = OneHotEncoder(sparse=False)
+genre_ohe = encoder.fit_transform(train_df[['Genre']])
+train_df[['Genre_ohe']] = genre_ohe
+#Split data into features and target variable
+
+X = train_df.drop(['Genre', 'Genre_ohe'], axis=1)  # Features (excluding Genre)
+y = train_df['Genre']  # Target variable_ohe
+#Split data into features and target variable
+
+X = pd.get_dummies(train_df, columns=['Genre'], drop_first=True)
+y = train_df['Genre']  # Target variable
+#One-Hot Encoding for 'Genre' column now handled in X
+
+X = pd.get_dummies(train_df, columns=['Genre'], drop_first=True)
+#Split data into training and validation sets
+
+X_train, X_val, y_train, y_val = train_test_split(X, y, test_size=0.2, random_state=42)
+#Train a suitable model on the training set
+
+model = LogisticRegression()
+model.fit(X_train, y_train)
+#Make predictions on the validation set
+
+y_pred_val = model.predict(X_val)
+#Evaluate the model's performance using metrics (e.g., accuracy, F1 score, classification report)
+
+print('Validation Accuracy:', accuracy_score(y_val, y_pred_val))
+print('Classification Report:\n', classification_report(y_val, y_pred_val))"
+10.43.0.111,-,2025-10-11 10:56:26,"full code -/usr/local/lib/python3.11/dist-packages/sklearn/preprocessing/_encoders.py:868: FutureWarning: sparse was renamed to sparse_output in version 1.2 and will be removed in 1.4. sparse_output is ignored unless you leave sparse to its default value.
+warnings.warn(
+
+ValueError                                Traceback (most recent call last)
+/tmp/ipykernel_37/1681090765.py in <cell line: 0>()
+12 encoder = OneHotEncoder(sparse=False)
+13 genre_ohe = encoder.fit_transform(train_df[['Genre']])
+---> 14 train_df[['Genre_ohe']] = genre_ohe
+15 #Split data into features and target variable
+16
+
+/usr/local/lib/python3.11/dist-packages/pandas/core/frame.py in setitem(self, key, value)
+4297             self._setitem_frame(key, value)
+4298         elif isinstance(key, (Series, np.ndarray, list, Index)):
+-> 4299             self._setitem_array(key, value)
+4300         elif isinstance(value, DataFrame):
+4301             self._set_item_frame_value(key, value)
+
+/usr/local/lib/python3.11/dist-packages/pandas/core/frame.py in _setitem_array(self, key, value)
+4348
+4349             elif isinstance(value, np.ndarray) and value.ndim == 2:
+-> 4350                 self._iset_not_inplace(key, value)
+4351
+4352             elif np.ndim(value) > 1:
+
+/usr/local/lib/python3.11/dist-packages/pandas/core/frame.py in _iset_not_inplace(self, key, value)
+4375         if self.columns.is_unique:
+4376             if np.shape(value)[-1] != len(key):
+-> 4377                 raise ValueError(""Columns must be same length as key"")
+4378
+4379             for i, col in enumerate(key):
+
+ValueError: Columns must be same length as key
+#ValueError: Columns must be same length as key in
+import pandas as pd
+from sklearn.preprocessing import OneHotEncoder
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import accuracy_score, classification_report
+#Load training data
+
+train_df = pd.read_csv('/kaggle/input/bdaio-1st-prb/train.csv')
+#Handle categorical 'Genre' column with One-Hot Encoding (OHE)
+
+encoder = OneHotEncoder(sparse=False)
+genre_ohe = encoder.fit_transform(train_df[['Genre']])
+train_df[['Genre_ohe']] = genre_ohe
+#Split data into features and target variable
+
+X = train_df.drop(['Genre', 'Genre_ohe'], axis=1)  # Features (excluding Genre)
+y = train_df['Genre']  # Target variable_ohe
+#Split data into features and target variable
+
+X = pd.get_dummies(train_df, columns=['Genre'], drop_first=True)
+y = train_df['Genre']  # Target variable
+#One-Hot Encoding for 'Genre' column now handled in X
+
+X = pd.get_dummies(train_df, columns=['Genre'], drop_first=True)
+#Split data into training and validation sets
+
+X_train, X_val, y_train, y_val = train_test_split(X, y, test_size=0.2, random_state=42)
+#Train a suitable model on the training set
+
+model = LogisticRegression()
+model.fit(X_train, y_train)
+#Make predictions on the validation set
+
+y_pred_val = model.predict(X_val)
+#Evaluate the model's performance using metrics (e.g., accuracy, F1 score, classification report)
+
+print('Validation Accuracy:', accuracy_score(y_val, y_pred_val))
+print('Classification Report:\n', classification_report(y_val, y_pred_val))"
+10.43.0.111,-,2025-10-11 10:59:54,how to match the size of a key and columns lengths
+10.43.0.111,-,2025-10-11 11:01:07,"match these-import pandas as pd
+from sklearn.preprocessing import OneHotEncoder
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import accuracy_score, classification_report
+
+# Load training data
+train_df = pd.read_csv('/kaggle/input/bdaio-1st-prb/train.csv')
+
+# Handle categorical 'Genre' column with One-Hot Encoding (OHE)
+encoder = OneHotEncoder(sparse=False)
+genre_ohe = encoder.fit_transform(train_df[['Genre']])
+train_df[['Genre_ohe']] = genre_ohe
+
+# Split data into features and target variable
+X = train_df.drop(['Genre', 'Genre_ohe'], axis=1)  # Features (excluding Genre)
+y = train_df['Genre']  # Target variable
+
+# One-Hot Encoding for 'Genre' column now handled in X
+X = pd.get_dummies(train_df, columns=['Genre'], drop_first=True)
+y = train_df['Genre']  # Target variable
+
+# Split data into training and validation sets
+X_train, X_val, y_train, y_val = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# Train a suitable model on the training set
+model = LogisticRegression()
+model.fit(X_train, y_train)
+
+# Make predictions on the validation set
+y_pred_val = model.predict(X_val)
+
+# Evaluate the model's performance using metrics (e.g., accuracy, F1 score, classification report)
+print('Validation Accuracy:', accuracy_score(y_val, y_pred_val))
+print('Classification Report:\n', classification_report(y_val, y_pred_val))"
+10.43.0.111,-,2025-10-11 11:05:04,what is the best way to bypass this error-Columns must be same length as key
+10.43.0.111,-,2025-10-11 11:06:11,"bypass this-ValueError: Columns must be same length as key in
+import pandas as pd
+from sklearn.preprocessing import OneHotEncoder
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import accuracy_score, classification_report
+
+# Load training data
+train_df = pd.read_csv('/kaggle/input/bdaio-1st-prb/train.csv')
+
+# Handle categorical 'Genre' column with One-Hot Encoding (OHE)
+encoder = OneHotEncoder(sparse=False)
+genre_ohe = encoder.fit_transform(train_df[['Genre']])
+train_df[['Genre_ohe']] = genre_ohe
+
+# Split data into features and target variable
+X = train_df.drop(['Genre', 'Genre_ohe'], axis=1)  # Features (excluding Genre)
+y = train_df['Genre']  # Target variable
+
+# One-Hot Encoding for 'Genre' column now handled in X
+X = pd.get_dummies(train_df, columns=['Genre'], drop_first=True)
+y = train_df['Genre']  # Target variable
+
+# Split data into training and validation sets
+X_train, X_val, y_train, y_val = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# Train a suitable model on the training set
+model = LogisticRegression()
+model.fit(X_train, y_train)
+
+# Make predictions on the validation set
+y_pred_val = model.predict(X_val)
+
+# Evaluate the model's performance using metrics (e.g., accuracy, F1 score, classification report)
+print('Validation Accuracy:', accuracy_score(y_val, y_pred_val))
+print('Classification Report:\n', classification_report(y_val, y_pred_val))"
+10.43.0.111,-,2025-10-11 11:08:21,"KeyError: ""['Target'] not found in axis"" in
+import pandas as pd
+from sklearn.preprocessing import OneHotEncoder
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import accuracy_score, classification_report
+
+# Load training data
+train_df = pd.read_csv('/kaggle/input/bdaio-1st-prb/train.csv')
+
+# Handle categorical 'Genre' column with One-Hot Encoding (OHE)
+encoder = OneHotEncoder(sparse=False)
+genre_ohe = encoder.fit_transform(train_df[['Genre']])
+# Instead of assigning genre_ohe back to the original DataFrame, create a new one
+genre_ohe_df = pd.DataFrame(genre_ohe, columns=encoder.get_feature_names_out(['Genre']))
+
+# Split data into features and target variable
+X = train_df.drop(['Genre', 'Target'], axis=1)  # Features (excluding Genre)
+y = train_df['Target']  # Target variable
+
+# One-Hot Encoding for 'Genre' column now handled in X
+X = pd.concat([X, genre_ohe_df], axis=1)
+
+# Split data into training and validation sets
+X_train, X_val, y_train, y_val = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# Train a suitable model on the training set
+model = LogisticRegression()
+model.fit(X_train, y_train)
+
+# Make predictions on the validation set
+y_pred_val = model.predict(X_val)
+
+# Evaluate the model's performance using metrics (e.g., accuracy, F1 score, classification report)
+print('Validation Accuracy:', accuracy_score(y_val, y_pred_val))
+print('Classification Report:\n', classification_report(y_val, y_pred_val))"
+10.43.0.111,-,2025-10-11 11:10:46,"my code is import pandas as pd
+from sklearn.preprocessing import OneHotEncoder
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import accuracy_score, classification_report
+
+# Load training data
+train_df = pd.read_csv('/kaggle/input/bdaio-1st-prb/train.csv')
+
+# Handle categorical 'Genre' column with One-Hot Encoding (OHE)
+encoder = OneHotEncoder(sparse=False)
+genre_ohe = encoder.fit_transform(train_df[['Genre']])
+genre_ohe_df = pd.DataFrame(genre_ohe, columns=encoder.get_feature_names_out(['Genre']))
+
+# Combine the original DataFrame and OHE-encoded 'Genre' column
+train_df['Target']  # Ensure this key exists in the axis
+X = train_df.drop(['Genre', 'Target'], axis=1)  
+y = train_df['Target']
+
+# Split data into training and validation sets
+X_train, X_val, y_train, y_val = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# Train a suitable model on the training set
+model = LogisticRegression()
+model.fit(X_train, y_train)
+
+# Make predictions on the validation set
+y_pred_val = model.predict(X_val)
+
+# Evaluate the model's performance using metrics (e.g., accuracy, F1 score, classification report)
+print('Validation Accuracy:', accuracy_score(y_val, y_pred_val))
+print('Classification Report:\n', classification_report(y_val, y_pred_val))"
+10.43.0.111,-,2025-10-11 11:15:03,use bypass method for not chcking the lengths
+10.43.0.111,-,2025-10-11 11:16:18,"import pandas as pd
+from sklearn.preprocessing import OneHotEncoder
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import accuracy_score, classification_report
+
+# Load training data
+train_df = pd.read_csv('/kaggle/input/bdaio-1st-prb/train.csv')
+
+# Handle categorical 'Genre' column with One-Hot Encoding (OHE)
+encoder = OneHotEncoder(sparse=False)
+genre_ohe = encoder.fit_transform(train_df[['Genre']])
+genre_ohe_df = pd.DataFrame(genre_ohe, columns=encoder.get_feature_names_out(['Genre']))
+
+# Combine the original DataFrame and OHE-encoded 'Genre' column
+train_df['Target']  # Ensure this key exists in the axis
+X = train_df.drop(['Genre', 'Target'], axis=1)  
+y = train_df['Target']
+
+# Split data into training and validation sets
+X_train, X_val, y_train, y_val = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# Train a suitable model on the training set
+model = LogisticRegression()
+model.fit(X_train, y_train)
+
+# Make predictions on the validation set
+y_pred_val = model.predict(X_val)
+
+# Evaluate the model's performance using metrics (e.g., accuracy, F1 score, classification report)
+print('Validation Accuracy:', accuracy_score(y_val, y_pred_val))
+print('Classification Report:\n', classification_report(y_val, y_pred_val))"
+10.43.0.111,-,2025-10-11 11:19:27,"Submission File
+
+For each ID in the test set, you must predict the genres as a comma-separated list.
+Your submission file must include a header and have the following format:
+Id 	Genre
+1 	Drama, Romance
+2 	Action, Crime, Comedy
+3 	Life, Drama
+Evaluation
+
+Submissions are evaluated using a multi-label genre matching metric based on the Jaccard Index (Intersection over Union).
+
+For each K-Drama in the test set:
+
+    If all genres are predicted correctly, the score is 100%.
+    Partial matches are proportionally rewarded based on overlap.
+    The final score is the average over all rows and is expressed as a percentage (0–100).
+
+The leaderboard is split 50/50 into Public and Private sets:
+
+    Public leaderboard is visible during the competition.
+    Private leaderboard determines the final ranking.
+Dataset Description
+Dataset & Problem Overview
+Dataset Files
+
+The dataset provided for this competition contains the following files:
+
+    train.csv
+        Contains 50% of the full dataset.
+        Includes all features along with the Genre column.
+        Participants will use this file to train their models. 
+
+    test.csv
+        Contains the remaining 50% of the dataset.
+        Participants will use this file to make predictions for the public leaderboard. 
+
+    sample_submission.csv
+        A template submission file.
+        Shows the required format (ID and predicted Genre comma-separated).
+        Can be used to test submission code before uploading.
+make me a code"
+10.43.0.111,-,2025-10-11 11:22:01,"Submission File
+
+For each ID in the test set, you must predict the genres as a comma-separated list.
+Your submission file must include a header and have the following format:
+Id 	Genre
+1 	Drama, Romance
+2 	Action, Crime, Comedy
+3 	Life, Drama
+Evaluation
+
+Submissions are evaluated using a multi-label genre matching metric based on the Jaccard Index (Intersection over Union).
+
+For each K-Drama in the test set:
+
+If all genres are predicted correctly, the score is 100%.
+Partial matches are proportionally rewarded based on overlap.
+The final score is the average over all rows and is expressed as a percentage (0–100).
+
+The leaderboard is split 50/50 into Public and Private sets:
+
+Public leaderboard is visible during the competition.
+Private leaderboard determines the final ranking.
+
+Dataset Description
+Dataset & Problem Overview
+Dataset Files
+
+The dataset provided for this competition contains the following files:
+
+train.csv
+    Contains 50% of the full dataset.
+    Includes all features along with the Genre column.
+    Participants will use this file to train their models. 
+
+test.csv
+    Contains the remaining 50% of the dataset.
+    Participants will use this file to make predictions for the public leaderboard. 
+
+sample_submission.csv
+    A template submission file.
+    Shows the required format (ID and predicted Genre comma-separated).
+    Can be used to test submission code before uploading.
+
+make me a code THAT MAKES A REAL SUBMISSION FILE"
+10.43.0.111,-,2025-10-11 11:24:22,"Generate submission file with ID and predicted genres
+    
+    Parameters:
+    df (pd.DataFrame): Test set dataframe
+    predictions (list): List of genre lists for each ID
+    
+    Returns:
+    submission_df (pd.DataFrame): Submission dataframe in correct format
+from Dataset Description
+Dataset & Problem Overview
+Dataset Files
+
+The dataset provided for this competition contains the following files:
+
+    train.csv
+        Contains 50% of the full dataset.
+        Includes all features along with the Genre column.
+        Participants will use this file to train their models. 
+
+    test.csv
+        Contains the remaining 50% of the dataset.
+        Participants will use this file to make predictions for the public leaderboard. 
+
+    sample_submission.csv
+        A template submission file.
+        Shows the required format (ID and predicted Genre comma-separated).
+        Can be used to test submission code before uploading."
+10.43.0.111,-,2025-10-11 11:32:05,"--------------------------------------------------------------------------
+KeyError                                  Traceback (most recent call last)
+/usr/local/lib/python3.11/dist-packages/pandas/core/indexes/base.py in get_loc(self, key)
+   3804         try:
+-> 3805             return self._engine.get_loc(casted_key)
+   3806         except KeyError as err:
+
+index.pyx in pandas._libs.index.IndexEngine.get_loc()
+
+index.pyx in pandas._libs.index.IndexEngine.get_loc()
+
+pandas/_libs/hashtable_class_helper.pxi in pandas._libs.hashtable.PyObjectHashTable.get_item()
+
+pandas/_libs/hashtable_class_helper.pxi in pandas._libs.hashtable.PyObjectHashTable.get_item()
+
+KeyError: 'ID'
+
+The above exception was the direct cause of the following exception:
+
+KeyError                                  Traceback (most recent call last)
+/tmp/ipykernel_37/4188093444.py in <cell line: 0>()
+     45 df = pd.read_csv('/kaggle/input/bdaio-1st-prb/test.csv')  # Load test set dataframe
+     46 predictions = [[1, 2], [3, 4]]  # Replace with actual predictions
+---> 47 submission_df = generate_submission(df, predictions)
+     48 print(submission_df.to_csv(index=False))
+
+/tmp/ipykernel_37/4188093444.py in generate_submission(df, predictions)
+     17         for idx, genres in enumerate(predictions):
+     18             # Get the ID from the test set dataframe
+---> 19             id = df.loc[idx, 'ID']
+     20 
+     21             # Join the predicted genres into a comma-separated string
+
+/usr/local/lib/python3.11/dist-packages/pandas/core/indexing.py in __getitem__(self, key)
+   1181             key = tuple(com.apply_if_callable(x, self.obj) for x in key)
+   1182             if self._is_scalar_access(key):
+-> 1183                 return self.obj._get_value(*key, takeable=self._takeable)
+   1184             return self._getitem_tuple(key)
+   1185         else:
+
+/usr/local/lib/python3.11/dist-packages/pandas/core/frame.py in _get_value(self, index, col, takeable)
+   4212             return series._values[index]
+   4213 
+-> 4214         series = self._get_item_cache(col)
+   4215         engine = self.index._engine
+   4216 
+
+/usr/local/lib/python3.11/dist-packages/pandas/core/frame.py in _get_item_cache(self, item)
+   4636             #  pending resolution of GH#33047
+   4637 
+-> 4638             loc = self.columns.get_loc(item)
+   4639             res = self._ixs(loc, axis=1)
+   4640 
+
+/usr/local/lib/python3.11/dist-packages/pandas/core/indexes/base.py in get_loc(self, key)
+   3810             ):
+   3811                 raise InvalidIndexError(key)
+-> 3812             raise KeyError(key) from err
+   3813         except TypeError:
+   3814             # If we have a listlike key, _check_indexing_error will raise
+
+KeyError: 'ID'
+import pandas as pd
+def generate_submission(df, predictions):
+        """"""
+        Generate submission file with ID and predicted genres
+        
+        Parameters:
+        df (pd.DataFrame): Test set dataframe
+        predictions (list): List of genre lists for each ID
+        
+        Returns:
+        submission_df (pd.DataFrame): Submission dataframe in correct format
+        """"""
+        # Create a new DataFrame to store the submission data
+        submission_df = pd.DataFrame(columns=['ID', 'Genre'])
+        
+        # Iterate over the test set IDs and corresponding predictions
+        for idx, genres in enumerate(predictions):
+            # Get the ID from the test set dataframe
+            id = df.loc[idx, 'ID']
+            
+            # Join the predicted genres into a comma-separated string
+            genre_str = ', '.join(genres)
+            
+            # Create a new row for the submission DataFrame
+            new_row = pd.DataFrame({'ID': [id], 'Genre': [genre_str]})
+            
+            # Append the new row to the submission DataFrame
+            submission_df = pd.concat([submission_df, new_row])
+        
+        return submission_df
+def make_submission(df, predictions):
+    # Initialize submission dataframe with 'Id' and 'Genre' columns
+    submission_df = pd.DataFrame(columns=['Id', 'Genre'])
+    
+    # Iterate over test set IDs and corresponding predictions
+    for id, genres in zip(df['Id'], predictions):
+        # Join genres as a comma-separated string
+        genre_str = ','.join(genres)
+        
+        # Append new row to submission dataframe
+        submission_df.loc[len(submission_df)] = [id, genre_str]
+    
+    return submission_df
+
+df = pd.read_csv('/kaggle/input/bdaio-1st-prb/test.csv')  # Load test set dataframe
+predictions = [[1, 2], [3, 4]]  # Replace with actual predictions
+submission_df = generate_submission(df, predictions)
+print(submission_df.to_csv(index=False))"
+10.43.0.111,-,2025-10-11 11:34:53,"KeyError                                  Traceback (most recent call last)
+/usr/local/lib/python3.11/dist-packages/pandas/core/indexes/base.py in get_loc(self, key)
+3804         try:
+-> 3805             return self._engine.get_loc(casted_key)
+3806         except KeyError as err:
+
+index.pyx in pandas._libs.index.IndexEngine.get_loc()
+
+index.pyx in pandas._libs.index.IndexEngine.get_loc()
+
+pandas/_libs/hashtable_class_helper.pxi in pandas._libs.hashtable.PyObjectHashTable.get_item()
+
+pandas/_libs/hashtable_class_helper.pxi in pandas._libs.hashtable.PyObjectHashTable.get_item()
+
+KeyError: 'ID'
+
+The above exception was the direct cause of the following exception:
+
+KeyError                                  Traceback (most recent call last)
+/tmp/ipykernel_37/4188093444.py in <cell line: 0>()
+45 df = pd.read_csv('/kaggle/input/bdaio-1st-prb/test.csv')  # Load test set dataframe
+46 predictions = [[1, 2], [3, 4]]  # Replace with actual predictions
+---> 47 submission_df = generate_submission(df, predictions)
+48 print(submission_df.to_csv(index=False))
+
+/tmp/ipykernel_37/4188093444.py in generate_submission(df, predictions)
+17         for idx, genres in enumerate(predictions):
+18             # Get the ID from the test set dataframe
+---> 19             id = df.loc[idx, 'ID']
+20
+21             # Join the predicted genres into a comma-separated string
+
+/usr/local/lib/python3.11/dist-packages/pandas/core/indexing.py in getitem(self, key)
+1181             key = tuple(com.apply_if_callable(x, self.obj) for x in key)
+1182             if self._is_scalar_access(key):
+-> 1183                 return self.obj._get_value(*key, takeable=self._takeable)
+1184             return self._getitem_tuple(key)
+1185         else:
+
+/usr/local/lib/python3.11/dist-packages/pandas/core/frame.py in _get_value(self, index, col, takeable)
+4212             return series._values[index]
+4213
+-> 4214         series = self._get_item_cache(col)
+4215         engine = self.index._engine
+4216
+
+/usr/local/lib/python3.11/dist-packages/pandas/core/frame.py in _get_item_cache(self, item)
+4636             #  pending resolution of GH#33047
+4637
+-> 4638             loc = self.columns.get_loc(item)
+4639             res = self._ixs(loc, axis=1)
+4640
+
+/usr/local/lib/python3.11/dist-packages/pandas/core/indexes/base.py in get_loc(self, key)
+3810             ):
+3811                 raise InvalidIndexError(key)
+-> 3812             raise KeyError(key) from err
+3813         except TypeError:
+3814             # If we have a listlike key, _check_indexing_error will raise
+
+KeyError: 'ID'
+import pandas as pd
+def generate_submission(df, predictions):
+""""""
+Generate submission file with ID and predicted genres
+
+    Parameters:
+    df (pd.DataFrame): Test set dataframe
+    predictions (list): List of genre lists for each ID
+    
+    Returns:
+    submission_df (pd.DataFrame): Submission dataframe in correct format
+    """"""
+    # Create a new DataFrame to store the submission data
+    submission_df = pd.DataFrame(columns=['ID', 'Genre'])
+    
+    # Iterate over the test set IDs and corresponding predictions
+    for idx, genres in enumerate(predictions):
+        # Get the ID from the test set dataframe
+        id = df.loc[idx, 'ID']
+        
+        # Join the predicted genres into a comma-separated string
+        genre_str = ', '.join(genres)
+        
+        # Create a new row for the submission DataFrame
+        new_row = pd.DataFrame({'ID': [id], 'Genre': [genre_str]})
+        
+        # Append the new row to the submission DataFrame
+        submission_df = pd.concat([submission_df, new_row])
+    
+    return submission_df
+
+def make_submission(df, predictions):
+# Initialize submission dataframe with 'Id' and 'Genre' columns
+submission_df = pd.DataFrame(columns=['Id', 'Genre'])
+
+# Iterate over test set IDs and corresponding predictions
+for id, genres in zip(df['Id'], predictions):
+    # Join genres as a comma-separated string
+    genre_str = ','.join(genres)
+    
+    # Append new row to submission dataframe
+    submission_df.loc[len(submission_df)] = [id, genre_str]
+
+return submission_df
+
+df = pd.read_csv('/kaggle/input/bdaio-1st-prb/test.csv')  # Load test set dataframe
+predictions = [[1, 2], [3, 4]]  # Replace with actual predictions
+submission_df = generate_submission(df, predictions)
+print(submission_df.to_csv(index=False))
+full fixed code!"
+10.43.0.111,-,2025-10-11 11:38:40,full code
+10.43.0.111,-,2025-10-11 11:41:42,finish it properly
+10.43.0.111,-,2025-10-11 11:42:58,"Import necessary libraries
+
+import pandas as pd
+import numpy as np
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
+from sklearn.linear_model import LogisticRegression
+from torch.utils.data import Dataset, DataLoader
+Load dataset
+
+train_df = pd.read_csv(""bdaio_train.csv"")
+test_df = pd.read_csv(""bdaio_test.csv"")
+Preprocess data
+
+def preprocess_data(df):
+df[""feature""] = np.log1p(df[""feature""])
+return df
+
+train_df = preprocess_data(train_df)
+test_df = preprocess_data(test_df)
+Define custom dataset class
+
+class BDAIODataset(Dataset):
+def init(self, df, transform=None):
+self.df = df
+self.transform = transform
+
+def __len__(self):
+    return len(self.df)
+
+def __getitem__(self, idx):
+    sample = self.df.iloc[idx]
+    features = torch.tensor(sample[""feature""].values)
+    label = torch.tensor(sample[""target""].values)
+    if self.transform:
+        features = self.transform(features)
+    return features, label
+
+Create data loaders
+
+train_dataset = BDAIODataset(train_df)
+test_dataset = BDAIODataset(test_df)
+
+batch_size = 32
+train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True)
+test_loader = DataLoader(test_dataset, batch_size=batch_size, shuffle=False)
+Define model and training loop
+
+class LogisticRegressionModel(nn.Module):
+def init(self, input_dim):
+super(LogisticRegressionModel, self).init()
+self.fc1 = nn.Linear(input_dim, 128) # Input layer (batch size) -> hidden layer
+self.relu = nn.ReLU()
+self.dropout = nn.Dropout(0.2)
+self.fc2 = nn.Linear(128, 64) # Hidden layer -> Output layer
+self.output = nn.LogSoftmax(dim=1)
+
+def forward(self, x):
+    out = self.relu(self.fc1(x))
+    out = self.dropout(out)
+    out = self.fc2(out)
+    return self.output(out)
+
+Initialize model and optimizer
+
+model = LogisticRegressionModel(input_dim=train_df.shape[1])
+criterion = nn.CrossEntropyLoss()
+optimizer = torch.optim.Adam(model.parameters(), lr=0.001)
+
+for epoch in range(
+#finish it"
+10.43.0.111,-,2025-10-11 11:47:51,where to import trait test splitter from
+10.43.0.111,-,2025-10-11 11:50:34,where to import traintestsplitter fro
+10.43.0.111,-,2025-10-11 11:51:36,what fuynctions do train test split has
+10.43.0.111,-,2025-10-11 11:53:59,"what is wrong in this code-import pandas as pd
+from sklearn.tree import DecisionTreeRegressor
+from sklearn.model_selection import train_test_split as tts
+train_file_path = ""/kaggle/input/bdaio-1st-prb/train.csv""
+test_file_path = ""/kaggle/input/bdaio-1st-prb/test.csv""
+
+train = pd.read_csv(train_file_path)
+test = pd.read_csv(test_file_path)
+
+#splitting the data
+train_X,train_y,test_X,test_Y = tts(X,y,test_size=0.2,random_state=1)
+
+#loading the model
+model = DecisionTreeRegressor(random_state=1)
+model.fit(train_X,train_y)
+pred = model.pred(test_y)
+print(pred)"
+10.43.0.111,-,2025-10-11 11:59:23,"# Load the data
+train_file_path = ""/kaggle/input/bdaio-1st-prb/train.csv""
+test_file_path = ""/kaggle/input/bdaio-1st-prb/test.csv""
+
+train = pd.read_csv(train_file_path)
+test = pd.read_csv(test_file_path)
+features = ['Name', 'Aired Date', 'Year of release', 'Original Network', 'Aired On',
+       'Number of Episodes', 'Duration', 'Content Rating', 'Rating',
+       'Synopsis', 'Genre', 'Tags', 'Director', 'Screenwriter', 'Cast',
+       'Production companies', 'Rank']
+X = train[features]
+y = train.Genre
+# Splitting the data (fixing variable names and test size)
+X_train, y_train, X_test, y_test = tts(X,y, test_size=0.2, random_state=1)
+
+# Loading the model
+model = DecisionTreeRegressor(random_state=1)
+model.fit(X_train, y_train)
+pred = model.predict(y_test)  # Fix: 'predict' instead of 'pred'
+print(pred)
+in ValueError: could not convert string to float: 'Racket Boys'"
+10.43.0.111,-,2025-10-11 12:03:19,how to convert strings to float value
+10.43.0.111,-,2025-10-11 12:05:59,"import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.tree import DecisionTreeRegressor
+
+# Load the data
+train_file_path = ""/kaggle/input/bdaio-1st-prb/train.csv""
+test_file_path = ""/kaggle/input/bdaio-1st-prb/test.csv""
+
+train = pd.read_csv(train_file_path)
+test = pd.read_csv(test_file_path)
+# Assuming you have a DataFrame with string values in a column named 'column_name'
+def convert_string_to_float(df):
+    df['column_name'] = pd.to_numeric(df['column_name'], errors='coerce').astype(float)
+    return df
+features = ['Name', 'Aired Date', 'Year of release', 'Original Network', 
+            'Aired On', 'Number of Episodes', 'Duration', 'Content Rating', 
+            'Rating', 'Synopsis', 'Genre', 'Tags', 'Director', 'Screenwriter', 
+            'Cast', 'Production companies', 'Rank']
+X = train[features]
+y = train['Genre']  # Fix: Genre is a category, not numerical
+
+# Splitting the data
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=1)
+
+# Loading the model
+model = DecisionTreeRegressor(random_state=1)
+model.fit(X_train, convert_string_to_float(y_train))
+
+# Make predictions
+y_pred = model.predict(X_test)  # Fix: use X_test instead of y_test
+
+print(y_pred)"
+10.43.0.111,-,2025-10-11 12:07:13,AttributeError: 'numpy.ndarray' object has no attribute 'get'
+10.43.0.111,-,2025-10-11 12:08:23,"import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.tree import DecisionTreeRegressor
+
+# Load the data
+train_file_path = ""/kaggle/input/bdaio-1st-prb/train.csv""
+test_file_path = ""/kaggle/input/bdaio-1st-prb/test.csv""
+
+train = pd.read_csv(train_file_path)
+test = pd.read_csv(test_file_path)
+
+def convert_string_to_float(df):
+    df['column_name'] = pd.to_numeric(df['column_name'], errors='coerce').astype(float)
+    return df
+
+features = ['Name', 'Aired Date', 'Year of release', 'Original Network', 
+            'Aired On', 'Number of Episodes', 'Duration', 'Content Rating', 
+            'Rating', 'Synopsis', 'Genre', 'Tags', 'Director', 'Screenwriter', 
+            'Cast', 'Production companies', 'Rank']
+X = train[features]
+y = train['Genre']  # Fix: Genre is a category, not numerical
+
+# Splitting the data
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=1)
+
+def categorical_to_numeric(y):
+    le = pd.Series.unique(y)
+    y = y.map(lambda x: le.get(x))
+    return y
+
+# Convert Genre to numeric
+y_train = categorical_to_numeric(y_train)
+y_test = categorical_to_numeric(y_test)
+
+# Loading the model
+model = DecisionTreeRegressor(random_state=1)
+model.fit(X_train, y_train)
+
+# Make predictions
+y_pred = model.predict(X_test)
+
+print(y_pred)"
+10.43.0.111,-,2025-10-11 12:13:15,how to merge two dataset columns
+10.43.0.111,-,2025-10-11 12:16:37,the remaining datasets after merging two dataset columns should be added to the main dataset
+10.43.0.111,-,2025-10-11 12:18:15,"fix this-import pandas as pd
+from sklearn.tree import DecisionTreeRegressor
+
+train = pd.read_csv(""/kaggle/input/bdaio-1st-prb/train.csv"")
+test = pd.read_csv(""/kaggle/input/bdaio-1st-prb/test.csv"")
+df = pd.DataFrame(train,test)
+features = ['Name', 'Aired Date', 'Year of release', 'Original Network', 'Aired On',
+       'Number of Episodes', 'Duration', 'Content Rating', 'Rating',
+       'Synopsis', 'Genre', 'Tags', 'Director', 'Screenwriter', 'Cast',
+       'Production companies', 'Rank']
+merge = pd.merge(df,features)
+the remaining genres column will be added to the merged datast"
+10.43.0.111,-,2025-10-11 12:20:10,"Can only merge Series or DataFrame objects, a <class 'list'> was passed"
+10.43.0.111,-,2025-10-11 12:21:18,"from sklearn.tree import DecisionTreeRegressor
+import pandas as pd
+
+train = pd.read_csv(""/kaggle/input/bdaio-1st-prb/train.csv"")
+test = pd.read_csv(""/kaggle/input/bdaio-1st-prb/test.csv"")
+
+# Create a new DataFrame by concatenating train and test datasets
+df = pd.concat([train, test], ignore_index=True)
+
+features = ['Name', 'Aired Date', 'Year of release', 'Original Network', 
+            'Aired On', 'Number of Episodes', 'Duration', 'Content Rating', 
+            'Rating', 'Synopsis', 'Genre', 'Tags', 'Director', 'Screenwriter', 
+            'Cast', 'Production companies', 'Rank']
+
+# Perform an inner merge to avoid adding redundant columns
+merge = pd.merge(df, features, how='inner')
+fix this-TypeError: Can only merge Series or DataFrame objects, a <class 'list'> was passed"
+10.43.0.111,-,2025-10-11 12:25:19,"now  want the nan genre features to match with the most similar topics to genarete their own genres
+-from sklearn.tree import DecisionTreeRegressor
+import pandas as pd
+
+train = pd.read_csv(""/kaggle/input/bdaio-1st-prb/train.csv"")
+test = pd.read_csv(""/kaggle/input/bdaio-1st-prb/test.csv"")
+
+# Concatenate train and test datasets
+df = pd.concat([train, test], ignore_index=True)
+
+features = ['Name', 'Aired Date', 'Year of release', 'Original Network', 
+            'Aired On', 'Number of Episodes', 'Duration', 'Content Rating', 
+            'Rating', 'Synopsis', 'Genre', 'Tags', 'Director', 'Screenwriter', 
+            'Cast', 'Production companies', 'Rank']
+
+# You should merge features with the df DataFrame, not a list
+merge = pd.merge(df, df[features], how='inner')
+display(merge)"
+10.43.0.111,-,2025-10-11 12:27:34,"IndexError: index 125 is out of bounds for axis 0 with size 3 in
+import pandas as pd
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.metrics.pairwise import cosine_similarity
+
+train = pd.read_csv(""/kaggle/input/bdaio-1st-prb/train.csv"")
+test = pd.read_csv(""/kaggle/input/bdaio-1st-prb/test.csv"")
+
+# Concatenate train and test datasets
+df = pd.concat([train, test], ignore_index=True)
+
+features = ['Synopsis', 'Genre', 'Tags']  # select relevant features
+
+# Vectorize the text data using TF-IDF
+vectorizer = TfidfVectorizer(stop_words='english')
+vectors = vectorizer.fit_transform(df[features])
+
+# Compute cosine similarity between genres and other topics
+similarity = cosine_similarity(vectors, vectors)
+
+# Get index of NaN genre
+nan_genre_idx = df[df['Genre'].isnull()].index
+
+# Find most similar topics to generate new genres
+similar_topics = []
+for idx in nan_genre_idx:
+    similarity_vector = similarity[idx]
+    top_similar = np.argsort(-similarity_vector)[:5]  # get top 5 most similar
+    similar_topics.append(list(df.loc[top_similar, 'Genre'].values))
+
+# Generate new genre for each NaN value
+new_genres = []
+for i in range(len(nan_genre_idx)):
+    topic = similar_topics[i]
+    new_genre = ', '.join(topic)
+    new_genres.append(new_genre)
+
+# Fill NaN values with generated genres
+df.loc[nan_genre_idx, 'Genre'] = new_genres
+
+# Display the updated DataFrame
+display(df)"
+10.43.0.111,-,2025-10-11 12:31:19,full code
+10.43.0.111,-,2025-10-11 12:32:32,"IndexError: index 125 is out of bounds for axis 0 with size 3
+how to solve this error"
+10.43.0.111,-,2025-10-11 12:36:18,"Your goal is to predict the correct species label (target) for each ID.
+
+
+    train.csv — Contains 50 samples, corresponding to the first 50 datapoints (by index) of the original Iris dataset from sklearn.datasets.load_iris().
+        These samples belong to only one class of Iris flowers.
+        Use this data to investigate and compare with the original Iris dataset in order to identify the mathematical noise function.
+        Do not use this data for model training — it represents only one class and will not help in prediction.
+
+    test.csv — Contains the public test set, consisting of the remaining samples after the first 50.
+        Includes only the noisy features and an ID column.
+        You will use your inferred denoising function and trained model to predict the corresponding target values for this file.
+
+    sample_submission.csv — Shows the required format for your final submission.
+        Each row should contain the ID and your predicted target class (0, 1, or 2)."
+10.43.0.111,-,2025-10-11 12:47:53,"give me the whole code
+Your goal is to predict the correct species label (target) for each ID.
+
+train.csv — Contains 50 samples, corresponding to the first 50 datapoints (by index) of the original Iris dataset from sklearn.datasets.load_iris().
+    These samples belong to only one class of Iris flowers.
+    Use this data to investigate and compare with the original Iris dataset in order to identify the mathematical noise function.
+    Do not use this data for model training — it represents only one class and will not help in prediction.
+
+test.csv — Contains the public test set, consisting of the remaining samples after the first 50.
+    Includes only the noisy features and an ID column.
+    You will use your inferred denoising function and trained model to predict the corresponding target values for this file.
+
+sample_submission.csv — Shows the required format for your final submission.
+    Each row should contain the ID and your predicted target class (0, 1, or 2)."
+10.43.0.111,-,2025-10-11 12:58:18,"ID 	sepal length (cm) 	sepal width (cm) 	petal length (cm) 	petal width (cm)
+there;s nothing called noisy_feastures in the dataset.the avaiable thibngs are -
+ID 	sepal length (cm) 	sepal width (cm) 	petal length (cm) 	petal width (cm)
+my c0ode-
+Import necessary libraries
+
+import pandas as pd
+from sklearn.datasets import load_iris
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.metrics import accuracy_score
+Load the Iris dataset
+
+iris = load_iris()
+X = iris.data
+y = iris.target
+Split the data into training and testing sets
+
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+Standardize features by removing the mean and scaling to unit variance
+
+scaler = StandardScaler()
+X_train_scaled = scaler.fit_transform(X_train)
+X_test_scaled = scaler.transform(X_test)
+Train a Random Forest classifier on the training data
+
+rfc = RandomForestClassifier(n_estimators=100, random_state=42)
+rfc.fit(X_train_scaled, y_train)
+Make predictions on the test set
+
+y_pred = rfc.predict(X_test_scaled)
+Evaluate the model's performance
+
+accuracy = accuracy_score(y_test, y_pred)
+print(f""Model Accuracy: {accuracy:.3f}"")
+Define a function to predict species labels for new data
+
+def predict_labels(data):
+scaled_data = scaler.transform(data)
+return rfc.predict(scaled_data)
+Load the test data and make predictions
+
+test_data = pd.read_csv('/kaggle/input/bdaio-2nd-q/test.csv')
+predictions = predict_labels(test_data[['noisy_features']])  # Assuming 'noisy_features' is a column in the test CSV
+Save the predictions to a submission file
+
+submission_df = pd.DataFrame({'ID': test_data['ID'], 'target': predictions})
+submission_df.to_csv('submission.csv', index=False)"
+10.43.0.111,-,2025-10-11 13:00:39,"ID 	sepal length (cm) 	sepal width (cm) 	petal length (cm) 	petal width (cm)
+there;s nothing called noisy_feastures in the dataset.the avaiable thibngs are -
+ID 	sepal length (cm) 	sepal width (cm) 	petal length (cm) 	petal width (cm)
+my c0ode-
+Import necessary libraries
+
+import pandas as pd
+from sklearn.datasets import load_iris
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.metrics import accuracy_score
+Load the Iris dataset
+
+iris = load_iris()
+X = iris.data
+y = iris.target
+Split the data into training and testing sets
+
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+Standardize features by removing the mean and scaling to unit variance
+
+scaler = StandardScaler()
+X_train_scaled = scaler.fit_transform(X_train)
+X_test_scaled = scaler.transform(X_test)
+Train a Random Forest classifier on the training data
+
+rfc = RandomForestClassifier(n_estimators=100, random_state=42)
+rfc.fit(X_train_scaled, y_train)
+Make predictions on the test set
+
+y_pred = rfc.predict(X_test_scaled)
+Evaluate the model's performance
+
+accuracy = accuracy_score(y_test, y_pred)
+print(f""Model Accuracy: {accuracy:.3f}"")
+Define a function to predict species labels for new data
+
+def predict_labels(data):
+scaled_data = scaler.transform(data)
+return rfc.predict(scaled_data)
+Load the test data and make predictions
+
+test_data = pd.read_csv('/kaggle/input/bdaio-2nd-q/test.csv')
+predictions = predict_labels(test_data[['noisy_features']])  # Assuming 'noisy_features' is a column in the test CSV
+Save the predictions to a submission file
+
+submission_df = pd.DataFrame({'ID': test_data['ID'], 'target': predictions})
+submission_df.to_csv('submission.csv', index=False)"
+10.43.0.111,-,2025-10-11 13:03:24,how to filter out warnings in python
+10.43.0.111,-,2025-10-11 13:12:08,"make me a model trainer for this-
+Your team has collected 20 reference images of these navigation arrows under perfect daylight conditions and positions. Unfortunately, citywide curfews have prevented collection of nighttime training images.
+
+
+Figure: Sample of Training(DAY) and Testing(Day, Night, Road) images
+
+    Real-World Complications: Remember the training set contains perfect images. Real life arrows maybe a bit off-angled
+
+📌Extension:
+Classifying arrow images in day and night correctly results in 80% with 40% accuracy each. The rest 20% unlocks by correctly classifying images with no arrows as road.
+
+
+🎯 Task:
+Develop a robust image classification model that can:
+
+    Input: 20 reference images of navigational arrows in perfect daylight conditions.
+    Output: Directional classification into 8 directional categories and 1 conditional category:
+        north, south, east, west
+        north-east, south-east, north-west, south-west
+        road (no arrow present)
+
+🚧Limitations:
+
+    Your solution cannot use extra images to train model. You are limited to 20 reference image.
+    No manual data labeling and incorporation is allowed.
+
+Also any pretrained models are allowed.
+
+    May the AI forces be with you.
+
+Evaluation
+
+The public leader-board is based on the 30% of the test set and the private leaderboard is based on the rest 70% of the test set. Submissions are evaluated on F-1 score. According to metric documentation of Kaggle -
+
+**F1 score**: The harmonic mean of the precision and recall, where an F1 score reaches its best value at 1 and worst score at 0.
+
+The formula for the F1 score is::
+
+F1 = 2 * (precision * recall) / (precision + recall)
+
+Submission File
+
+For each ID in the test set, you must predict a probability for the TARGET variable. The file should contain a header and have the following format:
+
+Id, label
+1,south
+2,north-west
+3,road
+etc."
+10.43.0.111,-,2025-10-11 13:13:57,"make me a model trainer for this-
+Your team has collected 20 reference images of these navigation arrows under perfect daylight conditions and positions. Unfortunately, citywide curfews have prevented collection of nighttime training images.
+
+Figure: Sample of Training(DAY) and Testing(Day, Night, Road) images
+
+Real-World Complications: Remember the training set contains perfect images. Real life arrows maybe a bit off-angled
+
+📌Extension:
+Classifying arrow images in day and night correctly results in 80% with 40% accuracy each. The rest 20% unlocks by correctly classifying images with no arrows as road.
+
+🎯 Task:
+Develop a robust image classification model that can:
+
+Input: 20 reference images of navigational arrows in perfect daylight conditions.
+Output: Directional classification into 8 directional categories and 1 conditional category:
+    north, south, east, west
+    north-east, south-east, north-west, south-west
+    road (no arrow present)
+
+🚧Limitations:
+
+Your solution cannot use extra images to train model. You are limited to 20 reference image.
+No manual data labeling and incorporation is allowed.
+
+Also any pretrained models are allowed.
+
+May the AI forces be with you.
+
+Evaluation
+
+The public leader-board is based on the 30% of the test set and the private leaderboard is based on the rest 70% of the test set. Submissions are evaluated on F-1 score. According to metric documentation of Kaggle -
+
+F1 score: The harmonic mean of the precision and recall, where an F1 score reaches its best value at 1 and worst score at 0.
+
+The formula for the F1 score is::
+
+F1 = 2 * (precision * recall) / (precision + recall)
+
+Submission File
+
+For each ID in the test set, you must predict a probability for the TARGET variable. The file should contain a header and have the following format:
+
+Id, label
+1,south
+2,north-west
+3,road
+etc."
+10.43.0.111,-,2025-10-11 13:16:23,"import torch
+import torch.nn as nn
+import torchvision
+import torchvision.transforms as transforms
+
+# Device configuration
+device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+
+# Hyperparameters
+num_classes = 9
+input_size = 224
+batch_size = 64
+learning_rate = 0.001
+num_epochs = 10
+
+# Data augmentation and normalization for training
+transform = transforms.Compose([transforms.Resize((256, 256)),
+                                transforms.RandomCrop(input_size),
+                                transforms.RandomHorizontalFlip(),
+                                transforms.ToTensor(),
+                                transforms.Normalize((0.485, 0.456, 0.406), (0.229, 0.224, 0.225))])
+
+# Data augmentation and normalization for validation
+valid_transform = transforms.Compose([transforms.Resize((256, 256)),
+                                      transforms.CenterCrop(input_size),
+                                      transforms.ToTensor(),
+                                      transforms.Normalize((0.485, 0.456, 0.406), (0.229, 0.224, 0.225))])
+
+# Dataset class for navigation arrow images
+class NavigationArrowsDataset(torch.utils.data.Dataset):
+    def __init__(self, root_dir, transform=transform):
+        self.root_dir = root_dir
+        self.transform = transform
+        self.images = os.listdir(root_dir)
+
+    def __len__(self):
+        return len(self.images)
+
+    def __getitem__(self, index):
+        img = Image.open(os.path.join(self.root_dir, self.images[index]))
+        img = self.transform(img)
+        label = torch.tensor(int(self.images[index].split('.')[0]) - 1)  # Label as integer
+        return img, label
+
+# Load dataset and create data loaders
+train_dataset = NavigationArrowsDataset('path_to_train_images', transform=transform)
+valid_dataset = NavigationArrowsDataset('path_to_valid_images', transform=valid_transform)
+
+train_loader = torch.utils.data.DataLoader(train_dataset, batch_size=batch_size, shuffle=True)
+valid_loader = torch.utils.data.DataLoader(valid_dataset, batch_size=batch_size, shuffle=False)
+
+# Define the CNN model
+class Net(nn.Module):
+    def __init__(self):
+        super(Net, self).__init__()
+        self.conv1 = nn.Conv2d(3, 6, kernel_size=5)
+        self.pool = nn.MaxPool2d(2, 2)
+        self.conv2 = nn.Conv2d(6, 12,
+finish the code"
+10.43.0.111,-,2025-10-11 13:24:56,"import torch
+import torch.nn as nn
+import torchvision
+import torchvision.transforms as transforms
+
+# Device configuration
+device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+
+# Hyperparameters
+num_classes = 9
+input_size = 224
+batch_size = 64
+learning_rate = 0.001
+num_epochs = 10
+
+# Data augmentation and normalization for training
+transform = transforms.Compose([transforms.Resize((256, 256)),
+                                transforms.RandomCrop(input_size),
+                                transforms.RandomHorizontalFlip(),
+                                transforms.ToTensor(),
+                                transforms.Normalize((0.485, 0.456, 0.406), (0.229, 0.224, 0.225))])
+
+# Data augmentation and normalization for validation
+valid_transform = transforms.Compose([transforms.Resize((256, 256)),
+                                      transforms.CenterCrop(input_size),
+                                      transforms.ToTensor(),
+                                      transforms.Normalize((0.485, 0.456, 0.406), (0.229, 0.224, 0.225))])
+
+# Dataset class for navigation arrow images
+class NavigationArrowsDataset(torch.utils.data.Dataset):
+    def __init__(self, root_dir, transform=transform):
+        self.root_dir = root_dir
+        self.transform = transform
+        self.images = os.listdir(root_dir)
+
+    def __len__(self):
+        return len(self.images)
+
+    def __getitem__(self, index):
+        img = Image.open(os.path.join(self.root_dir, self.images[index]))
+        img = self.transform(img)
+        label = torch.tensor(int(self.images[index].split('.')[0]) - 1)  # Label as integer
+        return img, label
+
+# Load dataset and create data loaders
+train_dataset = NavigationArrowsDataset('/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/train.csv', transform=transform)
+valid_dataset = NavigationArrowsDataset('/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test.csv', transform=valid_transform)
+
+train_loader = torch.utils.data.DataLoader(train_dataset, batch_size=batch_size, shuffle=True)
+valid_loader = torch.utils.data.DataLoader(valid_dataset, batch_size=batch_size, shuffle=False)
+
+# Define the CNN model
+# Define the CNN model (continued from previous snippet)
+class Net(nn.Module):
+    def __init__(self):
+        super(Net, self).__init__()
+        self.conv1 = nn.Conv2d(3, 6, kernel_size=5)
+        self.pool = nn.MaxPool2d(2, 2)
+        self.conv2 = nn.Conv2d(12, 24, kernel_size=5)
+        self.fc1 = nn.Linear(24 * 10 * 10, 128) # assuming 10x10 output from conv2
+        self.drop = nn.Dropout2d()
+        self.fc2 = nn.Linear(128, num_classes)
+
+    def forward(self, x):
+        out = self.pool(nn.functional.relu(self.conv1(x)))
+        out = self.pool(nn.functional.relu(self.conv2(out)))
+        out = out.view(-1, 24 * 10 * 10)
+        out = nn.functional.relu(self.fc1(out))
+        out = self.drop(out)
+        out = self.fc2(out)
+        return out
+
+# Initialize the model, loss function, and optimizer
+model = Net()
+criterion = nn.CrossEntropyLoss()
+optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate)
+
+# Train the model
+for epoch in range(num_epochs):
+    for i, (images, labels) in enumerate(train_loader):
+        # Move data to device
+        images, labels = images.to(device), labels.to(device)
+        
+        # Zero the gradients
+        optimizer.zero_grad()
+        
+        # Forward pass
+        outputs = model(images)
+        loss = criterion(outputs, labels)
+        
+        # Backward pass
+        loss.backward()
+        
+        # Update model parameters
+        optimizer.step()
+
+    print('Epoch [{}/{}], Loss: {:.4f}'.format(epoch+1, num_epochs, loss.item())
+the error-
+  File ""/tmp/ipykernel_37/316783275.py"", line 98
+    
+    ^
+SyntaxError: incomplete input"
+10.43.0.111,-,2025-10-11 13:29:24,"how o fix this -NameError: name 'os' is not defined
+in this-
+import torch
+import torch.nn as nn
+import torchvision
+import torchvision.transforms as transforms
+
+# Device configuration
+device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+
+# Hyperparameters
+num_classes = 9
+input_size = 224
+batch_size = 64
+learning_rate = 0.001
+num_epochs = 10
+
+# Data augmentation and normalization for training
+transform = transforms.Compose([transforms.Resize((256, 256)),
+                                transforms.RandomCrop(input_size),
+                                transforms.RandomHorizontalFlip(),
+                                transforms.ToTensor(),
+                                transforms.Normalize((0.485, 0.456, 0.406), (0.229, 0.224, 0.225))])
+
+# Data augmentation and normalization for validation
+valid_transform = transforms.Compose([transforms.Resize((256, 256)),
+                                      transforms.CenterCrop(input_size),
+                                      transforms.ToTensor(),
+                                      transforms.Normalize((0.485, 0.456, 0.406), (0.229, 0.224, 0.225))])
+
+# Dataset class for navigation arrow images
+class NavigationArrowsDataset(torch.utils.data.Dataset):
+    def __init__(self, root_dir, transform=transform):
+        self.root_dir = root_dir
+        self.transform = transform
+        self.images = os.listdir(root_dir)
+
+    def __len__(self):
+        return len(self.images)
+
+    def __getitem__(self, index):
+        img = Image.open(os.path.join(self.root_dir, self.images[index]))
+        img = self.transform(img)
+        label = torch.tensor(int(self.images[index].split('.')[0]) - 1)  # Label as integer
+        return img, label
+
+# Load dataset and create data loaders
+train_dataset = NavigationArrowsDataset('/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/train.csv', transform=transform)
+valid_dataset = NavigationArrowsDataset('/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test.csv', transform=valid_transform)
+
+train_loader = torch.utils.data.DataLoader(train_dataset, batch_size=batch_size, shuffle=True)
+valid_loader = torch.utils.data.DataLoader(valid_dataset, batch_size=batch_size, shuffle=False)
+
+# Define the CNN model
+# Define the CNN model (continued from previous snippet)
+class Net(nn.Module):
+    def __init__(self):
+        super(Net, self).__init__()
+        self.conv1 = nn.Conv2d(3, 6, kernel_size=5)
+        self.pool = nn.MaxPool2d(2, 2)
+        self.conv2 = nn.Conv2d(12, 24, kernel_size=5)
+        self.fc1 = nn.Linear(24 * 10 * 10, 128) # assuming 10x10 output from conv2
+        self.drop = nn.Dropout2d()
+        self.fc2 = nn.Linear(128, num_classes)
+
+    def forward(self, x):
+        out = self.pool(nn.functional.relu(self.conv1(x)))
+        out = self.pool(nn.functional.relu(self.conv2(out)))
+        out = out.view(-1, 24 * 10 * 10)
+        out = nn.functional.relu(self.fc1(out))
+        out = self.drop(out)
+        out = self.fc2(out)
+        return out
+
+# Initialize the model, loss function, and optimizer
+model = Net()
+criterion = nn.CrossEntropyLoss()
+optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate)
+
+
+# Train the model
+for epoch in range(num_epochs):
+    for i, (images, labels) in enumerate(train_loader):
+        # Move data to device
+        images, labels = images.to(device), labels.to(device)
+        
+        # Zero the gradients
+        optimizer.zero_grad()
+        
+        # Forward pass
+        outputs = model(images)
+        loss = criterion(outputs, labels)
+        
+        # Backward pass
+        loss.backward()
+        
+        # Update model parameters
+        optimizer.step()
+
+print('Epoch [{}/{}], Loss: {:.4f}'.format(epoch+1, num_epochs, loss.item()))"
+10.43.0.111,-,2025-10-11 13:34:03,"NameError: name 'Image' is not defined in
+import torch
+import torch.nn as nn
+import torchvision
+import torchvision.transforms as transforms
+import os
+# Device configuration
+device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+
+# Hyperparameters
+num_classes = 9
+input_size = 224
+batch_size = 64
+learning_rate = 0.001
+num_epochs = 10
+
+# Data augmentation and normalization for training
+transform = transforms.Compose([transforms.Resize((256, 256)),
+                                transforms.RandomCrop(input_size),
+                                transforms.RandomHorizontalFlip(),
+                                transforms.ToTensor(),
+                                transforms.Normalize((0.485, 0.456, 0.406), (0.229, 0.224, 0.225))])
+
+# Data augmentation and normalization for validation
+valid_transform = transforms.Compose([transforms.Resize((256, 256)),
+                                      transforms.CenterCrop(input_size),
+                                      transforms.ToTensor(),
+                                      transforms.Normalize((0.485, 0.456, 0.406), (0.229, 0.224, 0.225))])
+
+# Dataset class for navigation arrow images
+class NavigationArrowsDataset(torch.utils.data.Dataset):
+    def __init__(self, root_dir, transform=transform):
+        self.root_dir = root_dir
+        self.transform = transform
+        self.images = os.listdir(root_dir)
+
+    def __len__(self):
+        return len(self.images)
+
+    def __getitem__(self, index):
+        img = Image.open(os.path.join(self.root_dir, self.images[index]))
+        img = self.transform(img)
+        label = torch.tensor(int(self.images[index].split('.')[0]) - 1)  # Label as integer
+        return img, label
+
+# Load dataset and create data loaders
+train_dataset = NavigationArrowsDataset('/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/train', transform=transform)
+valid_dataset = NavigationArrowsDataset('/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test', transform=valid_transform)
+
+train_loader = torch.utils.data.DataLoader(train_dataset, batch_size=batch_size, shuffle=True)
+valid_loader = torch.utils.data.DataLoader(valid_dataset, batch_size=batch_size, shuffle=False)
+
+# Define the CNN model
+# Define the CNN model (continued from previous snippet)
+class Net(nn.Module):
+    def __init__(self):
+        super(Net, self).__init__()
+        self.conv1 = nn.Conv2d(3, 6, kernel_size=5)
+        self.pool = nn.MaxPool2d(2, 2)
+        self.conv2 = nn.Conv2d(12, 24, kernel_size=5)
+        self.fc1 = nn.Linear(24 * 10 * 10, 128) # assuming 10x10 output from conv2
+        self.drop = nn.Dropout2d()
+        self.fc2 = nn.Linear(128, num_classes)
+
+    def forward(self, x):
+        out = self.pool(nn.functional.relu(self.conv1(x)))
+        out = self.pool(nn.functional.relu(self.conv2(out)))
+        out = out.view(-1, 24 * 10 * 10)
+        out = nn.functional.relu(self.fc1(out))
+        out = self.drop(out)
+        out = self.fc2(out)
+        return out
+
+# Initialize the model, loss function, and optimizer
+model = Net()
+criterion = nn.CrossEntropyLoss()
+optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate)
+
+
+# Train the model
+for epoch in range(num_epochs):
+    for i, (images, labels) in enumerate(train_loader):
+        # Move data to device
+        images, labels = images.to(device), labels.to(device)
+        
+        # Zero the gradients
+        optimizer.zero_grad()
+        
+        # Forward pass
+        outputs = model(images)
+        loss = criterion(outputs, labels)
+        
+        # Backward pass
+        loss.backward()
+        
+        # Update model parameters
+        optimizer.step()
+
+print('Epoch [{}/{}], Loss: {:.4f}'.format(epoch+1, num_epochs, loss.item()))"
+10.43.0.111,-,2025-10-11 13:36:33,"ValueError: invalid literal for int() with base 10: 'south_04'
+in 
+import torch
+import torch.nn as nn
+import torchvision
+import torchvision.transforms as transforms
+import os
+from PIL import Image
+# Device configuration
+device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+
+# Hyperparameters
+num_classes = 9
+input_size = 224
+batch_size = 64
+learning_rate = 0.001
+num_epochs = 10
+
+# Data augmentation and normalization for training
+transform = transforms.Compose([transforms.Resize((256, 256)),
+                                transforms.RandomCrop(input_size),
+                                transforms.RandomHorizontalFlip(),
+                                transforms.ToTensor(),
+                                transforms.Normalize((0.485, 0.456, 0.406), (0.229, 0.224, 0.225))])
+
+# Data augmentation and normalization for validation
+valid_transform = transforms.Compose([transforms.Resize((256, 256)),
+                                      transforms.CenterCrop(input_size),
+                                      transforms.ToTensor(),
+                                      transforms.Normalize((0.485, 0.456, 0.406), (0.229, 0.224, 0.225))])
+
+# Dataset class for navigation arrow images
+class NavigationArrowsDataset(torch.utils.data.Dataset):
+    def __init__(self, root_dir, transform=transform):
+        self.root_dir = root_dir
+        self.transform = transform
+        self.images = os.listdir(root_dir)
+
+    def __len__(self):
+        return len(self.images)
+
+    def __getitem__(self, index):
+        img = Image.open(os.path.join(self.root_dir, self.images[index]))
+        img = self.transform(img)
+        label = torch.tensor(int(self.images[index].split('.')[0]) - 1)  # Label as integer
+        return img, label
+
+# Load dataset and create data loaders
+train_dataset = NavigationArrowsDataset('/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/train', transform=transform)
+valid_dataset = NavigationArrowsDataset('/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test', transform=valid_transform)
+
+train_loader = torch.utils.data.DataLoader(train_dataset, batch_size=batch_size, shuffle=True)
+valid_loader = torch.utils.data.DataLoader(valid_dataset, batch_size=batch_size, shuffle=False)
+
+# Define the CNN model
+# Define the CNN model (continued from previous snippet)
+class Net(nn.Module):
+    def __init__(self):
+        super(Net, self).__init__()
+        self.conv1 = nn.Conv2d(3, 6, kernel_size=5)
+        self.pool = nn.MaxPool2d(2, 2)
+        self.conv2 = nn.Conv2d(12, 24, kernel_size=5)
+        self.fc1 = nn.Linear(24 * 10 * 10, 128) # assuming 10x10 output from conv2
+        self.drop = nn.Dropout2d()
+        self.fc2 = nn.Linear(128, num_classes)
+
+    def forward(self, x):
+        out = self.pool(nn.functional.relu(self.conv1(x)))
+        out = self.pool(nn.functional.relu(self.conv2(out)))
+        out = out.view(-1, 24 * 10 * 10)
+        out = nn.functional.relu(self.fc1(out))
+        out = self.drop(out)
+        out = self.fc2(out)
+        return out
+
+# Initialize the model, loss function, and optimizer
+model = Net()
+criterion = nn.CrossEntropyLoss()
+optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate)
+
+
+# Train the model
+for epoch in range(num_epochs):
+    for i, (images, labels) in enumerate(train_loader):
+        # Move data to device
+        images, labels = images.to(device), labels.to(device)
+        
+        # Zero the gradients
+        optimizer.zero_grad()
+        
+        # Forward pass
+        outputs = model(images)
+        loss = criterion(outputs, labels)
+        
+        # Backward pass
+        loss.backward()
+        
+        # Update model parameters
+        optimizer.step()
+
+print('Epoch [{}/{}], Loss: {:.4f}'.format(epoch+1, num_epochs, loss.item()))"
+10.43.0.111,-,2025-10-11 13:42:26,"Error converting west_02.jpg to integer: invalid literal for int() with base 10: 'west_02'
+Error converting west_03.jpg to integer: invalid literal for int() with base 10: 'west_03'
+Error converting east_01.jpg to integer: invalid literal for int() with base 10: 'east_01'
+Error converting southwest_01.jpg to integer: invalid literal for int() with base 10: 'southwest_01'
+Error converting south_03.jpg to integer: invalid literal for int() with base 10: 'south_03'
+Error converting south_01.jpg to integer: invalid literal for int() with base 10: 'south_01'
+Error converting north_03.jpg to integer: invalid literal for int() with base 10: 'north_03'
+Error converting east_04.jpg to integer: invalid literal for int() with base 10: 'east_04'
+Error converting southeast_01.jpg to integer: invalid literal for int() with base 10: 'southeast_01'
+Error converting north_02.jpg to integer: invalid literal for int() with base 10: 'north_02'
+Error converting east_02.jpg to integer: invalid literal for int() with base 10: 'east_02'
+Error converting north_04.jpg to integer: invalid literal for int() with base 10: 'north_04'
+Error converting west_04.jpg to integer: invalid literal for int() with base 10: 'west_04'
+Error converting south_02.jpg to integer: invalid literal for int() with base 10: 'south_02'
+Error converting east_03.jpg to integer: invalid literal for int() with base 10: 'east_03'
+Error converting northwest_01.jpg to integer: invalid literal for int() with base 10: 'northwest_01'
+Error converting south_04.jpg to integer: invalid literal for int() with base 10: 'south_04'
+Error converting north_01.jpg to integer: invalid literal for int() with base 10: 'north_01'
+Error converting west_01.jpg to integer: invalid literal for int() with base 10: 'west_01'
+Error converting northeast_01.jpg to integer: invalid literal for int() with base 10: 'northeast_01'
+
+---------------------------------------------------------------------------
+RuntimeError                              Traceback (most recent call last)
+/tmp/ipykernel_37/106743809.py in <cell line: 0>()
+     97 
+     98         # Forward pass
+---> 99         outputs = model(images)
+    100         loss = criterion(outputs, labels)
+    101 
+
+/usr/local/lib/python3.11/dist-packages/torch/nn/modules/module.py in _wrapped_call_impl(self, *args, **kwargs)
+   1737             return self._compiled_call_impl(*args, **kwargs)  # type: ignore[misc]
+   1738         else:
+-> 1739             return self._call_impl(*args, **kwargs)
+   1740 
+   1741     # torchrec tests the code consistency with the following code
+
+/usr/local/lib/python3.11/dist-packages/torch/nn/modules/module.py in _call_impl(self, *args, **kwargs)
+   1748                 or _global_backward_pre_hooks or _global_backward_hooks
+   1749                 or _global_forward_hooks or _global_forward_pre_hooks):
+-> 1750             return forward_call(*args, **kwargs)
+   1751 
+   1752         result = None
+
+/tmp/ipykernel_37/106743809.py in forward(self, x)
+     74     def forward(self, x):
+     75         out = self.pool(nn.functional.relu(self.conv1(x)))
+---> 76         out = self.pool(nn.functional.relu(self.conv2(out)))
+     77         out = out.view(-1, 24 * 10 * 10)
+     78         out = nn.functional.relu(self.fc1(out))
+
+/usr/local/lib/python3.11/dist-packages/torch/nn/modules/module.py in _wrapped_call_impl(self, *args, **kwargs)
+   1737             return self._compiled_call_impl(*args, **kwargs)  # type: ignore[misc]
+   1738         else:
+-> 1739             return self._call_impl(*args, **kwargs)
+   1740 
+   1741     # torchrec tests the code consistency with the following code
+
+/usr/local/lib/python3.11/dist-packages/torch/nn/modules/module.py in _call_impl(self, *args, **kwargs)
+   1748                 or _global_backward_pre_hooks or _global_backward_hooks
+   1749                 or _global_forward_hooks or _global_forward_pre_hooks):
+-> 1750             return forward_call(*args, **kwargs)
+   1751 
+   1752         result = None
+
+/usr/local/lib/python3.11/dist-packages/torch/nn/modules/conv.py in forward(self, input)
+    552 
+    553     def forward(self, input: Tensor) -> Tensor:
+--> 554         return self._conv_forward(input, self.weight, self.bias)
+    555 
+    556 
+
+/usr/local/lib/python3.11/dist-packages/torch/nn/modules/conv.py in _conv_forward(self, input, weight, bias)
+    547                 self.groups,
+    548             )
+--> 549         return F.conv2d(
+    550             input, weight, bias, self.stride, self.padding, self.dilation, self.groups
+    551         )
+
+RuntimeError: Given groups=1, weight of size [24, 12, 5, 5], expected input[20, 6, 110, 110] to have 12 channels, but got 6 channels instead
+in
+import torch
+import torch.nn as nn
+import torchvision
+import torchvision.transforms as transforms
+import os
+from PIL import Image
+# Device configuration
+device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+
+# Hyperparameters
+num_classes = 9
+input_size = 224
+batch_size = 64
+learning_rate = 0.001
+num_epochs = 10
+
+# Data augmentation and normalization for training
+transform = transforms.Compose([transforms.Resize((256, 256)),
+                                transforms.RandomCrop(input_size),
+                                transforms.RandomHorizontalFlip(),
+                                transforms.ToTensor(),
+                                transforms.Normalize((0.485, 0.456, 0.406), (0.229, 0.224, 0.225))])
+
+# Data augmentation and normalization for validation
+valid_transform = transforms.Compose([transforms.Resize((256, 256)),
+                                      transforms.CenterCrop(input_size),
+                                      transforms.ToTensor(),
+                                      transforms.Normalize((0.485, 0.456, 0.406), (0.229, 0.224, 0.225))])
+
+# Dataset class for navigation arrow images
+# Modify the __getitem__ method in NavigationArrowsDataset class to handle invalid labels
+class NavigationArrowsDataset(torch.utils.data.Dataset):
+    def __init__(self, root_dir, transform=transform):
+        self.root_dir = root_dir
+        self.transform = transform
+        self.images = os.listdir(root_dir)
+
+    def __len__(self):
+        return len(self.images)
+
+    def __getitem__(self, index):
+        img = Image.open(os.path.join(self.root_dir, self.images[index]))
+        img = self.transform(img)
+        
+        # Attempt to convert the image name (without extension) to an integer
+        try:
+            label = torch.tensor(int(self.images[index].split('.')[0]) - 1)
+        except ValueError as e:
+            print(f""Error converting {self.images[index]} to integer: {e}"")
+            # Use a default or fallback value for this image (e.g., -1, 0, etc.)
+            label = torch.tensor(-1)
+
+        return img, label
+
+# Load dataset and create data loaders
+train_dataset = NavigationArrowsDataset('/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/train', transform=transform)
+valid_dataset = NavigationArrowsDataset('/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test', transform=valid_transform)
+
+train_loader = torch.utils.data.DataLoader(train_dataset, batch_size=batch_size, shuffle=True)
+valid_loader = torch.utils.data.DataLoader(valid_dataset, batch_size=batch_size, shuffle=False)
+
+# Define the CNN model
+# Define the CNN model (continued from previous snippet)
+class Net(nn.Module):
+    def __init__(self):
+        super(Net, self).__init__()
+        self.conv1 = nn.Conv2d(3, 6, kernel_size=5)
+        self.pool = nn.MaxPool2d(2, 2)
+        self.conv2 = nn.Conv2d(12, 24, kernel_size=5)
+        self.fc1 = nn.Linear(24 * 10 * 10, 128) # assuming 10x10 output from conv2
+        self.drop = nn.Dropout2d()
+        self.fc2 = nn.Linear(128, num_classes)
+
+    def forward(self, x):
+        out = self.pool(nn.functional.relu(self.conv1(x)))
+        out = self.pool(nn.functional.relu(self.conv2(out)))
+        out = out.view(-1, 24 * 10 * 10)
+        out = nn.functional.relu(self.fc1(out))
+        out = self.drop(out)
+        out = self.fc2(out)
+        return out
+
+# Initialize the model, loss function, and optimizer
+model = Net()
+criterion = nn.CrossEntropyLoss()
+optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate)
+
+
+# Train the model
+for epoch in range(num_epochs):
+    for i, (images, labels) in enumerate(train_loader):
+        # Move data to device
+        images, labels = images.to(device), labels.to(device)
+        
+        # Zero the gradients
+        optimizer.zero_grad()
+        
+        # Forward pass
+        outputs = model(images)
+        loss = criterion(outputs, labels)
+        
+        # Backward pass
+        loss.backward()
+        
+        # Update model parameters
+        optimizer.step()
+
+print('Epoch [{}/{}], Loss: {:.4f}'.format(epoch+1, num_epochs, loss.item())"
+10.43.0.111,-,2025-10-11 13:44:46,"Error converting west_02.jpg to integer: invalid literal for int() with base 10: 'west_02'
+Error converting west_03.jpg to integer: invalid literal for int() with base 10: 'west_03'
+Error converting east_01.jpg to integer: invalid literal for int() with base 10: 'east_01'
+Error converting southwest_01.jpg to integer: invalid literal for int() with base 10: 'southwest_01'
+Error converting south_03.jpg to integer: invalid literal for int() with base 10: 'south_03'
+Error converting south_01.jpg to integer: invalid literal for int() with base 10: 'south_01'
+Error converting north_03.jpg to integer: invalid literal for int() with base 10: 'north_03'
+Error converting east_04.jpg to integer: invalid literal for int() with base 10: 'east_04'
+Error converting southeast_01.jpg to integer: invalid literal for int() with base 10: 'southeast_01'
+Error converting north_02.jpg to integer: invalid literal for int() with base 10: 'north_02'
+Error converting east_02.jpg to integer: invalid literal for int() with base 10: 'east_02'
+Error converting north_04.jpg to integer: invalid literal for int() with base 10: 'north_04'
+Error converting west_04.jpg to integer: invalid literal for int() with base 10: 'west_04'
+Error converting south_02.jpg to integer: invalid literal for int() with base 10: 'south_02'
+Error converting east_03.jpg to integer: invalid literal for int() with base 10: 'east_03'
+Error converting northwest_01.jpg to integer: invalid literal for int() with base 10: 'northwest_01'
+Error converting south_04.jpg to integer: invalid literal for int() with base 10: 'south_04'
+Error converting north_01.jpg to integer: invalid literal for int() with base 10: 'north_01'
+Error converting west_01.jpg to integer: invalid literal for int() with base 10: 'west_01'
+Error converting northeast_01.jpg to integer: invalid literal for int() with base 10: 'northeast_01'
+
+RuntimeError                              Traceback (most recent call last)
+/tmp/ipykernel_37/106743809.py in <cell line: 0>()
+97
+98         # Forward pass
+---> 99         outputs = model(images)
+100         loss = criterion(outputs, labels)
+101
+
+/usr/local/lib/python3.11/dist-packages/torch/nn/modules/module.py in _wrapped_call_impl(self, *args, **kwargs)
+1737             return self._compiled_call_impl(*args, **kwargs)  # type: ignore[misc]
+1738         else:
+-> 1739             return self._call_impl(*args, **kwargs)
+1740
+1741     # torchrec tests the code consistency with the following code
+
+/usr/local/lib/python3.11/dist-packages/torch/nn/modules/module.py in _call_impl(self, *args, **kwargs)
+1748                 or _global_backward_pre_hooks or _global_backward_hooks
+1749                 or _global_forward_hooks or _global_forward_pre_hooks):
+-> 1750             return forward_call(*args, **kwargs)
+1751
+1752         result = None
+
+/tmp/ipykernel_37/106743809.py in forward(self, x)
+74     def forward(self, x):
+75         out = self.pool(nn.functional.relu(self.conv1(x)))
+---> 76         out = self.pool(nn.functional.relu(self.conv2(out)))
+77         out = out.view(-1, 24 * 10 * 10)
+78         out = nn.functional.relu(self.fc1(out))
+
+/usr/local/lib/python3.11/dist-packages/torch/nn/modules/module.py in _wrapped_call_impl(self, *args, **kwargs)
+1737             return self._compiled_call_impl(*args, **kwargs)  # type: ignore[misc]
+1738         else:
+-> 1739             return self._call_impl(*args, **kwargs)
+1740
+1741     # torchrec tests the code consistency with the following code
+
+/usr/local/lib/python3.11/dist-packages/torch/nn/modules/module.py in _call_impl(self, *args, **kwargs)
+1748                 or _global_backward_pre_hooks or _global_backward_hooks
+1749                 or _global_forward_hooks or _global_forward_pre_hooks):
+-> 1750             return forward_call(*args, **kwargs)
+1751
+1752         result = None
+
+/usr/local/lib/python3.11/dist-packages/torch/nn/modules/conv.py in forward(self, input)
+552
+553     def forward(self, input: Tensor) -> Tensor:
+--> 554         return self._conv_forward(input, self.weight, self.bias)
+555
+556
+
+/usr/local/lib/python3.11/dist-packages/torch/nn/modules/conv.py in _conv_forward(self, input, weight, bias)
+547                 self.groups,
+548             )
+--> 549         return F.conv2d(
+550             input, weight, bias, self.stride, self.padding, self.dilation, self.groups
+551         )
+
+RuntimeError: Given groups=1, weight of size [24, 12, 5, 5], expected input[20, 6, 110, 110] to have 12 channels, but got 6 channels instead
+in
+import torch
+import torch.nn as nn
+import torchvision
+import torchvision.transforms as transforms
+import os
+from PIL import Image
+Device configuration
+
+device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+Hyperparameters
+
+num_classes = 9
+input_size = 224
+batch_size = 64
+learning_rate = 0.001
+num_epochs = 10
+Data augmentation and normalization for training
+
+transform = transforms.Compose([transforms.Resize((256, 256)),
+transforms.RandomCrop(input_size),
+transforms.RandomHorizontalFlip(),
+transforms.ToTensor(),
+transforms.Normalize((0.485, 0.456, 0.406), (0.229, 0.224, 0.225))])
+Data augmentation and normalization for validation
+
+valid_transform = transforms.Compose([transforms.Resize((256, 256)),
+transforms.CenterCrop(input_size),
+transforms.ToTensor(),
+transforms.Normalize((0.485, 0.456, 0.406), (0.229, 0.224, 0.225))])
+Dataset class for navigation arrow images
+Modify the getitem method in NavigationArrowsDataset class to handle invalid labels
+
+class NavigationArrowsDataset(torch.utils.data.Dataset):
+def init(self, root_dir, transform=transform):
+self.root_dir = root_dir
+self.transform = transform
+self.images = os.listdir(root_dir)
+
+def __len__(self):
+    return len(self.images)
+
+def __getitem__(self, index):
+    img = Image.open(os.path.join(self.root_dir, self.images[index]))
+    img = self.transform(img)
+    
+    # Attempt to convert the image name (without extension) to an integer
+    try:
+        label = torch.tensor(int(self.images[index].split('.')[0]) - 1)
+    except ValueError as e:
+        print(f""Error converting {self.images[index]} to integer: {e}"")
+        # Use a default or fallback value for this image (e.g., -1, 0, etc.)
+        label = torch.tensor(-1)
+
+    return img, label
+
+Load dataset and create data loaders
+
+train_dataset = NavigationArrowsDataset('/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/train', transform=transform)
+valid_dataset = NavigationArrowsDataset('/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test', transform=valid_transform)
+
+train_loader = torch.utils.data.DataLoader(train_dataset, batch_size=batch_size, shuffle=True)
+valid_loader = torch.utils.data.DataLoader(valid_dataset, batch_size=batch_size, shuffle=False)
+Define the CNN model
+Define the CNN model (continued from previous snippet)
+
+class Net(nn.Module):
+def init(self):
+super(Net, self).init()
+self.conv1 = nn.Conv2d(3, 6, kernel_size=5)
+self.pool = nn.MaxPool2d(2, 2)
+self.conv2 = nn.Conv2d(12, 24, kernel_size=5)
+self.fc1 = nn.Linear(24 * 10 * 10, 128) # assuming 10x10 output from conv2
+self.drop = nn.Dropout2d()
+self.fc2 = nn.Linear(128, num_classes)
+
+def forward(self, x):
+    out = self.pool(nn.functional.relu(self.conv1(x)))
+    out = self.pool(nn.functional.relu(self.conv2(out)))
+    out = out.view(-1, 24 * 10 * 10)
+    out = nn.functional.relu(self.fc1(out))
+    out = self.drop(out)
+    out = self.fc2(out)
+    return out
+
+Initialize the model, loss function, and optimizer
+
+model = Net()
+criterion = nn.CrossEntropyLoss()
+optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate)
+Train the model
+
+for epoch in range(num_epochs):
+for i, (images, labels) in enumerate(train_loader):
+# Move data to device
+images, labels = images.to(device), labels.to(device)
+
+    # Zero the gradients
+    optimizer.zero_grad()
+    
+    # Forward pass
+    outputs = model(images)
+    loss = criterion(outputs, labels)
+    
+    # Backward pass
+    loss.backward()
+    
+    # Update model parameters
+    optimizer.step()
+
+print('Epoch [{}/{}], Loss: {:.4f}'.format(epoch+1, num_epochs, loss.item())"
+10.43.0.111,-,2025-10-11 13:50:08,"RuntimeError: Given groups=1, weight of size [24, 12, 5, 5], expected input[20, 6, 110, 110] to have 12 channels, but got 6 channels instead
+in 
+import torch
+import torch.nn as nn
+import torchvision
+import torchvision.transforms as transforms
+import os
+from PIL import Image
+# Device configuration
+device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+
+# Hyperparameters
+num_classes = 9
+input_size = 224
+batch_size = 64
+learning_rate = 0.001
+num_epochs = 10
+
+# Data augmentation and normalization for training
+transform = transforms.Compose([transforms.Resize((256, 256)),
+                                transforms.RandomCrop(input_size),
+                                transforms.RandomHorizontalFlip(),
+                                transforms.ToTensor(),
+                                transforms.Normalize((0.485, 0.456, 0.406), (0.229, 0.224, 0.225))])
+
+# Data augmentation and normalization for validation
+valid_transform = transforms.Compose([transforms.Resize((256, 256)),
+                                      transforms.CenterCrop(input_size),
+                                      transforms.ToTensor(),
+                                      transforms.Normalize((0.485, 0.456, 0.406), (0.229, 0.224, 0.225))])
+def validate_labels(labels):
+    # Check if any label is not an integer
+    for label in labels:
+        if not isinstance(label, int):
+            print(f""Warning: Non-integer label encountered: {label}"")
+            return False
+    return True
+
+# ...
+
+for epoch in range(num_epochs):
+    ...
+    for i, (images, labels) in enumerate(train_loader):
+        # Validate labels before training
+        if not validate_labels(labels):
+            continue
+        ...
+# Dataset class for navigation arrow images
+# Modify the __getitem__ method in NavigationArrowsDataset class to handle invalid labels
+class NavigationArrowsDataset(torch.utils.data.Dataset):
+    def __init__(self, root_dir, transform=transform):
+        self.root_dir = root_dir
+        self.transform = transform
+        self.images = os.listdir(root_dir)
+
+    def __len__(self):
+        return len(self.images)
+
+    def __getitem__(self, index):
+        img = Image.open(os.path.join(self.root_dir, self.images[index]))
+        img = self.transform(img)
+        
+        # Extract the image name (without extension) and attempt to convert it to an integer
+        filename = os.path.splitext(self.images[index])[0]
+        try:
+            label = torch.tensor(int(filename))
+        except ValueError:
+            # Use a default or fallback value for this image (e.g., -1, 0, etc.)
+            label = torch.tensor(-1)
+    
+        return img, label
+# Load dataset and create data loaders
+train_dataset = NavigationArrowsDataset('/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/train', transform=transform)
+valid_dataset = NavigationArrowsDataset('/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test', transform=valid_transform)
+
+train_loader = torch.utils.data.DataLoader(train_dataset, batch_size=batch_size, shuffle=True)
+valid_loader = torch.utils.data.DataLoader(valid_dataset, batch_size=batch_size, shuffle=False)
+
+# Define the CNN model
+# Define the CNN model (continued from previous snippet)
+class Net(nn.Module):
+    def __init__(self):
+        super(Net, self).__init__()
+        self.conv1 = nn.Conv2d(3, 6, kernel_size=5)
+        self.pool = nn.MaxPool2d(2, 2)
+        self.conv2 = nn.Conv2d(12, 24, kernel_size=5)
+        self.fc1 = nn.Linear(24 * 10 * 10, 128) # assuming 10x10 output from conv2
+        self.drop = nn.Dropout2d()
+        self.fc2 = nn.Linear(128, num_classes)
+
+    def forward(self, x):
+        out = self.pool(nn.functional.relu(self.conv1(x)))
+        out = self.pool(nn.functional.relu(self.conv2(out)))
+        out = out.view(-1, 24 * 10 * 10)
+        out = nn.functional.relu(self.fc1(out))
+        out = self.drop(out)
+        out = self.fc2(out)
+        return out
+
+# Initialize the model, loss function, and optimizer
+model = Net()
+criterion = nn.CrossEntropyLoss()
+optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate)
+
+
+# Train the model
+for epoch in range(num_epochs):
+    for i, (images, labels) in enumerate(train_loader):
+        # Move data to device
+        images, labels = images.to(device), labels.to(device)
+        
+        # Zero the gradients
+        optimizer.zero_grad()
+        
+        # Forward pass
+        outputs = model(images)
+        loss = criterion(outputs, labels)
+        
+        # Backward pass
+        loss.backward()
+        
+        # Update model parameters
+        optimizer.step()
+
+print('Epoch [{}/{}], Loss: {:.4f}'.format(epoch+1, num_epochs, loss.item()))"
+10.43.0.111,-,2025-10-11 13:52:06,"RuntimeError: shape '[-1, 2400]' is invalid for input of size 1348320"
+10.43.0.111,-,2025-10-11 13:53:07,"RuntimeError: Given groups=1, weight of size [24, 12, 5, 5], expected input[20, 6, 110, 110] to have 12 channels, but got 6 channels instead
+in
+import torch
+import torch.nn as nn
+import torchvision
+import torchvision.transforms as transforms
+import os
+from PIL import Image
+Device configuration
+
+device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+Hyperparameters
+
+num_classes = 9
+input_size = 224
+batch_size = 64
+learning_rate = 0.001
+num_epochs = 10
+Data augmentation and normalization for training
+
+transform = transforms.Compose([transforms.Resize((256, 256)),
+transforms.RandomCrop(input_size),
+transforms.RandomHorizontalFlip(),
+transforms.ToTensor(),
+transforms.Normalize((0.485, 0.456, 0.406), (0.229, 0.224, 0.225))])
+Data augmentation and normalization for validation
+
+valid_transform = transforms.Compose([transforms.Resize((256, 256)),
+transforms.CenterCrop(input_size),
+transforms.ToTensor(),
+transforms.Normalize((0.485, 0.456, 0.406), (0.229, 0.224, 0.225))])
+def validate_labels(labels):
+Check if any label is not an integer
+
+for label in labels:
+if not isinstance(label, int):
+print(f""Warning: Non-integer label encountered: {label}"")
+return False
+return True
+...
+
+for epoch in range(num_epochs):
+...
+for i, (images, labels) in enumerate(train_loader):
+Validate labels before training
+
+if not validate_labels(labels):
+continue
+...
+Dataset class for navigation arrow images
+Modify the getitem method in NavigationArrowsDataset class to handle invalid labels
+
+class NavigationArrowsDataset(torch.utils.data.Dataset):
+def init(self, root_dir, transform=transform):
+self.root_dir = root_dir
+self.transform = transform
+self.images = os.listdir(root_dir)
+
+def len(self):
+return len(self.images)
+
+def getitem(self, index):
+img = Image.open(os.path.join(self.root_dir, self.images[index]))
+img = self.transform(img)
+
+# Extract the image name (without extension) and attempt to convert it to an integer
+filename = os.path.splitext(self.images[index])[0]
+try:
+    label = torch.tensor(int(filename))
+except ValueError:
+    # Use a default or fallback value for this image (e.g., -1, 0, etc.)
+    label = torch.tensor(-1)
+
+return img, label
+
+Load dataset and create data loaders
+
+train_dataset = NavigationArrowsDataset('/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/train', transform=transform)
+valid_dataset = NavigationArrowsDataset('/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test', transform=valid_transform)
+
+train_loader = torch.utils.data.DataLoader(train_dataset, batch_size=batch_size, shuffle=True)
+valid_loader = torch.utils.data.DataLoader(valid_dataset, batch_size=batch_size, shuffle=False)
+Define the CNN model
+Define the CNN model (continued from previous snippet)
+
+class Net(nn.Module):
+def init(self):
+super(Net, self).init()
+self.conv1 = nn.Conv2d(3, 6, kernel_size=5)
+self.pool = nn.MaxPool2d(2, 2)
+self.conv2 = nn.Conv2d(12, 24, kernel_size=5)
+self.fc1 = nn.Linear(24 * 10 * 10, 128) # assuming 10x10 output from conv2
+self.drop = nn.Dropout2d()
+self.fc2 = nn.Linear(128, num_classes)
+
+def forward(self, x):
+out = self.pool(nn.functional.relu(self.conv1(x)))
+out = self.pool(nn.functional.relu(self.conv2(out)))
+out = out.view(-1, 24 * 10 * 10)
+out = nn.functional.relu(self.fc1(out))
+out = self.drop(out)
+out = self.fc2(out)
+return out
+
+Initialize the model, loss function, and optimizer
+
+model = Net()
+criterion = nn.CrossEntropyLoss()
+optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate)
+Train the model
+
+for epoch in range(num_epochs):
+for i, (images, labels) in enumerate(train_loader):
+Move data to device
+
+images, labels = images.to(device), labels.to(device)
+
+# Zero the gradients
+optimizer.zero_grad()
+
+# Forward pass
+outputs = model(images)
+loss = criterion(outputs, labels)
+
+# Backward pass
+loss.backward()
+
+# Update model parameters
+optimizer.step()
+
+print('Epoch [{}/{}], Loss: {:.4f}'.format(epoch+1, num_epochs, loss.item()))
+
+RuntimeError: shape '[-1, 2400]' is invalid for input of size 1348320 in
+import torch
+import torch.nn as nn
+import torchvision
+import torchvision.transforms as transforms
+import os
+from PIL import Image
+Device configuration
+
+device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+Hyperparameters
+
+num_classes = 9
+input_size = 224
+batch_size = 64
+learning_rate = 0.001
+num_epochs = 10
+Data augmentation and normalization for training
+
+transform = transforms.Compose([transforms.Resize((256, 256)),
+transforms.RandomCrop(input_size),
+transforms.RandomHorizontalFlip(),
+transforms.ToTensor(),
+transforms.Normalize((0.485, 0.456, 0.406), (0.229, 0.224, 0.225))])
+Data augmentation and normalization for validation
+
+valid_transform = transforms.Compose([transforms.Resize((256, 256)),
+transforms.CenterCrop(input_size),
+transforms.ToTensor(),
+transforms.Normalize((0.485, 0.456, 0.406), (0.229, 0.224, 0.225))])
+def validate_labels(labels):
+# Check if any label is not an integer
+for label in labels:
+if not isinstance(label, int):
+print(f""Warning: Non-integer label encountered: {label}"")
+return False
+return True
+...
+
+for epoch in range(num_epochs):
+...
+for i, (images, labels) in enumerate(train_loader):
+# Validate labels before training
+if not validate_labels(labels):
+continue
+...
+Dataset class for navigation arrow images
+Modify the getitem method in NavigationArrowsDataset class to handle invalid labels
+
+class NavigationArrowsDataset(torch.utils.data.Dataset):
+def init(self, root_dir, transform=transform):
+self.root_dir = root_dir
+self.transform = transform
+self.images = os.listdir(root_dir)
+
+def __len__(self):
+    return len(self.images)
+
+def __getitem__(self, index):
+    img = Image.open(os.path.join(self.root_dir, self.images[index]))
+    img = self.transform(img)
+    
+    # Extract the image name (without extension) and attempt to convert it to an integer
+    filename = os.path.splitext(self.images[index])[0]
+    try:
+        label = torch.tensor(int(filename))
+    except ValueError:
+        # Use a default or fallback value for this image (e.g., -1, 0, etc.)
+        label = torch.tensor(-1)
+
+    return img, label
+
+Load dataset and create data loaders
+
+train_dataset = NavigationArrowsDataset('/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/train', transform=transform)
+valid_dataset = NavigationArrowsDataset('/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test', transform=valid_transform)
+
+train_loader = torch.utils.data.DataLoader(train_dataset, batch_size=batch_size, shuffle=True)
+valid_loader = torch.utils.data.DataLoader(valid_dataset, batch_size=batch_size, shuffle=False)
+Define the CNN model
+Define the CNN model (continued from previous snippet)
+
+class Net(nn.Module):
+def init(self):
+super(Net, self).init()
+self.conv1 = nn.Conv2d(3, 6, kernel_size=5)
+self.pool = nn.MaxPool2d(2, 2)
+self.conv2 = nn.Conv2d(6, 24, kernel_size=5) # Change here
+self.fc1 = nn.Linear(24 * 10 * 10, 128)
+self.drop = nn.Dropout2d()
+self.fc2 = nn.Linear(128, num_classes)
+
+def forward(self, x):
+    out = self.pool(nn.functional.relu(self.conv1(x)))
+    out = self.pool(nn.functional.relu(self.conv2(out))) # Change here
+    out = out.view(-1, 24 * 10 * 10)
+    out = nn.functional.relu(self.fc1(out))
+    out = self.drop(out)
+    out = self.fc2(out)
+    return out
+
+Initialize the model, loss function, and optimizer
+
+model = Net()
+criterion = nn.CrossEntropyLoss()
+optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate)
+Train the model
+
+for epoch in range(num_epochs):
+for i, (images, labels) in enumerate(train_loader):
+# Move data to device
+images, labels = images.to(device), labels.to(device)
+
+    # Zero the gradients
+    optimizer.zero_grad()
+    
+    # Forward pass
+    outputs = model(images)
+    loss = criterion(outputs, labels)
+    
+    # Backward pass
+    loss.backward()
+    
+    # Update model parameters
+    optimizer.step()
+
+print('Epoch [{}/{}], Loss: {:.4f}'.format(epoch+1, num_epochs, loss.item()))"
+10.43.0.111,-,2025-10-11 13:56:05,"RuntimeError: Given groups=1, weight of size [24, 12, 5, 5], expected input[20, 6, 110, 110] to have 12 channels, but got 6 channels instead
+in
+import torch
+import torch.nn as nn
+import torchvision
+import torchvision.transforms as transforms
+import os
+from PIL import Image
+Device configuration
+
+device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+Hyperparameters
+
+num_classes = 9
+input_size = 224
+batch_size = 64
+learning_rate = 0.001
+num_epochs = 10
+Data augmentation and normalization for training
+
+transform = transforms.Compose([transforms.Resize((256, 256)),
+transforms.RandomCrop(input_size),
+transforms.RandomHorizontalFlip(),
+transforms.ToTensor(),
+transforms.Normalize((0.485, 0.456, 0.406), (0.229, 0.224, 0.225))])
+Data augmentation and normalization for validation
+
+valid_transform = transforms.Compose([transforms.Resize((256, 256)),
+transforms.CenterCrop(input_size),
+transforms.ToTensor(),
+transforms.Normalize((0.485, 0.456, 0.406), (0.229, 0.224, 0.225))])
+def validate_labels(labels):
+Check if any label is not an integer
+
+for label in labels:
+if not isinstance(label, int):
+print(f""Warning: Non-integer label encountered: {label}"")
+return False
+return True
+...
+
+for epoch in range(num_epochs):
+...
+for i, (images, labels) in enumerate(train_loader):
+Validate labels before training
+
+if not validate_labels(labels):
+continue
+...
+Dataset class for navigation arrow images
+Modify the getitem method in NavigationArrowsDataset class to handle invalid labels
+
+class NavigationArrowsDataset(torch.utils.data.Dataset):
+def init(self, root_dir, transform=transform):
+self.root_dir = root_dir
+self.transform = transform
+self.images = os.listdir(root_dir)
+
+def len(self):
+return len(self.images)
+
+def getitem(self, index):
+img = Image.open(os.path.join(self.root_dir, self.images[index]))
+img = self.transform(img)
+
+# Extract the image name (without extension) and attempt to convert it to an integer
+filename = os.path.splitext(self.images[index])[0]
+try:
+    label = torch.tensor(int(filename))
+except ValueError:
+    # Use a default or fallback value for this image (e.g., -1, 0, etc.)
+    label = torch.tensor(-1)
+
+return img, label
+
+Load dataset and create data loaders
+
+train_dataset = NavigationArrowsDataset('/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/train', transform=transform)
+valid_dataset = NavigationArrowsDataset('/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test', transform=valid_transform)
+
+train_loader = torch.utils.data.DataLoader(train_dataset, batch_size=batch_size, shuffle=True)
+valid_loader = torch.utils.data.DataLoader(valid_dataset, batch_size=batch_size, shuffle=False)
+Define the CNN model
+Define the CNN model (continued from previous snippet)
+
+class Net(nn.Module):
+def init(self):
+super(Net, self).init()
+self.conv1 = nn.Conv2d(3, 6, kernel_size=5)
+self.pool = nn.MaxPool2d(2, 2)
+self.conv2 = nn.Conv2d(12, 24, kernel_size=5)
+self.fc1 = nn.Linear(24 * 10 * 10, 128) # assuming 10x10 output from conv2
+self.drop = nn.Dropout2d()
+self.fc2 = nn.Linear(128, num_classes)
+
+def forward(self, x):
+out = self.pool(nn.functional.relu(self.conv1(x)))
+out = self.pool(nn.functional.relu(self.conv2(out)))
+out = out.view(-1, 24 * 10 * 10)
+out = nn.functional.relu(self.fc1(out))
+out = self.drop(out)
+out = self.fc2(out)
+return out
+
+Initialize the model, loss function, and optimizer
+
+model = Net()
+criterion = nn.CrossEntropyLoss()
+optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate)
+Train the model
+
+for epoch in range(num_epochs):
+for i, (images, labels) in enumerate(train_loader):
+Move data to device
+
+images, labels = images.to(device), labels.to(device)
+
+# Zero the gradients
+optimizer.zero_grad()
+
+# Forward pass
+outputs = model(images)
+loss = criterion(outputs, labels)
+
+# Backward pass
+loss.backward()
+
+# Update model parameters
+optimizer.step()
+
+print('Epoch [{}/{}], Loss: {:.4f}'.format(epoch+1, num_epochs, loss.item()))
+
+RuntimeError: shape '[-1, 2400]' is invalid for input of size 1348320 in
+import torch
+import torch.nn as nn
+import torchvision
+import torchvision.transforms as transforms
+import os
+from PIL import Image
+Device configuration
+
+device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+Hyperparameters
+
+num_classes = 9
+input_size = 224
+batch_size = 64
+learning_rate = 0.001
+num_epochs = 10
+Data augmentation and normalization for training
+
+transform = transforms.Compose([transforms.Resize((256, 256)),
+transforms.RandomCrop(input_size),
+transforms.RandomHorizontalFlip(),
+transforms.ToTensor(),
+transforms.Normalize((0.485, 0.456, 0.406), (0.229, 0.224, 0.225))])
+Data augmentation and normalization for validation
+
+valid_transform = transforms.Compose([transforms.Resize((256, 256)),
+transforms.CenterCrop(input_size),
+transforms.ToTensor(),
+transforms.Normalize((0.485, 0.456, 0.406), (0.229, 0.224, 0.225))])
+def validate_labels(labels):
+# Check if any label is not an integer
+for label in labels:
+if not isinstance(label, int):
+print(f""Warning: Non-integer label encountered: {label}"")
+return False
+return True
+...
+
+for epoch in range(num_epochs):
+...
+for i, (images, labels) in enumerate(train_loader):
+# Validate labels before training
+if not validate_labels(labels):
+continue
+...
+Dataset class for navigation arrow images
+Modify the getitem method in NavigationArrowsDataset class to handle invalid labels
+
+class NavigationArrowsDataset(torch.utils.data.Dataset):
+def init(self, root_dir, transform=transform):
+self.root_dir = root_dir
+self.transform = transform
+self.images = os.listdir(root_dir)
+
+def __len__(self):
+    return len(self.images)
+
+def __getitem__(self, index):
+    img = Image.open(os.path.join(self.root_dir, self.images[index]))
+    img = self.transform(img)
+    
+    # Extract the image name (without extension) and attempt to convert it to an integer
+    filename = os.path.splitext(self.images[index])[0]
+    try:
+        label = torch.tensor(int(filename))
+    except ValueError:
+        # Use a default or fallback value for this image (e.g., -1, 0, etc.)
+        label = torch.tensor(-1)
+
+    return img, label
+
+Load dataset and create data loaders
+
+train_dataset = NavigationArrowsDataset('/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/train', transform=transform)
+valid_dataset = NavigationArrowsDataset('/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test', transform=valid_transform)
+
+train_loader = torch.utils.data.DataLoader(train_dataset, batch_size=batch_size, shuffle=True)
+valid_loader = torch.utils.data.DataLoader(valid_dataset, batch_size=batch_size, shuffle=False)
+Define the CNN model
+Define the CNN model (continued from previous snippet)
+
+class Net(nn.Module):
+def init(self):
+super(Net, self).init()
+self.conv1 = nn.Conv2d(3, 6, kernel_size=5)
+self.pool = nn.MaxPool2d(2, 2)
+self.conv2 = nn.Conv2d(6, 24, kernel_size=5) # Change here
+self.fc1 = nn.Linear(24 * 10 * 10, 128)
+self.drop = nn.Dropout2d()
+self.fc2 = nn.Linear(128, num_classes)
+
+def forward(self, x):
+    out = self.pool(nn.functional.relu(self.conv1(x)))
+    out = self.pool(nn.functional.relu(self.conv2(out))) # Change here
+    out = out.view(-1, 24 * 10 * 10)
+    out = nn.functional.relu(self.fc1(out))
+    out = self.drop(out)
+    out = self.fc2(out)
+    return out
+
+Initialize the model, loss function, and optimizer
+
+model = Net()
+criterion = nn.CrossEntropyLoss()
+optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate)
+Train the model
+
+for epoch in range(num_epochs):
+for i, (images, labels) in enumerate(train_loader):
+# Move data to device
+images, labels = images.to(device), labels.to(device)
+
+    # Zero the gradients
+    optimizer.zero_grad()
+    
+    # Forward pass
+    outputs = model(images)
+    loss = criterion(outputs, labels)
+    
+    # Backward pass
+    loss.backward()
+    
+    # Update model parameters
+    optimizer.step()
+
+print('Epoch [{}/{}], Loss: {:.4f}'.format(epoch+1, num_epochs, loss.item()))"
+10.43.0.111,-,2025-10-11 13:57:38,"RuntimeError: shape '[-1, 2400]' is invalid for input of size 1348320
+in import torch
+import torch.nn as nn
+import torchvision
+import torchvision.transforms as transforms
+import os
+from PIL import Image
+# Device configuration
+device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+
+# Hyperparameters
+num_classes = 9
+input_size = 224
+batch_size = 64
+learning_rate = 0.001
+num_epochs = 10
+
+# Data augmentation and normalization for training
+transform = transforms.Compose([transforms.Resize((256, 256)),
+                                transforms.RandomCrop(input_size),
+                                transforms.RandomHorizontalFlip(),
+                                transforms.ToTensor(),
+                                transforms.Normalize((0.485, 0.456, 0.406), (0.229, 0.224, 0.225))])
+
+# Data augmentation and normalization for validation
+valid_transform = transforms.Compose([transforms.Resize((256, 256)),
+                                      transforms.CenterCrop(input_size),
+                                      transforms.ToTensor(),
+                                      transforms.Normalize((0.485, 0.456, 0.406), (0.229, 0.224, 0.225))])
+def validate_labels(labels):
+    # Check if any label is not an integer
+    for label in labels:
+        if not isinstance(label, int):
+            print(f""Warning: Non-integer label encountered: {label}"")
+            return False
+    return True
+
+# ...
+
+for epoch in range(num_epochs):
+    ...
+    for i, (images, labels) in enumerate(train_loader):
+        # Validate labels before training
+        if not validate_labels(labels):
+            continue
+        ...
+# Dataset class for navigation arrow images
+# Modify the __getitem__ method in NavigationArrowsDataset class to handle invalid labels
+class NavigationArrowsDataset(torch.utils.data.Dataset):
+    def __init__(self, root_dir, transform=transform):
+        self.root_dir = root_dir
+        self.transform = transform
+        self.images = os.listdir(root_dir)
+
+    def __len__(self):
+        return len(self.images)
+
+    def __getitem__(self, index):
+        img = Image.open(os.path.join(self.root_dir, self.images[index]))
+        img = self.transform(img)
+        
+        # Extract the image name (without extension) and attempt to convert it to an integer
+        filename = os.path.splitext(self.images[index])[0]
+        try:
+            label = torch.tensor(int(filename))
+        except ValueError:
+            # Use a default or fallback value for this image (e.g., -1, 0, etc.)
+            label = torch.tensor(-1)
+    
+        return img, label
+# Load dataset and create data loaders
+train_dataset = NavigationArrowsDataset('/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/train', transform=transform)
+valid_dataset = NavigationArrowsDataset('/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test', transform=valid_transform)
+
+train_loader = torch.utils.data.DataLoader(train_dataset, batch_size=batch_size, shuffle=True)
+valid_loader = torch.utils.data.DataLoader(valid_dataset, batch_size=batch_size, shuffle=False)
+
+# Define the CNN model
+# Define the CNN model (continued from previous snippet)
+class Net(nn.Module):
+    def __init__(self):
+        super(Net, self).__init__()
+        self.conv1 = nn.Conv2d(3, 6, kernel_size=5)
+        self.pool = nn.MaxPool2d(2, 2)
+        self.conv2 = nn.Conv2d(6, 24, kernel_size=5) # Change here
+        self.fc1 = nn.Linear(24 * 10 * 10, 128) 
+        self.drop = nn.Dropout2d()
+        self.fc2 = nn.Linear(128, num_classes)
+
+    def forward(self, x):
+        out = self.pool(nn.functional.relu(self.conv1(x)))
+        out = self.pool(nn.functional.relu(self.conv2(out))) # Change here
+        out = out.view(-1, 24 * 10 * 10)
+        out = nn.functional.relu(self.fc1(out))
+        out = self.drop(out)
+        out = self.fc2(out)
+        return out
+
+# Initialize the model, loss function, and optimizer
+model = Net()
+criterion = nn.CrossEntropyLoss()
+optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate)
+
+
+# Train the model
+for epoch in range(num_epochs):
+    for i, (images, labels) in enumerate(train_loader):
+        # Move data to device
+        images, labels = images.to(device), labels.to(device)
+        
+        # Zero the gradients
+        optimizer.zero_grad()
+        
+        # Forward pass
+        outputs = model(images)
+        loss = criterion(outputs, labels)
+        
+        # Backward pass
+        loss.backward()
+        
+        # Update model parameters
+        optimizer.step()
+
+print('Epoch [{}/{}], Loss: {:.4f}'.format(epoch+1, num_epochs, loss.item()))"
+10.43.0.111,-,2025-10-11 14:00:52,full code
+10.43.0.111,-,2025-10-11 14:02:22,"ValueError: invalid literal for int() with base 10: 'south_02'
+in
+import torch
+import torch.nn as nn
+import torchvision
+import torchvision.transforms as transforms
+import os
+from PIL import Image
+# Device configuration
+device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+
+# Hyperparameters
+num_classes = 9
+input_size = 224
+batch_size = 64
+learning_rate = 0.001
+num_epochs = 10
+
+# Data augmentation and normalization for training
+transform = transforms.Compose([transforms.Resize((256, 256)),
+                                transforms.RandomCrop(input_size),
+                                transforms.RandomHorizontalFlip(),
+                                transforms.ToTensor(),
+                                transforms.Normalize((0.485, 0.456, 0.406), (0.229, 0.224, 0.225))])
+
+# Data augmentation and normalization for validation
+valid_transform = transforms.Compose([transforms.Resize((256, 256)),
+                                      transforms.CenterCrop(input_size),
+                                      transforms.ToTensor(),
+                                      transforms.Normalize((0.485, 0.456, 0.406), (0.229, 0.224, 0.225))])
+def validate_labels(labels):
+    # Check if any label is not an integer
+    for label in labels:
+        if not isinstance(label, int):
+            print(f""Warning: Non-integer label encountered: {label}"")
+            return False
+    return True
+
+# ...
+
+for epoch in range(num_epochs):
+    ...
+    for i, (images, labels) in enumerate(train_loader):
+        # Validate labels before training
+        if not validate_labels(labels):
+            continue
+        ...
+# Dataset class for navigation arrow images
+# Modify the __getitem__ method in NavigationArrowsDataset class to handle invalid labels
+class NavigationArrowsDataset(torch.utils.data.Dataset):
+    def __init__(self, root_dir, transform=transform):
+        self.root_dir = root_dir
+        self.transform = transform
+        self.images = os.listdir(root_dir)
+
+    def __len__(self):
+        return len(self.images)
+
+    def __getitem__(self, index):
+        img = Image.open(os.path.join(self.root_dir, self.images[index]))
+        img = self.transform(img)
+        
+        # Extract the image name (without extension) and convert it to an integer
+        filename = os.path.splitext(self.images[index])[0]
+        label = int(filename)  # Remove tensor conversion
+        
+        return img, torch.tensor(label)
+# Load dataset and create data loaders
+train_dataset = NavigationArrowsDataset('/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/train', transform=transform)
+valid_dataset = NavigationArrowsDataset('/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test', transform=valid_transform)
+
+train_loader = torch.utils.data.DataLoader(train_dataset, batch_size=batch_size, shuffle=True)
+valid_loader = torch.utils.data.DataLoader(valid_dataset, batch_size=batch_size, shuffle=False)
+
+# Define the CNN model
+# Define the CNN model (continued from previous snippet)
+
+class Net(nn.Module):
+    def __init__(self):
+        super(Net, self).__init__()
+        self.conv1 = nn.Conv2d(3, 6, kernel_size=5)
+        self.pool = nn.MaxPool2d(2, 2)
+        self.conv2 = nn.Conv2d(6, 12, kernel_size=5) # Change here
+        self.fc1 = nn.Linear(12 * 10 * 10, 128)
+        self.drop = nn.Dropout2d()
+        self.fc2 = nn.Linear(128, num_classes)
+
+    def forward(self, x):
+        out = self.pool(nn.functional.relu(self.conv1(x)))
+        out = self.pool(nn.functional.relu(self.conv2(out))) # Change here
+        out = out.view(-1, 12 * 10 * 10) # Change here
+        out = nn.functional.relu(self.fc1(out))
+        out = self.drop(out)
+        out = self.fc2(out)
+        return out
+
+# Initialize the model, loss function, and optimizer
+model = Net()
+criterion = nn.CrossEntropyLoss()
+optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate)
+
+
+# Train the model
+for epoch in range(num_epochs):
+    for i, (images, labels) in enumerate(train_loader):
+        # Move data to device
+        images, labels = images.to(device), labels.to(device)
+        
+        # Zero the gradients
+        optimizer.zero_grad()
+        
+        # Forward pass
+        outputs = model(images)
+        loss = criterion(outputs, labels)
+        
+        # Backward pass
+        loss.backward()
+        
+        # Update model parameters
+        optimizer.step()
+
+print('Epoch [{}/{}], Loss: {:.4f}'.format(epoch+1, num_epochs, loss.item()))"
+10.43.0.111,-,2025-10-11 14:04:36,"ValueError: invalid literal for int() with base 10: 'south_03'
+in 
+import torch
+import torch.nn as nn
+import torchvision
+import torchvision.transforms as transforms
+import os
+from PIL import Image
+# Device configuration
+device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+
+# Hyperparameters
+num_classes = 9
+input_size = 224
+batch_size = 64
+learning_rate = 0.001
+num_epochs = 10
+
+# Data augmentation and normalization for training
+transform = transforms.Compose([transforms.Resize((256, 256)),
+                                transforms.RandomCrop(input_size),
+                                transforms.RandomHorizontalFlip(),
+                                transforms.ToTensor(),
+                                transforms.Normalize((0.485, 0.456, 0.406), (0.229, 0.224, 0.225))])
+
+# Data augmentation and normalization for validation
+valid_transform = transforms.Compose([transforms.Resize((256, 256)),
+                                      transforms.CenterCrop(input_size),
+                                      transforms.ToTensor(),
+                                      transforms.Normalize((0.485, 0.456, 0.406), (0.229, 0.224, 0.225))])
+def validate_labels(labels):
+    # Check if any label is not an integer
+    for label in labels:
+        if not isinstance(label, int):
+            print(f""Warning: Non-integer label encountered: {label}"")
+            return False
+    return True
+
+# ...
+
+for epoch in range(num_epochs):
+    ...
+    for i, (images, labels) in enumerate(train_loader):
+        # Validate labels before training
+        if not validate_labels(labels):
+            continue
+        ...
+# Dataset class for navigation arrow images
+# Modify the __getitem__ method in NavigationArrowsDataset class to handle invalid labels
+class NavigationArrowsDataset(torch.utils.data.Dataset):
+    def __init__(self, root_dir, transform=transform):
+        self.root_dir = root_dir
+        self.transform = transform
+        self.images = os.listdir(root_dir)
+
+    def __len__(self):
+        return len(self.images)
+
+    def __getitem__(self, index):
+        img = Image.open(os.path.join(self.root_dir, self.images[index]))
+        img = self.transform(img)
+        
+        # Extract the image name (without extension) and try to convert it to an integer
+        filename = os.path.splitext(self.images[index])[0]
+        try:
+            label = int(filename)
+        except ValueError:
+            print(f""Warning: Non-integer label encountered for {self.images[index]}"")
+            label = 0  # Assign a default value, e.g., 0
+        
+        return img, torch.tensor(label)
+# Define the CNN model
+# Define the CNN model (continued from previous snippet)
+
+class Net(nn.Module):
+    def __init__(self):
+        super(Net, self).__init__()
+        self.conv1 = nn.Conv2d(3, 6, kernel_size=5)
+        self.pool = nn.MaxPool2d(2, 2)
+        self.conv2 = nn.Conv2d(6, 12, kernel_size=5) # Change here
+        self.fc1 = nn.Linear(12 * 10 * 10, 128)
+        self.drop = nn.Dropout2d()
+        self.fc2 = nn.Linear(128, num_classes)
+
+    def forward(self, x):
+        out = self.pool(nn.functional.relu(self.conv1(x)))
+        out = self.pool(nn.functional.relu(self.conv2(out))) # Change here
+        out = out.view(-1, 12 * 10 * 10) # Change here
+        out = nn.functional.relu(self.fc1(out))
+        out = self.drop(out)
+        out = self.fc2(out)
+        return out
+
+# Initialize the model, loss function, and optimizer
+model = Net()
+criterion = nn.CrossEntropyLoss()
+optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate)
+
+
+# Train the model
+for epoch in range(num_epochs):
+    for i, (images, labels) in enumerate(train_loader):
+        # Move data to device
+        images, labels = images.to(device), labels.to(device)
+        
+        # Zero the gradients
+        optimizer.zero_grad()
+        
+        # Forward pass
+        outputs = model(images)
+        loss = criterion(outputs, labels)
+        
+        # Backward pass
+        loss.backward()
+        
+        # Update model parameters
+        optimizer.step()
+
+print('Epoch [{}/{}], Loss: {:.4f}'.format(epoch+1, num_epochs, loss.item()))"
+10.43.0.111,-,2025-10-11 14:07:25,"import torch
+import torch.nn as nn
+import torchvision
+import torchvision.transforms as transforms
+import os
+from PIL import Image
+# Device configuration
+device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+
+# Hyperparameters
+num_classes = 9
+input_size = 224
+batch_size = 64
+learning_rate = 0.001
+num_epochs = 10
+
+# Data augmentation and normalization for training
+transform = transforms.Compose([transforms.Resize((256, 256)),
+                                transforms.RandomCrop(input_size),
+                                transforms.RandomHorizontalFlip(),
+                                transforms.ToTensor(),
+                                transforms.Normalize((0.485, 0.456, 0.406), (0.229, 0.224, 0.225))])
+
+# Data augmentation and normalization for validation
+valid_transform = transforms.Compose([transforms.Resize((256, 256)),
+                                      transforms.CenterCrop(input_size),
+                                      transforms.ToTensor(),
+                                      transforms.Normalize((0.485, 0.456, 0.406), (0.229, 0.224, 0.225))])
+def validate_labels(labels):
+    # Check if any label is not an integer
+    for label in labels:
+        if not isinstance(label, int):
+            print(f""Warning: Non-integer label encountered: {label}"")
+            return False
+    return True
+
+# ...
+
+for epoch in range(num_epochs):
+    ...
+    for i, (images, labels) in enumerate(train_loader):
+        # Validate labels before training
+        if not validate_labels(labels):
+            continue
+        ...
+# Dataset class for navigation arrow images
+# Modify the __getitem__ method in NavigationArrowsDataset class to handle invalid labels
+# Modify the __getitem__ method in NavigationArrowsDataset class to handle invalid labels
+class NavigationArrowsDataset(torch.utils.data.Dataset):
+    def __getitem__(self, index):
+        img = Image.open(os.path.join(self.root_dir, self.images[index]))
+        img = self.transform(img)
+        
+        # Extract the image name (without extension) and try to convert it to an integer
+        filename = os.path.splitext(self.images[index])[0]
+        label = None
+        for s in ['north', 'south', 'east', 'west']:
+            if s in filename:
+                filename = filename.replace(s, '')
+                try:
+                    label = int(filename)
+                    break
+                except ValueError:
+                    pass
+        if label is None:
+            print(f""Warning: Non-integer label encountered for {self.images[index]}"")
+            label = 0  # Assign a default value, e.g., 0
+        
+        return img, torch.tensor(label)
+# Define the CNN model
+# Define the CNN model (continued from previous snippet)
+
+class Net(nn.Module):
+    def __init__(self):
+        super(Net, self).__init__()
+        self.conv1 = nn.Conv2d(3, 6, kernel_size=5)
+        self.pool = nn.MaxPool2d(2, 2)
+        self.conv2 = nn.Conv2d(6, 12, kernel_size=5) # Change here
+        self.fc1 = nn.Linear(12 * 10 * 10, 128)
+        self.drop = nn.Dropout2d()
+        self.fc2 = nn.Linear(128, num_classes)
+
+    def forward(self, x):
+        out = self.pool(nn.functional.relu(self.conv1(x)))
+        out = self.pool(nn.functional.relu(self.conv2(out))) # Change here
+        out = out.view(-1, 12 * 10 * 10) # Change here
+        out = nn.functional.relu(self.fc1(out))
+        out = self.drop(out)
+        out = self.fc2(out)
+        return out
+
+# Initialize the model, loss function, and optimizer
+model = Net()
+criterion = nn.CrossEntropyLoss()
+optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate)
+
+
+# Train the model
+for epoch in range(num_epochs):
+    for i, (images, labels) in enumerate(train_loader):
+        # Move data to device
+        images, labels = images.to(device), labels.to(device)
+        
+        # Zero the gradients
+        optimizer.zero_grad()
+        
+        # Forward pass
+        outputs = model(images)
+        loss = criterion(outputs, labels)
+        
+        # Backward pass
+        loss.backward()
+        
+        # Update model parameters
+        optimizer.step()
+
+print('Epoch [{}/{}], Loss: {:.4f}'.format(epoch+1, num_epochs, loss.item())
+in 
+ValueError: invalid literal for int() with base 10: 'south_03'"
+10.43.0.111,-,2025-10-11 14:10:50,"i am having an error again and again but with random image -
+ValueError: invalid literal for int() with base 10: 'north_01'
+my code-
+import torch
+import torch.nn as nn
+import torchvision
+import torchvision.transforms as transforms
+import os
+from PIL import Image
+# Device configuration
+device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+
+# Hyperparameters
+num_classes = 9
+input_size = 224
+batch_size = 64
+learning_rate = 0.001
+num_epochs = 10
+
+# Data augmentation and normalization for training
+transform = transforms.Compose([transforms.Resize((256, 256)),
+                                transforms.RandomCrop(input_size),
+                                transforms.RandomHorizontalFlip(),
+                                transforms.ToTensor(),
+                                transforms.Normalize((0.485, 0.456, 0.406), (0.229, 0.224, 0.225))])
+
+# Data augmentation and normalization for validation
+valid_transform = transforms.Compose([transforms.Resize((256, 256)),
+                                      transforms.CenterCrop(input_size),
+                                      transforms.ToTensor(),
+                                      transforms.Normalize((0.485, 0.456, 0.406), (0.229, 0.224, 0.225))])
+def validate_labels(labels):
+    # Check if any label is not an integer
+    for label in labels:
+        if not isinstance(label, int):
+            print(f""Warning: Non-integer label encountered: {label}"")
+            return False
+    return True
+
+# ...
+
+for epoch in range(num_epochs):
+    ...
+    for i, (images, labels) in enumerate(train_loader):
+        # Validate labels before training
+        if not validate_labels(labels):
+            continue
+        ...
+# Dataset class for navigation arrow images
+class NavigationArrowsDataset(torch.utils.data.Dataset):
+    def __getitem__(self, index):
+        img = Image.open(os.path.join(self.root_dir, self.images[index]))
+        img = self.transform(img)
+        
+        # Extract the image name (without extension) and try to convert it to an integer
+        filename = os.path.splitext(self.images[index])[0]
+        label = None
+        for s in ['north', 'south', 'east', 'west']:
+            if s in filename:
+                filename = filename.replace(s, '')
+                try:
+                    # Replace this with a more sophisticated method of extracting the direction number
+                    import re
+                    match = re.search(r'\d+', filename)
+                    label = int(match.group())
+                    break
+                except ValueError:
+                    pass
+        if label is None:
+            print(f""Warning: Non-integer label encountered for {self.images[index]}"")
+            label = 0  # Assign a default value, e.g., 0
+        
+        return img, torch.tensor(label)# Define the CNN model (continued from previous snippet)
+
+class Net(nn.Module):
+    def __init__(self):
+        super(Net, self).__init__()
+        self.conv1 = nn.Conv2d(3, 6, kernel_size=5)
+        self.pool = nn.MaxPool2d(2, 2)
+        self.conv2 = nn.Conv2d(6, 12, kernel_size=5) # Change here
+        self.fc1 = nn.Linear(12 * 10 * 10, 128)
+        self.drop = nn.Dropout2d()
+        self.fc2 = nn.Linear(128, num_classes)
+
+    def forward(self, x):
+        out = self.pool(nn.functional.relu(self.conv1(x)))
+        out = self.pool(nn.functional.relu(self.conv2(out))) # Change here
+        out = out.view(-1, 12 * 10 * 10) # Change here
+        out = nn.functional.relu(self.fc1(out))
+        out = self.drop(out)
+        out = self.fc2(out)
+        return out
+
+# Initialize the model, loss function, and optimizer
+model = Net()
+criterion = nn.CrossEntropyLoss()
+optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate)
+
+
+# Train the model
+for epoch in range(num_epochs):
+    for i, (images, labels) in enumerate(train_loader):
+        # Move data to device
+        images, labels = images.to(device), labels.to(device)
+        
+        # Zero the gradients
+        optimizer.zero_grad()
+        
+        # Forward pass
+        outputs = model(images)
+        loss = criterion(outputs, labels)
+        
+        # Backward pass
+        loss.backward()
+        
+        # Update model parameters
+        optimizer.step()
+
+print('Epoch [{}/{}], Loss: {:.4f}'.format(epoch+1, num_epochs, loss.item()))"
+10.43.0.111,-,2025-10-11 14:12:02,"i am having an error again and again but with random image -
+ValueError: invalid literal for int() with base 10: 'north_01'
+my code-
+import torch
+import torch.nn as nn
+import torchvision
+import torchvision.transforms as transforms
+import os
+from PIL import Image
+Device configuration
+
+device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+Hyperparameters
+
+num_classes = 9
+input_size = 224
+batch_size = 64
+learning_rate = 0.001
+num_epochs = 10
+Data augmentation and normalization for training
+
+transform = transforms.Compose([transforms.Resize((256, 256)),
+transforms.RandomCrop(input_size),
+transforms.RandomHorizontalFlip(),
+transforms.ToTensor(),
+transforms.Normalize((0.485, 0.456, 0.406), (0.229, 0.224, 0.225))])
+Data augmentation and normalization for validation
+
+valid_transform = transforms.Compose([transforms.Resize((256, 256)),
+transforms.CenterCrop(input_size),
+transforms.ToTensor(),
+transforms.Normalize((0.485, 0.456, 0.406), (0.229, 0.224, 0.225))])
+def validate_labels(labels):
+# Check if any label is not an integer
+for label in labels:
+if not isinstance(label, int):
+print(f""Warning: Non-integer label encountered: {label}"")
+return False
+return True
+...
+
+for epoch in range(num_epochs):
+...
+for i, (images, labels) in enumerate(train_loader):
+# Validate labels before training
+if not validate_labels(labels):
+continue
+...
+Dataset class for navigation arrow images
+
+class NavigationArrowsDataset(torch.utils.data.Dataset):
+def getitem(self, index):
+img = Image.open(os.path.join(self.root_dir, self.images[index]))
+img = self.transform(img)
+
+    # Extract the image name (without extension) and try to convert it to an integer
+    filename = os.path.splitext(self.images[index])[0]
+    label = None
+    for s in ['north', 'south', 'east', 'west']:
+        if s in filename:
+            filename = filename.replace(s, '')
+            try:
+                # Replace this with a more sophisticated method of extracting the direction number
+                import re
+                match = re.search(r'\d+', filename)
+                label = int(match.group())
+                break
+            except ValueError:
+                pass
+    if label is None:
+        print(f""Warning: Non-integer label encountered for {self.images[index]}"")
+        label = 0  # Assign a default value, e.g., 0
+    
+    return img, torch.tensor(label)# Define the CNN model (continued from previous snippet)
+
+class Net(nn.Module):
+def init(self):
+super(Net, self).init()
+self.conv1 = nn.Conv2d(3, 6, kernel_size=5)
+self.pool = nn.MaxPool2d(2, 2)
+self.conv2 = nn.Conv2d(6, 12, kernel_size=5) # Change here
+self.fc1 = nn.Linear(12 * 10 * 10, 128)
+self.drop = nn.Dropout2d()
+self.fc2 = nn.Linear(128, num_classes)
+
+def forward(self, x):
+    out = self.pool(nn.functional.relu(self.conv1(x)))
+    out = self.pool(nn.functional.relu(self.conv2(out))) # Change here
+    out = out.view(-1, 12 * 10 * 10) # Change here
+    out = nn.functional.relu(self.fc1(out))
+    out = self.drop(out)
+    out = self.fc2(out)
+    return out
+
+Initialize the model, loss function, and optimizer
+
+model = Net()
+criterion = nn.CrossEntropyLoss()
+optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate)
+Train the model
+
+for epoch in range(num_epochs):
+for i, (images, labels) in enumerate(train_loader):
+# Move data to device
+images, labels = images.to(device), labels.to(device)
+
+    # Zero the gradients
+    optimizer.zero_grad()
+    
+    # Forward pass
+    outputs = model(images)
+    loss = criterion(outputs, labels)
+    
+    # Backward pass
+    loss.backward()
+    
+    # Update model parameters
+    optimizer.step()
+
+print('Epoch [{}/{}], Loss: {:.4f}'.format(epoch+1, num_epochs, loss.item()))"
+10.43.0.111,-,2025-10-11 14:13:13,"i am having an error again and again but with random image -
+ValueError: invalid literal for int() with base 10: 'north_01'
+my code-
+import torch
+import torch.nn as nn
+import torchvision
+import torchvision.transforms as transforms
+import os
+from PIL import Image
+Device configuration
+
+device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+Hyperparameters
+
+num_classes = 9
+input_size = 224
+batch_size = 64
+learning_rate = 0.001
+num_epochs = 10
+Data augmentation and normalization for training
+
+transform = transforms.Compose([transforms.Resize((256, 256)),
+transforms.RandomCrop(input_size),
+transforms.RandomHorizontalFlip(),
+transforms.ToTensor(),
+transforms.Normalize((0.485, 0.456, 0.406), (0.229, 0.224, 0.225))])
+Data augmentation and normalization for validation
+
+valid_transform = transforms.Compose([transforms.Resize((256, 256)),
+transforms.CenterCrop(input_size),
+transforms.ToTensor(),
+transforms.Normalize((0.485, 0.456, 0.406), (0.229, 0.224, 0.225))])
+def validate_labels(labels):
+# Check if any label is not an integer
+for label in labels:
+if not isinstance(label, int):
+print(f""Warning: Non-integer label encountered: {label}"")
+return False
+return True
+...
+
+for epoch in range(num_epochs):
+...
+for i, (images, labels) in enumerate(train_loader):
+# Validate labels before training
+if not validate_labels(labels):
+continue
+...
+Dataset class for navigation arrow images
+
+class NavigationArrowsDataset(torch.utils.data.Dataset):
+def getitem(self, index):
+img = Image.open(os.path.join(self.root_dir, self.images[index]))
+img = self.transform(img)
+
+    # Extract the image name (without extension) and try to convert it to an integer
+    filename = os.path.splitext(self.images[index])[0]
+    label = None
+    for s in ['north', 'south', 'east', 'west']:
+        if s in filename:
+            filename = filename.replace(s, '')
+            try:
+                # Replace this with a more sophisticated method of extracting the direction number
+                import re
+                match = re.search(r'\d+', filename)
+                label = int(match.group())
+                break
+            except ValueError:
+                pass
+    if label is None:
+        print(f""Warning: Non-integer label encountered for {self.images[index]}"")
+        label = 0  # Assign a default value, e.g., 0
+    
+    return img, torch.tensor(label)# Define the CNN model (continued from previous snippet)
+
+class Net(nn.Module):
+def init(self):
+super(Net, self).init()
+self.conv1 = nn.Conv2d(3, 6, kernel_size=5)
+self.pool = nn.MaxPool2d(2, 2)
+self.conv2 = nn.Conv2d(6, 12, kernel_size=5) # Change here
+self.fc1 = nn.Linear(12 * 10 * 10, 128)
+self.drop = nn.Dropout2d()
+self.fc2 = nn.Linear(128, num_classes)
+
+def forward(self, x):
+    out = self.pool(nn.functional.relu(self.conv1(x)))
+    out = self.pool(nn.functional.relu(self.conv2(out))) # Change here
+    out = out.view(-1, 12 * 10 * 10) # Change here
+    out = nn.functional.relu(self.fc1(out))
+    out = self.drop(out)
+    out = self.fc2(out)
+    return out
+
+Initialize the model, loss function, and optimizer
+
+model = Net()
+criterion = nn.CrossEntropyLoss()
+optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate)
+Train the model
+
+for epoch in range(num_epochs):
+for i, (images, labels) in enumerate(train_loader):
+# Move data to device
+images, labels = images.to(device), labels.to(device)
+
+    # Zero the gradients
+    optimizer.zero_grad()
+    
+    # Forward pass
+    outputs = model(images)
+    loss = criterion(outputs, labels)
+    
+    # Backward pass
+    loss.backward()
+    
+    # Update model parameters
+    optimizer.step()
+
+print('Epoch [{}/{}], Loss: {:.4f}'.format(epoch+1, num_epochs, loss.item()))"
+10.43.0.111,-,2025-10-11 14:25:49,"import torch
+import torch.nn as nn
+import torchvision
+import torchvision.transforms as transforms
+import os
+from PIL import Image
+import re
+# Device configuration
+device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+
+# Hyperparameters
+num_classes = 9
+input_size = 224
+batch_size = 64
+learning_rate = 0.001
+num_epochs = 10
+
+# Data augmentation and normalization for training
+transform = transforms.Compose([transforms.Resize((256, 256)),
+                                transforms.RandomCrop(input_size),
+                                transforms.RandomHorizontalFlip(),
+                                transforms.ToTensor(),
+                                transforms.Normalize((0.485, 0.456, 0.406), (0.229, 0.224, 0.225))])
+
+# Data augmentation and normalization for validation
+valid_transform = transforms.Compose([transforms.Resize((256, 256)),
+                                      transforms.CenterCrop(input_size),
+                                      transforms.ToTensor(),
+                                      transforms.Normalize((0.485, 0.456, 0.406), (0.229, 0.224, 0.225))])
+def validate_labels(labels):
+    for i, label in enumerate(labels):
+        if not isinstance(label, int):
+            print(f""Warning: Non-integer label encountered at index {i}: {label}"")
+    return True
+# ...
+    try:
+        label = int(re.search(r'\d+', os.path.splitext(self.images[index])[0]).group())
+    except ValueError:
+        print(f""Warning: Non-integer label encountered for {self.images[index]}"")
+        label = 0  # Assign a default value, e.g., 0
+for epoch in range(num_epochs):
+    ...
+    for i, (images, labels) in enumerate(train_loader):
+        # Validate labels before training
+        if not validate_labels(labels):
+            continue
+        ...
+# Dataset class for navigation arrow images
+class NavigationArrowsDataset(torch.utils.data.Dataset):
+    def __getitem__(self, index):
+        img = Image.open(os.path.join(self.root_dir, self.images[index]))
+        img = self.transform(img)
+        
+        # Extract the image name (without extension) and try to convert it to an integer
+        filename = os.path.splitext(self.images[index])[0]
+        label = None
+        for s in ['north', 'south', 'east', 'west']:
+            if s in filename:
+                filename = filename.replace(s, '')
+                try:
+                    # Replace this with a more sophisticated method of extracting the direction number
+                    import re
+                    match = re.search(r'\d+', filename)
+                    label = int(match.group())
+                    break
+                except ValueError:
+                    pass
+        if label is None:
+            print(f""Warning: Non-integer label encountered for {self.images[index]}"")
+            label = 0  # Assign a default value, e.g., 0
+        
+        return img, torch.tensor(label)# Define the CNN model (continued from previous snippet)
+
+class Net(nn.Module):
+    def __init__(self):
+        super(Net, self).__init__()
+        self.conv1 = nn.Conv2d(3, 6, kernel_size=5)
+        self.pool = nn.MaxPool2d(2, 2)
+        self.conv2 = nn.Conv2d(6, 12, kernel_size=5) # Change here
+        self.fc1 = nn.Linear(12 * 10 * 10, 128)
+        self.drop = nn.Dropout2d()
+        self.fc2 = nn.Linear(128, num_classes)
+
+    def forward(self, x):
+        out = self.pool(nn.functional.relu(self.conv1(x)))
+        out = self.pool(nn.functional.relu(self.conv2(out))) # Change here
+        out = out.view(-1, 12 * 10 * 10) # Change here
+        out = nn.functional.relu(self.fc1(out))
+        out = self.drop(out)
+        out = self.fc2(out)
+        return out
+
+# Initialize the model, loss function, and optimizer
+model = Net()
+criterion = nn.CrossEntropyLoss()
+optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate)
+
+
+# Train the model
+for epoch in range(num_epochs):
+    for i, (images, labels) in enumerate(train_loader):
+        # Move data to device
+        images, labels = images.to(device), labels.to(device)
+        
+        # Zero the gradients
+        optimizer.zero_grad()
+        
+        # Forward pass
+        outputs = model(images)
+        loss = criterion(outputs, labels)
+        
+        # Backward pass
+        loss.backward()
+        
+        # Update model parameters
+        optimizer.step()
+
+print('Epoch [{}/{}], Loss: {:.4f}'.format(epoch+1, num_epochs, loss.item())"
+10.43.0.111,-,2025-10-11 14:30:34,ValueError: invalid literal for int() with base 10: 'southeast_01'

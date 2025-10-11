@@ -1,0 +1,63 @@
+client_ip,handling_server,date_time,prompt
+10.43.0.113,-,2025-10-11 09:55:27,function for encoding multiclass data
+10.43.0.113,-,2025-10-11 10:08:00,"(Coma, Second Chance, Death, Car Accident, Naive Female Lead, Flashback To Past, Depression, Tragic Past, Multiple Mains, Fate) take each word seperated by comma and a multiclass feature set"
+10.43.0.113,-,2025-10-11 10:57:49,"column has data like this: ['1hr. 4min', '52min', ...]. How to convert hour (hr) into minute (min) and create a column with data like: ['64', '52', ...]"
+10.43.0.113,-,2025-10-11 11:05:46,"column has data like this: ['1 hr. 4 min', '52 min', ...]. How to convert hour (hr) into minute (min) and create a column with data like: ['64', '52', ...]"
+10.43.0.113,-,2025-10-11 11:06:59,how to recover a dropped column in dataframe
+10.43.0.113,-,2025-10-11 12:19:13,ValueError: setting an array element with a sequence.
+10.43.0.113,-,2025-10-11 12:26:33,"KeyError: Caught KeyError in DataLoader worker process 0.
+Original Traceback (most recent call last):
+  File ""/usr/local/lib/python3.11/dist-packages/pandas/core/indexes/base.py"", line 3805, in get_loc
+    return self._engine.get_loc(casted_key)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""index.pyx"", line 167, in pandas._libs.index.IndexEngine.get_loc
+  File ""index.pyx"", line 196, in pandas._libs.index.IndexEngine.get_loc
+  File ""pandas/_libs/hashtable_class_helper.pxi"", line 7081, in pandas._libs.hashtable.PyObjectHashTable.get_item
+  File ""pandas/_libs/hashtable_class_helper.pxi"", line 7089, in pandas._libs.hashtable.PyObjectHashTable.get_item
+KeyError: 'Image_ID'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File ""/usr/local/lib/python3.11/dist-packages/torch/utils/data/_utils/worker.py"", line 349, in _worker_loop
+    data = fetcher.fetch(index)  # type: ignore[possibly-undefined]
+           ^^^^^^^^^^^^^^^^^^^^
+  File ""/usr/local/lib/python3.11/dist-packages/torch/utils/data/_utils/fetch.py"", line 52, in fetch
+    data = [self.dataset[idx] for idx in possibly_batched_index]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""/usr/local/lib/python3.11/dist-packages/torch/utils/data/_utils/fetch.py"", line 52, in <listcomp>
+    data = [self.dataset[idx] for idx in possibly_batched_index]
+            ~~~~~~~~~~~~^^^^^
+  File ""/tmp/ipykernel_37/515499788.py"", line 49, in __getitem__
+    img_name = self.df.iloc[idx]['Image_ID']
+               ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File ""/usr/local/lib/python3.11/dist-packages/pandas/core/series.py"", line 1121, in __getitem__
+    return self._get_value(key)
+           ^^^^^^^^^^^^^^^^^^^^
+  File ""/usr/local/lib/python3.11/dist-packages/pandas/core/series.py"", line 1237, in _get_value
+    loc = self.index.get_loc(label)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""/usr/local/lib/python3.11/dist-packages/pandas/core/indexes/base.py"", line 3812, in get_loc
+    raise KeyError(key) from err
+KeyError: 'Image_ID'"
+10.43.0.113,-,2025-10-11 12:42:43,Solution and submission values for Id do not match
+10.43.0.113,-,2025-10-11 13:01:26,"# submission file
+submission = pd.DataFrame({
+    'Id': ids,
+    'label': preds
+})
+submission.to_csv('submission.csv', index=False)
+print(""submission.csv"")"
+10.43.0.113,-,2025-10-11 13:03:25,"# submission file
+submission = pd.DataFrame({
+    'Id': ids,
+    'label': preds
+})
+submission.to_csv('submission.csv', index=False)
+print(""submission.csv"")
+how to set 'Id' in a way that it corresponds to the row number (starting from 1) output should look like this:
+Id, label
+1,south
+2,north-west
+3,road"
+10.43.0.113,-,2025-10-11 13:09:48,what types of transformation to use on image of arrow (need to predict the direction like north/south/...)

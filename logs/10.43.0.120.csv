@@ -1,0 +1,72 @@
+client_ip,handling_server,date_time,prompt
+10.43.0.120,-,2025-10-11 09:12:44,Give me a standard regression code in python
+10.43.0.120,-,2025-10-11 09:57:07,scikt- learn
+10.43.0.120,-,2025-10-11 10:02:52,data split
+10.43.0.120,-,2025-10-11 10:04:09,train data
+10.43.0.120,-,2025-10-11 10:15:15,using matplotlit
+10.43.0.120,-,2025-10-11 10:24:21,how to use assing data from data set
+10.43.0.120,-,2025-10-11 10:28:03,how to give the path in file path
+10.43.0.120,-,2025-10-11 10:31:15,the file path is error
+10.43.0.120,-,2025-10-11 10:33:34,"def load_dataset(/kaggle/input/k-dramas/train.csv):
+    return pd.read_csv(""/kaggle/input/k-dramas/train.csv"")
+dataset = load_dataset('data/train.csv')
+print(dataset.head())
+
+what is wrong ?"
+10.43.0.120,-,2025-10-11 10:42:56,hoew
+10.43.0.120,-,2025-10-11 10:48:01,Range Index ?
+10.43.0.120,-,2025-10-11 10:51:54,how to print dataset
+10.43.0.120,-,2025-10-11 10:53:23,shoud i use here matplotlit
+10.43.0.120,-,2025-10-11 10:54:23,remove data
+10.43.0.120,-,2025-10-11 10:56:03,how to read columns
+10.43.0.120,-,2025-10-11 11:00:09,not work
+10.43.0.120,-,2025-10-11 11:01:11,how to read only specific columns
+10.43.0.120,-,2025-10-11 11:05:08,train a file
+10.43.0.120,-,2025-10-11 11:07:54,can you give me without comments
+10.43.0.120,-,2025-10-11 11:14:20,what is the file path ?
+10.43.0.120,-,2025-10-11 11:15:25,solution
+10.43.0.120,-,2025-10-11 11:19:38,data set columns
+10.43.0.120,-,2025-10-11 11:20:41,number 1 columns
+10.43.0.120,-,2025-10-11 11:22:30,train only columns
+10.43.0.120,-,2025-10-11 11:23:45,predict
+10.43.0.120,-,2025-10-11 11:29:07,train
+10.43.0.120,-,2025-10-11 11:31:15,train data
+10.43.0.120,-,2025-10-11 11:35:31,predict
+10.43.0.120,-,2025-10-11 11:36:56,Give me a demo code for matplotlib
+10.43.0.120,-,2025-10-11 11:41:09,data train
+10.43.0.120,-,2025-10-11 11:45:45,predict
+10.43.0.120,-,2025-10-11 11:50:38,predict using numpy or pandas?
+10.43.0.120,-,2025-10-11 11:57:10,which library can i use for predict not p[ytourhc
+10.43.0.120,-,2025-10-11 12:00:52,covert string to float
+10.43.0.120,-,2025-10-11 12:01:55,text train ?
+10.43.0.120,-,2025-10-11 12:05:09,predict text
+10.43.0.120,-,2025-10-11 12:06:18,text predict
+10.43.0.120,-,2025-10-11 12:15:47,how to see my prediction
+10.43.0.120,-,2025-10-11 12:19:05,without pytourch ?
+10.43.0.120,-,2025-10-11 12:29:29,model fit ?
+10.43.0.120,-,2025-10-11 12:31:18,what is drop ?
+10.43.0.120,-,2025-10-11 12:34:03,LLM
+10.43.0.120,-,2025-10-11 12:35:06,predict
+10.43.0.120,-,2025-10-11 12:36:13,predict
+10.43.0.120,-,2025-10-11 12:38:03,do something
+10.43.0.120,-,2025-10-11 12:39:10,predict text
+10.43.0.120,-,2025-10-11 12:40:15,predict text
+10.43.0.120,-,2025-10-11 12:45:41,try easy ?
+10.43.0.120,-,2025-10-11 12:47:46,text predict
+10.43.0.120,-,2025-10-11 12:58:17,train
+10.43.0.120,-,2025-10-11 13:01:26,test data
+10.43.0.120,-,2025-10-11 13:03:22,predict data
+10.43.0.120,-,2025-10-11 13:17:18,predict
+10.43.0.120,-,2025-10-11 13:18:26,predict text
+10.43.0.120,-,2025-10-11 13:25:41,it not worked
+10.43.0.120,-,2025-10-11 13:26:45,predict text
+10.43.0.120,-,2025-10-11 13:31:35,can you give me another method
+10.43.0.120,-,2025-10-11 13:35:47,text predict
+10.43.0.120,-,2025-10-11 13:40:29,predict text
+10.43.0.120,-,2025-10-11 13:41:36,predict
+10.43.0.120,-,2025-10-11 13:42:38,text predict
+10.43.0.120,-,2025-10-11 13:45:18,without tourch ?
+10.43.0.120,-,2025-10-11 13:47:48,text predict
+10.43.0.120,-,2025-10-11 13:55:38,what is data[text] here
+10.43.0.120,-,2025-10-11 14:00:26,how to get file
+10.43.0.120,-,2025-10-11 14:05:38,get predict file ?

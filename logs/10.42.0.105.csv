@@ -1,0 +1,103 @@
+client_ip,handling_server,date_time,prompt
+10.42.0.105,-,2025-10-11 10:24:33,"WHAT'S Wrong? from sklearn.datasets import fetch_20newsgroups
+cat = [sample_submission(1).csv, test.csv, train.csv]
+var = fetch_20newsgroups(subset = ""kdrama"", cat = cat, shuffle = True, random_state = 42)
+var.target_names
+print(""\n"".join(var.data[0].split(""\n"")[:3]))"
+10.42.0.105,-,2025-10-11 10:28:32,"from sklearn.datasets import fetch_20newsgroups
+cat = [""drama"", ""date"", ""genre"", ""episodes"", ""year"", ""publisher""]
+var = fetch_20newsgroups(subset = ""kdrama"", cat = cat, shuffle = True, random_state = 42)
+var.target_names
+print(""\n"".join(var.data[0].split(""\n"")[:3]))"
+10.42.0.105,-,2025-10-11 10:44:20,"from sklearn.datasets import fetch_20newsgroups
+
+cat = [""drama"", ""date"", ""genre""]
+var = fetch_20newsgroups(subset=""train"", categories=cat, shuffle=True, random_state=42)
+
+print(var.target_names)
+for i in var.data[0].split(""\n"")[:3]:
+    print(i)"
+10.42.0.105,-,2025-10-11 11:00:53,"from sklearn.datasets import fetch_rcvl
+rcvl = fetch_rcvl()
+rcvl.sample_id = [:50]
+arr([1, 50], dtype=uint32)
+rcvl.kdrama_names = test.csv"
+10.42.0.105,-,2025-10-11 11:13:51,"from sklearn.datasets import fetch_rcvl
+from sklearn.datasets import fetch_20newsgroups
+import numpy as np
+
+cat = [""drama"", ""date"", ""genre""]
+var = fetch_20newsgroups(subset=""train"", categories=cat, shuffle=True, random_state=42)
+
+print(var.target_names)
+for i in var.data[0].split(""\n"")[:3]:
+    print(i)
+rcvl = fetch_rcvl()
+sample_ids = np.array(range(50))
+rcvl.sample_id = sample_ids"
+10.42.0.105,-,2025-10-11 11:27:27,Give me a code to import datasets in python
+10.42.0.105,-,2025-10-11 11:43:16,"how to genarate csv for this code import pandas as pd
+
+def load_dataset(file_path):
+    try:
+        data = pd.read_csv(file_path)
+        return data
+    except Exception as e:
+        print(f""Error loading dataset: {e}"")
+
+dataset_path = '/kaggle/input/problem1dataset/sample_submission (1).csv'
+dataset_test = '/kaggle/input/problem1dataset/test.csv'
+dataset_train = '/kaggle/input/problem1dataset/train.csv'
+
+dataset = load_dataset(dataset_path)
+dataset2 = load_dataset(dataset_test)
+ds = load_dataset(dataset_train)
+
+print(dataset.head())
+print(dataset2.head())
+print(ds.head())"
+10.42.0.105,-,2025-10-11 11:44:56,how to import it to kaggle
+10.42.0.105,-,2025-10-11 11:49:45,"should i upload this code with csv file? import pandas as pd
+
+def load_dataset(file_path):
+    try:
+        data = pd.read_csv(file_path)
+        return data
+    except Exception as e:
+        print(f""Error loading dataset: {e}"")
+
+dataset_path = '/kaggle/input/problem1dataset/sample_submission (1).csv'
+dataset_test = '/kaggle/input/problem1dataset/test.csv'
+dataset_train = '/kaggle/input/problem1dataset/train.csv'
+
+dataset = load_dataset(dataset_path)
+dataset2 = load_dataset(dataset_test)
+ds = load_dataset(dataset_train)
+
+print(dataset.head())
+print(dataset2.head())
+print(ds.head())"
+10.42.0.105,-,2025-10-11 11:51:56,filename should be like main.py or main.csv or what??
+10.42.0.105,-,2025-10-11 11:55:49,"what kind of file is this? CSV OR PY? import pandas as pd
+
+def save_dataset_to_csv(file_path, data):
+    try:
+        data.to_csv(file_path, index=False)
+    except Exception as e:
+        print(f""Error saving dataset: {e}"")
+
+dataset_path = '/kaggle/input/problem1dataset/sample_submission (1).csv'
+dataset_test = '/kaggle/input/problem1dataset/test.csv'
+dataset_train = '/kaggle/input/problem1dataset/train.csv'
+
+dataset = pd.read_csv(dataset_path)
+dataset2 = pd.read_csv(dataset_test)
+ds = pd.read_csv(dataset_train)
+
+save_dataset_to_csv('generated_submission.csv', dataset)
+save_dataset_to_csv('generated_test.csv', dataset2)
+save_dataset_to_csv('generated_train.csv', ds)"
+10.42.0.105,-,2025-10-11 11:58:49,why showing error when submitting this csv
+10.42.0.105,-,2025-10-11 12:02:31,How to develop a robust image classification model
+10.42.0.105,-,2025-10-11 12:07:06,which pretrained model should i use for kaagle
+10.42.0.105,-,2025-10-11 12:21:31,csv file for this code

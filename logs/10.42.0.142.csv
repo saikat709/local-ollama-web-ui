@@ -1,0 +1,57 @@
+client_ip,handling_server,date_time,prompt
+10.42.0.142,-,2025-10-11 10:37:43,why is dataframe not callable
+10.42.0.142,-,2025-10-11 10:58:55,explain this error pls AttributeError: 'numpy.ndarray' object has no attribute 'select_dtypes'
+10.42.0.142,-,2025-10-11 11:10:14,how do i submit
+10.42.0.142,-,2025-10-11 11:23:13,"numerical_cols = X.select_dtypes(include=np.number).columns
+categorical_cols = X.select_dtypes(exclude=np.number).columns"
+10.42.0.142,-,2025-10-11 11:26:34,"it shows ttributeError                            Traceback (most recent call last)
+/tmp/ipykernel_37/2185206582.py in <cell line: 0>()
+----> 1 numerical_cols = X.select_dtype(include=np.number).columns
+2 categorical_cols = X.select_dtype(exclude=np.number).columns
+
+AttributeError: 'numpy.ndarray' object has no attribute 'select_dtype'"
+10.42.0.142,-,2025-10-11 11:28:24,"TypeError                                 Traceback (most recent call last)
+/tmp/ipykernel_37/3505563989.py in <cell line: 0>()
+      1 # Assuming X is a NumPy array
+----> 2 numerical_cols = [col for col in X.dtype.names if isinstance(X[col][0], (int, float))]
+      3 categorical_cols = [col for col in X.dtype.names if col not in numerical_cols]
+
+TypeError: 'NoneType' object is not iterable"
+10.42.0.142,-,2025-10-11 11:37:28,"TypeError                                 Traceback (most recent call last)
+/tmp/ipykernel_37/3505563989.py in <cell line: 0>()
+1 # Assuming X is a NumPy array
+----> 2 numerical_cols = [col for col in X.dtype.names if isinstance(X[col][0], (int, float))]
+3 categorical_cols = [col for col in X.dtype.names if col not in numerical_cols]
+
+TypeError: 'NoneType' object is not iterable"
+10.42.0.142,-,2025-10-11 11:51:44,Classification metrics can't handle a mix of binary and continuous targets
+10.42.0.142,-,2025-10-11 11:54:52,it shows Classification metrics can't handle a mix of binary and continuous targets when i submit whtat to do
+10.42.0.142,-,2025-10-11 12:29:44,"explain ndexError                                Traceback (most recent call last)
+/tmp/ipykernel_37/3492354671.py in <cell line: 0>()
+      9 
+     10 print(""\nEfficientNetB0 Model Training..."")
+---> 11 history = model.fit(
+     12      train_ds,
+     13      epochs= 20,
+
+/usr/local/lib/python3.11/dist-packages/keras/src/utils/traceback_utils.py in error_handler(*args, **kwargs)
+    120             # To get the full stack trace, call:
+    121             # `keras.config.disable_traceback_filtering()`
+--> 122             raise e.with_traceback(filtered_tb) from None
+    123         finally:
+    124             del filtered_tb
+
+/usr/local/lib/python3.11/dist-packages/keras/src/layers/preprocessing/image_preprocessing/resizing.py in compute_output_shape(self, input_shape)
+    283         else:
+    284             if self.data_format == ""channels_last"":
+--> 285                 input_shape[0] = self.height
+    286                 input_shape[1] = self.width
+    287             else:
+
+IndexError: Exception encountered when calling Resizing.call().
+
+list assignment index out of range
+
+Arguments received by Resizing.call():
+  • args=('<KerasTensor shape=(), dtype=float32, sparse=False, name=keras_tensor_23>',)
+  • kwargs={'training': 'True'}"

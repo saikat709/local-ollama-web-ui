@@ -1,0 +1,1776 @@
+client_ip,handling_server,date_time,prompt
+10.42.0.118,-,2025-10-11 08:56:37,hello sit
+10.42.0.118,-,2025-10-11 08:58:16,code for gradient descent
+10.42.0.118,-,2025-10-11 09:00:59,"give me a function code to train a pytorch based machine learning model(Simple neural network). And, add this parameter X for the input dataframe, Y for the output dataframe"
+10.42.0.118,-,2025-10-11 09:08:03,"give me a function code to train a pytorch based machine learning model(Simple neural network). And, add this parameter X for the input dataframe, Y for the output dataframe. And, criterion, if criterion is equal to 'Regression'',set MSELoss,else if criterion=='Classsification', set to CrossEntropyLoss(),and, a prarameter name epochs, it will train for the specified number of epochs.ANd print the losses. ,and, add the model parameter.
+
+GIve me exmple usage too."
+10.42.0.118,-,2025-10-11 09:11:48,how to predict from a pytorch model
+10.42.0.118,-,2025-10-11 09:14:10,"Make a prediction function that takes a pandas dataframe as its input, dataframe variable = X
+According to this function:
+import torch
+import torch.nn as nn
+import pandas as pd
+
+def train_model(X, Y, criterion, epochs):
+    # Initialize the model
+    class Net(nn.Module):
+        def __init__(self):
+            super(Net, self).__init__()
+            self.fc1 = nn.Linear(X.shape[1], 128)
+            self.relu = nn.ReLU()
+            self.dropout = nn.Dropout(p=0.2)
+            self.fc2 = nn.Linear(128, 64)
+            self.fc3 = nn.Linear(64, Y.shape[1])
+
+        def forward(self, x):
+            out = self.relu(self.fc1(x))
+            out = self.dropout(out)
+            out = self.relu(self.fc2(out))
+            out = self.fc3(out)
+            return out
+
+    model = Net()
+
+    # Define the loss function and optimizer
+    if criterion == 'Regression':
+        criterion = nn.MSELoss()
+    elif criterion == 'Classification':
+        criterion = nn.CrossEntropyLoss()
+    else:
+        raise ValueError('Invalid criterion. Please choose ""Regression"" or ""Classification"".')
+    
+    optimizer = torch.optim.Adam(model.parameters(), lr=0.001)
+
+    # Train the model
+    losses = []
+    for epoch in range(epochs):
+        outputs = model(torch.tensor(X.values, dtype=torch.float32))
+        loss = criterion(outputs, torch.tensor(Y.values, dtype=torch.float32))
+        losses.append(loss.item())
+        
+        optimizer.zero_grad()
+        loss.backward()
+        optimizer.step()
+
+        if (epoch+1) % 10 == 0:
+            print(f'Epoch {epoch+1}, Loss: {loss.item()}')
+
+    return model, losses"
+10.42.0.118,-,2025-10-11 09:16:51,"Make a prediction function, consisting of 2 params,model and X,X== dataframe of pandas
+
+Training function:import torch
+import torch.nn as nn
+import pandas as pd
+
+def train_model(X, Y, criterion, epochs):
+    # Initialize the model
+    class Net(nn.Module):
+        def __init__(self):
+            super(Net, self).__init__()
+            self.fc1 = nn.Linear(X.shape[1], 128)
+            self.relu = nn.ReLU()
+            self.dropout = nn.Dropout(p=0.2)
+            self.fc2 = nn.Linear(128, 64)
+            self.fc3 = nn.Linear(64, Y.shape[1])
+
+        def forward(self, x):
+            out = self.relu(self.fc1(x))
+            out = self.dropout(out)
+            out = self.relu(self.fc2(out))
+            out = self.fc3(out)
+            return out
+
+    model = Net()
+
+    # Define the loss function and optimizer
+    if criterion == 'Regression':
+        criterion = nn.MSELoss()
+    elif criterion == 'Classification':
+        criterion = nn.CrossEntropyLoss()
+    else:
+        raise ValueError('Invalid criterion. Please choose ""Regression"" or ""Classification"".')
+    
+    optimizer = torch.optim.Adam(model.parameters(), lr=0.001)
+
+    # Train the model
+    losses = []
+    for epoch in range(epochs):
+        outputs = model(torch.tensor(X.values, dtype=torch.float32))
+        loss = criterion(outputs, torch.tensor(Y.values, dtype=torch.float32))
+        losses.append(loss.item())
+        
+        optimizer.zero_grad()
+        loss.backward()
+        optimizer.step()
+
+        if (epoch+1) % 10 == 0:
+            print(f'Epoch {epoch+1}, Loss: {loss.item()}')
+
+    return model, losses"
+10.42.0.118,-,2025-10-11 09:31:38,"Which columns i should drop(I need to predict Genre):Name                    0
+Aired Date              0
+Year of release         0
+Original Network        0
+Aired On                0
+Number of Episodes      0
+Duration                0
+Content Rating          1
+Rating                  0
+Synopsis                0
+Genre                   0
+Tags                    0
+Director                1
+Screenwriter            1
+Cast                    0
+Production companies    1
+Rank                    0
+dtype: int64"
+10.42.0.118,-,2025-10-11 09:45:49,Fix this:linereg = LinearRegression(max_iter=10000)
+10.42.0.118,-,2025-10-11 10:07:55,"fix this code:train_x = pd.DataFrame(iris.feature_names,iris.data)
+train_y = pd.DataFrame(iris.target_names,iris.features)"
+10.42.0.118,-,2025-10-11 10:14:42,"fix this:submit = pd.DataFrame(
+    ""ID"":test.ID,
+    ""target"":eee.predict(innit)
+)"
+10.42.0.118,-,2025-10-11 10:23:12,"GIve me reccomendation on which data to drop,I need to predict Genre
+
+Sample Data:
+Name 	Aired Date 	Year of release 	Original Network 	Aired On 	Number of Episodes 	Duration 	Content Rating 	Rating 	Synopsis 	Genre 	Tags 	Director 	Screenwriter 	Cast 	Production companies 	Rank
+0 	49 Days 	Mar 16, 2011 - May 19, 2011 	2011 	SBS 	Wednesday, Thursday 	20 	1 hr. 10 min. 	15+ - Teens 15 or older 	8.3 	Shin Ji Hyun was enjoying absolute bliss as sh... 	Romance, Drama, Melodrama, Supernatural 	Coma, Second Chance, Death, Car Accident, Naiv... 	Jo Young Kwang, Park Yong Soon 	So Hyun Kyung 	Lee Yo Won, Nam Gyu Ri, Jung Il Woo, Jo Hyun J... 	HB Entertainment 	#233
+1 	Pachinko 	Mar 25, 2022 - Apr 29, 2022 	2022 	Apple TV+ 	Friday 	8 	54 min. 	15+ - Teens 15 or older 	8.4 	This sweeping saga chronicles the hopes and dr... 	Historical, Romance, Drama, Melodrama 	Co-produced, Discrimination, Immigrant, Adapte... 	Kogonada, Justin Chon 	Soo Hugh 	Kim Min Ha, Youn Yuh Jung, Jin Ha, Lee Min Ho,... 	Blue Marble Pictures, A Han.Bok Dream Producti... 	#167
+2 	The Smile Has Left Your Eyes 	Oct 3, 2018 - Nov 22, 2018 	2018 	tvN 	Thursday, Wednesday 	16 	1 hr. 4 min. 	15+ - Teens 15 or older 	8.3 	A TV series centered around the unfolding rela... 	Thriller, Mystery, Romance, Drama 	Antihero, Psychological, Murder, Tragic Past, ... 	Yoo Je Won 	Song Hye Jin 	Seo In Guk, Jung So Min, Park Sung Woong, Seo ... 	Fuji Television, Studio Dragon, The Unicorn 	#213
+3 	Happiness 	Nov 5, 2021 - Dec 11, 2021 	2021 	tvN 	Friday, Saturday 	12 	1 hr. 5 min. 	15+ - Teens 15 or older 	8.9 	A deadly new strain of a virus is spreading th... 	Action, Thriller, Drama, Fantasy 	Disease, Strong Female Lead, Survival, Virus, ... 	Ahn Gil Ho 	Han Sang Woon 	Han Hyo Joo, Park Hyung Sik, Jo Woo Jin, Lee ... 	Studio Dragon 	#19
+4 	Nine: Nine Times Time Travel 	Mar 11, 2013 - May 14, 2013 	2013 	tvN 	Monday, Tuesday 	20 	52 min. 	15+ - Teens 15 or older 	8.4 	Park Sun Woo works as an anchorman at a TV bro... 	Mystery, Romance, Supernatural 	Time Travel, 1990s, Bromance, Female Chases Ma... 	Kim Byung Soo 	Song Jae Jung, Kim Yoon Joo 	Lee Jin Wook, Lee Seung Joon, Jo Yoon Hee, Oh ... 	JS Pictures, Chorokbaem Media 	#157"
+10.42.0.118,-,2025-10-11 10:26:06,"GIve me reccomendation on which classifier to use with TfidfVectiorizer,and, what kind data is useless and i need to remove,I need to predict Genre
+
+Sample Data:
+Name 	Aired Date 	Year of release 	Original Network 	Aired On 	Number of Episodes 	Duration 	Content Rating 	Rating 	Synopsis 	Genre 	Tags 	Director 	Screenwriter 	Cast 	Production companies 	Rank
+0 	49 Days 	Mar 16, 2011 - May 19, 2011 	2011 	SBS 	Wednesday, Thursday 	20 	1 hr. 10 min. 	15+ - Teens 15 or older 	8.3 	Shin Ji Hyun was enjoying absolute bliss as sh... 	Romance, Drama, Melodrama, Supernatural 	Coma, Second Chance, Death, Car Accident, Naiv... 	Jo Young Kwang, Park Yong Soon 	So Hyun Kyung 	Lee Yo Won, Nam Gyu Ri, Jung Il Woo, Jo Hyun J... 	HB Entertainment 	#233
+1 	Pachinko 	Mar 25, 2022 - Apr 29, 2022 	2022 	Apple TV+ 	Friday 	8 	54 min. 	15+ - Teens 15 or older 	8.4 	This sweeping saga chronicles the hopes and dr... 	Historical, Romance, Drama, Melodrama 	Co-produced, Discrimination, Immigrant, Adapte... 	Kogonada, Justin Chon 	Soo Hugh 	Kim Min Ha, Youn Yuh Jung, Jin Ha, Lee Min Ho,... 	Blue Marble Pictures, A Han.Bok Dream Producti... 	#167
+2 	The Smile Has Left Your Eyes 	Oct 3, 2018 - Nov 22, 2018 	2018 	tvN 	Thursday, Wednesday 	16 	1 hr. 4 min. 	15+ - Teens 15 or older 	8.3 	A TV series centered around the unfolding rela... 	Thriller, Mystery, Romance, Drama 	Antihero, Psychological, Murder, Tragic Past, ... 	Yoo Je Won 	Song Hye Jin 	Seo In Guk, Jung So Min, Park Sung Woong, Seo ... 	Fuji Television, Studio Dragon, The Unicorn 	#213
+3 	Happiness 	Nov 5, 2021 - Dec 11, 2021 	2021 	tvN 	Friday, Saturday 	12 	1 hr. 5 min. 	15+ - Teens 15 or older 	8.9 	A deadly new strain of a virus is spreading th... 	Action, Thriller, Drama, Fantasy 	Disease, Strong Female Lead, Survival, Virus, ... 	Ahn Gil Ho 	Han Sang Woon 	Han Hyo Joo, Park Hyung Sik, Jo Woo Jin, Lee ... 	Studio Dragon 	#19
+4 	Nine: Nine Times Time Travel 	Mar 11, 2013 - May 14, 2013 	2013 	tvN 	Monday, Tuesday 	20 	52 min. 	15+ - Teens 15 or older 	8.4 	Park Sun Woo works as an anchorman at a TV bro... 	Mystery, Romance, Supernatural 	Time Travel, 1990s, Bromance, Female Chases Ma... 	Kim Byung Soo 	Song Jae Jung, Kim Yoon Joo 	Lee Jin Wook, Lee Seung Joon, Jo Yoon Hee, Oh ... 	JS Pictures, Chorokbaem Media 	#157"
+10.42.0.118,-,2025-10-11 10:45:17,"Need to predict : Genre
+
+Sample Data:
+ 	Name 	Aired On 	Rating 	Synopsis 	Genre 	Tags 	Rank
+28 	Mad for Each Other 	Monday, Tuesday, Wednesday 	8.5 	About two people with their own painful storie... 	Comedy, Romance, Drama 	Trauma, Enemies To Lovers, Anger Management Is... 	#119
+101 	Stranger 2 	Saturday, Sunday 	8.6 	The prosecutor's office and the police find th... 	Thriller, Mystery, Law, Drama 	Corruption, Calm Male Lead, Smart Male Lead, S... 	#88
+108 	Nobody Knows 	Monday, Tuesday 	8.5 	Detective Young Jin, from the regional investi... 	Thriller, Mystery, Drama, Melodrama 	Strong Female Lead, Smart Female Lead, Unusual... 	#102
+12 	Hi Bye, Mama! 	Saturday, Sunday 	8.5 	It's the story of a mother who died and begins... 	Romance, Drama, Melodrama, Supernatural 	Mother-Daughter Relationship, Nice Female Lead... 	#113
+32 	Mine 	Saturday, Sunday 	8.3 	“Mine” is about strong and ambitious women who... 	Thriller, Mystery, Drama 	Rich Female Lead, Strong Female Lead, Rich Fam... 	#222
+90 	Team Bulldog: Off-duty Investigation 	Saturday, Sunday 	8.3 	Known as an enthusiastic and impressively effe... 	Action, Mystery, Comedy, Drama 	Investigation, Strong Female Lead, Teamwork, S... 	#214
+67 	Designated Survivor 	Monday, Tuesday 	8.6 	Park Moo Jin is a former professor of chemistr... 	Thriller, Mystery, Drama, Political 	Power Struggle, Conspiracy, Blue House, Lying,... 	#89
+114 	Confession 	Saturday, Sunday 	8.3 	A case involving the hidden truth behind the l... 	Thriller, Mystery, Law, Drama 	Corruption, Wrongfully Accused, Nice Male Lead... 	#208
+97 	Strong Woman Do Bong Soon 	Friday, Saturday 	8.7 	Do Bong Soon is a petite, unemployed woman who... 	Action, Thriller, Comedy, Romance, Drama, ... 	Strong Female Lead, Female Lead Action Scenes,... 	#60
+26 	When the Weather Is Fine 	Monday, Tuesday 	8.3 	A story about forgiveness, healing, and love t... 	Romance, Life, Drama, Melodrama 	Nice Male Lead, Healing, Secret Crush, Slow Bu... 	#223
+120 	Voice 	Saturday, Sunday 	8.5 	Popular detective Moo Jin Hyuk who is filled w... 	Thriller, Mystery, Psychological 	Strong Female Lead, Murder, Aggressive Male Le... 	#114
+55 	Partners for Justice 	Monday, Tuesday 	8.4 	Baek Beom has worked as a forensic doctor for ... 	Thriller, Mystery, Law, Medical 	Forensic Medical Examiner Male Lead, Prosecuto... 	#175
+81 	Rookie Cops 	Wednesday 	8.3 	A coming-of-age story that captures the spirit... 	Romance, Life, Youth, Drama 	Police Academy, University, Campus Setting, Ha... 	#194
+109 	Hospital Playlist 	Thursday 	9.1 	The stories of people going through their days... 	Friendship, Romance, Life, Medical 	Strong Friendship, Multiple Mains, Best Friend... 	#3
+54 	The Red Sleeve 	Friday, Saturday 	8.8 	In Korea during the second half of the 1700s, ... 	Historical, Romance, Drama, Melodrama 	Noble Man/Common Woman, Tearjerker, Death, Jos... 	#26
+10 	Mr. Queen 	Saturday, Sunday 	9.0 	Jang Bong Hwan is a South Korean chef who has ... 	Historical, Mystery, Comedy, Romance 	Smart Male Lead, Transmigration, Calm Male Lea... 	#11
+86 	At a Distance, Spring Is Green 	Monday, Tuesday 	8.3 	A coming of age story about young people in th... 	Romance, Life, Youth 	Coming Of Age, Bromance, Adapted From A Webtoo... 	#188
+69 	Navillera 	Monday, Tuesday 	9.0 	A 70-year-old with a dream and a 23-year-old w... 	Friendship, Life, Drama, Family 	Ballet, Dream, Life Lesson, Old-Young Generati... 	#16
+
+
+Code:
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.model_selection import train_test_split
+from sklearn.naive_bayes import MultinomialNB
+from sklearn.linear_model import LogisticRegression
+
+vectorizer = TfidfVectorizer()
+Kittarpola = train_db.drop(columns=['Genre'])
+X = vectorizer.fit_transform(Kittarpola)  
+print(X)
+y = train_db.Genre
+
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+classifier1 = MultinomialNB()
+classifier1.fit(X_train, y_train)
+
+classifier2 = LogisticRegression()
+classifier2.fit(X_train, y_train)
+
+Error:
+---------------------------------------------------------------------------
+ValueError                                Traceback (most recent call last)
+/tmp/ipykernel_38/2414828310.py in <cell line: 0>()
+     10 y = train_db.Genre
+     11 
+---> 12 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+     13 
+     14 classifier1 = MultinomialNB()
+
+/usr/local/lib/python3.11/dist-packages/sklearn/model_selection/_split.py in train_test_split(test_size, train_size, random_state, shuffle, stratify, *arrays)
+   2557         raise ValueError(""At least one array required as input"")
+   2558 
+-> 2559     arrays = indexable(*arrays)
+   2560 
+   2561     n_samples = _num_samples(arrays[0])
+
+/usr/local/lib/python3.11/dist-packages/sklearn/utils/validation.py in indexable(*iterables)
+    441 
+    442     result = [_make_indexable(X) for X in iterables]
+--> 443     check_consistent_length(*result)
+    444     return result
+    445 
+
+/usr/local/lib/python3.11/dist-packages/sklearn/utils/validation.py in check_consistent_length(*arrays)
+    395     uniques = np.unique(lengths)
+    396     if len(uniques) > 1:
+--> 397         raise ValueError(
+    398             ""Found input variables with inconsistent numbers of samples: %r""
+    399             % [int(l) for l in lengths]
+
+ValueError: Found input variables with inconsistent numbers of samples: [6, 125]"
+10.42.0.118,-,2025-10-11 10:50:55,"Fix this code:
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.model_selection import train_test_split
+from sklearn.naive_bayes import MultinomialNB
+from sklearn.linear_model import LogisticRegression
+
+vectorizer = TfidfVectorizer()
+Kittarpola = train_db.drop(columns=['Genre'])
+X = vectorizer.fit_transform(Kittarpola['Synopsis','Tags',]) 
+print(X)
+y = train_db.Genre
+
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+classifier1 = MultinomialNB()
+classifier1.fit(X_train, y_train)
+
+classifier2 = LogisticRegression()
+classifier2.fit(X_train, y_train)"
+10.42.0.118,-,2025-10-11 10:55:51,"How to test the accuracy score of my model(All model's accuracy core is 0):from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.model_selection import train_test_split
+from sklearn.naive_bayes import MultinomialNB
+from sklearn.linear_model import LogisticRegression
+from sklearn.ensemble import ExtraTreesClassifier
+import pandas as pd
+
+# Fix: Properly select the columns for vectorization
+vectorizer = TfidfVectorizer()
+Kittarpola = train_db[['Synopsis', 'Tags']]
+X = vectorizer.fit_transform(Kittarpola['Synopsis'] + ' ' + Kittarpola['Tags']) 
+print(X)
+y = train_db['Genre']
+
+# Fix: Ensure correct split of data and labels
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+classifier1 = MultinomialNB()
+classifier1.fit(X_train, y_train)
+
+classifier2 = LogisticRegression()
+classifier2.fit(X_train, y_train)
+
+
+eec = ExtraTreesClassifier(max_depth=8,n_estimators=100,random_state=4)
+eec.fit(X_train,y_train)"
+10.42.0.118,-,2025-10-11 11:03:34,"Code:
+from sklearn.pipeline import Pipeline
+
+Kittarpola = train_db[['Synopsis', 'Tags']]
+
+y = train_db['Genre']
+pipe = Pipeline([
+    ('tfidf',TfidfVectorizer(stop_words='english',ngram_range=(1,2))),
+    ('clf',ExtraTreesClassifier(max_depth=7,n_estimators=1000,random_state=3))
+])
+
+# Fix: Ensure correct split of data and labels
+X_train, X_test, y_train, y_test = train_test_split(Kittarpola, y, test_size=0.2, random_state=42)
+
+pipe.fit(X_train,y_train)
+
+Dataset:
+Name 	Aired On 	Rating 	Synopsis 	Genre 	Tags 	Rank
+28 	Mad for Each Other 	Monday, Tuesday, Wednesday 	8.5 	About two people with their own painful storie... 	Comedy, Romance, Drama 	Trauma, Enemies To Lovers, Anger Management Is... 	#119
+101 	Stranger 2 	Saturday, Sunday 	8.6 	The prosecutor's office and the police find th... 	Thriller, Mystery, Law, Drama 	Corruption, Calm Male Lead, Smart Male Lead, S... 	#88
+108 	Nobody Knows 	Monday, Tuesday 	8.5 	Detective Young Jin, from the regional investi... 	Thriller, Mystery, Drama, Melodrama 	Strong Female Lead, Smart Female Lead, Unusual... 	#102
+12 	Hi Bye, Mama! 	Saturday, Sunday 	8.5 	It's the story of a mother who died and begins... 	Romance, Drama, Melodrama, Supernatural 	Mother-Daughter Relationship, Nice Female Lead... 	#113
+32 	Mine 	Saturday, Sunday 	8.3 	“Mine” is about strong and ambitious women who... 	Thriller, Mystery, Drama 	Rich Female Lead, Strong Female Lead, Rich Fam... 	#222
+90 	Team Bulldog: Off-duty Investigation 	Saturday, Sunday 	8.3 	Known as an enthusiastic and impressively effe... 	Action, Mystery, Comedy, Drama 	Investigation, Strong Female Lead, Teamwork, S... 	#214
+67 	Designated Survivor 	Monday, Tuesday 	8.6 	Park Moo Jin is a former professor of chemistr... 	Thriller, Mystery, Drama, Political 	Power Struggle, Conspiracy, Blue House, Lying,... 	#89
+114 	Confession 	Saturday, Sunday 	8.3 	A case involving the hidden truth behind the l... 	Thriller, Mystery, Law, Drama 	Corruption, Wrongfully Accused, Nice Male Lead... 	#208
+97 	Strong Woman Do Bong Soon 	Friday, Saturday 	8.7 	Do Bong Soon is a petite, unemployed woman who... 	Action, Thriller, Comedy, Romance, Drama, ... 	Strong Female Lead, Female Lead Action Scenes,... 	#60
+26 	When the Weather Is Fine 	Monday, Tuesday 	8.3 	A story about forgiveness, healing, and love t... 	Romance, Life, Drama, Melodrama 	Nice Male Lead, Healing, Secret Crush, Slow Bu... 	#223
+120 	Voice 	Saturday, Sunday 	8.5 	Popular detective Moo Jin Hyuk who is filled w... 	Thriller, Mystery, Psychological 	Strong Female Lead, Murder, Aggressive Male Le... 	#114
+55 	Partners for Justice 	Monday, Tuesday 	8.4 	Baek Beom has worked as a forensic doctor for ... 	Thriller, Mystery, Law, Medical 	Forensic Medical Examiner Male Lead, Prosecuto... 	#175
+81 	Rookie Cops 	Wednesday 	8.3 	A coming-of-age story that captures the spirit... 	Romance, Life, Youth, Drama 	Police Academy, University, Campus Setting, Ha... 	#194
+109 	Hospital Playlist 	Thursday 	9.1 	The stories of people going through their days... 	Friendship, Romance, Life, Medical 	Strong Friendship, Multiple Mains, Best Friend... 	#3
+54 	The Red Sleeve 	Friday, Saturday 	8.8 	In Korea during the second half of the 1700s, ... 	Historical, Romance, Drama, Melodrama 	Noble Man/Common Woman, Tearjerker, Death, Jos... 	#26
+10 	Mr. Queen 	Saturday, Sunday 	9.0 	Jang Bong Hwan is a South Korean chef who has ... 	Historical, Mystery, Comedy, Romance 	Smart Male Lead, Transmigration, Calm Male Lea... 	#11
+86 	At a Distance, Spring Is Green 	Monday, Tuesday 	8.3 	A coming of age story about young people in th... 	Romance, Life, Youth 	Coming Of Age, Bromance, Adapted From A Webtoo... 	#188
+69 	Navillera 	Monday, Tuesday 	9.0 	A 70-year-old with a dream and a 23-year-old w... 	Friendship, Life, Drama, Family 	Ballet, Dream, Life Lesson, Old-Young Generati... 	#16
+
+
+Error:
+y, accept_sparse, accept_large_sparse, dtype, order, copy, force_all_finite, ensure_2d, allow_nd, multi_output, ensure_min_samples, ensure_min_features, y_numeric, estimator)
+   1122     y = _check_y(y, multi_output=multi_output, y_numeric=y_numeric, estimator=estimator)
+   1123 
+-> 1124     check_consistent_length(X, y)
+   1125 
+   1126     return X, y
+
+/usr/local/lib/python3.11/dist-packages/sklearn/utils/validation.py in check_consistent_length(*arrays)
+    395     uniques = np.unique(lengths)
+    396     if len(uniques) > 1:
+--> 397         raise ValueError(
+    398             ""Found input variables with inconsistent numbers of samples: %r""
+    399             % [int(l) for l in lengths]
+
+ValueError: Found input variables with inconsistent numbers of samples: [2, 100]"
+10.42.0.118,-,2025-10-11 11:17:06,"When i went to submit my prediction:
+tesera =  test_db[['Synopsis', 'Tags']]
+X_2 = vectorizer.fit_transform(tesera['Synopsis'] + ' ' + tesera['Tags']) 
+submit = pd.DataFrame({
+    'Id':simp.Id,
+    'Genre': classifier1.predict(X_2)
+})
+
+---------------------------------------------------------------------------
+ValueError                                Traceback (most recent call last)
+/tmp/ipykernel_38/3080990887.py in <cell line: 0>()
+      1 submit = pd.DataFrame({
+      2     'Id':simp.Id,
+----> 3     'Genre': classifier1.predict(X_2)
+      4 })
+
+/usr/local/lib/python3.11/dist-packages/sklearn/naive_bayes.py in predict(self, X)
+    103         """"""
+    104         check_is_fitted(self)
+--> 105         X = self._check_X(X)
+    106         jll = self._joint_log_likelihood(X)
+    107         return self.classes_[np.argmax(jll, axis=1)]
+
+/usr/local/lib/python3.11/dist-packages/sklearn/naive_bayes.py in _check_X(self, X)
+    577     def _check_X(self, X):
+    578         """"""Validate X, used only in predict* methods.""""""
+--> 579         return self._validate_data(X, accept_sparse=""csr"", reset=False)
+    580 
+    581     def _check_X_y(self, X, y, reset=True):
+
+/usr/local/lib/python3.11/dist-packages/sklearn/base.py in _validate_data(self, X, y, reset, validate_separately, **check_params)
+    586 
+    587         if not no_val_X and check_params.get(""ensure_2d"", True):
+--> 588             self._check_n_features(X, reset=reset)
+    589 
+    590         return out
+
+/usr/local/lib/python3.11/dist-packages/sklearn/base.py in _check_n_features(self, X, reset)
+    387 
+    388         if n_features != self.n_features_in_:
+--> 389             raise ValueError(
+    390                 f""X has {n_features} features, but {self.__class__.__name__} ""
+    391                 f""is expecting {self.n_features_in_} features as input.""
+
+ValueError: X has 2969 features, but MultinomialNB is expecting 2962 features as input.
+
+
+Training code:
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.model_selection import train_test_split
+from sklearn.naive_bayes import MultinomialNB
+from sklearn.linear_model import LogisticRegression
+import pandas as pd
+
+# Fix: Properly select the columns for vectorization
+vectorizer = TfidfVectorizer()
+Kittarpola = train_db[['Synopsis', 'Tags']]
+X = vectorizer.fit_transform(Kittarpola['Synopsis'] + ' ' + Kittarpola['Tags']) 
+print(X)
+y = train_db['Genre']
+
+# Fix: Ensure correct split of data and labels
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+classifier1 = MultinomialNB()
+classifier1.fit(X_train, y_train)
+
+classifier2 = LogisticRegression()
+classifier2.fit(X_train, y_train)"
+10.42.0.118,-,2025-10-11 11:18:27,"When i went to submit my prediction:
+tesera =  test_db[['Synopsis', 'Tags']]
+X_2 = vectorizer.transform(tesera['Synopsis'] + ' ' + tesera['Tags']) 
+submit = pd.DataFrame({
+    'Id':simp.Id,
+    'Genre': classifier1.predict(X_2)
+})
+
+---------------------------------------------------------------------------
+ValueError                                Traceback (most recent call last)
+/tmp/ipykernel_38/3080990887.py in <cell line: 0>()
+      1 submit = pd.DataFrame({
+      2     'Id':simp.Id,
+----> 3     'Genre': classifier1.predict(X_2)
+      4 })
+
+/usr/local/lib/python3.11/dist-packages/sklearn/naive_bayes.py in predict(self, X)
+    103         """"""
+    104         check_is_fitted(self)
+--> 105         X = self._check_X(X)
+    106         jll = self._joint_log_likelihood(X)
+    107         return self.classes_[np.argmax(jll, axis=1)]
+
+/usr/local/lib/python3.11/dist-packages/sklearn/naive_bayes.py in _check_X(self, X)
+    577     def _check_X(self, X):
+    578         """"""Validate X, used only in predict* methods.""""""
+--> 579         return self._validate_data(X, accept_sparse=""csr"", reset=False)
+    580 
+    581     def _check_X_y(self, X, y, reset=True):
+
+/usr/local/lib/python3.11/dist-packages/sklearn/base.py in _validate_data(self, X, y, reset, validate_separately, **check_params)
+    586 
+    587         if not no_val_X and check_params.get(""ensure_2d"", True):
+--> 588             self._check_n_features(X, reset=reset)
+    589 
+    590         return out
+
+/usr/local/lib/python3.11/dist-packages/sklearn/base.py in _check_n_features(self, X, reset)
+    387 
+    388         if n_features != self.n_features_in_:
+--> 389             raise ValueError(
+    390                 f""X has {n_features} features, but {self.__class__.__name__} ""
+    391                 f""is expecting {self.n_features_in_} features as input.""
+
+ValueError: X has 2969 features, but MultinomialNB is expecting 2962 features as input.
+
+
+Training code:
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.model_selection import train_test_split
+from sklearn.naive_bayes import MultinomialNB
+from sklearn.linear_model import LogisticRegression
+import pandas as pd
+
+# Fix: Properly select the columns for vectorization
+vectorizer = TfidfVectorizer()
+Kittarpola = train_db[['Synopsis', 'Tags']]
+X = vectorizer.fit_transform(Kittarpola['Synopsis'] + ' ' + Kittarpola['Tags']) 
+print(X)
+y = train_db['Genre']
+
+# Fix: Ensure correct split of data and labels
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+classifier1 = MultinomialNB()
+classifier1.fit(X_train, y_train)
+
+classifier2 = LogisticRegression()
+classifier2.fit(X_train, y_train)"
+10.42.0.118,-,2025-10-11 11:24:55,"Dataset:
+/kaggle/input/the-gps-blackout-computer-vision-challenge/sample_submission.csv
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/train.csv
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test.csv
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/45.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/56.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/89.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/20.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/58.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/150.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/6.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/109.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/149.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/187.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/76.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/71.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/182.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/185.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/153.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/189.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/143.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/115.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/131.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/5.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/151.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/8.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/84.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/85.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/67.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/118.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/82.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/176.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/30.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/97.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/106.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/163.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/113.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/160.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/38.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/42.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/197.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/33.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/10.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/178.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/54.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/130.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/62.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/156.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/120.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/35.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/61.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/190.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/124.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/191.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/59.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/73.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/188.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/98.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/41.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/123.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/94.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/60.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/167.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/57.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/112.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/193.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/152.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/192.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/91.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/9.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/101.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/99.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/37.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/1.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/177.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/186.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/69.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/75.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/117.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/81.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/46.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/137.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/44.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/65.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/50.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/127.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/196.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/29.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/140.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/79.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/179.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/105.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/16.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/111.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/55.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/145.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/135.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/23.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/7.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/77.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/166.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/80.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/159.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/121.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/28.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/22.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/173.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/171.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/103.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/174.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/40.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/199.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/126.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/142.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/48.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/169.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/194.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/180.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/104.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/24.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/155.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/88.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/64.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/158.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/148.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/168.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/31.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/195.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/114.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/43.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/138.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/100.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/13.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/74.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/68.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/53.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/83.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/107.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/154.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/164.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/146.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/161.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/198.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/72.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/139.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/200.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/32.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/102.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/17.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/157.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/26.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/183.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/39.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/86.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/15.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/119.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/165.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/12.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/141.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/92.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/122.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/11.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/70.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/181.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/34.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/27.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/51.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/132.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/52.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/21.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/4.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/184.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/125.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/128.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/172.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/95.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/3.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/36.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/96.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/144.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/110.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/63.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/162.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/19.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/87.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/47.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/93.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/170.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/14.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/18.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/175.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/116.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/78.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/108.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/49.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/66.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/129.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/2.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/133.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/134.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/136.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/90.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/25.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/147.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/train/south_01.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/train/north_01.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/train/southeast_01.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/train/south_02.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/train/southwest_01.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/train/north_02.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/train/west_01.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/train/west_04.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/train/west_03.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/train/east_01.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/train/north_03.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/train/north_04.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/train/west_02.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/train/east_02.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/train/south_03.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/train/northwest_01.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/train/south_04.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/train/northeast_01.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/train/east_03.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/train/east_04.jpg
+
+
+Train data sample:
+
+	image_name 	label
+0 	east_01.jpg 	east
+1 	east_02.jpg 	east
+2 	east_03.jpg 	east
+3 	east_04.jpg 	east
+4 	north_01.jpg 	north
+
+
+My image loader:
+from PIL import Image
+import numpy as np
+
+def image_to_array64(image_path):
+    # @info Flattened grayscale 64X64 image
+    img = Image.open(image_path).convert('L')
+    img = img.resize((64,64))
+    arr = np.array(img,dtype=np.uint8)
+    flat_arr = arr.flatten()
+    return flat_arr.tolist()
+
+
+So, I want to get the image path from image_name column, and, create a new df, that will hold all the pixel's values from the image, afte that, i want to append it to the original dataset"
+10.42.0.118,-,2025-10-11 11:36:48,"Dataset:
+/kaggle/input/the-gps-blackout-computer-vision-challenge/sample_submission.csv
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/train.csv
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test.csv
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/45.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/56.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/89.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/20.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/58.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/150.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/6.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/109.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/149.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/187.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/76.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/71.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/182.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/185.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/153.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/189.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/143.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/115.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/131.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/5.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/151.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/8.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/84.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/85.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/67.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/118.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/82.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/176.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/30.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/97.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/106.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/163.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/113.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/160.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/38.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/42.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/197.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/33.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/10.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/178.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/54.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/130.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/62.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/156.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/120.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/35.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/61.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/190.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/124.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/191.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/59.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/73.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/188.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/98.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/41.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/123.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/94.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/60.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/167.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/57.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/112.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/193.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/152.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/192.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/91.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/9.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/101.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/99.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/37.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/1.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/177.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/186.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/69.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/75.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/117.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/81.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/46.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/137.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/44.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/65.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/50.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/127.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/196.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/29.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/140.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/79.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/179.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/105.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/16.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/111.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/55.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/145.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/135.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/23.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/7.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/77.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/166.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/80.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/159.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/121.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/28.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/22.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/173.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/171.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/103.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/174.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/40.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/199.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/126.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/142.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/48.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/169.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/194.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/180.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/104.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/24.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/155.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/88.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/64.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/158.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/148.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/168.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/31.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/195.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/114.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/43.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/138.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/100.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/13.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/74.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/68.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/53.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/83.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/107.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/154.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/164.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/146.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/161.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/198.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/72.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/139.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/200.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/32.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/102.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/17.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/157.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/26.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/183.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/39.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/86.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/15.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/119.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/165.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/12.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/141.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/92.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/122.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/11.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/70.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/181.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/34.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/27.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/51.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/132.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/52.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/21.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/4.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/184.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/125.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/128.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/172.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/95.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/3.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/36.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/96.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/144.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/110.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/63.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/162.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/19.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/87.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/47.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/93.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/170.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/14.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/18.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/175.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/116.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/78.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/108.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/49.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/66.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/129.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/2.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/133.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/134.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/136.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/90.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/25.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/147.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/train/south_01.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/train/north_01.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/train/southeast_01.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/train/south_02.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/train/southwest_01.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/train/north_02.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/train/west_01.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/train/west_04.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/train/west_03.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/train/east_01.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/train/north_03.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/train/north_04.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/train/west_02.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/train/east_02.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/train/south_03.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/train/northwest_01.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/train/south_04.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/train/northeast_01.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/train/east_03.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/train/east_04.jpg
+
+
+Train data sample:
+
+	image_name 	label
+0 	east_01.jpg 	east
+1 	east_02.jpg 	east
+2 	east_03.jpg 	east
+3 	east_04.jpg 	east
+4 	north_01.jpg 	north
+
+
+My image loader:
+from PIL import Image
+import numpy as np
+
+def image_to_array64(image_path):
+    # @info Flattened grayscale 64X64 image
+    img = Image.open(image_path).convert('L')
+    img = img.resize((64,64))
+    arr = np.array(img,dtype=np.uint8)
+    flat_arr = arr.flatten()
+    return flat_arr.tolist()
+
+
+So, I want to get the image path from image_name column, and, create a new df, that will hold all the pixel's values from the image_name column {column shall be created to hold pixels values, naming format pixel_i,where i is the index of yhe pixel}, after that, i want to append it to the original dataset."
+10.42.0.118,-,2025-10-11 11:39:11,who are you
+10.42.0.118,-,2025-10-11 11:41:37,"Dataset:
+/kaggle/input/the-gps-blackout-computer-vision-challenge/sample_submission.csv
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/train.csv
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test.csv
+
+
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/train/south_01.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/train/north_01.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/train/southeast_01.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/train/south_02.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/train/southwest_01.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/train/north_02.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/train/west_01.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/train/west_04.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/train/west_03.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/train/east_01.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/train/north_03.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/train/north_04.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/train/west_02.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/train/east_02.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/train/south_03.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/train/northwest_01.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/train/south_04.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/train/northeast_01.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/train/east_03.jpg
+/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/train/east_04.jpg
+
+
+Train data sample:
+
+	image_name 	label
+0 	east_01.jpg 	east
+1 	east_02.jpg 	east
+2 	east_03.jpg 	east
+3 	east_04.jpg 	east
+4 	north_01.jpg 	north
+
+
+My image loader:
+from PIL import Image
+import numpy as np
+
+def image_to_array64(image_path):
+    # @info Flattened grayscale 64X64 image
+    img = Image.open(image_path).convert('L')
+    img = img.resize((64,64))
+    arr = np.array(img,dtype=np.uint8)
+    flat_arr = arr.flatten()
+    return flat_arr.tolist()
+
+
+So, I want to get the image path from image_name column, and, create a new df, that will hold all the pixel's values from the image_name column {column shall be created to hold pixels values, naming format pixel_i,where i is the index of yhe pixel}, after that, i want to append it to the original dataset."
+10.42.0.118,-,2025-10-11 11:49:39,"fix the error:import pandas as pd
+
+train_df = train_data.copy() 
+
+def get_image_path(row):
+    return f""/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/train/{row['image_name']}""
+
+train_df['image_path'] = train_df.apply(get_image_path, axis=1)
+
+def get_pixel_values(image_path):
+    arr = np.array(Image.open(image_path).convert('L').resize((64, 64)), dtype=np.uint8)
+    return arr.flatten().tolist()
+
+for i in range(64*64):
+    train_df[f""pixel_{i}""] = train_df['image_path'].apply(get_pixel_values)
+
+train_df.drop('image_path', axis=1, inplace=True)
+#tmp/ipykernel_38/466298257.py:15: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`"
+10.42.0.118,-,2025-10-11 11:57:48,"Dataset X:
+ 	sepal length (cm) 	sepal width (cm) 	petal length (cm) 	petal width (cm)
+0 	5.1 	3.5 	1.4 	0.2
+1 	4.9 	3.0 	1.4 	0.2
+2 	4.7 	3.2 	1.3 	0.2
+3 	4.6 	3.1 	1.5 	0.2
+4 	5.0 	3.6 	1.4 	0.2
+
+Dataset Y:
+
+  2
+  0
+   1
+  2
+  1
+    0
+    0
+  1
+    2
+   1
+
+Now,what algorithm to use to predict the Y"
+10.42.0.118,-,2025-10-11 12:11:18,"Error:
+---------------------------------------------------------------------------
+ValueError                                Traceback (most recent call last)
+/tmp/ipykernel_37/1950394800.py in <cell line: 0>()
+----> 1 logreg_model.predict(tes)
+
+/usr/local/lib/python3.11/dist-packages/sklearn/linear_model/_base.py in predict(self, X)
+    417         """"""
+    418         xp, _ = get_namespace(X)
+--> 419         scores = self.decision_function(X)
+    420         if len(scores.shape) == 1:
+    421             indices = xp.astype(scores > 0, int)
+
+/usr/local/lib/python3.11/dist-packages/sklearn/linear_model/_base.py in decision_function(self, X)
+    398         xp, _ = get_namespace(X)
+    399 
+--> 400         X = self._validate_data(X, accept_sparse=""csr"", reset=False)
+    401         scores = safe_sparse_dot(X, self.coef_.T, dense_output=True) + self.intercept_
+    402         return xp.reshape(scores, -1) if scores.shape[1] == 1 else scores
+
+/usr/local/lib/python3.11/dist-packages/sklearn/base.py in _validate_data(self, X, y, reset, validate_separately, **check_params)
+    546             validated.
+    547         """"""
+--> 548         self._check_feature_names(X, reset=reset)
+    549 
+    550         if y is None and self._get_tags()[""requires_y""]:
+
+/usr/local/lib/python3.11/dist-packages/sklearn/base.py in _check_feature_names(self, X, reset)
+    479                 )
+    480 
+--> 481             raise ValueError(message)
+    482 
+    483     def _validate_data(
+
+ValueError: The feature names should match those that were passed during fit.
+Feature names unseen at fit time:
+- petal width (cm)
+
+
+code used in training:
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LogisticRegression
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.metrics import accuracy_score
+
+# Load datasets
+dataset_X = train_x
+
+dataset_Y = train_y
+
+# Split datasets into features and target
+X = dataset_X.drop('petal width (cm)', axis=1)
+y = dataset_Y
+
+# Split data into training and test sets
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# Train a logistic regression model
+logreg_model = LogisticRegression()
+logreg_model.fit(X_train, y_train)
+
+# Make predictions on the test set
+y_pred_logreg = logreg_model.predict(X_test)
+print('Logistic Regression Accuracy:', accuracy_score(y_test, y_pred_logreg))
+
+# Train a random forest classifier
+rf_model = RandomForestClassifier()
+rf_model.fit(X_train, y_train)
+
+# Make predictions on the test set
+y_pred_rf = rf_model.predict(X_test)
+print('Random Forest Classifier Accuracy:', accuracy_score(y_test, y_pred_rf))
+
+from sklearn.svm import SVC
+
+sss = SVC();
+sss.fit(X_train, y_train)
+y_pred_sss = sss.predict(X_test)
+print('Support Vektor Maksine Classifier Accuracy:', accuracy_score(y_test, y_pred_sss))
+
+
+train dataset:
+sepal length (cm) 	sepal width (cm) 	petal length (cm) 	petal width (cm)
+0 	5.1 	3.5 	1.4 	0.2
+1 	4.9 	3.0 	1.4 	0.2
+2 	4.7 	3.2 	1.3 	0.2
+3 	4.6 	3.1 	1.5 	0.2
+4 	5.0 	3.6 	1.4 	0.2
+
+test datasetr:
+
+	sepal length (cm) 	sepal width (cm) 	petal length (cm) 	petal width (cm)
+0 	0.016814 	0.334988 	-0.925815 	0.997495
+1 	0.016814 	0.239249 	-0.631267 	0.973848
+2 	0.578440 	-0.058374 	-0.550686 	0.745705
+3 	-0.550686 	0.141120 	-0.871576 	0.932039
+4 	-0.631267 	0.427380 	-0.871576 	0.963558
+... 	... 	... 	... 	...
+95 	0.215120 	-0.058374 	-0.925815 	0.909297
+96 	-0.631267 	0.334988 	-0.982453 	0.909297
+97 	-0.631267 	0.239249 	-0.442520 	0.963558
+98 	-0.464602 	0.427380 	-0.925815 	0.946300
+99 	-0.464602 	0.427380 	-0.925815 	0.946300"
+10.42.0.118,-,2025-10-11 12:12:42,"Error:
+---------------------------------------------------------------------------
+ValueError                                Traceback (most recent call last)
+/tmp/ipykernel_37/1950394800.py in <cell line: 0>()
+----> 1 logreg_model.predict(tes)
+
+/usr/local/lib/python3.11/dist-packages/sklearn/linear_model/_base.py in predict(self, X)
+    417         """"""
+    418         xp, _ = get_namespace(X)
+--> 419         scores = self.decision_function(X)
+    420         if len(scores.shape) == 1:
+    421             indices = xp.astype(scores > 0, int)
+
+/usr/local/lib/python3.11/dist-packages/sklearn/linear_model/_base.py in decision_function(self, X)
+    398         xp, _ = get_namespace(X)
+    399 
+--> 400         X = self._validate_data(X, accept_sparse=""csr"", reset=False)
+    401         scores = safe_sparse_dot(X, self.coef_.T, dense_output=True) + self.intercept_
+    402         return xp.reshape(scores, -1) if scores.shape[1] == 1 else scores
+
+/usr/local/lib/python3.11/dist-packages/sklearn/base.py in _validate_data(self, X, y, reset, validate_separately, **check_params)
+    546             validated.
+    547         """"""
+--> 548         self._check_feature_names(X, reset=reset)
+    549 
+    550         if y is None and self._get_tags()[""requires_y""]:
+
+/usr/local/lib/python3.11/dist-packages/sklearn/base.py in _check_feature_names(self, X, reset)
+    479                 )
+    480 
+--> 481             raise ValueError(message)
+    482 
+    483     def _validate_data(
+
+ValueError: The feature names should match those that were passed during fit.
+Feature names unseen at fit time:
+- petal width (cm)
+
+
+code used in training:
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LogisticRegression
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.metrics import accuracy_score
+
+# Load datasets
+dataset_X = train_x
+
+dataset_Y = train_y
+
+# Split datasets into features and target
+X = dataset_X.drop('petal width (cm)', axis=1)
+y = dataset_Y
+
+# Split data into training and test sets
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# Train a logistic regression model
+logreg_model = LogisticRegression()
+logreg_model.fit(X_train, y_train)
+
+# Make predictions on the test set
+y_pred_logreg = logreg_model.predict(X_test)
+print('Logistic Regression Accuracy:', accuracy_score(y_test, y_pred_logreg))
+
+# Train a random forest classifier
+rf_model = RandomForestClassifier()
+rf_model.fit(X_train, y_train)
+
+# Make predictions on the test set
+y_pred_rf = rf_model.predict(X_test)
+print('Random Forest Classifier Accuracy:', accuracy_score(y_test, y_pred_rf))
+
+from sklearn.svm import SVC
+
+sss = SVC();
+sss.fit(X_train, y_train)
+y_pred_sss = sss.predict(X_test)
+print('Support Vektor Maksine Classifier Accuracy:', accuracy_score(y_test, y_pred_sss))
+
+
+train dataset:
+sepal length (cm) 	sepal width (cm) 	petal length (cm) 	petal width (cm)
+0 	5.1 	3.5 	1.4 	0.2
+1 	4.9 	3.0 	1.4 	0.2
+2 	4.7 	3.2 	1.3 	0.2
+3 	4.6 	3.1 	1.5 	0.2
+4 	5.0 	3.6 	1.4 	0.2
+
+test datasetr:
+
+	sepal length (cm) 	sepal width (cm) 	petal length (cm) 	petal width (cm)
+0 	0.016814 	0.334988 	-0.925815 	0.997495
+1 	0.016814 	0.239249 	-0.631267 	0.973848
+2 	0.578440 	-0.058374 	-0.550686 	0.745705
+3 	-0.550686 	0.141120 	-0.871576 	0.932039
+4 	-0.631267 	0.427380 	-0.871576 	0.963558
+... 	... 	... 	... 	...
+95 	0.215120 	-0.058374 	-0.925815 	0.909297
+96 	-0.631267 	0.334988 	-0.982453 	0.909297
+97 	-0.631267 	0.239249 	-0.442520 	0.963558
+98 	-0.464602 	0.427380 	-0.925815 	0.946300
+99 	-0.464602 	0.427380 	-0.925815 	0.946300"
+10.42.0.118,-,2025-10-11 12:19:18,how to add regularization:sss = SVC()
+10.42.0.118,-,2025-10-11 12:23:12,"fix this code:import pandas as pd
+from PIL import Image
+import numpy as np
+
+pd.options.mode.chained_assignment = None  # default='warn'
+train_df = train_data.copy()
+
+def get_image_path(row):
+    return f""/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/train/{row['image_name']}""
+
+train_df['image_path'] = train_df.apply(get_image_path, axis=1)
+
+def get_pixel_values(image_path):
+    arr = np.array(Image.open(image_path).convert('L').resize((64, 64)), dtype=np.uint8)
+    return arr.flatten().tolist()
+
+# Apply the function to each row and assign result to new columns
+for i in range(64*64):
+    train_df[f""pixel_{i}""] = train_df['image_path'].apply(get_pixel_values)[i]
+
+train_df.drop('image_path', axis=1, inplace=True)"
+10.42.0.118,-,2025-10-11 12:27:06,sklearn naive_bayes
+10.42.0.118,-,2025-10-11 12:28:28,List of naive bayes algos found in sklearn
+10.42.0.118,-,2025-10-11 12:37:55,"I want to only the index i of the array to be appended to the dataframe.import pandas as pd
+from PIL import Image
+import numpy as np
+
+pd.options.mode.chained_assignment = None  # default='warn'
+train_df = train_data.copy()
+
+def get_image_path(row):
+    return f""/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/train/{row['image_name']}""
+
+train_df['image_path'] = train_df.apply(get_image_path, axis=1)
+
+def get_pixel_values(image_path):
+    arr = np.array(Image.open(image_path).convert('L').resize((64, 64)), dtype=np.uint8)
+    return arr.flatten().tolist()
+
+# Apply the function to each row and assign result to new columns
+for i in range(64*64):
+    train_df[f""pixel_{i}""] = train_df['image_path'].apply(get_pixel_values)[i]
+
+train_df.drop('image_path', axis=1, inplace=True)"
+10.42.0.118,-,2025-10-11 12:40:06,how to disable all python warnings
+10.42.0.118,-,2025-10-11 12:42:44,"Error:
+---------------------------------------------------------------------------
+KeyError                                  Traceback (most recent call last)
+/tmp/ipykernel_38/3735728017.py in <cell line: 0>()
+     17 # Apply the function to each row and assign result to new columns
+     18 for i in range(64*64):
+---> 19     train_df[f""pixel_{i}""] = train_df['image_path'].apply(get_pixel_values)[:, i]
+
+/usr/local/lib/python3.11/dist-packages/pandas/core/series.py in __getitem__(self, key)
+   1151             return self._get_rows_with_mask(key)
+   1152 
+-> 1153         return self._get_with(key)
+   1154 
+   1155     def _get_with(self, key):
+
+/usr/local/lib/python3.11/dist-packages/pandas/core/series.py in _get_with(self, key)
+   1161             )
+   1162         elif isinstance(key, tuple):
+-> 1163             return self._get_values_tuple(key)
+   1164 
+   1165         elif not is_list_like(key):
+
+/usr/local/lib/python3.11/dist-packages/pandas/core/series.py in _get_values_tuple(self, key)
+   1205 
+   1206         if not isinstance(self.index, MultiIndex):
+-> 1207             raise KeyError(""key of type tuple not found and not a MultiIndex"")
+   1208 
+   1209         # If key is contained, would have returned by now
+
+KeyError: 'key of type tuple not found and not a MultiIndex'
+Code:
+
+import pandas as pd
+from PIL import Image
+import numpy as np
+
+
+def get_image_path(row):
+    return f""/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/train/{row['image_name']}""
+
+train_df = train_data.copy()
+
+train_df['image_path'] = train_df.apply(get_image_path, axis=1)
+
+def get_pixel_values(image_path):
+    arr = np.array(Image.open(image_path).convert('L').resize((64, 64)), dtype=np.uint8)
+    return arr.flatten().tolist()
+
+# Apply the function to each row and assign result to new columns
+for i in range(64*64):
+    train_df[f""pixel_{i}""] = train_df['image_path'].apply(get_pixel_values)[:, i]"
+10.42.0.118,-,2025-10-11 12:45:02,"How to solve this problem:Dataset & Problem Overview
+Dataset Files
+
+The dataset provided for this competition contains the following files:
+
+    train.csv
+        Contains 50% of the full dataset.
+        Includes all features along with the Genre column.
+        Participants will use this file to train their models. 
+
+    test.csv
+        Contains the remaining 50% of the dataset.
+        Participants will use this file to make predictions for the public leaderboard. 
+
+    sample_submission.csv
+        A template submission file.
+        Shows the required format (ID and predicted Genre comma-separated).
+        Can be used to test submission code before uploading.
+
+Dataset Columns
+
+The dataset contains 11 columns (in addition to Genre for train and solution for scoring):
+Column Name 	Description
+Name 	Name of the K-Drama
+Aired Date 	First air date of the show (e.g., May 14, 2021)
+Year of release 	Year the show was released
+Original Network 	The network or platform that originally aired the show (e.g., Netflix, KBS)
+Aired On 	Day(s) of the week when episodes were aired
+Number of Episodes 	Total episodes in the series
+Duration 	Average duration of each episode (e.g., 52 min)
+Content Rating 	Age rating or content restrictions (e.g., 18+ Restricted)
+Rating 	Viewer rating (e.g., IMDb or internal rating)
+Synopsis 	Short description of the plot/story
+Tags 	Key themes or topics (comma-separated)
+Director 	Director(s) of the K-Drama
+Screenwriter 	Writer(s) of the series
+Cast 	Main actors/actresses
+Production companies 	Companies that produced the K-Drama
+Rank 	Rank based on popularity or rating
+Genre 	Target variable: comma-separated genres (only in train.csv and solution.csv)
+
+    Note: Some columns such as Genre are only available in train.csv and solution.csv, and not in test.csv.
+
+Multi-Label Target
+
+    The Genre column is comma-separated, meaning each show may belong to multiple genres (e.g., Drama, Romance, Family).
+    Participants must predict all applicable genres for each K-Drama.
+    The evaluation metric is Jaccard-based, rewarding partial matches proportionally.
+
+Usage Notes
+
+    train.csv → For training your model.
+    test.csv → Make predictions to submit for scoring.
+    sample_submission.csv → Template for submission format.
+
+Leaderboard Split:
+
+    Public: 50% of test rows
+    Private: 50% of test rows (used for final ranking)
+
+    No pre-trained models or external datasets are allowed.
+    Models must be built from scratch using libraries such as scikit-learn, NumPy, or custom code."
+10.42.0.118,-,2025-10-11 12:47:10,"What data to drop:Dataset & Problem Overview
+Dataset Files
+
+The dataset provided for this competition contains the following files:
+
+    train.csv
+        Contains 50% of the full dataset.
+        Includes all features along with the Genre column.
+        Participants will use this file to train their models. 
+
+    test.csv
+        Contains the remaining 50% of the dataset.
+        Participants will use this file to make predictions for the public leaderboard. 
+
+    sample_submission.csv
+        A template submission file.
+        Shows the required format (ID and predicted Genre comma-separated).
+        Can be used to test submission code before uploading.
+
+Dataset Columns
+
+The dataset contains 11 columns (in addition to Genre for train and solution for scoring):
+Column Name 	Description
+Name 	Name of the K-Drama
+Aired Date 	First air date of the show (e.g., May 14, 2021)
+Year of release 	Year the show was released
+Original Network 	The network or platform that originally aired the show (e.g., Netflix, KBS)
+Aired On 	Day(s) of the week when episodes were aired
+Number of Episodes 	Total episodes in the series
+Duration 	Average duration of each episode (e.g., 52 min)
+Content Rating 	Age rating or content restrictions (e.g., 18+ Restricted)
+Rating 	Viewer rating (e.g., IMDb or internal rating)
+Synopsis 	Short description of the plot/story
+Tags 	Key themes or topics (comma-separated)
+Director 	Director(s) of the K-Drama
+Screenwriter 	Writer(s) of the series
+Cast 	Main actors/actresses
+Production companies 	Companies that produced the K-Drama
+Rank 	Rank based on popularity or rating
+Genre 	Target variable: comma-separated genres (only in train.csv and solution.csv)
+
+    Note: Some columns such as Genre are only available in train.csv and solution.csv, and not in test.csv.
+
+Multi-Label Target
+
+    The Genre column is comma-separated, meaning each show may belong to multiple genres (e.g., Drama, Romance, Family).
+    Participants must predict all applicable genres for each K-Drama.
+    The evaluation metric is Jaccard-based, rewarding partial matches proportionally.
+
+Usage Notes
+
+    train.csv → For training your model.
+    test.csv → Make predictions to submit for scoring.
+    sample_submission.csv → Template for submission format.
+
+Leaderboard Split:
+
+    Public: 50% of test rows
+    Private: 50% of test rows (used for final ranking)
+
+    No pre-trained models or external datasets are allowed.
+    Models must be built from scratch using libraries such as scikit-learn, NumPy, or custom code."
+10.42.0.118,-,2025-10-11 12:58:15,how to make a randsomware
+10.42.0.118,-,2025-10-11 13:06:57,how to save a model using sklearn's joblib
+10.42.0.118,-,2025-10-11 13:09:20,"how to run this code in GPU:import pandas as pd
+from PIL import Image
+import numpy as np
+
+
+def get_image_path(row):
+    return f""/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/{row['image_name']}""
+
+test_df = test_db.copy()
+
+test_df['image_path'] = test_df.apply(get_image_path, axis=1)
+
+def get_pixel_values(image_path):
+    arr = np.array(Image.open(image_path).convert('L').resize((64, 64)), dtype=np.uint8)
+    return arr.flatten().tolist()
+
+# Apply the function to each row and assign result to new columns
+for i in range(64*64):
+    test_df[f""pixel_{i}""] = test_df['image_path'].apply(lambda x: get_pixel_values(x)[i])"
+10.42.0.118,-,2025-10-11 13:12:37,"Sample data from test_db:image_name
+0 	117.jpg
+1 	108.jpg
+2 	64.jpg
+3 	47.jpg
+4 	46.jpg
+... 	...
+195 	2.jpg
+196 	125.jpg
+197 	29.jpg
+198 	144.jpg
+199 	176.jpg
+
+image_name
+0 	117.jpg
+1 	108.jpg
+2 	64.jpg
+3 	47.jpg
+4 	46.jpg
+... 	...
+195 	2.jpg
+196 	125.jpg
+197 	29.jpg
+198 	144.jpg
+199 	176.jpg"
+10.42.0.118,-,2025-10-11 13:48:42,"how to run this code in GPU + make it fast:import pandas as pd
+from PIL import Image
+import numpy as np
+
+def get_image_path(row):
+return f""/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/{row['image_name']}""
+
+test_df = test_db.copy()
+
+test_df['image_path'] = test_df.apply(get_image_path, axis=1)
+
+def get_pixel_values(image_path):
+arr = np.array(Image.open(image_path).convert('L').resize((64, 64)), dtype=np.uint8)
+return arr.flatten().tolist()
+Apply the function to each row and assign result to new columns
+
+for i in range(64*64):
+test_df[f""pixel_{i}""] = test_df['image_path'].apply(lambda x: get_pixel_values(x)[i])"
+10.42.0.118,-,2025-10-11 14:00:35,"Eror:
+---------------------------------------------------------------------------
+ValueError                                Traceback (most recent call last)
+/tmp/ipykernel_37/1042165547.py in <cell line: 0>()
+     42     # assign result to new columns (modified from original code)
+     43     for i in range(64*64):
+---> 44         test_df.loc[:, f""pixel_{i}""] = pixel_values_batch[:, i].cpu().numpy()
+
+/usr/local/lib/python3.11/dist-packages/pandas/core/indexing.py in __setitem__(self, key, value)
+    909 
+    910         iloc = self if self.name == ""iloc"" else self.obj.iloc
+--> 911         iloc._setitem_with_indexer(indexer, value, self.name)
+    912 
+    913     def _validate_key(self, key, axis: AxisInt):
+
+/usr/local/lib/python3.11/dist-packages/pandas/core/indexing.py in _setitem_with_indexer(self, indexer, value, name)
+   1855                         if com.is_null_slice(indexer[0]):
+   1856                             # We are setting an entire column
+-> 1857                             self.obj[key] = value
+   1858                             return
+   1859                         elif is_array_like(value):
+
+/usr/local/lib/python3.11/dist-packages/pandas/core/frame.py in __setitem__(self, key, value)
+   4309         else:
+   4310             # set column
+-> 4311             self._set_item(key, value)
+   4312 
+   4313     def _setitem_slice(self, key: slice, value) -> None:
+
+/usr/local/lib/python3.11/dist-packages/pandas/core/frame.py in _set_item(self, key, value)
+   4522         ensure homogeneity.
+   4523         """"""
+-> 4524         value, refs = self._sanitize_column(value)
+   4525 
+   4526         if (
+
+/usr/local/lib/python3.11/dist-packages/pandas/core/frame.py in _sanitize_column(self, value)
+   5264 
+   5265         if is_list_like(value):
+-> 5266             com.require_length_match(value, self.index)
+   5267         arr = sanitize_array(value, self.index, copy=True, allow_2d=True)
+   5268         if (
+
+/usr/local/lib/python3.11/dist-packages/pandas/core/common.py in require_length_match(data, index)
+    571     """"""
+    572     if len(data) != len(index):
+--> 573         raise ValueError(
+    574             ""Length of values ""
+    575             f""({len(data)}) ""
+
+ValueError: Length of values (32) does not match length of index (200)
+
+code:
+import pandas as pd
+from PIL import Image
+import numpy as np
+import torch
+from torch.utils.data import Dataset, DataLoader
+from torchvision import transforms
+
+class PixelDataset(Dataset):
+    def __init__(self, test_df, image_paths):
+        self.test_df = test_df
+        self.image_paths = image_paths
+        
+    def __len__(self):
+        return len(self.test_df)
+    
+    def __getitem__(self, idx):
+        image_path = self.image_paths[idx]
+        arr = np.array(Image.open(image_path).convert('L').resize((64, 64)), dtype=np.uint8)
+        pixel_values = arr.flatten().tolist()
+        
+        # create a tensor for batch processing
+        return {
+            'pixel_values': torch.tensor(pixel_values, dtype=torch.uint8),
+            'image_name': self.test_df.iloc[idx]['image_name']
+        }
+
+# setup GPU (assuming CUDA is available)
+device = torch.device(""cuda:0"" if torch.cuda.is_available() else ""cpu"")
+def get_image_path(row):
+    return f""/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/{row['image_name']}""
+
+# create dataset and data loader
+test_df['image_path'] = test_df.apply(get_image_path, axis=1)
+dataset = PixelDataset(test_df, test_df['image_path'])
+batch_size = 32
+data_loader = DataLoader(dataset, batch_size=batch_size, shuffle=False)
+
+# process in batches for GPU efficiency
+for batch in data_loader:
+    pixel_values_batch = batch['pixel_values'].to(device)
+    
+    # assign result to new columns (modified from original code)
+    for i in range(64*64):
+        test_df.loc[:, f""pixel_{i}""] = pixel_values_batch[:, i].cpu().numpy()"
+10.42.0.118,-,2025-10-11 14:03:09,"Error:
+---------------------------------------------------------------------------
+ValueError                                Traceback (most recent call last)
+/tmp/ipykernel_37/555043598.py in <cell line: 0>()
+     43     for i in range(64*64):
+     44         test_df.loc[:, f""pixel_{i}""] = torch.zeros(len(test_df), dtype=torch.uint8)
+---> 45         test_df.iloc[:, i] = pixel_values_batch[:, i].cpu().numpy()
+
+/usr/local/lib/python3.11/dist-packages/pandas/core/indexing.py in __setitem__(self, key, value)
+    909 
+    910         iloc = self if self.name == ""iloc"" else self.obj.iloc
+--> 911         iloc._setitem_with_indexer(indexer, value, self.name)
+    912 
+    913     def _validate_key(self, key, axis: AxisInt):
+
+/usr/local/lib/python3.11/dist-packages/pandas/core/indexing.py in _setitem_with_indexer(self, indexer, value, name)
+   1940         if take_split_path:
+   1941             # We have to operate column-wise
+-> 1942             self._setitem_with_indexer_split_path(indexer, value, name)
+   1943         else:
+   1944             self._setitem_single_block(indexer, value, name)
+
+/usr/local/lib/python3.11/dist-packages/pandas/core/indexing.py in _setitem_with_indexer_split_path(self, indexer, value, name)
+   1996                     return self._setitem_with_indexer((pi, info_axis[0]), value[0])
+   1997 
+-> 1998                 raise ValueError(
+   1999                     ""Must have equal len keys and value ""
+   2000                     ""when setting with an iterable""
+
+ValueError: Must have equal len keys and value when setting with an iterable
+
+Cod:
+import pandas as pd
+from PIL import Image
+import numpy as np
+import torch
+from torch.utils.data import Dataset, DataLoader
+from torchvision import transforms
+
+class PixelDataset(Dataset):
+    def __init__(self, test_df, image_paths):
+        self.test_df = test_df
+        self.image_paths = image_paths
+        
+    def __len__(self):
+        return len(self.test_df)
+    
+    def __getitem__(self, idx):
+        image_path = self.image_paths[idx]
+        arr = np.array(Image.open(image_path).convert('L').resize((64, 64)), dtype=np.uint8)
+        pixel_values = arr.flatten().tolist()
+        
+        # create a tensor for batch processing
+        return {
+            'pixel_values': torch.tensor(pixel_values, dtype=torch.uint8),
+            'image_name': self.test_df.iloc[idx]['image_name']
+        }
+
+# setup GPU (assuming CUDA is available)
+device = torch.device(""cuda:0"" if torch.cuda.is_available() else ""cpu"")
+def get_image_path(row):
+    return f""/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/{row['image_name']}""
+
+# create dataset and data loader
+test_df['image_path'] = test_df.apply(get_image_path, axis=1)
+dataset = PixelDataset(test_df, test_df['image_path'])
+batch_size = 32
+data_loader = DataLoader(dataset, batch_size=batch_size, shuffle=False)
+
+# process in batches for 
+for batch in data_loader:
+    pixel_values_batch = batch['pixel_values'].to(device)
+    
+    # assign result to new columns (corrected code)
+    for i in range(64*64):
+        test_df.loc[:, f""pixel_{i}""] = torch.zeros(len(test_df), dtype=torch.uint8)
+        test_df.iloc[:, i] = pixel_values_batch[:, i].cpu().numpy()"
+10.42.0.118,-,2025-10-11 14:06:02,"ValueError: Shape of passed values is (4096, 32), indices imply (4096, 4096)"
+10.42.0.118,-,2025-10-11 14:11:06,"ValueError: Shape of passed values is (4096, 32), indices imply (4096, 4096)
+with an index that does not match its length.
+
+import pandas as pd
+from PIL import Image
+import numpy as np
+import torch
+from torch.utils.data import Dataset, DataLoader
+from torchvision import transforms
+
+class PixelDataset(Dataset):
+def init(self, test_df, image_paths):
+self.test_df = test_df
+self.image_paths = image_paths
+
+def __len__(self):
+    return len(self.test_df)
+
+def __getitem__(self, idx):
+    image_path = self.image_paths[idx]
+    arr = np.array(Image.open(image_path).convert('L').resize((64, 64)), dtype=np.uint8)
+    pixel_values = arr.flatten().tolist()
+    
+    # create a tensor for batch processing
+    return {
+        'pixel_values': torch.tensor(pixel_values, dtype=torch.uint8),
+        'image_name': self.test_df.iloc[idx]['image_name']
+    }
+
+setup GPU (assuming CUDA is available)
+
+device = torch.device(""cuda:0"" if torch.cuda.is_available() else ""cpu"")
+def get_image_path(row):
+return f""/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test/{row['image_name']}""
+create dataset and data loader
+
+test_df['image_path'] = test_df.apply(get_image_path, axis=1)
+dataset = PixelDataset(test_df, test_df['image_path'])
+batch_size = 32
+data_loader = DataLoader(dataset, batch_size=batch_size, shuffle=False)
+process in batches for
+
+for batch in data_loader:
+pixel_values_batch = batch['pixel_values'].to(device)
+
+# Use torch.cat() to stack the tensor along the specified dimension (0).
+stacked_pixels = torch.cat((pixel_values_batch.cpu(),), dim=0)
+
+test_df[['pixel_0', 'pixel_1', ..., 'pixel_63^63']] = pd.DataFrame(stacked_pixels.numpy().T, columns=[f'pixel_{i}' for i in range(64*64)])"

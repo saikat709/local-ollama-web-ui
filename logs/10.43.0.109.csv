@@ -1,0 +1,554 @@
+client_ip,handling_server,date_time,prompt
+10.43.0.109,-,2025-10-11 09:16:10,"What is this model capable of?
+if im getting error on kaggle, will i get the reason to verify how?
+Or, if im un-able to code a section up or dont know what should i use, will i get hhelp"
+10.43.0.109,-,2025-10-11 09:39:37,how to compare two datasets in pandas and how can i can i get the relation between those two
+10.43.0.109,-,2025-10-11 09:41:23,"i meant same database, same column"
+10.43.0.109,-,2025-10-11 09:42:45,"array([[5.1, 3.5, 1.4, 0.2],
+       [4.9, 3. , 1.4, 0.2],
+       [4.7, 3.2, 1.3, 0.2],
+       [4.6, 3.1, 1.5, 0.2],
+       [5. , 3.6, 1.4, 0.2],
+       [5.4, 3.9, 1.7, 0.4],
+       [4.6, 3.4, 1.4, 0.3],
+       [5. , 3.4, 1.5, 0.2],
+       [4.4, 2.9, 1.4, 0.2],
+how can i paste this array as Tabular data"
+10.43.0.109,-,2025-10-11 09:48:01,"data_1=pd.DataFrame(X)
+data_2=pd.DataFrame(y)
+
+howcan i combine these two datasets"
+10.43.0.109,-,2025-10-11 09:49:11,how can i add labels on them
+10.43.0.109,-,2025-10-11 09:54:00,"data_1=pd.DataFrame(X)
+data_2=pd.DataFrame(y)
+
+Add the labels here 
+combined_data['labels'] = ['sepal length','sepal width','petal length','petal width','target']"
+10.43.0.109,-,2025-10-11 09:58:45,"0 	5.1 	3.5 	1.4 	0.2 	0
+1 	4.9 	3.0 	1.4 	0.2 	0
+2 	4.7 	3.2 	1.3 	0.2 	0
+3 	4.6 	3.1 	1.5 	0.2 	0
+4 	5.0 	3.6 	1.4 	0.2 	0
+this and 
+0 	1 	-0.925815 	-0.350783 	0.985450 	0.198669 	0
+1 	2 	-0.982453 	0.141120 	0.985450 	0.198669 	0
+2 	3 	-0.999923 	-0.058374 	0.963558 	0.198669 	0
+3 	4 	-0.993691 	0.041581 	0.997495 	0.198669 	0
+4 	5 	-0.958924 	-0.442520 	0.985450 	0.198669 	0
+
+what could be the diference in features, one just gave lengths and another one this, how come one of them is minus, how can i get the formula, where i can get the answer frm the formula"
+10.43.0.109,-,2025-10-11 10:09:49,how to create submission file in pandas
+10.43.0.109,-,2025-10-11 10:26:23,how to take inputs in computer vision
+10.43.0.109,-,2025-10-11 10:33:33,"train_dataset = torchvision.datasets.CIFAR10(root='./data', train=True,
+                                        download=True, transform=transform)
+
+test_dataset = torchvision.datasets.CIFAR10(root='./data', train=False,
+                                       download=True, transform=transform)
+
+train_loader = torch.utils.data.DataLoader(train_dataset, batch_size=batch_size,
+                                          shuffle=True)
+
+test_loader = torch.utils.data.DataLoader(test_dataset, batch_size=batch_size,
+                                         shuffle=False)
+
+classes = ('plane', 'car', 'bird', 'cat',
+           'deer', 'dog', 'frog', 'horse', 'ship', 'truck')
+
+isnt it somthing like this"
+10.43.0.109,-,2025-10-11 10:40:38,NameError: name 'axes' is not defined
+10.43.0.109,-,2025-10-11 11:02:26,how can i get the mathmathical relationship between two curve lines in graph
+10.43.0.109,-,2025-10-11 11:22:30,what maths are needed to get denoise function or needed to get the answer of curve line co-relation
+10.43.0.109,-,2025-10-11 11:30:52,_SingleProcessDataLoaderIter' object has no attribute 'next'
+10.43.0.109,-,2025-10-11 11:40:12,How to use NLP
+10.43.0.109,-,2025-10-11 11:41:36,nlp in sklearn
+10.43.0.109,-,2025-10-11 11:44:47,"pure in sklearn, how to use nlp to solve one"
+10.43.0.109,-,2025-10-11 11:51:11,how to process information in NLP
+10.43.0.109,-,2025-10-11 11:52:29,how to use it to get the meaning of genre and stuff
+10.43.0.109,-,2025-10-11 11:56:52,"dataiter = iter(train_loader)
+images, labels = dataiter.next()
+
+why is this showing errors"
+10.43.0.109,-,2025-10-11 11:58:58,"train_loader = torch.utils.data.DataLoader('/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/train', batch_size=batch_size, shuffle=True)
+test_loader = torch.utils.data.DataLoader('/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/test', batch_size=batch_size, shuffle=False)
+this is the way i got the dataset, whats wrong here"
+10.43.0.109,-,2025-10-11 12:02:07,"AttributeError: '_SingleProcessDataLoaderIter' object has no attribute 'next'
+
+still gtting the same error"
+10.43.0.109,-,2025-10-11 12:03:22,"device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+
+num_epochs = 10
+batch_size = 32
+learning_rate = 0.001
+
+transform = transforms.Compose(
+[transforms.ToTensor(),
+transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))])
+Create data loaders
+
+train_loader = torch.utils.data.DataLoader(train_dataset, batch_size=batch_size, shuffle=True)
+test_loader = torch.torch.utils.data.DataLoader(test_dataset, batch_size=batch_size, shuffle=False)
+
+def imshow(imgs):
+imgs = imgs / 2 + 0.5   # unnormalize
+npimgs = imgs.numpy()
+plt.imshow(np.transpose(npimgs, (1, 2, 0)))
+plt.show()
+dataiter = iter(train_loader)
+
+images, labels = dataiter.next()
+img_grid = torchvision.utils.make_grid(images[0:25], nrow=5)
+imshow(img_grid)
+
+still having the same error"
+10.43.0.109,-,2025-10-11 12:04:41,"AttributeError: '_SingleProcessDataLoaderIter' object has no attribute 'next'
+
+still same error"
+10.43.0.109,-,2025-10-11 12:05:52,"device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+
+num_epochs = 10
+batch_size = 32
+learning_rate = 0.001
+
+transform = transforms.Compose([
+    transforms.ToTensor(),
+    transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))
+])
+
+# Create data loaders
+train_loader = torch.utils.data.DataLoader(train_dataset, batch_size=batch_size, shuffle=True)
+test_loader = torch.utils.data.DataLoader(test_dataset, batch_size=batch_size, shuffle=False)
+
+def imshow(imgs):
+    imgs = imgs / 2 + 0.5   # unnormalize
+    npimgs = imgs.numpy()
+    plt.imshow(np.transpose(npimgs, (1, 2, 0)))
+    plt.show()
+
+dataiter = iter(train_loader)
+images, labels = dataiter.next()
+img_grid = utils.make_grid(images[0:25], nrow=5)
+imshow(img_grid)
+
+This is the code, i didnt wrote any of te stuff you mentioned"
+10.43.0.109,-,2025-10-11 12:09:40,"what is this errpr.
+---------------------------------------------------------------------------
+KeyError                                  Traceback (most recent call last)
+/usr/local/lib/python3.11/dist-packages/pandas/core/indexes/base.py in get_loc(self, key)
+   3804         try:
+-> 3805             return self._engine.get_loc(casted_key)
+   3806         except KeyError as err:
+
+index.pyx in pandas._libs.index.IndexEngine.get_loc()
+
+index.pyx in pandas._libs.index.IndexEngine.get_loc()
+
+pandas/_libs/hashtable_class_helper.pxi in pandas._libs.hashtable.PyObjectHashTable.get_item()
+
+pandas/_libs/hashtable_class_helper.pxi in pandas._libs.hashtable.PyObjectHashTable.get_item()
+
+KeyError: 18
+
+The above exception was the direct cause of the following exception:
+
+KeyError                                  Traceback (most recent call last)
+/tmp/ipykernel_37/3383599156.py in <cell line: 0>()
+     26 # Get data iterator and next batch
+     27 dataiter = iter(train_loader)
+---> 28 images, labels = next(dataiter)
+     29 
+     30 # Display grid of images
+
+/usr/local/lib/python3.11/dist-packages/torch/utils/data/dataloader.py in __next__(self)
+    706                 # TODO(https://github.com/pytorch/pytorch/issues/76750)
+    707                 self._reset()  # type: ignore[call-arg]
+--> 708             data = self._next_data()
+    709             self._num_yielded += 1
+    710             if (
+
+/usr/local/lib/python3.11/dist-packages/torch/utils/data/dataloader.py in _next_data(self)
+    762     def _next_data(self):
+    763         index = self._next_index()  # may raise StopIteration
+--> 764         data = self._dataset_fetcher.fetch(index)  # may raise StopIteration
+    765         if self._pin_memory:
+    766             data = _utils.pin_memory.pin_memory(data, self._pin_memory_device)
+
+/usr/local/lib/python3.11/dist-packages/torch/utils/data/_utils/fetch.py in fetch(self, possibly_batched_index)
+     50                 data = self.dataset.__getitems__(possibly_batched_index)
+     51             else:
+---> 52                 data = [self.dataset[idx] for idx in possibly_batched_index]
+     53         else:
+     54             data = self.dataset[possibly_batched_index]
+
+/usr/local/lib/python3.11/dist-packages/torch/utils/data/_utils/fetch.py in <listcomp>(.0)
+     50                 data = self.dataset.__getitems__(possibly_batched_index)
+     51             else:
+---> 52                 data = [self.dataset[idx] for idx in possibly_batched_index]
+     53         else:
+     54             data = self.dataset[possibly_batched_index]
+
+/usr/local/lib/python3.11/dist-packages/pandas/core/frame.py in __getitem__(self, key)
+   4100             if self.columns.nlevels > 1:
+   4101                 return self._getitem_multilevel(key)
+-> 4102             indexer = self.columns.get_loc(key)
+   4103             if is_integer(indexer):
+   4104                 indexer = [indexer]
+
+/usr/local/lib/python3.11/dist-packages/pandas/core/indexes/base.py in get_loc(self, key)
+   3810             ):
+   3811                 raise InvalidIndexError(key)
+-> 3812             raise KeyError(key) from err
+   3813         except TypeError:
+   3814             # If we have a listlike key, _check_indexing_error will raise
+
+KeyError: 18"
+10.43.0.109,-,2025-10-11 12:13:19,"---------------------------------------------------------------------------
+KeyError                                  Traceback (most recent call last)
+/usr/local/lib/python3.11/dist-packages/pandas/core/indexes/base.py in get_loc(self, key)
+   3804         try:
+-> 3805             return self._engine.get_loc(casted_key)
+   3806         except KeyError as err:
+
+index.pyx in pandas._libs.index.IndexEngine.get_loc()
+
+index.pyx in pandas._libs.index.IndexEngine.get_loc()
+
+pandas/_libs/hashtable_class_helper.pxi in pandas._libs.hashtable.PyObjectHashTable.get_item()
+
+pandas/_libs/hashtable_class_helper.pxi in pandas._libs.hashtable.PyObjectHashTable.get_item()
+
+KeyError: 13
+
+The above exception was the direct cause of the following exception:
+
+KeyError                                  Traceback (most recent call last)
+/tmp/ipykernel_37/3383599156.py in <cell line: 0>()
+     26 # Get data iterator and next batch
+     27 dataiter = iter(train_loader)
+---> 28 images, labels = next(dataiter)
+     29 
+     30 # Display grid of images
+
+/usr/local/lib/python3.11/dist-packages/torch/utils/data/dataloader.py in __next__(self)
+    706                 # TODO(https://github.com/pytorch/pytorch/issues/76750)
+    707                 self._reset()  # type: ignore[call-arg]
+--> 708             data = self._next_data()
+    709             self._num_yielded += 1
+    710             if (
+
+/usr/local/lib/python3.11/dist-packages/torch/utils/data/dataloader.py in _next_data(self)
+    762     def _next_data(self):
+    763         index = self._next_index()  # may raise StopIteration
+--> 764         data = self._dataset_fetcher.fetch(index)  # may raise StopIteration
+    765         if self._pin_memory:
+    766             data = _utils.pin_memory.pin_memory(data, self._pin_memory_device)
+
+/usr/local/lib/python3.11/dist-packages/torch/utils/data/_utils/fetch.py in fetch(self, possibly_batched_index)
+     50                 data = self.dataset.__getitems__(possibly_batched_index)
+     51             else:
+---> 52                 data = [self.dataset[idx] for idx in possibly_batched_index]
+     53         else:
+     54             data = self.dataset[possibly_batched_index]
+
+/usr/local/lib/python3.11/dist-packages/torch/utils/data/_utils/fetch.py in <listcomp>(.0)
+     50                 data = self.dataset.__getitems__(possibly_batched_index)
+     51             else:
+---> 52                 data = [self.dataset[idx] for idx in possibly_batched_index]
+     53         else:
+     54             data = self.dataset[possibly_batched_index]
+
+/usr/local/lib/python3.11/dist-packages/pandas/core/frame.py in __getitem__(self, key)
+   4100             if self.columns.nlevels > 1:
+   4101                 return self._getitem_multilevel(key)
+-> 4102             indexer = self.columns.get_loc(key)
+   4103             if is_integer(indexer):
+   4104                 indexer = [indexer]
+
+/usr/local/lib/python3.11/dist-packages/pandas/core/indexes/base.py in get_loc(self, key)
+   3810             ):
+   3811                 raise InvalidIndexError(key)
+-> 3812             raise KeyError(key) from err
+   3813         except TypeError:
+   3814             # If we have a listlike key, _check_indexing_error will raise
+
+KeyError: 13
+now getting this error"
+10.43.0.109,-,2025-10-11 12:18:24,"---------------------------------------------------------------------------
+KeyError                                  Traceback (most recent call last)
+/usr/local/lib/python3.11/dist-packages/pandas/core/indexes/base.py in get_loc(self, key)
+   3804         try:
+-> 3805             return self._engine.get_loc(casted_key)
+   3806         except KeyError as err:
+
+index.pyx in pandas._libs.index.IndexEngine.get_loc()
+
+index.pyx in pandas._libs.index.IndexEngine.get_loc()
+
+pandas/_libs/hashtable_class_helper.pxi in pandas._libs.hashtable.PyObjectHashTable.get_item()
+
+pandas/_libs/hashtable_class_helper.pxi in pandas._libs.hashtable.PyObjectHashTable.get_item()
+
+KeyError: 13
+
+The above exception was the direct cause of the following exception:
+
+KeyError                                  Traceback (most recent call last)
+/tmp/ipykernel_37/3383599156.py in <cell line: 0>()
+     26 # Get data iterator and next batch
+     27 dataiter = iter(train_loader)
+---> 28 images, labels = next(dataiter)
+     29 
+     30 # Display grid of images
+
+/usr/local/lib/python3.11/dist-packages/torch/utils/data/dataloader.py in __next__(self)
+    706                 # TODO(https://github.com/pytorch/pytorch/issues/76750)
+    707                 self._reset()  # type: ignore[call-arg]
+--> 708             data = self._next_data()
+    709             self._num_yielded += 1
+    710             if (
+
+/usr/local/lib/python3.11/dist-packages/torch/utils/data/dataloader.py in _next_data(self)
+    762     def _next_data(self):
+    763         index = self._next_index()  # may raise StopIteration
+--> 764         data = self._dataset_fetcher.fetch(index)  # may raise StopIteration
+    765         if self._pin_memory:
+    766             data = _utils.pin_memory.pin_memory(data, self._pin_memory_device)
+
+/usr/local/lib/python3.11/dist-packages/torch/utils/data/_utils/fetch.py in fetch(self, possibly_batched_index)
+     50                 data = self.dataset.__getitems__(possibly_batched_index)
+     51             else:
+---> 52                 data = [self.dataset[idx] for idx in possibly_batched_index]
+     53         else:
+     54             data = self.dataset[possibly_batched_index]
+
+/usr/local/lib/python3.11/dist-packages/torch/utils/data/_utils/fetch.py in <listcomp>(.0)
+     50                 data = self.dataset.__getitems__(possibly_batched_index)
+     51             else:
+---> 52                 data = [self.dataset[idx] for idx in possibly_batched_index]
+     53         else:
+     54             data = self.dataset[possibly_batched_index]
+
+/usr/local/lib/python3.11/dist-packages/pandas/core/frame.py in __getitem__(self, key)
+   4100             if self.columns.nlevels > 1:
+   4101                 return self._getitem_multilevel(key)
+-> 4102             indexer = self.columns.get_loc(key)
+   4103             if is_integer(indexer):
+   4104                 indexer = [indexer]
+
+/usr/local/lib/python3.11/dist-packages/pandas/core/indexes/base.py in get_loc(self, key)
+   3810             ):
+   3811                 raise InvalidIndexError(key)
+-> 3812             raise KeyError(key) from err
+   3813         except TypeError:
+   3814             # If we have a listlike key, _check_indexing_error will raise
+
+KeyError: 13
+
+whats the reason for this error"
+10.43.0.109,-,2025-10-11 12:20:39,getting TypeError: cannot unpack non-iterable NoneType object
+10.43.0.109,-,2025-10-11 12:24:11,"class ConvNet(nn.Module):
+    def __init__(self):
+        super().__init__()
+        self.conv1 = nn.Conv2d(3, 32, 3)
+        self.pool = nn.MaxPool2d(2, 2)
+        self.conv2 = nn.Conv2d(32, 64, 3)
+        self.conv3 = nn.Conv2d(64, 64, 3)
+        self.fc1 = nn.Linear(64*4*4, 64)
+        self.fc2 = nn.Linear(64, 10)
+
+    def forward(self, x):
+        # N, 3, 32, 32
+        x = F.relu(self.conv1(x))   # -> N, 32, 30, 30
+        x = self.pool(x)            # -> N, 32, 15, 15
+        x = F.relu(self.conv2(x))   # -> N, 64, 13, 13
+        x = self.pool(x)            # -> N, 64, 6, 6
+        x = F.relu(self.conv3(x))   # -> N, 64, 4, 4
+        x = torch.flatten(x, 1)     # -> N, 1024
+        x = F.relu(self.fc1(x))     # -> N, 64
+        x = self.fc2(x)             # -> N, 10
+        return x
+
+
+model = ConvNet().to(device)
+
+criterion = nn.CrossEntropyLoss()
+optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate)
+
+n_total_steps = len(train_loader)
+for epoch in range(num_epochs):
+
+    running_loss = 0.0
+
+    for i, (images, labels) in enumerate(train_loader):
+        images = images.to(device)
+        labels = labels.to(device)
+
+        # Forward pass
+        outputs = model(images)
+        loss = criterion(outputs, labels)
+
+        # Backward and optimize
+        loss.backward()
+        optimizer.step()
+        optimizer.zero_grad()
+
+        running_loss += loss.item()
+
+    print(f'[{epoch + 1}] loss: {running_loss / n_total_steps:.3f}')
+
+print('Finished Training')
+PATH = './cnn.pth'
+torch.save(model.state_dict(), PATH)
+
+Now im getting error here"
+10.43.0.109,-,2025-10-11 12:27:04,getting keyerror of 8
+10.43.0.109,-,2025-10-11 12:33:09,in this code
+10.43.0.109,-,2025-10-11 12:37:52,"Error in the model's forward pass
+
+class ConvNet(nn.Module):
+def init(self):
+super().init()
+self.conv1 = nn.Conv2d(3, 32, 3)
+self.pool = nn.MaxPool2d(2, 2)
+self.conv2 = nn.Conv2d(32, 64, 3)
+self.conv3 = nn.Conv2d(64, 64, 3)
+self.fc1 = nn.Linear(6444, 64)
+self.fc2 = nn.Linear(64, 10)
+
+def forward(self, x):
+    # N, 3, 32, 32
+    x = F.relu(self.conv1(x))   # -> N, 32, 30, 30
+    x = self.pool(x)            # -> N, 32, 15, 15
+    x = F.relu(self.conv2(x))   # -> N, 64, 13, 13
+    x = self.pool(x)            # -> N, 64, 6, 6
+    x = F.relu(self.conv3(x))   # -> N, 64, 4, 4
+    x = torch.flatten(x, start_dim=1)     # -> N, 1024
+    x = F.relu(self.fc1(x))     # -> N, 64
+    x = self.fc2(x)             # -> N, 10
+    return x
+
+Error in the training loop
+
+model = ConvNet().to(device)
+
+criterion = nn.CrossEntropyLoss()
+optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate)
+
+n_total_steps = len(train_loader)
+for epoch in range(num_epochs):
+
+running_loss = 0.0
+
+for i, (images, labels) in enumerate(train_loader):
+    images = images.to(device)
+    labels = labels.to(device)
+
+    # Forward pass
+    outputs = model(images)
+    loss = criterion(outputs, labels)
+
+    # Backward and optimize
+    loss.backward()
+    optimizer.step()
+    optimizer.zero_grad()
+
+    running_loss += loss.item()
+
+print(f'[{epoch + 1}] loss: {running_loss / n_total_steps:.3f}')
+
+print('Finished Training')
+PATH = './cnn.pth'
+torch.save(model.state_dict(), PATH)
+
+this si the code where im getting a error"
+10.43.0.109,-,2025-10-11 12:49:40,how can i add my prediction in submission
+10.43.0.109,-,2025-10-11 12:58:15,"test_ids = test_dataset[""ID""].values
+
+submission = pd.DataFrame({
+""ID"": test_ids,
+""Genre"": y_hat
+})
+
+submission.to_csv(""submission3.csv"", index=False)
+print(""submission.csv generated"")
+
+I Dont have id in the input, but it wants id, how do i write it, lik natural number iwth id tag"
+10.43.0.109,-,2025-10-11 12:59:28,"test_ids = test_dataset[""ID""].values
+
+submission = pd.DataFrame({
+""ID"": test_ids,
+""Genre"": y_hat
+})
+
+submission.to_csv(""submission3.csv"", index=False)
+print(""submission.csv generated"")
+
+I Dont have id in the input, but it wants id, how do i write it, lik natural number iwth id tag"
+10.43.0.109,-,2025-10-11 13:09:59,"ids = list(range(len(test_dataset)))
+
+submission = pd.DataFrame({
+    ""id"": [(i+1) for i in (ids)],
+    ""Genre"": y_hat
+})
+
+submission.to_csv(""submission3.csv"", index=False)
+print(""submission.csv generated"")
+
+this isnt working, kaggl still showing errors of id not found ID column"
+10.43.0.109,-,2025-10-11 13:14:25,"ID column Id not found in submission
+still the same error"
+10.43.0.109,-,2025-10-11 13:36:31,"fig, axes = plt.subplots(2, 2, figsize=(12, 8))
+axes = axes.flatten()
+
+for i, feature in enumerate(feature_names):
+    # Sort the original values for smooth plotting
+    sort_idx = np.argsort(X_original[:50, i])
+    X_sorted = X_original[:50, i][sort_idx]
+    Y_noisy_sorted = train_df[feature].values[sort_idx]
+
+    axes[i].plot(X_sorted, Y_noisy_sorted, 'bo-', label='Noisy', alpha=0.7)
+    axes[i].plot(X_sorted, X_sorted, 'r--', label='Original', alpha=0.7)
+    axes[i].set_title(feature)
+    axes[i].set_xlabel(""Original value"")
+    axes[i].set_ylabel(""Feature value"")
+    axes[i].legend()
+
+plt.suptitle(""Original vs Noisy Features (First 50 Samples, Sorted)"", fontsize=14)
+plt.tight_layout()
+plt.show()
+
+is there a better way to represet it"
+10.43.0.109,-,2025-10-11 13:40:32,abit better and broad representation to know more about data
+10.43.0.109,-,2025-10-11 13:42:38,using graphs only
+10.43.0.109,-,2025-10-11 13:43:40,"fig, axes = plt.subplots(2, 2, figsize=(12, 8))
+axes = axes.flatten()
+
+for i, feature in enumerate(feature_names):
+# Sort the original values for smooth plotting
+sort_idx = np.argsort(X_original[:50, i])
+X_sorted = X_original[:50, i][sort_idx]
+Y_noisy_sorted = train_df[feature].values[sort_idx]
+
+axes[i].scatter(X_sorted, Y_noisy_sorted, label='Noisy', alpha=0.7)
+axes[i].plot(np.sort(X_original[:50, i]), np.sort(X_original[:50, i]), 'r--', label='Original', alpha=0.7)
+axes[i].set_title(feature)
+axes[i].set_xlabel(""Feature value"")
+axes[i].set_ylabel(""Original value"")  # swapped labels for clarity
+axes[i].legend()
+
+plt.suptitle(""Original vs Noisy Features (First 50 Samples, Sorted)"", fontsize=14)
+plt.tight_layout()
+plt.show()
+
+i mean this, give me more codes so ican varify the graph more"
+10.43.0.109,-,2025-10-11 13:45:32,Add more feature or another type of graph to varify the data
+10.43.0.109,-,2025-10-11 13:49:29,well which one is more effctive for data visualizing
+10.43.0.109,-,2025-10-11 13:52:02,i mean which graph/plot in matplotlib will help me the most to get the noise function or to judge the data more and compare it
+10.43.0.109,-,2025-10-11 13:58:32,"def denoise_sqrt_clip(noisy_data):
+  clipped_data = np.clip(noisy_data, 0, None)
+  denoised_data = np.sqrt(clipped_data)
+  return denoised_data
+
+What could be other mathemathical option to check
+It curved and stays down in low"
+10.43.0.109,-,2025-10-11 14:09:11,hmm some others which will give value down sqrt
+10.43.0.109,-,2025-10-11 14:10:11,"other than those stuff sqrt, exp, log other stuff"

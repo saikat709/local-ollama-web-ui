@@ -1,0 +1,398 @@
+client_ip,handling_server,date_time,prompt
+10.42.0.103,-,2025-10-11 09:44:04,"Overview
+🎭
+
+Meet Aera, a devoted Film and Drama Studies student with a heart full of stories and a dream of becoming a director who changes how the world sees emotions on screen.
+
+Her mentor, Professor Haruto, is a legendary figure in their university — eccentric, brilliant, and deeply passionate about cinema. He’s the kind of professor who quotes classic Korean dramas in class and believes that “data tells the real story behind every masterpiece.”
+
+For months, Haruto had been preparing his magnum opus — a massive research presentation for the FilmFare Local Showcase, the university’s grandest annual event where film scholars, critics, and students come together to celebrate the art of storytelling.
+This showcase wasn’t just another presentation — it was his reputation, legacy, and pride on the line.
+
+    But disaster struck the night before the showcase
+
+As the clock hit midnight, Haruto inserted his old pen drive into his laptop… only to be greeted by a single line of horror:
+
+    “Drive not readable. Files corrupted”
+
+Years of his research — gone.
+The carefully labeled K-Drama dataset, a record of thousands of dramas and their genres, had lost half its entries.
+Only 50% of the genre data remained intact. The other half? Completely blank.
+
+Panic set in. The presentation was due in just a few hours, and without the genre analysis, his entire talk would collapse.
+
+In a moment of desperation, Haruto called his most promising student — Aera.
+She had always been fascinated by how genres shape emotions, and she had built small models for fun before.
+Now, this wasn’t a classroom assignment anymore — it was a real challenge.
+
+Haruto’s voice trembled as he said:
+
+    “Aera… my dataset—it’s gone. Half of it is missing. I can’t show anything tomorrow. You’re my only hope”
+
+The Mission
+
+Aera now has only 5 hours to recover the missing genre labels from the corrupted dataset before sunrise.
+
+The dataset, thankfully, still has:
+
+    Some K-Dramas with known genres
+    And the rest — dramas with missing genres that need to be predicted
+
+The university auditorium will be full by morning. Professors, critics, and fellow students will be watching.
+If Aera fails, Haruto’s years of research — and perhaps his reputation — will crumble.
+
+But if she succeeds…
+She’ll not only save her professor but also prove that even broken data can tell beautiful stories again.
+
+Your task?
+Step into Aera’s shoes.
+Help her predict the missing genres of the dramas using the remaining data — accurately, efficiently, and creatively.
+You have limited time and limited data — can you bring back the lost stories before dawn?
+
+Constraint:
+Due to a sudden router DNS failure at Aera’s dorm, she can’t access any external model repositories or pretrained libraries. That means no pre-built embeddings, no sentence transformers, and no pretrained neural networks.
+She must design everything from scratch — craft her own model depending on other basic libraries for NLP to recover the lost genres before sunrise.
+
+    “True creativity begins where convenience ends”
+
+Objective:
+Predict the lost Genre values in the K-Drama dataset.
+Your model’s accuracy will determine whether Aera becomes the university’s hero — or the student who couldn’t save her professor’s final act.
+
+Start
+4 days ago
+Close
+5 hours to go
+Description
+
+You will be given a dataset of K-Dramas with details such as titles, cast, directors, summaries, and other metadata.
+Your task is to predict the genre(s) of each drama in the test set based on the available information.
+
+Remember you can’t use any pretrained models or Hugging Face libraries here as there are some problems in Aera's local network that blocks HF. Now, no time to solve the router issue, Aera decides to get into raw codinf.
+
+You must build your own NLP solution from scratch just like Aera, working through the night to save the day!
+
+Good luck!
+May your models be as dramatic in methodology and accuracy themselves. 💫
+Evaluation
+
+Submissions are evaluated using a multi-label genre matching metric based on the Jaccard Index (Intersection over Union).
+
+For each K-Drama in the test set:
+
+    If all genres are predicted correctly, the score is 100%.
+    Partial matches are proportionally rewarded based on overlap.
+    The final score is the average over all rows and is expressed as a percentage (0–100).
+
+The leaderboard is split 50/50 into Public and Private sets:
+
+    Public leaderboard is visible during the competition.
+    Private leaderboard determines the final ranking.
+
+Submission File
+
+For each ID in the test set, you must predict the genres as a comma-separated list.
+Your submission file must include a header and have the following format:
+Id 	Genre
+1 	Drama, Romance
+2 	Action, Crime, Comedy
+3 	Life, Drama
+
+Sample submission file has achieved 13% (rounded) in the current setting"
+10.42.0.103,-,2025-10-11 09:51:43,Give me a standard regression code in python
+10.42.0.103,-,2025-10-11 10:01:29,"NameError                                 Traceback (most recent call last)
+/tmp/ipykernel_37/4210105663.py in <cell line: 0>()
+      6 
+      7 # Assume 'K-Drama dataset' is your dataset with features and target variable
+----> 8 X = df.drop('target', axis=1)  # Features
+      9 y = df['target']  # Target variable
+     10 
+
+NameError: name 'df' is not defined"
+10.42.0.103,-,2025-10-11 10:05:38,"---------------------------------------------------------------------------
+KeyError                                  Traceback (most recent call last)
+/tmp/ipykernel_37/466442912.py in <cell line: 0>()
+      2 
+      3 # Feature and target variable selection
+----> 4 X = data.drop('target', axis=1)  # Features
+      5 y = data['target']  # Target variable
+
+/usr/local/lib/python3.11/dist-packages/pandas/core/frame.py in drop(self, labels, axis, index, columns, level, inplace, errors)
+   5579                 weight  1.0     0.8
+   5580         """"""
+-> 5581         return super().drop(
+   5582             labels=labels,
+   5583             axis=axis,
+
+/usr/local/lib/python3.11/dist-packages/pandas/core/generic.py in drop(self, labels, axis, index, columns, level, inplace, errors)
+   4786         for axis, labels in axes.items():
+   4787             if labels is not None:
+-> 4788                 obj = obj._drop_axis(labels, axis, level=level, errors=errors)
+   4789 
+   4790         if inplace:
+
+/usr/local/lib/python3.11/dist-packages/pandas/core/generic.py in _drop_axis(self, labels, axis, level, errors, only_slice)
+   4828                 new_axis = axis.drop(labels, level=level, errors=errors)
+   4829             else:
+-> 4830                 new_axis = axis.drop(labels, errors=errors)
+   4831             indexer = axis.get_indexer(new_axis)
+   4832 
+
+/usr/local/lib/python3.11/dist-packages/pandas/core/indexes/base.py in drop(self, labels, errors)
+   7068         if mask.any():
+   7069             if errors != ""ignore"":
+-> 7070                 raise KeyError(f""{labels[mask].tolist()} not found in axis"")
+   7071             indexer = indexer[~mask]
+   7072         return self.delete(indexer)
+
+KeyError: ""['target'] not found in axis"""
+10.42.0.103,-,2025-10-11 10:10:11,"File ""/tmp/ipykernel_37/1875250547.py"", line 4
+    X = data.drop('Drama', train.csv=1)  # Features
+                           ^
+SyntaxError: expression cannot contain assignment, perhaps you meant ""==""?"
+10.42.0.103,-,2025-10-11 10:29:15,"Iris - Your Favourite Dataset
+
+The world is full of obvious things which nobody by any chance ever observes - Sherlock Holmes
+Iris - Your Favourite Dataset
+Overview
+
+An evil and playful jester has turned up to become an antagonist in the field of AI. Historians are assuming he is the reincarnation of an evil data scientist. He has taken the classic Iris dataset and applied a single mathematical transformation to all the features. Both the training and testing data are now “distorted” in a clever way.
+
+The jester loves to tangle the minds of data scientists, leaving subtle clues in the data. Your challenge is to explore, visualize, and detect the transformation he used. Can you figure out his trick and reveal the original patterns in the data? Or will you be another victim of the joker's trickery ?
+N.B :
+
+    Before the competition ends, please make sure to share your code file with the host of the competition. It should be the code of your best performing model. If you fail to do this, your submission shall be disregarded.
+    The jester has also provided a baseline code for you so that you have better chances of winning against him. You can view the baseline code in the Discussion tab.
+
+Start
+3 days ago
+Close
+4 hours to go
+Description
+
+The Iris dataset, often called the simplest of all datasets, is here to give you a bit of nostalgia—about the time you first started learning AI and data science, that first thrill of building a model, and the happiness when you saw a good accuracy score.
+
+You must have heard about the Iris dataset before, but let’s repeat just for the sake of it.
+The dataset contains measurements of three species of the iris flower. It has four numerical features—petal length, petal width, sepal length, and sepal width—that help you classify the flowers into their respective species.
+
+Here, you will get the same dataset but with a twist. You have to classify the same three flower classes, but both your training and testing data have been distorted by the clever jester. The jester has given you a hint: 'all the features have been treated with a structured noise. The new distorted values are simply the original values after being passed through a specific mathematical function. If you find the noise function and denoise the distorted values, solving this version of the Iris dataset becomes straightforward.'
+
+If you’ve worked with the Iris dataset before, you know it’s usually a walk in the park because the species can often be separated just by looking at plots. But this time, things might look a little different.
+
+You can use anything and everything at your disposal, including the original Iris dataset from sklearn. You can import the original dataset without distorted values for comparison.
+
+# Import libraries
+import pandas as pd
+from sklearn.datasets import load_iris
+
+# Load the Iris dataset
+iris = load_iris()
+X = iris.data
+y = iris.target
+
+Note left by the jester:
+All features have been transformed using the same noise function. Both the train and test datasets use this function. The function is a single mathematical operation. This task tests whether you can remove noise based on probabilistic or deterministic methods.
+
+A small piece of advice:
+The jester loves to tangle your thoughts. Try to visualize what you know. Simple mathematical reasoning and knowledge about graphs may crack the code. Overthinking is a sin.
+
+You’re going to have a great time with this problem… or will you? 🌸
+Evaluation
+
+Submissions are evaluated using the macro-averaged F1-score.
+
+For each class i, the F1-score is defined as:
+
+where
+
+and ( TP_i ), ( FP_i ), and ( FN_i ) represent the true positives, false positives, and false negatives for class i.
+
+The macro F1-score is then computed as the simple average across all classes:
+
+Each row in the test set corresponds to one flower sample.
+Your goal is to predict the correct species label (target) for each ID.
+
+Public leaderboard scores are calculated on 30% of the test data ,
+and private leaderboard scores are calculated on the remaining 70%
+Submission Format
+
+To submit, upload a CSV file with exactly these two columns:
+ID 	target
+51 	0
+52 	1
+53 	2
+… 	…
+Requirements:
+
+    The ID values must exactly match those provided in the test set.
+    The target column should contain your predicted class labels (0, 1, or 2).
+    Do not include any extra columns or headers besides ID and target.
+
+Example Submission
+
+ID,target
+51,1
+52,0
+53,2
+
+Your final score on the leaderboard will be computed as the macro F1-score between your predictions and the hidden ground-truth labels using:
+
+from sklearn.metrics import f1_score
+f1_score(y_true, y_pred, average='macro')"
+10.42.0.103,-,2025-10-11 10:41:42,"import pandas as pd
+import numpy as np
+from sklearn.datasets import load_iris
+from sklearn.model_selection import train_test_split
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.metrics import f1_score
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+# Load the Iris dataset
+iris = load_iris()
+X = iris.data
+y = iris.target
+
+# Load your distorted dataset here
+# distorted_data = pd.read_csv(""path/to/your/distorted_data.csv"")
+
+# EDA: Visualize the original and distorted datasets
+def visualize_data(X, y):
+    df = pd.DataFrame(X, columns=['sepal length', 'sepal width', 'petal length', 'petal width'])
+    df['species'] = y
+    sns.pairplot(df, hue='species')
+    plt.show()
+
+# visualizing original data
+visualize_data(X, y)
+
+# Hypothesize and reverse the transformation
+def reverse_transformation(data):
+    # Example: if it was a logarithmic transformation, reverse it using exp
+    return np.exp(data)  # Replace with your actual reverse logic
+
+# Denoised data
+# denoised_X = reverse_transformation(distorted_data)
+
+# Model training
+X_train, X_test, y_train, y_test = train_test_split(denoised_X, y, test_size=0.3, random_state=42)
+model = RandomForestClassifier()
+model.fit(X_train, y_train)
+
+# Predictions
+y_pred = model.predict(X_test)
+
+# Evaluation
+score = f1_score(y_test, y_pred, average='macro')
+print(f'Macro F1 Score: {score}')"
+10.42.0.103,-,2025-10-11 10:44:21,"---------------------------------------------------------------------------
+NameError                                 Traceback (most recent call last)
+/tmp/ipykernel_37/2088968377.py in <cell line: 0>()
+     23     return np.exp(data)
+     24 
+---> 25 X_train, X_test, y_train, y_test = train_test_split(denoised_X, y, test_size=0.3, random_state=42)
+     26 model = RandomForestClassifier()
+     27 model.fit(X_train, y_train)
+
+NameError: name 'denoised_X' is not defined"
+10.42.0.103,-,2025-10-11 14:06:40,"ID	target
+51	1
+52	1
+53	1
+54	1
+55	1
+56	1
+57	1
+58	1
+59	1
+60	1
+61	1
+62	1
+63	1
+64	1
+65	0
+66	1
+67	1
+68	1
+69	1
+70	1
+71	1
+72	1
+73	1
+74	1
+75	1
+76	1
+77	1
+78	1
+79	1
+80	1
+81	1
+82	1
+83	1
+84	1
+85	1
+86	1
+87	1
+88	1
+89	1
+90	1
+91	1
+92	1
+93	1
+94	1
+95	1
+96	1
+97	1
+98	1
+99	1
+100	1
+101	1
+102	1
+103	1
+104	1
+105	1
+106	1
+107	1
+108	0
+109	1
+110	1
+111	1
+112	1
+113	1
+114	1
+115	0
+116	1
+117	1
+118	1
+119	1
+120	1
+121	1
+122	1
+123	1
+124	1
+125	1
+126	1
+127	1
+128	1
+129	0
+130	0
+131	1
+132	1
+133	1
+134	1
+135	1
+136	1
+137	1
+138	1
+139	1
+140	1
+141	1
+142	1
+143	0
+144	1
+145	1
+146	1
+147	1
+148	1
+149	1
+150	1"

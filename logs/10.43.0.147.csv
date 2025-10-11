@@ -1,0 +1,1618 @@
+client_ip,handling_server,date_time,prompt
+10.43.0.147,-,2025-10-11 09:18:35,Hello.
+10.43.0.147,-,2025-10-11 09:19:41,Why does the typeError error occur in Python?
+10.43.0.147,-,2025-10-11 09:33:26,How do i load the iris dataset from sklearn?
+10.43.0.147,-,2025-10-11 09:34:38,HOw do i load the iris dataset with sklearn?
+10.43.0.147,-,2025-10-11 09:51:19,How do i load a image dataset for tensorflow keras models? The labels are in a csv file with the name of the file
+10.43.0.147,-,2025-10-11 09:52:35,BUT HOW DO i assign the labels
+10.43.0.147,-,2025-10-11 09:54:06,"How do I assign labels to images to feed a tensorflow model? the labels are stored in a csv file looking something like this: east_01.jpg
+	east
+east_02.jpg
+	east
+east_03.jpg
+	east
+east_04.jpg
+	east
+north_01.jpg
+	north
+north_02.jpg
+	north
+north_03.jpg
+	north
+north_04.jpg
+	north
+northeast_01.jpg
+	north-east
+northwest_01.jpg
+	north-west
+south_01.jpg
+	south
+south_02.jpg
+	south
+south_03.jpg
+	south
+south_04.jpg
+	south
+southeast_01.jpg
+	south-east
+southwest_01.jpg
+	south-west
+west_01.jpg
+	west
+west_02.jpg
+	west
+west_03.jpg
+	west
+west_04.jpg
+	west"
+10.43.0.147,-,2025-10-11 10:00:33,"Apply softmax to these : from sklearn.datasets import load_iris
+import pandas as pd
+
+# Load iris dataset
+iris = load_iris()
+
+# Convert to Pandas DataFrame for easier manipulation
+df = pd.DataFrame(data=iris.data, columns=iris.feature_names)
+df['target'] = iris.target  # Add target variable as a column
+
+print(df.head())  # Display first few rows of the dataset"
+10.43.0.147,-,2025-10-11 10:01:39,"softmax:    sepal length (cm)  sepal width (cm)  petal length (cm)  petal width (cm)  
+
+0                5.1               3.5                1.4               0.2
+
+1                4.9               3.0                1.4               0.2
+
+2                4.7               3.2                1.3               0.2
+
+3                4.6               3.1                1.5               0.2
+
+4                5.0               3.6                1.4               0.2
+
+target
+
+0       0
+
+1       0
+
+2       0
+
+3       0
+
+4       0
+
+apply softmax to these values"
+10.43.0.147,-,2025-10-11 10:04:07,"Apply sigmoid: import pandas as pd
+train_data=pd.read_csv('/kaggle/input/iris-your-favourite-dataset/train.csv')
+print(train_data.head())
+
+   ID  sepal length (cm)  sepal width (cm)  petal length (cm)  \
+0   1          -0.925815         -0.350783           0.985450   
+1   2          -0.982453          0.141120           0.985450   
+2   3          -0.999923         -0.058374           0.963558   
+3   4          -0.993691          0.041581           0.997495   
+4   5          -0.958924         -0.442520           0.985450   
+
+   petal width (cm)  target  
+0          0.198669       0  
+1          0.198669       0  
+2          0.198669       0  
+3          0.198669       0  
+4          0.198669       0"
+10.43.0.147,-,2025-10-11 10:05:21,"Apply sigmoid: import pandas as pd
+train_data=pd.read_csv('/kaggle/input/iris-your-favourite-dataset/train.csv')
+print(train_data.head())
+
+ID  sepal length (cm)  sepal width (cm)  petal length (cm)  
+
+0   1          -0.925815         -0.350783           0.985450
+
+1   2          -0.982453          0.141120           0.985450
+
+2   3          -0.999923         -0.058374           0.963558
+
+3   4          -0.993691          0.041581           0.997495
+
+4   5          -0.958924         -0.442520           0.985450
+
+petal width (cm)  target
+
+0          0.198669       0
+
+1          0.198669       0
+
+2          0.198669       0
+
+3          0.198669       0
+
+4          0.198669       0"
+10.43.0.147,-,2025-10-11 10:06:56,"change the code to apply sigmoid: import numpy as np
+
+# Input data (features and target)
+X = np.array([[5.1, 3.5, 1.4, 0.2],
+              [4.9, 3.0, 1.4, 0.2],
+              [4.7, 3.2, 1.3, 0.2],
+              [4.6, 3.1, 1.5, 0.2],
+              [5.0, 3.6, 1.4, 0.2]])
+
+y = np.array([0, 0, 0, 0, 0])
+
+# Define softmax function
+def softmax(x):
+    e_x = np.exp(x - np.max(x))
+    return e_x / e_x.sum()
+
+# Apply softmax to input features (columns)"
+10.43.0.147,-,2025-10-11 10:09:32,"Do you see any relation between the two?   ID  sepal length (cm)  sepal width (cm)  petal length (cm)  \
+0   1          -0.925815         -0.350783           0.985450   
+1   2          -0.982453          0.141120           0.985450   
+2   3          -0.999923         -0.058374           0.963558   
+3   4          -0.993691          0.041581           0.997495   
+4   5          -0.958924         -0.442520           0.985450   
+
+   petal width (cm)  target  
+0          0.198669       0  
+1          0.198669       0  
+2          0.198669       0  
+3          0.198669       0  
+4          0.198669       0  
+ANOTHER: from sklearn.datasets import load_iris
+import pandas as pd
+
+# Load iris dataset
+iris = load_iris()
+
+# Convert to Pandas DataFrame for easier manipulation
+df = pd.DataFrame(data=iris.data, columns=iris.feature_names)
+df['target'] = iris.target  # Add target variable as a column
+
+print(df.head())  # Display first few rows of the dataset
+
+   sepal length (cm)  sepal width (cm)  petal length (cm)  petal width (cm)  \
+0                5.1               3.5                1.4               0.2   
+1                4.9               3.0                1.4               0.2   
+2                4.7               3.2                1.3               0.2   
+3                4.6               3.1                1.5               0.2   
+4                5.0               3.6                1.4               0.2   
+
+   target  
+0       0  
+1       0  
+2       0  
+3       0  
+4       0"
+10.43.0.147,-,2025-10-11 10:11:17,"Apply scaler: aPPLY scaler:    sepal length (cm)  sepal width (cm)  petal length (cm)  petal width (cm)  
+
+0                5.1               3.5                1.4               0.2
+
+1                4.9               3.0                1.4               0.2
+
+2                4.7               3.2                1.3               0.2
+
+3                4.6               3.1                1.5               0.2
+
+4                5.0               3.6                1.4               0.2
+
+target
+
+0       0
+
+1       0
+
+2       0
+
+3       0
+
+4       0"
+10.43.0.147,-,2025-10-11 10:19:23,"How do i add a type of a dataset to a folder? I have a dataset with names 'west_01.jpg', 'west_02.jpg', so on, also, north, south, east, northwest etc i want the images of a class to be joined in a single folder."
+10.43.0.147,-,2025-10-11 10:21:29,"---------------------------------------------------------------------------
+OSError                                   Traceback (most recent call last)
+/tmp/ipykernel_37/2074052707.py in <cell line: 0>()
+      8 for class_name in class_names:
+      9     folder_path = os.path.join(dataset_root, class_name)
+---> 10     os.makedirs(folder_path, exist_ok=True)
+     11 
+     12 # Move images to respective folders based on their names
+
+/usr/lib/python3.11/os.py in makedirs(name, mode, exist_ok)
+
+OSError: [Errno 30] Read-only file system: '/kaggle/input/the-gps-blackout-computer-vision-challenge/dataset/dataset/train/west'"
+10.43.0.147,-,2025-10-11 10:25:04,"---------------------------------------------------------------------------
+PermissionError                           Traceback (most recent call last)
+/tmp/ipykernel_37/1735471619.py in <cell line: 0>()
+     14     path = Path(folder_path).resolve()
+     15     if not path.is_dir() or (path.exists() and not path.is_writable()):
+---> 16         raise PermissionError(f""The directory '{folder_path}' exists but may be on a read-only filesystem."")
+     17 
+     18     os.makedirs(folder_path, exist_ok=True)
+
+PermissionError: The directory 'dataset/east' exists but may be on a read-only filesystem."
+10.43.0.147,-,2025-10-11 10:32:23,How do i load a image dataset for training?
+10.43.0.147,-,2025-10-11 11:07:24,123334
+10.43.0.147,-,2025-10-11 12:06:22,How do i create a custom NLP from scratch given a dataset?
+10.43.0.147,-,2025-10-11 12:16:43,How do i use the label encoder in sklearn?
+10.43.0.147,-,2025-10-11 12:18:40,"---------------------------------------------------------------------------
+ValueError                                Traceback (most recent call last)
+/tmp/ipykernel_37/1545950938.py in <cell line: 0>()
+      9 from xgboost import XGBRegressor
+     10 model=XGBRegressor(n_estimators=5000, learning_rate=0.02)
+---> 11 model.fit(X,y,verbose=True)
+
+/usr/local/lib/python3.11/dist-packages/xgboost/core.py in inner_f(*args, **kwargs)
+    728             for k, arg in zip(sig.parameters, args):
+    729                 kwargs[k] = arg
+--> 730             return func(**kwargs)
+    731 
+    732         return inner_f
+
+/usr/local/lib/python3.11/dist-packages/xgboost/sklearn.py in fit(self, X, y, sample_weight, base_margin, eval_set, eval_metric, early_stopping_rounds, verbose, xgb_model, sample_weight_eval_set, base_margin_eval_set, feature_weights, callbacks)
+   1053         with config_context(verbosity=self.verbosity):
+   1054             evals_result: TrainingCallback.EvalsLog = {}
+-> 1055             train_dmatrix, evals = _wrap_evaluation_matrices(
+   1056                 missing=self.missing,
+   1057                 X=X,
+
+/usr/local/lib/python3.11/dist-packages/xgboost/sklearn.py in _wrap_evaluation_matrices(missing, X, y, group, qid, sample_weight, base_margin, feature_weights, eval_set, sample_weight_eval_set, base_margin_eval_set, eval_group, eval_qid, create_dmatrix, enable_categorical, feature_types)
+    519     """"""Convert array_like evaluation matrices into DMatrix.  Perform validation on the
+    520     way.""""""
+--> 521     train_dmatrix = create_dmatrix(
+    522         data=X,
+    523         label=y,
+
+/usr/local/lib/python3.11/dist-packages/xgboost/sklearn.py in _create_dmatrix(self, ref, **kwargs)
+    956         if _can_use_qdm(self.tree_method) and self.booster != ""gblinear"":
+    957             try:
+--> 958                 return QuantileDMatrix(
+    959                     **kwargs, ref=ref, nthread=self.n_jobs, max_bin=self.max_bin
+    960                 )
+
+/usr/local/lib/python3.11/dist-packages/xgboost/core.py in inner_f(*args, **kwargs)
+    728             for k, arg in zip(sig.parameters, args):
+    729                 kwargs[k] = arg
+--> 730             return func(**kwargs)
+    731 
+    732         return inner_f
+
+/usr/local/lib/python3.11/dist-packages/xgboost/core.py in __init__(self, data, label, weight, base_margin, missing, silent, feature_names, feature_types, nthread, max_bin, ref, group, qid, label_lower_bound, label_upper_bound, feature_weights, enable_categorical, data_split_mode)
+   1527                 )
+   1528 
+-> 1529         self._init(
+   1530             data,
+   1531             ref=ref,
+
+/usr/local/lib/python3.11/dist-packages/xgboost/core.py in _init(self, data, ref, enable_categorical, **meta)
+   1586             ctypes.byref(handle),
+   1587         )
+-> 1588         it.reraise()
+   1589         # delay check_call to throw intermediate exception first
+   1590         _check_call(ret)
+
+/usr/local/lib/python3.11/dist-packages/xgboost/core.py in reraise(self)
+    574             exc = self._exception
+    575             self._exception = None
+--> 576             raise exc  # pylint: disable=raising-bad-type
+    577 
+    578     def __del__(self) -> None:
+
+/usr/local/lib/python3.11/dist-packages/xgboost/core.py in _handle_exception(self, fn, dft_ret)
+    555 
+    556         try:
+--> 557             return fn()
+    558         except Exception as e:  # pylint: disable=broad-except
+    559             # Defer the exception in order to return 0 and stop the iteration.
+
+/usr/local/lib/python3.11/dist-packages/xgboost/core.py in <lambda>()
+    639 
+    640         # pylint: disable=not-callable
+--> 641         return self._handle_exception(lambda: self.next(input_data), 0)
+    642 
+    643     @abstractmethod
+
+/usr/local/lib/python3.11/dist-packages/xgboost/data.py in next(self, input_data)
+   1278             return 0
+   1279         self.it += 1
+-> 1280         input_data(**self.kwargs)
+   1281         return 1
+   1282 
+
+/usr/local/lib/python3.11/dist-packages/xgboost/core.py in inner_f(*args, **kwargs)
+    728             for k, arg in zip(sig.parameters, args):
+    729                 kwargs[k] = arg
+--> 730             return func(**kwargs)
+    731 
+    732         return inner_f
+
+/usr/local/lib/python3.11/dist-packages/xgboost/core.py in input_data(data, feature_names, feature_types, **kwargs)
+    622                 new, cat_codes, feature_names, feature_types = self._temporary_data
+    623             else:
+--> 624                 new, cat_codes, feature_names, feature_types = _proxy_transform(
+    625                     data,
+    626                     feature_names,
+
+/usr/local/lib/python3.11/dist-packages/xgboost/data.py in _proxy_transform(data, feature_names, feature_types, enable_categorical)
+   1313         data = pd.DataFrame(data)
+   1314     if _is_pandas_df(data):
+-> 1315         arr, feature_names, feature_types = _transform_pandas_df(
+   1316             data, enable_categorical, feature_names, feature_types
+   1317         )
+
+/usr/local/lib/python3.11/dist-packages/xgboost/data.py in _transform_pandas_df(data, enable_categorical, feature_names, feature_types, meta, meta_type)
+    488             or is_pa_ext_dtype(dtype)
+    489         ):
+--> 490             _invalid_dataframe_dtype(data)
+    491         if is_pa_ext_dtype(dtype):
+    492             pyarrow_extension = True
+
+/usr/local/lib/python3.11/dist-packages/xgboost/data.py in _invalid_dataframe_dtype(data)
+    306     type_err = ""DataFrame.dtypes for data must be int, float, bool or category.""
+    307     msg = f""""""{type_err} {_ENABLE_CAT_ERR} {err}""""""
+--> 308     raise ValueError(msg)
+    309 
+    310 
+
+ValueError: DataFrame.dtypes for data must be int, float, bool or category. When categorical type is supplied, The experimental DMatrix parameter`enable_categorical` must be set to `True`.  Invalid columns:Content Rating: object"
+10.43.0.147,-,2025-10-11 12:19:57,How do i use onehotencoding?
+10.43.0.147,-,2025-10-11 12:21:12,how do i use onehotencoding for a particular columns of a dataset?
+10.43.0.147,-,2025-10-11 12:24:18,Show me an example of training an xgbregressor
+10.43.0.147,-,2025-10-11 12:27:28,Does xgboost have classification
+10.43.0.147,-,2025-10-11 12:36:20,"When using fit_transform in labelencoder, does it get trained again?"
+10.43.0.147,-,2025-10-11 12:40:53,"X=data[['Year of release','Tags','Original Network','Number of Episodes','Content Rating','Tags','Rating']]"
+10.43.0.147,-,2025-10-11 12:49:08,"import pandas as pd
+from sklearn.preprocessing import LabelEncoder
+data=pd.read_csv('/kaggle/input/bdaio-nlp-genre-prediction/train.csv')
+X=data[['Year of release','Original Network','Number of Episodes','Content Rating','Tags','Rating']]
+y=data.Genre
+encoder=LabelEncoder()
+y=encoder.fit_transform(y)
+encoder2=LabelEncoder()
+encoder3=LabelEncoder()
+encoder4=LabelEncoder()
+X['Original Network']=encoder3.fit_transform(X['Original Network'])
+X['Content Rating']=encoder2.fit_transform(X['Content Rating'])
+X['Tags']=encoder4.fit_transform(X['Tags'])
+print(X['Content Rating'])
+from xgboost import XGBClassifier
+model=XGBClassifier(n_estimators=4000, learning_rate=0.02)
+test=pd.read_csv('/kaggle/input/bdaio-nlp-genre-prediction/test.csv')
+test['Original Network']=encoder3.fit_transform(test['Original Network'])
+test['Content Rating']=encoder2.fit_transform(test['Content Rating'])
+test['Tags']=encoder4.fit_transform(test['Tags'])
+X2=test[['Year of release','Original Network','Number of Episodes','Content Rating','Tags','Rating']]
+model.fit(X,y,verbose=True)
+raw=model.predict(test.head())
+pred=encoder.inverse_transform(raw)
+print(pred) Fix the errors and add validation set and validating the model on  the validation set. note: there is no validation ds."
+10.43.0.147,-,2025-10-11 12:51:31,"/tmp/ipykernel_37/1475326709.py:18: SettingWithCopyWarning: 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+  X['Original Network']=encoder3.fit_transform(X['Original Network'])
+/tmp/ipykernel_37/1475326709.py:19: SettingWithCopyWarning: 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+  X['Content Rating']=encoder2.fit_transform(X['Content Rating'])
+/tmp/ipykernel_37/1475326709.py:20: SettingWithCopyWarning: 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+  X['Tags']=encoder4.fit_transform(X['Tags'])
+
+---------------------------------------------------------------------------
+ValueError                                Traceback (most recent call last)
+/tmp/ipykernel_37/1475326709.py in <cell line: 0>()
+     30 # Define the model with a smaller number of estimators to speed up development
+     31 model=XGBClassifier(n_estimators=400, learning_rate=0.02)
+---> 32 model.fit(X_train,y_train,verbose=True)
+     33 
+     34 # Make predictions on validation set
+
+/usr/local/lib/python3.11/dist-packages/xgboost/core.py in inner_f(*args, **kwargs)
+    728             for k, arg in zip(sig.parameters, args):
+    729                 kwargs[k] = arg
+--> 730             return func(**kwargs)
+    731 
+    732         return inner_f
+
+/usr/local/lib/python3.11/dist-packages/xgboost/sklearn.py in fit(self, X, y, sample_weight, base_margin, eval_set, eval_metric, early_stopping_rounds, verbose, xgb_model, sample_weight_eval_set, base_margin_eval_set, feature_weights, callbacks)
+   1469                 or not (classes == expected_classes).all()
+   1470             ):
+-> 1471                 raise ValueError(
+   1472                     f""Invalid classes inferred from unique values of `y`.  ""
+   1473                     f""Expected: {expected_classes}, got {classes}""
+
+ValueError: Invalid classes inferred from unique values of `y`.  Expected: [ 0  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20 21 22 23
+ 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47
+ 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71
+ 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93], got [  0   2   4   5   6   7   9  10  11  12  14  15  16  17  18  19  20  21
+  22  23  24  25  27  28  29  31  32  33  34  35  36  37  38  39  42  43
+  44  47  48  49  50  51  52  53  54  57  58  59  60  61  62  63  64  66
+  67  68  69  70  71  72  73  74  76  77  79  80  81  82  83  84  85  86
+  87  90  91  92  93  94  95  96  97  98  99 100 101 102 103 105 106 107
+ 108 109 110 111]"
+10.43.0.147,-,2025-10-11 12:58:44,"Why is this code: import pandas as pd
+from sklearn.preprocessing import LabelEncoder
+from sklearn.model_selection import train_test_split
+from xgboost import XGBClassifier
+from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
+
+data=pd.read_csv('/kaggle/input/bdaio-nlp-genre-prediction/train.csv')
+Define feature and target variables
+
+X=data[['Year of release','Original Network','Number of Episodes','Content Rating','Tags','Rating']]
+y=data.Genre
+One-hot encoding for genre (no need to use LabelEncoder)
+
+encoder=LabelEncoder()
+y=encoder.fit_transform(y)
+One-hot encoding for other categorical features
+
+X['Original Network']=encoder3.fit_transform(X['Original Network'])
+X['Content Rating']=encoder2.fit_transform(X['Content Rating'])
+X['Tags']=encoder4.fit_transform(X['Tags'])
+
+test=pd.read_csv('/kaggle/input/bdaio-nlp-genre-prediction/test.csv')
+test['Original Network']=encoder3.fit_transform(test['Original Network'])
+test['Content Rating']=encoder2.fit_transform(test['Content Rating'])
+test['Tags']=encoder4.fit_transform(test['Tags'])
+Split dataset into training and validation sets
+
+X_train, X_val, y_train, y_val = train_test_split(X, y, test_size=0.2, random_state=42)
+Define the model with a smaller number of estimators to speed up development
+
+model=XGBClassifier(n_estimators=400, learning_rate=0.02)
+model.fit(X_train,y_train,verbose=True)
+Make predictions on validation set
+
+y_pred=model.predict(X_val)
+Evaluate the model on the validation set
+
+print('Validation Accuracy:', accuracy_score(y_val, y_pred))
+print('Classification Report:')
+print(classification_report(y_val, y_pred))
+print('Confusion Matrix:')
+print(confusion_matrix(y_val, y_pred))
+
+raw=model.predict(test.head())
+pred=encoder.inverse_transform(raw)
+print(pred) hitting this error: import pandas as pd
+from sklearn.preprocessing import LabelEncoder
+from sklearn.model_selection import train_test_split
+from xgboost import XGBClassifier
+from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
+
+data=pd.read_csv('/kaggle/input/bdaio-nlp-genre-prediction/train.csv')
+Define feature and target variables
+
+X=data[['Year of release','Original Network','Number of Episodes','Content Rating','Tags','Rating']]
+y=data.Genre
+One-hot encoding for genre (no need to use LabelEncoder)
+
+encoder=LabelEncoder()
+y=encoder.fit_transform(y)
+One-hot encoding for other categorical features
+
+X['Original Network']=encoder3.fit_transform(X['Original Network'])
+X['Content Rating']=encoder2.fit_transform(X['Content Rating'])
+X['Tags']=encoder4.fit_transform(X['Tags'])
+
+test=pd.read_csv('/kaggle/input/bdaio-nlp-genre-prediction/test.csv')
+test['Original Network']=encoder3.fit_transform(test['Original Network'])
+test['Content Rating']=encoder2.fit_transform(test['Content Rating'])
+test['Tags']=encoder4.fit_transform(test['Tags'])
+Split dataset into training and validation sets
+
+X_train, X_val, y_train, y_val = train_test_split(X, y, test_size=0.2, random_state=42)
+Define the model with a smaller number of estimators to speed up development
+
+model=XGBClassifier(n_estimators=400, learning_rate=0.02)
+model.fit(X_train,y_train,verbose=True)
+Make predictions on validation set
+
+y_pred=model.predict(X_val)
+Evaluate the model on the validation set
+
+print('Validation Accuracy:', accuracy_score(y_val, y_pred))
+print('Classification Report:')
+print(classification_report(y_val, y_pred))
+print('Confusion Matrix:')
+print(confusion_matrix(y_val, y_pred))
+
+raw=model.predict(test.head())
+pred=encoder.inverse_transform(raw)
+print(pred)
+
+/tmp/ipykernel_37/1475326709.py:18: SettingWithCopyWarning:
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+X['Original Network']=encoder3.fit_transform(X['Original Network'])
+/tmp/ipykernel_37/1475326709.py:19: SettingWithCopyWarning:
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+X['Content Rating']=encoder2.fit_transform(X['Content Rating'])
+/tmp/ipykernel_37/1475326709.py:20: SettingWithCopyWarning:
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+X['Tags']=encoder4.fit_transform(X['Tags'])
+
+ValueError                                Traceback (most recent call last)
+/tmp/ipykernel_37/1475326709.py in <cell line: 0>()
+30 # Define the model with a smaller number of estimators to speed up development
+31 model=XGBClassifier(n_estimators=400, learning_rate=0.02)
+---> 32 model.fit(X_train,y_train,verbose=True)
+33
+34 # Make predictions on validation set
+
+/usr/local/lib/python3.11/dist-packages/xgboost/core.py in inner_f(*args, **kwargs)
+728             for k, arg in zip(sig.parameters, args):
+729                 kwargs[k] = arg
+--> 730             return func(**kwargs)
+731
+732         return inner_f
+
+/usr/local/lib/python3.11/dist-packages/xgboost/sklearn.py in fit(self, X, y, sample_weight, base_margin, eval_set, eval_metric, early_stopping_rounds, verbose, xgb_model, sample_weight_eval_set, base_margin_eval_set, feature_weights, callbacks)
+1469                 or not (classes == expected_classes).all()
+1470             ):
+-> 1471                 raise ValueError(
+1472                     f""Invalid classes inferred from unique values of y.  ""
+1473                     f""Expected: {expected_classes}, got {classes}""
+
+ValueError: Invalid classes inferred from unique values of y.  Expected: [ 0  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20 21 22 23
+24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47
+48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71
+72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93], got [  0   2   4   5   6   7   9  10  11  12  14  15  16  17  18  19  20  21
+22  23  24  25  27  28  29  31  32  33  34  35  36  37  38  39  42  43
+44  47  48  49  50  51  52  53  54  57  58  59  60  61  62  63  64  66
+67  68  69  70  71  72  73  74  76  77  79  80  81  82  83  84  85  86
+87  90  91  92  93  94  95  96  97  98  99 100 101 102 103 105 106 107
+108 109 110 111]"
+10.43.0.147,-,2025-10-11 13:00:53,"Why is this code: import pandas as pd
+from sklearn.preprocessing import LabelEncoder
+from sklearn.model_selection import train_test_split
+from xgboost import XGBClassifier
+from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
+
+data=pd.read_csv('/kaggle/input/bdaio-nlp-genre-prediction/train.csv')
+Define feature and target variables
+
+X=data[['Year of release','Original Network','Number of Episodes','Content Rating','Tags','Rating']]
+y=data.Genre
+One-hot encoding for genre (no need to use LabelEncoder)
+
+encoder=LabelEncoder()
+y=encoder.fit_transform(y)
+One-hot encoding for other categorical features
+
+X['Original Network']=encoder3.fit_transform(X['Original Network'])
+X['Content Rating']=encoder2.fit_transform(X['Content Rating'])
+X['Tags']=encoder4.fit_transform(X['Tags'])
+
+test=pd.read_csv('/kaggle/input/bdaio-nlp-genre-prediction/test.csv')
+test['Original Network']=encoder3.fit_transform(test['Original Network'])
+test['Content Rating']=encoder2.fit_transform(test['Content Rating'])
+test['Tags']=encoder4.fit_transform(test['Tags'])
+Split dataset into training and validation sets
+
+X_train, X_val, y_train, y_val = train_test_split(X, y, test_size=0.2, random_state=42)
+Define the model with a smaller number of estimators to speed up development
+
+model=XGBClassifier(n_estimators=400, learning_rate=0.02)
+model.fit(X_train,y_train,verbose=True)
+Make predictions on validation set
+
+y_pred=model.predict(X_val)
+Evaluate the model on the validation set
+
+print('Validation Accuracy:', accuracy_score(y_val, y_pred))
+print('Classification Report:')
+print(classification_report(y_val, y_pred))
+print('Confusion Matrix:')
+print(confusion_matrix(y_val, y_pred))
+
+raw=model.predict(test.head())
+pred=encoder.inverse_transform(raw)
+print(pred) hitting this error: import pandas as pd
+from sklearn.preprocessing import LabelEncoder
+from sklearn.model_selection import train_test_split
+from xgboost import XGBClassifier
+from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
+
+data=pd.read_csv('/kaggle/input/bdaio-nlp-genre-prediction/train.csv')
+Define feature and target variables
+
+X=data[['Year of release','Original Network','Number of Episodes','Content Rating','Tags','Rating']]
+y=data.Genre
+One-hot encoding for genre (no need to use LabelEncoder)
+
+encoder=LabelEncoder()
+y=encoder.fit_transform(y)
+One-hot encoding for other categorical features
+
+X['Original Network']=encoder3.fit_transform(X['Original Network'])
+X['Content Rating']=encoder2.fit_transform(X['Content Rating'])
+X['Tags']=encoder4.fit_transform(X['Tags'])
+
+test=pd.read_csv('/kaggle/input/bdaio-nlp-genre-prediction/test.csv')
+test['Original Network']=encoder3.fit_transform(test['Original Network'])
+test['Content Rating']=encoder2.fit_transform(test['Content Rating'])
+test['Tags']=encoder4.fit_transform(test['Tags'])
+Split dataset into training and validation sets
+
+X_train, X_val, y_train, y_val = train_test_split(X, y, test_size=0.2, random_state=42)
+Define the model with a smaller number of estimators to speed up development
+
+model=XGBClassifier(n_estimators=400, learning_rate=0.02)
+model.fit(X_train,y_train,verbose=True)
+Make predictions on validation set
+
+y_pred=model.predict(X_val)
+Evaluate the model on the validation set
+
+print('Validation Accuracy:', accuracy_score(y_val, y_pred))
+print('Classification Report:')
+print(classification_report(y_val, y_pred))
+print('Confusion Matrix:')
+print(confusion_matrix(y_val, y_pred))
+
+raw=model.predict(test.head())
+pred=encoder.inverse_transform(raw)
+print(pred)
+
+/tmp/ipykernel_37/1475326709.py:18: SettingWithCopyWarning:
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+X['Original Network']=encoder3.fit_transform(X['Original Network'])
+/tmp/ipykernel_37/1475326709.py:19: SettingWithCopyWarning:
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+X['Content Rating']=encoder2.fit_transform(X['Content Rating'])
+/tmp/ipykernel_37/1475326709.py:20: SettingWithCopyWarning:
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+X['Tags']=encoder4.fit_transform(X['Tags'])
+
+ValueError                                Traceback (most recent call last)
+/tmp/ipykernel_37/1475326709.py in <cell line: 0>()
+30 # Define the model with a smaller number of estimators to speed up development
+31 model=XGBClassifier(n_estimators=400, learning_rate=0.02)
+---> 32 model.fit(X_train,y_train,verbose=True)
+33
+34 # Make predictions on validation set
+
+/usr/local/lib/python3.11/dist-packages/xgboost/core.py in inner_f(*args, **kwargs)
+728             for k, arg in zip(sig.parameters, args):
+729                 kwargs[k] = arg
+--> 730             return func(**kwargs)
+731
+732         return inner_f
+
+/usr/local/lib/python3.11/dist-packages/xgboost/sklearn.py in fit(self, X, y, sample_weight, base_margin, eval_set, eval_metric, early_stopping_rounds, verbose, xgb_model, sample_weight_eval_set, base_margin_eval_set, feature_weights, callbacks)
+1469                 or not (classes == expected_classes).all()
+1470             ):
+-> 1471                 raise ValueError(
+1472                     f""Invalid classes inferred from unique values of y.  ""
+1473                     f""Expected: {expected_classes}, got {classes}""
+
+ValueError: Invalid classes inferred from unique values of y.  Expected: [ 0  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20 21 22 23
+24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47
+48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71
+72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93], got [  0   2   4   5   6   7   9  10  11  12  14  15  16  17  18  19  20  21
+22  23  24  25  27  28  29  31  32  33  34  35  36  37  38  39  42  43
+44  47  48  49  50  51  52  53  54  57  58  59  60  61  62  63  64  66
+67  68  69  70  71  72  73  74  76  77  79  80  81  82  83  84  85  86
+87  90  91  92  93  94  95  96  97  98  99 100 101 102 103 105 106 107
+108 109 110 111]"
+10.43.0.147,-,2025-10-11 13:03:15,"Why is this code: import pandas as pd
+from sklearn.preprocessing import LabelEncoder
+from sklearn.model_selection import train_test_split
+from xgboost import XGBClassifier
+from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
+
+data=pd.read_csv('/kaggle/input/bdaio-nlp-genre-prediction/train.csv')
+Define feature and target variables
+
+X=data[['Year of release','Original Network','Number of Episodes','Content Rating','Tags','Rating']]
+y=data.Genre
+One-hot encoding for genre (no need to use LabelEncoder)
+
+encoder=LabelEncoder()
+y=encoder.fit_transform(y)
+One-hot encoding for other categorical features
+
+X['Original Network']=encoder3.fit_transform(X['Original Network'])
+X['Content Rating']=encoder2.fit_transform(X['Content Rating'])
+X['Tags']=encoder4.fit_transform(X['Tags'])
+
+test=pd.read_csv('/kaggle/input/bdaio-nlp-genre-prediction/test.csv')
+test['Original Network']=encoder3.fit_transform(test['Original Network'])
+test['Content Rating']=encoder2.fit_transform(test['Content Rating'])
+test['Tags']=encoder4.fit_transform(test['Tags'])
+Split dataset into training and validation sets
+
+X_train, X_val, y_train, y_val = train_test_split(X, y, test_size=0.2, random_state=42)
+Define the model with a smaller number of estimators to speed up development
+
+model=XGBClassifier(n_estimators=400, learning_rate=0.02)
+model.fit(X_train,y_train,verbose=True)
+Make predictions on validation set
+
+y_pred=model.predict(X_val)
+Evaluate the model on the validation set
+
+print('Validation Accuracy:', accuracy_score(y_val, y_pred))
+print('Classification Report:')
+print(classification_report(y_val, y_pred))
+print('Confusion Matrix:')
+print(confusion_matrix(y_val, y_pred))
+
+raw=model.predict(test.head())
+pred=encoder.inverse_transform(raw)
+print(pred) hitting this error: import pandas as pd
+from sklearn.preprocessing import LabelEncoder
+from sklearn.model_selection import train_test_split
+from xgboost import XGBClassifier
+from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
+
+data=pd.read_csv('/kaggle/input/bdaio-nlp-genre-prediction/train.csv')
+Define feature and target variables
+
+X=data[['Year of release','Original Network','Number of Episodes','Content Rating','Tags','Rating']]
+y=data.Genre
+One-hot encoding for genre (no need to use LabelEncoder)
+
+encoder=LabelEncoder()
+y=encoder.fit_transform(y)
+One-hot encoding for other categorical features
+
+X['Original Network']=encoder3.fit_transform(X['Original Network'])
+X['Content Rating']=encoder2.fit_transform(X['Content Rating'])
+X['Tags']=encoder4.fit_transform(X['Tags'])
+
+test=pd.read_csv('/kaggle/input/bdaio-nlp-genre-prediction/test.csv')
+test['Original Network']=encoder3.fit_transform(test['Original Network'])
+test['Content Rating']=encoder2.fit_transform(test['Content Rating'])
+test['Tags']=encoder4.fit_transform(test['Tags'])
+Split dataset into training and validation sets
+
+X_train, X_val, y_train, y_val = train_test_split(X, y, test_size=0.2, random_state=42)
+Define the model with a smaller number of estimators to speed up development
+
+model=XGBClassifier(n_estimators=400, learning_rate=0.02)
+model.fit(X_train,y_train,verbose=True)
+Make predictions on validation set
+
+y_pred=model.predict(X_val)
+Evaluate the model on the validation set
+
+print('Validation Accuracy:', accuracy_score(y_val, y_pred))
+print('Classification Report:')
+print(classification_report(y_val, y_pred))
+print('Confusion Matrix:')
+print(confusion_matrix(y_val, y_pred))
+
+raw=model.predict(test.head())
+pred=encoder.inverse_transform(raw)
+print(pred)
+
+/tmp/ipykernel_37/1475326709.py:18: SettingWithCopyWarning:
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+X['Original Network']=encoder3.fit_transform(X['Original Network'])
+/tmp/ipykernel_37/1475326709.py:19: SettingWithCopyWarning:
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+X['Content Rating']=encoder2.fit_transform(X['Content Rating'])
+/tmp/ipykernel_37/1475326709.py:20: SettingWithCopyWarning:
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+X['Tags']=encoder4.fit_transform(X['Tags'])
+
+ValueError                                Traceback (most recent call last)
+/tmp/ipykernel_37/1475326709.py in <cell line: 0>()
+30 # Define the model with a smaller number of estimators to speed up development
+31 model=XGBClassifier(n_estimators=400, learning_rate=0.02)
+---> 32 model.fit(X_train,y_train,verbose=True)
+33
+34 # Make predictions on validation set
+
+/usr/local/lib/python3.11/dist-packages/xgboost/core.py in inner_f(*args, **kwargs)
+728             for k, arg in zip(sig.parameters, args):
+729                 kwargs[k] = arg
+--> 730             return func(**kwargs)
+731
+732         return inner_f
+
+/usr/local/lib/python3.11/dist-packages/xgboost/sklearn.py in fit(self, X, y, sample_weight, base_margin, eval_set, eval_metric, early_stopping_rounds, verbose, xgb_model, sample_weight_eval_set, base_margin_eval_set, feature_weights, callbacks)
+1469                 or not (classes == expected_classes).all()
+1470             ):
+-> 1471                 raise ValueError(
+1472                     f""Invalid classes inferred from unique values of y.  ""
+1473                     f""Expected: {expected_classes}, got {classes}""
+
+ValueError: Invalid classes inferred from unique values of y.  Expected: [ 0  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20 21 22 23
+24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47
+48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71
+72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93], got [  0   2   4   5   6   7   9  10  11  12  14  15  16  17  18  19  20  21
+22  23  24  25  27  28  29  31  32  33  34  35  36  37  38  39  42  43
+44  47  48  49  50  51  52  53  54  57  58  59  60  61  62  63  64  66
+67  68  69  70  71  72  73  74  76  77  79  80  81  82  83  84  85  86
+87  90  91  92  93  94  95  96  97  98  99 100 101 102 103 105 106 107
+108 109 110 111]"
+10.43.0.147,-,2025-10-11 13:05:34,"---------------------------------------------------------------------------
+ValueError                                Traceback (most recent call last)
+/tmp/ipykernel_37/1077982074.py in <cell line: 0>()
+     17 
+     18 # One-hot encoding for other categorical features
+---> 19 X['Original Network'] = pd.get_dummies(X['Original Network']).astype(int)
+     20 X['Content Rating'] = pd.get_dummies(X['Content Rating']).astype(int)
+     21 X['Tags'] = pd.get_dummies(X['Tags']).astype(int)
+
+/usr/local/lib/python3.11/dist-packages/pandas/core/frame.py in __setitem__(self, key, value)
+   4299             self._setitem_array(key, value)
+   4300         elif isinstance(value, DataFrame):
+-> 4301             self._set_item_frame_value(key, value)
+   4302         elif (
+   4303             is_list_like(value)
+
+/usr/local/lib/python3.11/dist-packages/pandas/core/frame.py in _set_item_frame_value(self, key, value)
+   4427             len_cols = 1 if is_scalar(cols) or isinstance(cols, tuple) else len(cols)
+   4428             if len_cols != len(value.columns):
+-> 4429                 raise ValueError(""Columns must be same length as key"")
+   4430 
+   4431             # align right-hand-side columns if self.columns
+
+ValueError: Columns must be same length as key"
+10.43.0.147,-,2025-10-11 13:07:29,"Why the error? import pandas as pd
+from sklearn.preprocessing import LabelEncoder
+from sklearn.model_selection import train_test_split
+from xgboost import XGBClassifier
+from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
+
+# Load the training data
+data = pd.read_csv('/kaggle/input/bdaio-nlp-genre-prediction/train.csv')
+
+# Define feature and target variables
+X = data[['Year of release','Original Network','Number of Episodes','Content Rating','Tags','Rating']]
+y = data.Genre
+
+# One-hot encoding for genre (no need to use LabelEncoder)
+encoder = LabelEncoder()
+y = encoder.fit_transform(y)
+
+# One-hot encoding for other categorical features
+X['Original Network'] = pd.get_dummies(X['Original Network'], drop_first=True).astype(int)
+X['Content Rating'] = pd.get_dummies(X['Content Rating'], drop_first=True).astype(int)
+X['Tags'] = pd.get_dummies(X['Tags'], drop_first=True).astype(int)
+
+test = pd.read_csv('/kaggle/input/bdaio-nlp-genre-prediction/test.csv')
+test['Original Network'] = pd.get_dummies(test['Original Network']).astype(int)
+test['Content Rating'] = pd.get_dummies(test['Content Rating']).astype(int)
+test['Tags'] = pd.get_dummies(test['Tags']).astype(int)
+
+# Split dataset into training and validation sets
+X_train, X_val, y_train, y_val = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# Define the model with a smaller number of estimators to speed up development
+model = XGBClassifier(n_estimators=400, learning_rate=0.02)
+model.fit(X_train,y_train,verbose=True)
+
+# Make predictions on validation set
+y_pred=model.predict(X_val)
+
+# Evaluate the model on the validation set
+print('Validation Accuracy:', accuracy_score(y_val, y_pred))
+print('Classification Report:')
+print(classification_report(y_val, y_pred))
+print('Confusion Matrix:')
+print(confusion_matrix(y_val, y_pred))
+
+# Make predictions on test set
+raw=model.predict(test)
+pred=encoder.inverse_transform(raw)
+print(pred) ---------------------------------------------------------------------------
+ValueError                                Traceback (most recent call last)
+/tmp/ipykernel_37/1959556525.py in <cell line: 0>()
+     17 
+     18 # One-hot encoding for other categorical features
+---> 19 X['Original Network'] = pd.get_dummies(X['Original Network'], drop_first=True).astype(int)
+     20 X['Content Rating'] = pd.get_dummies(X['Content Rating'], drop_first=True).astype(int)
+     21 X['Tags'] = pd.get_dummies(X['Tags'], drop_first=True).astype(int)
+
+/usr/local/lib/python3.11/dist-packages/pandas/core/frame.py in __setitem__(self, key, value)
+   4299             self._setitem_array(key, value)
+   4300         elif isinstance(value, DataFrame):
+-> 4301             self._set_item_frame_value(key, value)
+   4302         elif (
+   4303             is_list_like(value)
+
+/usr/local/lib/python3.11/dist-packages/pandas/core/frame.py in _set_item_frame_value(self, key, value)
+   4427             len_cols = 1 if is_scalar(cols) or isinstance(cols, tuple) else len(cols)
+   4428             if len_cols != len(value.columns):
+-> 4429                 raise ValueError(""Columns must be same length as key"")
+   4430 
+   4431             # align right-hand-side columns if self.columns
+
+ValueError: Columns must be same length as key"
+10.43.0.147,-,2025-10-11 13:10:29,v
+10.43.0.147,-,2025-10-11 13:11:48,"---------------------------------------------------------------------------
+ValueError                                Traceback (most recent call last)
+/tmp/ipykernel_37/3215349831.py in <cell line: 0>()
+     18 # One-hot encoding for other categorical features
+     19 # One-hot encoding for categorical features without converting to int
+---> 20 X['Original Network'] = pd.get_dummies(X['Original Network'], drop_first=True)
+     21 X['Content Rating'] = pd.get_dummies(X['Content Rating'], drop_first=True)
+     22 X['Tags'] = pd.get_dummies(X['Tags'], drop_first=True).astype(int)
+
+/usr/local/lib/python3.11/dist-packages/pandas/core/frame.py in __setitem__(self, key, value)
+   4299             self._setitem_array(key, value)
+   4300         elif isinstance(value, DataFrame):
+-> 4301             self._set_item_frame_value(key, value)
+   4302         elif (
+   4303             is_list_like(value)
+
+/usr/local/lib/python3.11/dist-packages/pandas/core/frame.py in _set_item_frame_value(self, key, value)
+   4427             len_cols = 1 if is_scalar(cols) or isinstance(cols, tuple) else len(cols)
+   4428             if len_cols != len(value.columns):
+-> 4429                 raise ValueError(""Columns must be same length as key"")
+   4430 
+   4431             # align right-hand-side columns if self.columns
+
+ValueError: Columns must be same length as key"
+10.43.0.147,-,2025-10-11 13:14:56,"The same error always occurs on this code, give me the full correct code to solve this: ---------------------------------------------------------------------------
+ValueError                                Traceback (most recent call last)
+/tmp/ipykernel_37/1761123587.py in <cell line: 0>()
+     19 # One-hot encoding for categorical features without converting to int
+     20 # Fix one-hot encoding for categorical features
+---> 21 X['Original Network'] = pd.get_dummies(X['Original Network'], drop_first=True, dtype=int)
+     22 X['Content Rating'] = pd.get_dummies(X['Content Rating'], drop_first=True, dtype=int)
+     23 X['Tags'] = pd.get_dummies(X['Tags'], drop_first=True).astype(int)
+
+/usr/local/lib/python3.11/dist-packages/pandas/core/frame.py in __setitem__(self, key, value)
+   4299             self._setitem_array(key, value)
+   4300         elif isinstance(value, DataFrame):
+-> 4301             self._set_item_frame_value(key, value)
+   4302         elif (
+   4303             is_list_like(value)
+
+/usr/local/lib/python3.11/dist-packages/pandas/core/frame.py in _set_item_frame_value(self, key, value)
+   4427             len_cols = 1 if is_scalar(cols) or isinstance(cols, tuple) else len(cols)
+   4428             if len_cols != len(value.columns):
+-> 4429                 raise ValueError(""Columns must be same length as key"")
+   4430 
+   4431             # align right-hand-side columns if self.columns
+
+ValueError: Columns must be same length as key import pandas as pd
+from sklearn.preprocessing import LabelEncoder
+from sklearn.model_selection import train_test_split
+from xgboost import XGBClassifier
+from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
+
+# Load the training data
+data = pd.read_csv('/kaggle/input/bdaio-nlp-genre-prediction/train.csv')
+
+# Define feature and target variables
+X = data[['Year of release','Original Network','Number of Episodes','Content Rating','Tags','Rating']]
+y = data.Genre
+
+# One-hot encoding for genre (no need to use LabelEncoder)
+encoder = LabelEncoder()
+y = encoder.fit_transform(y)
+
+# One-hot encoding for other categorical features
+# One-hot encoding for categorical features without converting to int
+# Fix one-hot encoding for categorical features
+X['Original Network'] = pd.get_dummies(X['Original Network'], drop_first=True, dtype=int)
+X['Content Rating'] = pd.get_dummies(X['Content Rating'], drop_first=True, dtype=int)
+X['Tags'] = pd.get_dummies(X['Tags'], drop_first=True).astype(int)
+
+# Reorder columns to keep original order
+X = X.loc[:, [col for col in X.columns if col != 'Original Network']]
+X = X[['Original Network', 'Content Rating', 'Tags'] + list(X.columns)[list(X.columns).index('Original Network'):-1]]
+
+# Ensure all categorical features are integers
+for col in ['Original Network', 'Content Rating', 'Tags']:
+    X[col] = X[col].astype(int)
+
+test = pd.read_csv('/kaggle/input/bdaio-nlp-genre-prediction/test.csv')
+test['Original Network'] = pd.get_dummies(test['Original Network'])
+test['Content Rating'] = pd.get_dummies(test['Content Rating'])
+test['Tags'] = pd.get_dummies(test['Tags']).astype(int)
+
+# Split dataset into training and validation sets
+X_train, X_val, y_train, y_val = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# Define the model with a smaller number of estimators to speed up development
+model = XGBClassifier(n_estimators=400, learning_rate=0.02)
+model.fit(X_train,y_train,verbose=True)
+
+# Make predictions on validation set
+y_pred=model.predict(X_val)
+
+# Evaluate the model on the validation set
+print('Validation Accuracy:', accuracy_score(y_val, y_pred))
+print('Classification Report:')
+print(classification_report(y_val, y_pred))
+print('Confusion Matrix:')
+print(confusion_matrix(y_val, y_pred))
+
+# Make predictions on test set
+raw=model.predict(test)
+pred=encoder.inverse_transform(raw)
+print(pred)"
+10.43.0.147,-,2025-10-11 13:16:52,"import pandas as pd
+from sklearn.preprocessing import LabelEncoder
+from sklearn.model_selection import train_test_split
+from xgboost import XGBClassifier
+from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
+
+# Load the training data
+data = pd.read_csv('/kaggle/input/bdaio-nlp-genre-prediction/train.csv')
+
+# Define feature and target variables
+X = data[['Year of release','Original Network','Number of Episodes','Content Rating','Tags','Rating']]
+y = data['Genre']
+
+# One-hot encoding for genre (no need to use LabelEncoder)
+encoder = LabelEncoder()
+y = encoder.fit_transform(y)
+
+# One-hot encoding for other categorical features
+# Fix one-hot encoding for categorical features
+X['Original Network'] = pd.get_dummies(X['Original Network'], drop_first=True, dtype=int)
+X['Content Rating'] = pd.get_dummies(X['Content Rating'], drop_first=True, dtype=int)
+X['Tags'] = pd.get_dummies(X['Tags'], drop_first=True).astype(int)
+
+# Ensure all categorical features are integers
+for col in ['Original Network', 'Content Rating', 'Tags']:
+    X[col] = X[col].astype(int)
+
+test = pd.read_csv('/kaggle/input/bdaio-nlp-genre-prediction/test.csv')
+test['Original Network'] = pd.get_dummies(test['Original Network'])
+test['Content Rating'] = pd.get_dummies(test['Content Rating'])
+test['Tags'] = pd.get_dummies(test['Tags']).astype(int)
+
+# Split dataset into training and validation sets
+X_train, X_val, y_train, y_val = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# Define the model with a smaller number of estimators to speed up development
+model = XGBClassifier(n_estimators=400, learning_rate=0.02)
+model.fit(X_train,y_train,verbose=True)
+
+# Make predictions on validation set
+y_pred=model.predict(X_val)
+
+# Evaluate the model on the validation set
+print('Validation Accuracy:', accuracy_score(y_val, y_pred))
+print('Classification Report:')
+print(classification_report(y_val, y_pred))
+print('Confusion Matrix:')
+print(confusion_matrix(y_val, y_pred))
+
+# Make predictions on test set and store them in a submission format
+submission = pd.DataFrame({'Genre': model.predict(test)})
+submission.to_csv('submission.csv', index=False)"
+10.43.0.147,-,2025-10-11 13:18:33,"import pandas as pd
+from sklearn.preprocessing import LabelEncoder
+from sklearn.model_selection import train_test_split
+from xgboost import XGBClassifier
+from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
+
+# Load the training data
+data = pd.read_csv('/kaggle/input/bdaio-nlp-genre-prediction/train.csv')
+
+# Define feature and target variables
+X = data[['Year of release','Original Network','Number of Episodes','Content Rating','Tags','Rating']]
+y = data['Genre']
+
+# One-hot encoding for genre (no need to use LabelEncoder)
+encoder = LabelEncoder()
+y = encoder.fit_transform(y)
+
+# One-hot encoding for other categorical features
+# Fix one-hot encoding for categorical features
+X['Original Network'] = pd.get_dummies(X['Original Network'], drop_first=True, dtype=int)
+X['Content Rating'] = pd.get_dummies(X['Content Rating'], drop_first=True, dtype=int)
+X['Tags'] = pd.get_dummies(X['Tags'], drop_first=True).astype(int)
+
+# Ensure all categorical features are integers
+for col in ['Original Network', 'Content Rating', 'Tags']:
+    X[col] = X[col].astype(int)
+
+test = pd.read_csv('/kaggle/input/bdaio-nlp-genre-prediction/test.csv')
+test['Original Network'] = pd.get_dummies(test['Original Network'])
+test['Content Rating'] = pd.get_dummies(test['Content Rating'])
+test['Tags'] = pd.get_dummies(test['Tags']).astype(int)
+
+# Split dataset into training and validation sets
+X_train, X_val, y_train, y_val = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# Define the model with a smaller number of estimators to speed up development
+model = XGBClassifier(n_estimators=400, learning_rate=0.02)
+model.fit(X_train,y_train,verbose=True)
+
+# Make predictions on validation set
+y_pred=model.predict(X_val)
+
+# Evaluate the model on the validation set
+print('Validation Accuracy:', accuracy_score(y_val, y_pred))
+print('Classification Report:')
+print(classification_report(y_val, y_pred))
+print('Confusion Matrix:')
+print(confusion_matrix(y_val, y_pred))
+
+# Make predictions on test set and store them in a submission format
+submission = pd.DataFrame({'Genre': model.predict(test)})
+submission.to_csv('submission.csv', index=False)
+ use the sklearn one hot encoder instead of pandas. give me te full code"
+10.43.0.147,-,2025-10-11 13:24:51,"import pandas as pd
+from sklearn.preprocessing import LabelEncoder
+from sklearn.model_selection import train_test_split
+from xgboost import XGBClassifier
+from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
+
+# Load the training data
+data = pd.read_csv('/kaggle/input/bdaio-nlp-genre-prediction/train.csv')
+
+# Define feature and target variables
+X = data[['Year of release','Original Network','Number of Episodes','Content Rating','Tags','Rating']]
+y = data['Genre']
+
+# One-hot encoding for genre (no need to use LabelEncoder)
+encoder = LabelEncoder()
+y = encoder.fit_transform(y)
+
+# One-hot encoding for other categorical features
+# Fix one-hot encoding for categorical features
+X['Original Network'] = pd.get_dummies(X['Original Network'], drop_first=True, dtype=int)
+X['Content Rating'] = pd.get_dummies(X['Content Rating'], drop_first=True, dtype=int)
+X['Tags'] = pd.get_dummies(X['Tags'], drop_first=True).astype(int)
+
+# Ensure all categorical features are integers
+for col in ['Original Network', 'Content Rating', 'Tags']:
+    X[col] = X[col].astype(int)
+
+test = pd.read_csv('/kaggle/input/bdaio-nlp-genre-prediction/test.csv')
+test['Original Network'] = pd.get_dummies(test['Original Network'])
+test['Content Rating'] = pd.get_dummies(test['Content Rating'])
+test['Tags'] = pd.get_dummies(test['Tags']).astype(int)
+
+# Split dataset into training and validation sets
+X_train, X_val, y_train, y_val = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# Define the model with a smaller number of estimators to speed up development
+model = XGBClassifier(n_estimators=400, learning_rate=0.02)
+model.fit(X_train,y_train,verbose=True)
+
+# Make predictions on validation set
+y_pred=model.predict(X_val)
+
+# Evaluate the model on the validation set
+print('Validation Accuracy:', accuracy_score(y_val, y_pred))
+print('Classification Report:')
+print(classification_report(y_val, y_pred))
+print('Confusion Matrix:')
+print(confusion_matrix(y_val, y_pred))
+
+# Make predictions on test set and store them in a submission format
+submission = pd.DataFrame({'Genre': model.predict(test)})
+submission.to_csv('submission.csv', index=False)"
+10.43.0.147,-,2025-10-11 13:25:58,"import pandas as pd
+from sklearn.preprocessing import LabelEncoder
+from sklearn.model_selection import train_test_split
+from xgboost import XGBClassifier
+from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
+
+# Load the training data
+data = pd.read_csv('/kaggle/input/bdaio-nlp-genre-prediction/train.csv')
+
+# Define feature and target variables
+X = data[['Year of release','Original Network','Number of Episodes','Content Rating','Tags','Rating']]
+y = data['Genre']
+
+# One-hot encoding for genre (no need to use LabelEncoder)
+encoder = LabelEncoder()
+y = encoder.fit_transform(y)
+
+# One-hot encoding for other categorical features
+# Fix one-hot encoding for categorical features
+X['Original Network'] = pd.get_dummies(X['Original Network'], drop_first=True, dtype=int)
+X['Content Rating'] = pd.get_dummies(X['Content Rating'], drop_first=True, dtype=int)
+X['Tags'] = pd.get_dummies(X['Tags'], drop_first=True).astype(int)
+
+# Ensure all categorical features are integers
+for col in ['Original Network', 'Content Rating', 'Tags']:
+    X[col] = X[col].astype(int)
+
+test = pd.read_csv('/kaggle/input/bdaio-nlp-genre-prediction/test.csv')
+test['Original Network'] = pd.get_dummies(test['Original Network'])
+test['Content Rating'] = pd.get_dummies(test['Content Rating'])
+test['Tags'] = pd.get_dummies(test['Tags']).astype(int)
+
+# Split dataset into training and validation sets
+X_train, X_val, y_train, y_val = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# Define the model with a smaller number of estimators to speed up development
+model = XGBClassifier(n_estimators=400, learning_rate=0.02)
+model.fit(X_train,y_train,verbose=True)
+
+# Make predictions on validation set
+y_pred=model.predict(X_val)
+
+# Evaluate the model on the validation set
+print('Validation Accuracy:', accuracy_score(y_val, y_pred))
+print('Classification Report:')
+print(classification_report(y_val, y_pred))
+print('Confusion Matrix:')
+print(confusion_matrix(y_val, y_pred))
+
+# Make predictions on test set and store them in a submission format
+submission = pd.DataFrame({'Genre': model.predict(test)})
+submission.to_csv('submission.csv', index=False) Use sklearn onehotencoding"
+10.43.0.147,-,2025-10-11 13:28:44,"import pandas as pd
+from sklearn.preprocessing import LabelEncoder
+from sklearn.model_selection import train_test_split
+from xgboost import XGBClassifier
+from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
+
+# Load the training data
+data = pd.read_csv('/kaggle/input/bdaio-nlp-genre-prediction/train.csv')
+
+# Define feature and target variables
+X = data[['Year of release','Original Network','Number of Episodes','Content Rating','Tags','Rating']]
+y = data['Genre']
+
+# One-hot encoding for genre (no need to use LabelEncoder)
+encoder = LabelEncoder()
+y = encoder.fit_transform(y)
+
+# One-hot encoding for other categorical features
+# Fix one-hot encoding for categorical features
+X['Original Network'] = pd.get_dummies(X['Original Network'], drop_first=True, dtype=int)
+X['Content Rating'] = pd.get_dummies(X['Content Rating'], drop_first=True, dtype=int)
+X['Tags'] = pd.get_dummies(X['Tags'], drop_first=True).astype(int)
+
+# Ensure all categorical features are integers
+for col in ['Original Network', 'Content Rating', 'Tags']:
+    X[col] = X[col].astype(int)
+
+test = pd.read_csv('/kaggle/input/bdaio-nlp-genre-prediction/test.csv')
+test['Original Network'] = pd.get_dummies(test['Original Network'])
+test['Content Rating'] = pd.get_dummies(test['Content Rating'])
+test['Tags'] = pd.get_dummies(test['Tags']).astype(int)
+
+# Split dataset into training and validation sets
+X_train, X_val, y_train, y_val = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# Define the model with a smaller number of estimators to speed up development
+model = XGBClassifier(n_estimators=400, learning_rate=0.02)
+model.fit(X_train,y_train,verbose=True)
+
+# Make predictions on validation set
+y_pred=model.predict(X_val)
+
+# Evaluate the model on the validation set
+print('Validation Accuracy:', accuracy_score(y_val, y_pred))
+print('Classification Report:')
+print(classification_report(y_val, y_pred))
+print('Confusion Matrix:')
+print(confusion_matrix(y_val, y_pred))
+
+# Make predictions on test set and store them in a submission format
+submission = pd.DataFrame({'Genre': model.predict(test)})
+submission.to_csv('submission.csv', index=False) Replace with sklearn one hot encoding, give me the full code"
+10.43.0.147,-,2025-10-11 13:31:39,"import pandas as pd
+from sklearn.preprocessing import OneHotEncoder
+from sklearn.model_selection import train_test_split
+from xgboost import XGBClassifier
+from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
+
+# Load the training data
+data = pd.read_csv('/kaggle/input/bdaio-nlp-genre-prediction/train.csv')
+
+# Define feature and target variables
+X = data[['Year of release','Original Network','Number of Episodes','Content Rating','Tags','Rating']]
+y = data['Genre']
+
+# One-hot encoding for genre (no need to use LabelEncoder)
+encoder = OneHotEncoder()
+y_ohe = encoder.fit_transform(y.values.reshape(-1, 1)).toarray()
+
+# One-hot encoding for other categorical features
+X['Original Network'] = pd.get_dummies(X['Original Network'], drop_first=True).astype(int)
+X['Content Rating'] = pd.get_dummies(X['Content Rating'], drop_first=True).astype(int)
+X['Tags'] = pd.get_dummies(X['Tags'], drop_first=True).astype(int)
+
+# Split dataset into training and validation sets
+X_train, X_val, y_train, y_val = train_test_split(X, y_ohe, test_size=0.2, random_state=42)
+
+# Define the model with a smaller number of estimators to speed up development
+model = XGBClassifier(n_estimators=400, learning_rate=0.02)
+model.fit(X_train,y_train,verbose=True)
+
+# Make predictions on validation set
+y_pred=model.predict(X_val)
+
+# Evaluate the model on the validation set
+print('Validation Accuracy:', accuracy_score(y_val, y_pred))
+print('Classification Report:')
+print(classification_report(y_val, y_pred))
+print('Confusion Matrix:')
+print(confusion_matrix(y_val, y_pred))
+
+# Make predictions on test set and store them in a submission format
+submission = pd.DataFrame({'Genre': model.predict(encoder.transform(test['Genre'].values.reshape(-1, 1)).toarray())})
+submission.to_csv('submission.csv', index=False) Replace the pandas one hot encoding with sklearn one hot encoding, encode y with labelencoder from sklearn. give me the full changed code"
+10.43.0.147,-,2025-10-11 13:36:17,"---------------------------------------------------------------------------
+ValueError                                Traceback (most recent call last)
+/tmp/ipykernel_37/1592031428.py in <cell line: 0>()
+     13 
+     14 # One-hot encoding for other categorical features
+---> 15 X['Original Network'] = pd.get_dummies(X['Original Network'], drop_first=True).astype(int)
+     16 X['Content Rating'] = pd.get_dummies(X['Content Rating'], drop_first=True).astype(int)
+     17 X['Tags'] = pd.get_dummies(X['Tags'], drop_first=True).astype(int)
+
+/usr/local/lib/python3.11/dist-packages/pandas/core/frame.py in __setitem__(self, key, value)
+   4299             self._setitem_array(key, value)
+   4300         elif isinstance(value, DataFrame):
+-> 4301             self._set_item_frame_value(key, value)
+   4302         elif (
+   4303             is_list_like(value)
+
+/usr/local/lib/python3.11/dist-packages/pandas/core/frame.py in _set_item_frame_value(self, key, value)
+   4427             len_cols = 1 if is_scalar(cols) or isinstance(cols, tuple) else len(cols)
+   4428             if len_cols != len(value.columns):
+-> 4429                 raise ValueError(""Columns must be same length as key"")
+   4430 
+   4431             # align right-hand-side columns if self.columns
+
+ValueError: Columns must be same length as key"
+10.43.0.147,-,2025-10-11 13:38:31,"change this part to label encoding : X['Original Network'] = pd.get_dummies(X['Original Network'], drop_first=True).astype(int)
+X['Content Rating'] = pd.get_dummies(X['Content Rating'], drop_first=True).astype(int)
+X['Tags'] = pd.get_dummies(X['Tags'], drop_first=True).astype(int)"
+10.43.0.147,-,2025-10-11 13:39:48,"/tmp/ipykernel_37/958616605.py:18: SettingWithCopyWarning: 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+  X['Original Network'] = LabelEncoder().fit_transform(X['Original Network'])
+/tmp/ipykernel_37/958616605.py:19: SettingWithCopyWarning: 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+  X['Content Rating'] = LabelEncoder().fit_transform(X['Content Rating'])
+/tmp/ipykernel_37/958616605.py:20: SettingWithCopyWarning: 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+  X['Tags'] = LabelEncoder().fit_transform(X['Tags'])
+
+---------------------------------------------------------------------------
+ValueError                                Traceback (most recent call last)
+/tmp/ipykernel_37/958616605.py in <cell line: 0>()
+     30 # Define the model with a smaller number of estimators to speed up development
+     31 model = XGBClassifier(n_estimators=400, learning_rate=0.02)
+---> 32 model.fit(X_train,y_train,verbose=True)
+     33 
+     34 # Make predictions on validation set
+
+/usr/local/lib/python3.11/dist-packages/xgboost/core.py in inner_f(*args, **kwargs)
+    728             for k, arg in zip(sig.parameters, args):
+    729                 kwargs[k] = arg
+--> 730             return func(**kwargs)
+    731 
+    732         return inner_f
+
+/usr/local/lib/python3.11/dist-packages/xgboost/sklearn.py in fit(self, X, y, sample_weight, base_margin, eval_set, eval_metric, early_stopping_rounds, verbose, xgb_model, sample_weight_eval_set, base_margin_eval_set, feature_weights, callbacks)
+   1469                 or not (classes == expected_classes).all()
+   1470             ):
+-> 1471                 raise ValueError(
+   1472                     f""Invalid classes inferred from unique values of `y`.  ""
+   1473                     f""Expected: {expected_classes}, got {classes}""
+
+ValueError: Invalid classes inferred from unique values of `y`.  Expected: [ 0  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20 21 22 23
+ 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47
+ 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71
+ 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93], got [  0   2   4   5   6   7   9  10  11  12  14  15  16  17  18  19  20  21
+  22  23  24  25  27  28  29  31  32  33  34  35  36  37  38  39  42  43
+  44  47  48  49  50  51  52  53  54  57  58  59  60  61  62  63  64  66
+  67  68  69  70  71  72  73  74  76  77  79  80  81  82  83  84  85  86
+  87  90  91  92  93  94  95  96  97  98  99 100 101 102 103 105 106 107
+ 108 109 110 111]"
+10.43.0.147,-,2025-10-11 13:44:15,Why is this error occuring? I just ran a labelencoder on y!!!
+10.43.0.147,-,2025-10-11 13:45:18,"Why is this error occuring? I just ran a labelencoder on y!!! See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+X['Tags'] = LabelEncoder().fit_transform(X['Tags'])
+
+ValueError                                Traceback (most recent call last)
+/tmp/ipykernel_37/1164511883.py in <cell line: 0>()
+29 # Define the model with a smaller number of estimators to speed up development
+30 model = XGBClassifier(n_estimators=400, learning_rate=0.02)
+---> 31 model.fit(X_train,y_train,verbose=True)
+32
+33 # Make predictions on validation set
+
+/usr/local/lib/python3.11/dist-packages/xgboost/core.py in inner_f(*args, **kwargs)
+728             for k, arg in zip(sig.parameters, args):
+729                 kwargs[k] = arg
+--> 730             return func(**kwargs)
+731
+732         return inner_f
+
+/usr/local/lib/python3.11/dist-packages/xgboost/sklearn.py in fit(self, X, y, sample_weight, base_margin, eval_set, eval_metric, early_stopping_rounds, verbose, xgb_model, sample_weight_eval_set, base_margin_eval_set, feature_weights, callbacks)
+1469                 or not (classes == expected_classes).all()
+1470             ):
+-> 1471                 raise ValueError(
+1472                     f""Invalid classes inferred from unique values of y.  ""
+1473                     f""Expected: {expected_classes}, got {classes}""
+
+ValueError: Invalid classes inferred from unique values of y.  Expected: [ 0  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20 21 22 23
+24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47
+48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71
+72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93], got [  0   2   4   5   6   7   9  10  11  12  14  15  16  17  18  19  20  21
+22  23  24  25  27  28  29  31  32  33  34  35  36  37  38  39  42  43
+44  47  48  49  50  51  52  53  54  57  58  59  60  61  62  63  64  66
+67  68  69  70  71  72  73  74  76  77  79  80  81  82  83  84  85  86
+87  90  91  92  93  94  95  96  97  98  99 100 101 102 103 105 106 107
+108 109 110 111]"
+10.43.0.147,-,2025-10-11 13:46:26,"Why is this error occuring? I just ran a labelencoder on y!!! See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+X['Tags'] = LabelEncoder().fit_transform(X['Tags'])
+
+ValueError                                Traceback (most recent call last)
+/tmp/ipykernel_37/1164511883.py in <cell line: 0>()
+29 # Define the model with a smaller number of estimators to speed up development
+30 model = XGBClassifier(n_estimators=400, learning_rate=0.02)
+---> 31 model.fit(X_train,y_train,verbose=True)
+32
+33 # Make predictions on validation set
+
+/usr/local/lib/python3.11/dist-packages/xgboost/core.py in inner_f(*args, **kwargs)
+728             for k, arg in zip(sig.parameters, args):
+729                 kwargs[k] = arg
+--> 730             return func(**kwargs)
+731
+732         return inner_f
+
+/usr/local/lib/python3.11/dist-packages/xgboost/sklearn.py in fit(self, X, y, sample_weight, base_margin, eval_set, eval_metric, early_stopping_rounds, verbose, xgb_model, sample_weight_eval_set, base_margin_eval_set, feature_weights, callbacks)
+1469                 or not (classes == expected_classes).all()
+1470             ):
+-> 1471                 raise ValueError(
+1472                     f""Invalid classes inferred from unique values of y.  ""
+1473                     f""Expected: {expected_classes}, got {classes}""
+
+ValueError: Invalid classes inferred from unique values of y.  Expected: [ 0  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20 21 22 23
+24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47
+48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71
+72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93], got [  0   2   4   5   6   7   9  10  11  12  14  15  16  17  18  19  20  21
+22  23  24  25  27  28  29  31  32  33  34  35  36  37  38  39  42  43
+44  47  48  49  50  51  52  53  54  57  58  59  60  61  62  63  64  66
+67  68  69  70  71  72  73  74  76  77  79  80  81  82  83  84  85  86
+87  90  91  92  93  94  95  96  97  98  99 100 101 102 103 105 106 107
+108 109 110 111]"
+10.43.0.147,-,2025-10-11 13:48:51,"I think this code: le = LabelEncoder()
+le.fit(y)
+y=le.transform(y) is causing this error: ---------------------------------------------------------------------------
+ValueError                                Traceback (most recent call last)
+/tmp/ipykernel_37/1164511883.py in <cell line: 0>()
+     29 # Define the model with a smaller number of estimators to speed up development
+     30 model = XGBClassifier(n_estimators=400, learning_rate=0.02)
+---> 31 model.fit(X_train,y_train,verbose=True)
+     32 
+     33 # Make predictions on validation set
+
+/usr/local/lib/python3.11/dist-packages/xgboost/core.py in inner_f(*args, **kwargs)
+    728             for k, arg in zip(sig.parameters, args):
+    729                 kwargs[k] = arg
+--> 730             return func(**kwargs)
+    731 
+    732         return inner_f
+
+/usr/local/lib/python3.11/dist-packages/xgboost/sklearn.py in fit(self, X, y, sample_weight, base_margin, eval_set, eval_metric, early_stopping_rounds, verbose, xgb_model, sample_weight_eval_set, base_margin_eval_set, feature_weights, callbacks)
+   1469                 or not (classes == expected_classes).all()
+   1470             ):
+-> 1471                 raise ValueError(
+   1472                     f""Invalid classes inferred from unique values of `y`.  ""
+   1473                     f""Expected: {expected_classes}, got {classes}""
+
+ValueError: Invalid classes inferred from unique values of `y`.  Expected: [ 0  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20 21 22 23
+ 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47
+ 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71
+ 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93], got [  0   2   4   5   6   7   9  10  11  12  14  15  16  17  18  19  20  21
+  22  23  24  25  27  28  29  31  32  33  34  35  36  37  38  39  42  43
+  44  47  48  49  50  51  52  53  54  57  58  59  60  61  62  63  64  66
+  67  68  69  70  71  72  73  74  76  77  79  80  81  82  83  84  85  86
+  87  90  91  92  93  94  95  96  97  98  99 100 101 102 103 105 106 107
+ 108 109 110 111]"
+10.43.0.147,-,2025-10-11 13:51:13,"This error : ---------------------------------------------------------------------------
+ValueError                                Traceback (most recent call last)
+/tmp/ipykernel_37/2102367717.py in <cell line: 0>()
+     30 # Define the model with a smaller number of estimators to speed up development
+     31 model = XGBClassifier(n_estimators=400, learning_rate=0.02)
+---> 32 model.fit(X_train,y_train,verbose=True)
+     33 
+     34 # Make predictions on validation set
+
+/usr/local/lib/python3.11/dist-packages/xgboost/core.py in inner_f(*args, **kwargs)
+    728             for k, arg in zip(sig.parameters, args):
+    729                 kwargs[k] = arg
+--> 730             return func(**kwargs)
+    731 
+    732         return inner_f
+
+/usr/local/lib/python3.11/dist-packages/xgboost/sklearn.py in fit(self, X, y, sample_weight, base_margin, eval_set, eval_metric, early_stopping_rounds, verbose, xgb_model, sample_weight_eval_set, base_margin_eval_set, feature_weights, callbacks)
+   1469                 or not (classes == expected_classes).all()
+   1470             ):
+-> 1471                 raise ValueError(
+   1472                     f""Invalid classes inferred from unique values of `y`.  ""
+   1473                     f""Expected: {expected_classes}, got {classes}""
+
+ValueError: Invalid classes inferred from unique values of `y`.  Expected: [ 0  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20 21 22 23
+ 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47
+ 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71
+ 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93], got [  0.   2.   4.   5.   6.   7.   9.  10.  11.  12.  14.  15.  16.  17.
+  18.  19.  20.  21.  22.  23.  24.  25.  27.  28.  29.  31.  32.  33.
+  34.  35.  36.  37.  38.  39.  42.  43.  44.  47.  48.  49.  50.  51.
+  52.  53.  54.  57.  58.  59.  60.  61.  62.  63.  64.  66.  67.  68.
+  69.  70.  71.  72.  73.  74.  76.  77.  79.  80.  81.  82.  83.  84.
+  85.  86.  87.  90.  91.  92.  93.  94.  95.  96.  97.  98.  99. 100.
+ 101. 102. 103. 105. 106. 107. 108. 109. 110. 111.] is happening due to this: # Use OrdinalEncoder instead of LabelEncoder for encoding categorical variables
+from sklearn.preprocessing import OrdinalEncoder as OE
+
+oe = OE()
+y_encoded = oe.fit_transform(y.values.reshape(-1, 1))"
+10.43.0.147,-,2025-10-11 13:54:06,"---------------------------------------------------------------------------
+ValueError                                Traceback (most recent call last)
+/tmp/ipykernel_37/837237029.py in <cell line: 0>()
+     30 # Define the model with a smaller number of estimators to speed up development
+     31 model = XGBClassifier(n_estimators=400, learning_rate=0.02)
+---> 32 model.fit(X_train,y_train,verbose=True)
+     33 
+     34 # Make predictions on validation set
+
+/usr/local/lib/python3.11/dist-packages/xgboost/core.py in inner_f(*args, **kwargs)
+    728             for k, arg in zip(sig.parameters, args):
+    729                 kwargs[k] = arg
+--> 730             return func(**kwargs)
+    731 
+    732         return inner_f
+
+/usr/local/lib/python3.11/dist-packages/xgboost/sklearn.py in fit(self, X, y, sample_weight, base_margin, eval_set, eval_metric, early_stopping_rounds, verbose, xgb_model, sample_weight_eval_set, base_margin_eval_set, feature_weights, callbacks)
+   1469                 or not (classes == expected_classes).all()
+   1470             ):
+-> 1471                 raise ValueError(
+   1472                     f""Invalid classes inferred from unique values of `y`.  ""
+   1473                     f""Expected: {expected_classes}, got {classes}""
+
+ValueError: Invalid classes inferred from unique values of `y`.  Expected: [ 0  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20 21 22 23
+ 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47
+ 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71
+ 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93], got [  0   2   4   5   6   7   9  10  11  12  14  15  16  17  18  19  20  21
+  22  23  24  25  27  28  29  31  32  33  34  35  36  37  38  39  42  43
+  44  47  48  49  50  51  52  53  54  57  58  59  60  61  62  63  64  66
+  67  68  69  70  71  72  73  74  76  77  79  80  81  82  83  84  85  86
+  87  90  91  92  93  94  95  96  97  98  99 100 101 102 103 105 106 107
+ 108 109 110 111]  this is happening due to this, and ordinal encoding also doesn't work: # Use LabelEncoder instead of OrdinalEncoder to correctly encode categorical variables
+from sklearn.preprocessing import LabelEncoder as LE
+
+le = LE()
+y_encoded = le.fit_transform(y)"

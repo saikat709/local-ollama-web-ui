@@ -1,0 +1,22 @@
+client_ip,handling_server,date_time,prompt
+10.42.0.179,-,2025-10-11 09:44:58,if I want to make my NLP model how should I get started ?
+10.42.0.179,-,2025-10-11 10:03:48,now I have dtatsets how should I use them for my nlp
+10.42.0.179,-,2025-10-11 10:11:37,what can information can you help me with to identify a model architect? And can you define a model architect ? answer in 100 wordsor less
+10.42.0.179,-,2025-10-11 10:13:55,whats ski-learn-docs
+10.42.0.179,-,2025-10-11 10:20:45,list only the steps to create an nlp model and be short
+10.42.0.179,-,2025-10-11 10:23:54,how do I know I have loaded the dataset
+10.42.0.179,-,2025-10-11 10:26:36,how do I know I have loaded the dataset
+10.42.0.179,-,2025-10-11 10:48:15,how do I train the model using a csv file
+10.42.0.179,-,2025-10-11 10:49:19,df here is
+10.42.0.179,-,2025-10-11 11:04:55,how many types of models are there like the decisison tree
+10.42.0.179,-,2025-10-11 11:35:05,how to use pd.read_csv
+10.42.0.179,-,2025-10-11 12:49:31,Should I use Decision Tree Regressor for a non numerical model
+10.42.0.179,-,2025-10-11 12:59:53,how do I fix a value erro r
+10.42.0.179,-,2025-10-11 13:36:10,could not convert string to float what should I do to solve this value error
+10.42.0.179,-,2025-10-11 13:51:31,help use decision tree regressor after importing pandas
+10.42.0.179,-,2025-10-11 14:00:19,train_test_split is not defined
+10.42.0.179,-,2025-10-11 14:02:54,"a float in the (0,1) range should be written as"
+10.42.0.179,-,2025-10-11 14:04:50,how to write float
+10.42.0.179,-,2025-10-11 14:06:14,meaning of could not convert float to string
+10.42.0.179,-,2025-10-11 14:09:32,how do I turn all alphabetical data into floats
+10.42.0.179,-,2025-10-11 14:14:57,can you help me to convert a string to float

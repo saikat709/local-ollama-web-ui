@@ -1,0 +1,153 @@
+client_ip,handling_server,date_time,prompt
+10.42.0.123,-,2025-10-11 10:00:52,how can i predict genre for a dataset
+10.42.0.123,-,2025-10-11 10:09:26,Content Rating 	Rating 	Synopsis 	Genre 	Tags 	Director 	Screenwriter 	Cast 	Production companies 	Rank among these feuture which ar the most needed for my model
+10.42.0.123,-,2025-10-11 10:17:15,how to drop column
+10.42.0.123,-,2025-10-11 10:18:19,l
+10.42.0.123,-,2025-10-11 10:23:29,HOW CAN I MAKE  MODEL FOR PREDICTING GENRE OF SERIES
+10.42.0.123,-,2025-10-11 10:26:35,"Name                    0
+Aired Date              0
+Year of release         0
+Original Network        0
+Aired On                0
+Number of Episodes      0
+Duration                0
+Content Rating          1
+Rating                  0
+Synopsis                0
+Genre                   0
+Tags                    0
+Director                1
+Screenwriter            1
+Cast                    0
+Production companies    1
+Rank                    0 feuture extract"
+10.42.0.123,-,2025-10-11 10:35:36,how to drop columns using dropna
+10.42.0.123,-,2025-10-11 10:37:04,df_train.dropna['Duration']
+10.42.0.123,-,2025-10-11 10:44:09,for genre pred which feutures are needed most
+10.42.0.123,-,2025-10-11 10:51:49,what does synopsis mean
+10.42.0.123,-,2025-10-11 10:54:07,how to remove comas from a datasetlabel
+10.42.0.123,-,2025-10-11 11:13:01,how to labl encode ordial data
+10.42.0.123,-,2025-10-11 11:16:23,nominal data?
+10.42.0.123,-,2025-10-11 11:20:38,to predict genre of a movie can i use k mean cluster
+10.42.0.123,-,2025-10-11 11:29:04,how to select feauture for a model
+10.42.0.123,-,2025-10-11 11:35:35,"TypeError                                 Traceback (most recent call last)
+/usr/local/lib/python3.11/dist-packages/pandas/core/indexes/base.py in get_loc(self, key)
+   3804         try:
+-> 3805             return self._engine.get_loc(casted_key)
+   3806         except KeyError as err:
+
+index.pyx in pandas._libs.index.IndexEngine.get_loc()
+
+index.pyx in pandas._libs.index.IndexEngine.get_loc()
+
+TypeError: '('Duration', 'Content Rating', ['Director'], ['Cast'])' is an invalid key
+
+During handling of the above exception, another exception occurred:
+
+InvalidIndexError                         Traceback (most recent call last)
+/tmp/ipykernel_37/4279913817.py in <cell line: 0>()
+----> 1 df.dropna(df['Duration','Content Rating', ['Director'],['Cast']])
+
+/usr/local/lib/python3.11/dist-packages/pandas/core/frame.py in __getitem__(self, key)
+   4100             if self.columns.nlevels > 1:
+   4101                 return self._getitem_multilevel(key)
+-> 4102             indexer = self.columns.get_loc(key)
+   4103             if is_integer(indexer):
+   4104                 indexer = [indexer]
+
+/usr/local/lib/python3.11/dist-packages/pandas/core/indexes/base.py in get_loc(self, key)
+   3815             #  InvalidIndexError. Otherwise we fall through and re-raise
+   3816             #  the TypeError.
+-> 3817             self._check_indexing_error(key)
+   3818             raise
+   3819 
+
+/usr/local/lib/python3.11/dist-packages/pandas/core/indexes/base.py in _check_indexing_error(self, key)
+   6057             # if key is not a scalar, directly raise an error (the code below
+   6058             # would convert to numpy arrays and raise later any way) - GH29926
+-> 6059             raise InvalidIndexError(key)
+   6060 
+   6061     @cache_readonly
+
+InvalidIndexError: ('Duration', 'Content Rating', ['Director'], ['Cast'])"
+10.42.0.123,-,2025-10-11 11:42:53,"File ""/tmp/ipykernel_37/1244247461.py"", line 1
+    df.dropna(df['columns']= ['Duration'] , ['Content Rating'], ['Screenwriter'] , ['Cast'], inplace = True)
+              ^
+SyntaxError: expression cannot contain assignment, perhaps you meant ""==""?"
+10.42.0.123,-,2025-10-11 11:45:23,how to drop many columns
+10.42.0.123,-,2025-10-11 12:00:31,whn do we use hstack
+10.42.0.123,-,2025-10-11 12:08:30,how to transform 1d array to 2d array
+10.42.0.123,-,2025-10-11 12:11:12,"AttributeError                            Traceback (most recent call last)
+/tmp/ipykernel_37/331951096.py in <cell line: 0>()
+      1 Rating = df['Rating']
+----> 2 Rating.reshape(2,3)
+
+/usr/local/lib/python3.11/dist-packages/pandas/core/generic.py in __getattr__(self, name)
+   6297         ):
+   6298             return self[name]
+-> 6299         return object.__getattribute__(self, name)
+   6300 
+   6301     @final
+
+AttributeError: 'Series' object has no attribute 'reshape'"
+10.42.0.123,-,2025-10-11 12:12:37,how to turn series into array
+10.42.0.123,-,2025-10-11 12:21:01,ordinalscaler
+10.42.0.123,-,2025-10-11 12:22:29,how can i scale ordinal data
+10.42.0.123,-,2025-10-11 12:26:49,one hot encder code
+10.42.0.123,-,2025-10-11 12:33:33,"Romance, Drama, Melodrama, Supernatural"
+10.42.0.123,-,2025-10-11 12:37:44,nlp
+10.42.0.123,-,2025-10-11 12:39:44,in nlp what exactly happens
+10.42.0.123,-,2025-10-11 12:45:48,if genre given to be predicted which model should i do and give exampple on preprocees too
+10.42.0.123,-,2025-10-11 12:46:55,if genre given to be predicted which model should i
+10.42.0.123,-,2025-10-11 13:08:39,how can i set genre as y and x as feuture
+10.42.0.123,-,2025-10-11 13:11:30,"usr/local/lib/python3.11/dist-packages/pandas/core/indexes/base.py in get_loc(self, key)
+   3804         try:
+-> 3805             return self._engine.get_loc(casted_key)
+   3806         except KeyError as err:
+
+index.pyx in pandas._libs.index.IndexEngine.get_loc()
+
+index.pyx in pandas._libs.index.IndexEngine.get_loc()
+
+TypeError: '(['vct'], ['vector'], ['Name'])' is an invalid key
+
+During handling of the above exception, another exception occurred:
+
+InvalidIndexError                         Traceback (most recent call last)
+/tmp/ipykernel_37/2890367797.py in <cell line: 0>()
+      3 Y_train = df
+      4 Y_test = dfa
+----> 5 X = df[['vct'] , ['vector'] , ['Name']]
+
+/usr/local/lib/python3.11/dist-packages/pandas/core/frame.py in __getitem__(self, key)
+   4100             if self.columns.nlevels > 1:
+   4101                 return self._getitem_multilevel(key)
+-> 4102             indexer = self.columns.get_loc(key)
+   4103             if is_integer(indexer):
+   4104                 indexer = [indexer]
+
+/usr/local/lib/python3.11/dist-packages/pandas/core/indexes/base.py in get_loc(self, key)
+   3815             #  InvalidIndexError. Otherwise we fall through and re-raise
+   3816             #  the TypeError.
+-> 3817             self._check_indexing_error(key)
+   3818             raise
+   3819 
+
+/usr/local/lib/python3.11/dist-packages/pandas/core/indexes/base.py in _check_indexing_error(self, key)
+   6057             # if key is not a scalar, directly raise an error (the code below
+   6058             # would convert to numpy arrays and raise later any way) - GH29926
+-> 6059             raise InvalidIndexError(key)
+   6060 
+   6061     @cache_readonly
+
+InvalidIndexError: (['vct'], ['vector'], ['Name'])"
+10.42.0.123,-,2025-10-11 13:15:10,"rain_test_split(df[['Name']], df['Genre'], should i input all my feuture name here"
+10.42.0.123,-,2025-10-11 13:18:22,i want it to tarin into naive bayes
+10.42.0.123,-,2025-10-11 13:26:01,why am i not geting any fit statement or pred val
+10.42.0.123,-,2025-10-11 13:39:54,X = df[cols[]] here i want all the columns except target value
+10.42.0.123,-,2025-10-11 13:42:22,make me a nlp
+10.42.0.123,-,2025-10-11 13:44:51,if i use cosine will i be able to predict genre
+10.42.0.123,-,2025-10-11 13:51:53,tfidf code
+10.42.0.123,-,2025-10-11 13:59:40,"df.drop(df[['columns'],axis = 0])"
+10.42.0.123,-,2025-10-11 14:00:43,how to drop row
+10.42.0.123,-,2025-10-11 14:03:11,drop a full column
