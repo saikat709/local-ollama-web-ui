@@ -9,7 +9,7 @@ sudo ufw default deny incoming
 sudo ufw allow out 53
 
 # allow your specific trusted host
-sudo ufw allow out to <YOUR_IP>
+sudo ufw allow out to 10.100.201.91
 
 # allow Kaggle main domain (approx Google IPs)
 for ip in $(dig +short kaggle.com storage.googleapis.com kaggleusercontent.com); do
